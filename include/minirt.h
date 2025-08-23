@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raytracer.h                                        :+:      :+:    :+:   */
+/*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/22 17:14:17 by hallison         ###   ########.fr       */
+/*   Updated: 2025/08/23 17:59:06 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@
 
 typedef enum e_error
 {
-	ERROR_NOFILE,
+	ERROR_WRONG_ARGS,
 	ERROR_FILENAME,
 	ERROR_OPEN,
+	ERROR_WRONG_CHARS,
 } t_error;
 
 typedef struct s_ambient
@@ -95,5 +96,14 @@ typedef struct s_data
 	t_plane **plane;
 	t_cyl	**cyl;
 } t_data;
+
+//check_file.c
+int	scenefile_check_chars(char *filename);
+
+//file_helpers.c
+int	open_file(char *filename);
+int	check_rt_filename(char	*filename);
+//error_handling.c
+void	rt_early_exit(int error);
 
 #endif
