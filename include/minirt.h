@@ -6,12 +6,12 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/23 17:59:06 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/23 19:17:18 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RAYTRACER_H
-# define RAYTRACER_H
+#ifndef MINIRT_H
+# define MINIRT_H
 
 # include "includes/libft.h"
 # include <math.h>
@@ -37,72 +37,72 @@ typedef enum e_error
 	ERROR_FILENAME,
 	ERROR_OPEN,
 	ERROR_WRONG_CHARS,
-} t_error;
+}	t_error;
 
 typedef struct s_ambient
 {
-	float ratio; // range [0.0, 1.0]
-	unsigned int rgb[3]; // [0-255]
-} t_ambient;
+	float			ratio; // range [0.0, 1.0]
+	unsigned int	rgb[3]; // [0-255]
+}	t_ambient;
 
 typedef struct s_camera
 {
-	float view[3]; // zB. -50.0,0,20
-	float vector[3]; // range [-1,1]
+	float			viewpoint[3]; // zB. -50.0,0,20
+	float			vector[3]; // range [-1,1]
 	unsigned int	fov; // field of view, range [0,180]
-} t_camera;
+}	t_camera;
 
 typedef struct s_light
 {
-	float point[3]; // X, Y, Z
-	float brightness; // range [0.0,1.0]
+	float			light_point[3]; // X, Y, Z
+	float			brightness; // range [0.0,1.0]
 	// for bonus only:
-	unsigned int rgb[3];	
-} t_light;
+	unsigned int	rgb[3];	
+}	t_light;
 
 typedef struct s_sphere
 {
-	float center[3]; // signed?
-	float diameter;
+	float			center[3]; // signed?
+	float			diameter;
 	unsigned int	rgb[3];
-} t_sphere;
+}	t_sphere;
 
 typedef struct s_plane
 {
 	float	point[3]; // coordinates
 	float	vectors[3]; // range [-1.1]
-	int	rgb[3];
-} t_plane;
+	int		rgb[3];
+}	t_plane;
 
 typedef struct s_cyl
 {
-	float center[3]; // signed?
-	float axis[3]; // range [-1,1], 1 each coordinate
-	float diam;
-	float	height;
+	float			center[3]; // signed?
+	float			axis[3]; // range [-1,1], 1 each coordinate
+	float			diam;
+	float			height;
 	unsigned int	rgb[3];
-} t_cyl;
+}	t_cyl;
 
 typedef struct s_data
 {
-	char	*file_name;
-	void	*mlx_ptr;
-	void	*win_ptr;
-	void	*img_ptr;
-	t_ambient *ambient;
-	t_camera *camera;
-	t_light *light;
-	t_sphere **sphere;
-	t_plane **plane;
-	t_cyl	**cyl;
-} t_data;
+	char		*file_name;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	void		*img_ptr;
+	t_ambient	*ambient;
+	t_camera	*camera;
+	t_light		*light;
+	t_sphere	**sphere;
+	t_plane		**plane;
+	t_cyl		**cyl;
+}	t_data;
 
 //check_file.c
-int	scenefile_check_chars(char *filename);
+int		scenefile_check_chars(char *filename);
 
 //file_helpers.c
-int	open_file(char *filename);
-int	check_rt_filename(char	*filename);
+int		open_file(char *filename);
+int		check_rt_filename(char	*filename);
 //error_handling.c
 void	rt_early_exit(int error);
 

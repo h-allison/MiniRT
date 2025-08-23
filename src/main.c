@@ -6,25 +6,11 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:54:44 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/23 17:59:21 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/23 19:26:18 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-int	parse_file(char *filename, t_data *data)
-{
-	int fd;
-
-	check_rt_filename(filename);
-	scenefile_check_chars(filename);
-	fd = open_file(filename);
-	data->file_name = filename;
-	data->mlx_ptr = NULL; // TODO
-	data->win_ptr = NULL; // TODO
-	close(fd);
-	return(0);
-}
 
 int	main(int argc, char **argv)
 {

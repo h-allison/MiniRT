@@ -20,7 +20,6 @@ L -40,0,30 0.7 255,255,255
 * the light brightness ratio in the range [0.0,1.0]: 0.6
 * (unused in mandatory part) R, G, B colors in the range [0-255]: 10, 0,
 255
-
 pl 0,0,0 0,1.0,0 255,0,225
 
 * identifier: pl
