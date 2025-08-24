@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 15:20:01 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/24 15:59:54 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/24 21:06:01 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_tuple	tadd(t_tuple a, t_tuple b)
 	result.x = a.x + b.x;
 	result.y = a.y + b.y;
 	result.z = a.z + b.z;
-	result.x = a.w + b.w;
+	result.w = a.w + b.w;
 	return (result);
 }
 
@@ -42,7 +42,7 @@ t_tuple	tsub(t_tuple a, t_tuple b)
 	result.x = a.x - b.x;
 	result.y = a.y - b.y;
 	result.z = a.z - b.z;
-	result.x = a.w - b.w;
+	result.w = a.w - b.w;
 	return (result);
 }
 
@@ -53,6 +53,6 @@ t_tuple	tneg(t_tuple a)
 	result.x = -a.x;
 	result.y = -a.y;
 	result.z = -a.z;
-	result.x = -a.w;
+	result.w = -a.w;
 	return (result);
 }

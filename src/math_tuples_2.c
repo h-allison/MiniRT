@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 15:20:01 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/24 16:39:31 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/24 21:06:36 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_tuple	tmult(t_tuple a, float scalar)
 	result.x = a.x * scalar;
 	result.y = a.y * scalar;
 	result.z = a.z * scalar;
-	result.x = a.w * scalar;
+	result.w = a.w * scalar;
 	return (result);
 }
 
@@ -30,7 +30,7 @@ t_tuple	tdiv(t_tuple a, float scalar)
 	result.x = a.x / scalar;
 	result.y = a.y / scalar;
 	result.z = a.z / scalar;
-	result.x = a.w / scalar;
+	result.w = a.w / scalar;
 	return (result);
 }
 

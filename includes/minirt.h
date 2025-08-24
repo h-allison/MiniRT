@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/24 16:28:23 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/24 20:55:23 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,9 @@ int		check_rt_filename(char	*filename);
 void	rt_early_exit(int error);
 //parsing.c
 int		parse_file(char *filename, t_data *data);
+//create_tuple.c
+t_tuple	point(float x, float y, float z);
+t_tuple vector(float x, float y, float z);
 //math_float.c
 int		fisequal(float a, float b);
 //math_tuple_1.c
