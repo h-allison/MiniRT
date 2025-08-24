@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/24 15:01:31 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/24 16:28:23 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <errno.h>
+
+# define TRUE 1
+# define FALSE 0
 
 # define X 0
 # define Y 1
@@ -116,5 +119,17 @@ int		check_rt_filename(char	*filename);
 void	rt_early_exit(int error);
 //parsing.c
 int		parse_file(char *filename, t_data *data);
+//math_float.c
+int		fisequal(float a, float b);
+//math_tuple_1.c
+int		tisequal(t_tuple a, t_tuple b);
+t_tuple	tadd(t_tuple a, t_tuple b);
+t_tuple	tsub(t_tuple a, t_tuple b);
+t_tuple	tneg(t_tuple a);
+//math_tuple_2.c
+t_tuple	tmult(t_tuple a, float scalar);
+t_tuple	tdiv(t_tuple a, float scalar);
+float	tmag(t_tuple a);
+t_tuple	tnorm(t_tuple a, float magnitude);
 
 #endif

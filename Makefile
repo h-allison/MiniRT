@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/08/24 15:06:00 by mmillhof         ###   ########.fr        #
+#    Updated: 2025/08/24 16:28:40 by mmillhof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,13 @@ SRC = src/main.c \
 	  src/check_file.c \
 	  src/file_helpers.c \
 	  src/error_handling.c \
-	  src/parsing.c
+	  src/parsing.c \
+	  src/math_float.c \
+	  src/math_tuples_1.c \
+	  src/math_tuples_2.c
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I$(LIBFT_PATH) -Iinclude
+CFLAGS = -Wall -Wextra -Werror -I$(LIBFT_PATH) -Iincludes
 
 #subject says be sure to compile with lm, but this throws an error when compiling
 
