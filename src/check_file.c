@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 17:08:43 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/24 20:31:35 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/24 21:18:59 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ int	scenefile_check_chars(char *filename)
 	comment = 0;
 	while(read(fd, &buf, 1))
 	{
-		comment += ((!comment && buf == '*')
-				- (comment && (!buf || buf == '\n')));
+		comment = (!comment && buf == '*') || (comment && buf && buf != '\n');
 		if (!comment && !ft_isalnum(buf) && !str_contains(buf, " .,-\n\t"))
 		{
 			close(fd);
