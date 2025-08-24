@@ -24,6 +24,12 @@ int	tisequal(t_tuple a, t_tuple b)
 	return (!err);
 }
 
+/* Add 2 Tuples */
+
+// point (w:1) + vector (w:0) = point (w:1)
+// vector (w:1) + vector (w:0) = vector (w:1)
+// point (w:1) + point (w:1) = nonsense (w:2) !
+
 t_tuple	tadd(t_tuple a, t_tuple b)
 {
 	t_tuple	result;
@@ -34,6 +40,14 @@ t_tuple	tadd(t_tuple a, t_tuple b)
 	result.x = a.w + b.w;
 	return (result);
 }
+
+/* Subtract 2 Tuples */
+
+// point (w:1) - vector (w:0) = point (w:1)
+// vector (w:0) - vector (w:0) = vector (w:0)
+// point (w:1) - point (w:1) = vector (w:0)
+// vector (w:0) - point (w:1) = nonsense (w: -1) !
+
 
 t_tuple	tsub(t_tuple a, t_tuple b)
 {
