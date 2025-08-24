@@ -12,6 +12,12 @@
 
 #include "minirt.h"
 
+
+/* Tuple is equal */
+// err = inequality found
+// if err, returns 0 ("isequal" is false)
+// if no err, returns 1 ("isequal" is true)
+
 int	tisequal(t_tuple a, t_tuple b)
 {
 	int	err;
@@ -48,7 +54,6 @@ t_tuple	tadd(t_tuple a, t_tuple b)
 // point (w:1) - point (w:1) = vector (w:0)
 // vector (w:0) - point (w:1) = nonsense (w: -1) !
 
-
 t_tuple	tsub(t_tuple a, t_tuple b)
 {
 	t_tuple	result;
@@ -59,6 +64,10 @@ t_tuple	tsub(t_tuple a, t_tuple b)
 	result.x = a.w - b.w;
 	return (result);
 }
+
+/* Negate Tuple */
+// "given a vector that poitns frmo a surface toward a light source,
+// what vector points from the light source back to the surface?
 
 t_tuple	tneg(t_tuple a)
 {
