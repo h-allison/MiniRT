@@ -6,14 +6,15 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/08/23 17:53:29 by mmillhof         ###   ########.fr        #
+#    Updated: 2025/08/24 15:06:00 by mmillhof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC = src/main.c \
 	  src/check_file.c \
 	  src/file_helpers.c \
-	  src/error_handling.c
+	  src/error_handling.c \
+	  src/parsing.c
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -I$(LIBFT_PATH) -Iinclude
@@ -24,7 +25,7 @@ LIBFT_PATH = lib/libft
 LIBFT = $(LIBFT_PATH)/libft.a
 
 #LOGO = lib/minishell_logo.txt
-NAME = raytracer
+NAME = miniRT
 HEADER = include/minirt.h
 
 OBJ = $(SRC:.c=.o)

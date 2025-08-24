@@ -6,12 +6,11 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:18:37 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/23 20:03:41 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/24 15:03:48 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
 
 // check identifier:
 // check for A, C, L, pl, sp, cy
@@ -21,14 +20,18 @@
 	// on parsing error, print ERROR and exit
 // if ACL found twice, abort / exit
 
+
 int	analyze_line(char *line, t_data *data)
 {
-	while (*line)
+	(void) data;
+	ft_putstr_fd(line, 1);
+/*	while (*line)
 	{
 		if ((ft_isalpha(*line))
 				// check identifier
-	}
+	}*/
 	// Is there an empty struct? 
+	return (0);
 }
 
 int	parse_lines(int fd, t_data  *data)
@@ -48,25 +51,25 @@ int	parse_lines(int fd, t_data  *data)
 		{
 			free(line);
 			continue ;
-		}
+		}	
 		analyze_line(line + i, data);
 		free (line);
 	}
+	return (0);
 }
 
 int	parse_file(char *filename, t_data *data)
 {
 	int fd;
 
-	data->file_name = filename;
-
 	check_rt_filename(filename);
-	scenefile_check_chars(filename);
-	fd = open_file(filename);
+	data->filename = filename;
+	scenefile_check_chars(data->filename);
+	fd = open_file(data->filename);
 	parse_lines(fd, data);
-
+/*
 	data->mlx_ptr = NULL; // TODO
-	data->win_ptr = NULL; // TODO
+	data->win_ptr = NULL; // TODO*/
 	close(fd);
 	return(0);
 }

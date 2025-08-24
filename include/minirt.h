@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/23 19:17:18 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/24 15:01:31 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 # define G 1
 # define B 2
 
+# define EPSILON 0.0001
+
 typedef enum e_error
 {
 	ERROR_WRONG_ARGS,
@@ -45,10 +47,18 @@ typedef struct s_ambient
 	unsigned int	rgb[3]; // [0-255]
 }	t_ambient;
 
+typedef struct s_tuple
+{
+	float			x;
+	float			y;
+	float			z;
+	float			w;
+}	t_tuple;
+
 typedef struct s_camera
 {
 	float			viewpoint[3]; // zB. -50.0,0,20
-	float			vector[3]; // range [-1,1]
+	float			vector; // range [-1,1]
 	unsigned int	fov; // field of view, range [0,180]
 }	t_camera;
 
@@ -85,7 +95,7 @@ typedef struct s_cyl
 
 typedef struct s_data
 {
-	char		*file_name;
+	char		*filename;
 	void		*mlx_ptr;
 	void		*win_ptr;
 	void		*img_ptr;
@@ -99,11 +109,12 @@ typedef struct s_data
 
 //check_file.c
 int		scenefile_check_chars(char *filename);
-
 //file_helpers.c
 int		open_file(char *filename);
 int		check_rt_filename(char	*filename);
 //error_handling.c
 void	rt_early_exit(int error);
+//parsing.c
+int		parse_file(char *filename, t_data *data);
 
 #endif
