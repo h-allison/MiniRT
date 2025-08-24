@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/08/24 17:34:22 by mmillhof         ###   ########.fr        #
+#    Updated: 2025/08/24 21:35:25 by mmillhof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,9 @@ SRC = src/main.c \
 	  src/parsing.c \
 	  src/math_float.c \
 	  src/math_tuples_1.c \
-	  src/math_tuples_2.c
+	  src/math_tuples_2.c \
+	  src/math_tuples_3.c \
+	  src/create_tuples.c
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -I$(LIBFT_PATH) -Iincludes

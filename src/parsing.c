@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:18:37 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/24 15:03:48 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/24 23:40:07 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 // open new function, fill cooresponding struct'
 	// on parsing error, print ERROR and exit
 // if ACL found twice, abort / exit
-
 
 int	analyze_line(char *line, t_data *data)
 {
@@ -34,10 +33,10 @@ int	analyze_line(char *line, t_data *data)
 	return (0);
 }
 
-int	parse_lines(int fd, t_data  *data)
+int	parse_lines(int fd, t_data *data)
 {
-	char *line;
-	int	i;
+	char	*line;
+	int		i;
 
 	while (1)
 	{
@@ -51,7 +50,7 @@ int	parse_lines(int fd, t_data  *data)
 		{
 			free(line);
 			continue ;
-		}	
+		}
 		analyze_line(line + i, data);
 		free (line);
 	}
@@ -60,7 +59,7 @@ int	parse_lines(int fd, t_data  *data)
 
 int	parse_file(char *filename, t_data *data)
 {
-	int fd;
+	int	fd;
 
 	check_rt_filename(filename);
 	data->filename = filename;
@@ -71,5 +70,5 @@ int	parse_file(char *filename, t_data *data)
 	data->mlx_ptr = NULL; // TODO
 	data->win_ptr = NULL; // TODO*/
 	close(fd);
-	return(0);
+	return (0);
 }

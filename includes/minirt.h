@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/24 16:28:23 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/24 22:37:09 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,17 +119,23 @@ int		check_rt_filename(char	*filename);
 void	rt_early_exit(int error);
 //parsing.c
 int		parse_file(char *filename, t_data *data);
+//create_tuples.c
+t_tuple	point(float x, float y, float z);
+t_tuple vector(float x, float y, float z);
 //math_float.c
 int		fisequal(float a, float b);
-//math_tuple_1.c
+//math_tuples_1.c
 int		tisequal(t_tuple a, t_tuple b);
 t_tuple	tadd(t_tuple a, t_tuple b);
 t_tuple	tsub(t_tuple a, t_tuple b);
 t_tuple	tneg(t_tuple a);
-//math_tuple_2.c
+//math_tuples_2.c
 t_tuple	tmult(t_tuple a, float scalar);
 t_tuple	tdiv(t_tuple a, float scalar);
 float	tmag(t_tuple a);
-t_tuple	tnorm(t_tuple a, float magnitude);
+t_tuple	tnorm(t_tuple a);
+//math_tuples_3.c
+float	dot(t_tuple a, t_tuple b);
+t_tuple	cross(t_tuple a, t_tuple b);
 
 #endif
