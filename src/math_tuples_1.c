@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 15:20:01 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/24 21:06:01 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/24 23:35:17 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	tisequal(t_tuple a, t_tuple b)
 {
 	int	err;
-	
+
 	err = 0;
 	err += !fisequal(a.x, b.x);
 	err += !fisequal(a.y, b.y);

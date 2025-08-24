@@ -6,14 +6,14 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 17:08:43 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/24 21:18:59 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/24 23:42:43 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include <ctype.h>
 
-static int str_contains(char c, char *str);
+static int	str_contains(char c, char *str);
 
 int	scenefile_check_chars(char *filename)
 {
@@ -23,7 +23,7 @@ int	scenefile_check_chars(char *filename)
 
 	fd = open_file(filename);
 	comment = 0;
-	while(read(fd, &buf, 1))
+	while (read(fd, &buf, 1))
 	{
 		comment = (!comment && buf == '*') || (comment && buf && buf != '\n');
 		if (!comment && !ft_isalnum(buf) && !str_contains(buf, " .,-\n\t"))
@@ -36,15 +36,15 @@ int	scenefile_check_chars(char *filename)
 		}
 	}
 	close(fd);
-	return(EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }
 
-static int str_contains(char c, char *str)
+static int	str_contains(char c, char *str)
 {
 	int	found;
 
 	found = 0;
-	while(*str && !found)
+	while (*str && !found)
 		if (*str++ == c)
 			found++;
 	if (found > 0)

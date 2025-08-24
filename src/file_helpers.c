@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 17:27:01 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/23 18:14:37 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/24 23:40:43 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int	check_rt_filename(char	*filename)
 	int	filename_len;
 
 	filename_len = ft_strlen(filename);
-	if (filename_len < 4 || ft_strncmp (filename + filename_len - 3, ".rt", 3) != 0)
+	if (filename_len < 4
+		|| ft_strncmp (filename + filename_len - 3, ".rt", 3) != 0)
 		rt_early_exit(ERROR_FILENAME);
 	return (0);
 }

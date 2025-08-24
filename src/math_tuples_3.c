@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 15:20:01 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/24 21:39:39 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/24 23:37:04 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 float	dot(t_tuple a, t_tuple b)
 {
-
 	return (a.x * b.x
 		+ a.y * b.y
 		+ a.z * b.z
 		+ a.w * b.w);
 }
 
-t_tuple cross(t_tuple a, t_tuple b)
+t_tuple	cross(t_tuple a, t_tuple b)
 {
 	t_tuple	result;
 
