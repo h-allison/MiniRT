@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 17:08:43 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/24 20:27:40 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/24 20:31:35 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,12 @@ int	scenefile_check_chars(char *filename)
 
 static int str_contains(char c, char *str)
 {
-	int	i;
 	int	found;
 
-	i = 0;
 	found = 0;
-	while(str[i] && !found)
-	{
-		if (str[i] == c)
+	while(*str && !found)
+		if (*str++ == c)
 			found++;
-		i++;
-	}
 	if (found > 0)
 		return (1);
 	return (0);
