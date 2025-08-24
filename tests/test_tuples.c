@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 16:10:50 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/24 21:04:05 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/24 21:58:59 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ int	main(void)
 
 	printf("create tuples\n");
 	print_tuple("a", a);
-	printf("\n");
 	print_tuple("b", b);
-	printf("\n\n");
+	printf("\n");
 
 	a = point(4.3, -4.2, 3.1);
 	b = point(4.3, -4.19999, 3.10001);
@@ -36,9 +35,7 @@ int	main(void)
 	
 	printf("is equal?\n");
 	print_tuple("a", a);
-	printf("\n");
 	print_tuple("b", b);
-	printf("\n");
 	print_tuple("c", c);
 	printf("\n");
 
@@ -50,48 +47,51 @@ int	main(void)
 
 	printf("add tuples\n");
 	print_tuple("a", a);
-	printf("\n");
 	print_tuple("b", b);
-	printf("\n");
 	print_tuple("(a + b)", tadd(a, b));
-	printf("\n\n");
+	printf("\n");
 
 	a = point(3, 2, 1);
 	b = point(5, 6, 7);
 
 	printf("subtract tuples\n");
 	print_tuple("a", a);
-	printf("\n");
 	print_tuple("b", b);
-	printf("\n");
 	print_tuple("(a - b)", tsub(a, b));
-	printf("\n\n");
+	printf("\n");
 
 	printf("negate tuples\n");
 	print_tuple("(negative c)", tneg(c));
-	printf("\n\n");
+	printf("\n");
 
 	printf("multiply tuples\n");
 	print_tuple("(b * 3.5)", tmult(b, 3.5));
-	printf("\n\n");
+	printf("\n");
 
 	printf("divide tuples\n");
 	print_tuple("(b / 2)", tdiv(b, 2));
-	printf("\n\n");
+	printf("\n");
 
-	printf("magnitude c: %f\n\n", tmag(c));
+	a = vector(0, 1, 0);
+	b = vector(-1, -2, -3);
+	print_tuple("a", a);
+	printf("magnitude a: %f\n\n", tmag(a));
+	print_tuple("b", b);
+	printf("magnitude b: %f\n\n", tmag(b));
 
 	print_tuple("(normalized c)", tdiv(c, tmag(c)));
 }
 
 static void	print_tuple(char *str, t_tuple a)
 {
-	printf("%s.x = %f\n", str, a.x);
-	printf("%s.y = %f\n", str, a.y);
-	printf("%s.z = %f\n", str, a.z);
-	printf("%s.w = %f\n", str, a.w);
+	printf("%s > x = %f ", str, a.x);
+	printf("y = %f ", a.y);
+	printf("z = %f ", a.z);
+	printf("w = %f", a.w);
 	if (a.w == 0)
-		printf("is a vector\n");
-	if (a.w == 1)
-		printf("is a point\n");
+		printf("  > is a vector\n");
+	else if (a.w == 1)
+		printf("  > is a point\n");
+	else
+		printf("\n");
 }
