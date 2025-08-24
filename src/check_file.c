@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 17:08:43 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/23 19:02:40 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/24 20:27:40 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,15 @@ int	scenefile_check_chars(char *filename)
 {
 	int		fd;
 	char	buf;
+	int		comment;
 
 	fd = open_file(filename);
+	comment = 0;
 	while(read(fd, &buf, 1))
 	{
-		if (!ft_isalnum(buf) && !str_contains(buf, " .:,+-*()[]\n\t"))
+		comment += ((!comment && buf == '*')
+				- (comment && (!buf || buf == '\n')));
+		if (!comment && !ft_isalnum(buf) && !str_contains(buf, " .,-\n\t"))
 		{
 			close(fd);
 			ft_putstr_fd("ERROR: invalid character found in file: ", 2);
