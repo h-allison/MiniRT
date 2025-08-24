@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 16:10:50 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/24 21:58:59 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/24 22:35:58 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(void)
 
 	a = point(4.3, -4.2, 3.1);
 	b = point(4.3, -4.19999, 3.10001);
-	c = point(4.3, -4.1, 3.2);
+	c = vector(4.3, -4.1, 3.2);
 	
 	printf("is equal?\n");
 	print_tuple("a", a);
@@ -79,7 +79,7 @@ int	main(void)
 	print_tuple("b", b);
 	printf("magnitude b: %f\n\n", tmag(b));
 
-	print_tuple("(normalized c)", tdiv(c, tmag(c)));
+	print_tuple("(normalized b)", tnorm(b));
 }
 
 static void	print_tuple(char *str, t_tuple a)

@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 15:20:01 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/24 21:06:36 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/24 22:35:42 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,12 @@ float	tmag(t_tuple a)
 	return sqrtf(powf(a.x, 2) + powf(a.y, 2) + powf(a.z, 2) + powf(a.w, 2));
 }
 
-t_tuple	tnorm(t_tuple a, float magnitude)
+t_tuple	tnorm(t_tuple a)
 {
+	int		magnitude;
 	t_tuple	result;
 
+	magnitude = tmag(a);
 	result.x = a.x / magnitude;
 	result.y = a.y / magnitude;
 	result.z = a.z / magnitude;

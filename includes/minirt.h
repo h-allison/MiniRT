@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/24 21:40:20 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/24 22:37:09 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ t_tuple	tneg(t_tuple a);
 t_tuple	tmult(t_tuple a, float scalar);
 t_tuple	tdiv(t_tuple a, float scalar);
 float	tmag(t_tuple a);
-t_tuple	tnorm(t_tuple a, float magnitude);
+t_tuple	tnorm(t_tuple a);
 //math_tuples_3.c
 float	dot(t_tuple a, t_tuple b);
 t_tuple	cross(t_tuple a, t_tuple b);
