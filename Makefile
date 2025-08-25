@@ -6,69 +6,108 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/08/24 21:35:25 by mmillhof         ###   ########.fr        #
+#    Updated: 2025/08/25 07:32:54 by matthias         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC = src/main.c \
-	  src/check_file.c \
-	  src/file_helpers.c \
-	  src/error_handling.c \
-	  src/parsing.c \
-	  src/math_float.c \
-	  src/math_tuples_1.c \
-	  src/math_tuples_2.c \
-	  src/math_tuples_3.c \
-	  src/create_tuples.c
+# ---- Project ----
+NAME        := miniRT
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -I$(LIBFT_PATH) -Iincludes
+SRC         := src/main.c \
+               src/check_file.c \
+               src/file_helpers.c \
+               src/error_handling.c \
+               src/parsing.c \
+               src/math_float.c \
+               src/math_tuples_1.c \
+               src/math_tuples_2.c \
+               src/math_tuples_3.c \
+               src/create_tuples.c
 
-#subject says be sure to compile with lm, but this throws an error when compiling
+# ---- Paths ----
+LIBFT_PATH  := lib/libft
+LIBFT       := $(LIBFT_PATH)/libft.a
 
-LIBFT_PATH = lib/libft
-LIBFT = $(LIBFT_PATH)/libft.a
+MLX42_PATH  := lib/MLX42
+MLX42_A     := $(MLX42_PATH)/build/libmlx42.a
 
-#LOGO = lib/minishell_logo.txt
-NAME = miniRT
-HEADER = include/minirt.h
+# ---- Toolchain ----
+CC          ?= cc
+CFLAGS      ?= -Wall -Wextra -Werror
+CPPFLAGS := -Iinclude \
+             -I$(LIBFT_PATH)/include \
+             -I$(MLX42_PATH)/include \
+             -MMD -MP
+LDFLAGS     := -L$(LIBFT_PATH) -L$(MLX42_PATH)/build
+LDLIBS      := -lft -lmlx42 -lglfw -lm
 
-OBJ = $(SRC:.c=.o)
+# ---- OS-specific extras (GLFW deps) ----
+UNAME_S     := $(shell uname -s)
+ifeq ($(UNAME_S),Darwin)
+    LDLIBS  += -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
+else
+    LDLIBS  += -ldl -lpthread
+endif
+
+# ---- Objects / Deps ----
+OBJDIR      := build
+OBJ         := $(patsubst src/%.c,$(OBJDIR)/%.o,$(SRC))
+DEP         := $(OBJ:.o=.d)
+
+# ---- Rules ----
+.PHONY: all clean fclean re asan gdb valgrind valchild mlx42
 
 all: $(NAME)
-#	@cat $(LOGO)
 
-%.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) -c $< -o $@
+# Compile C -> .o into build/
+$(OBJDIR)/%.o: src/%.c | $(OBJDIR)
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
+
+# Build libft if needed
 $(LIBFT):
-	make -C $(LIBFT_PATH)
+	$(MAKE) -C $(LIBFT_PATH) CFLAGS+=' -Iinclude'
 
-$(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -L$(LIBFT_PATH) -lft -lm
+# Build MLX42 if needed
+mlx42: $(MLX42_A)
+
+$(MLX42_A):
+	cmake -S $(MLX42_PATH) -B $(MLX42_PATH)/build -DMLX42_BUILD_EXAMPLES=OFF
+	$(MAKE) -C $(MLX42_PATH)/build
+
+# Build target
+$(NAME): $(OBJ) $(LIBFT) $(MLX42_A)
+	$(CC) $(OBJ) $(LDFLAGS) $(LDLIBS) -o $@
 
 clean:
-	make clean -C $(LIBFT_PATH)
-	rm -rf $(OBJ)
+	$(MAKE) -C $(LIBFT_PATH) clean
+	rm -rf $(OBJDIR)
+	@if [ -d "$(MLX42_PATH)/build" ]; then $(MAKE) -C $(MLX42_PATH)/build clean; fi
 
 fclean: clean
-	make fclean -C $(LIBFT_PATH)
-	rm -rf $(NAME)
-
-asan: fclean
-asan: CFLAGS += -fsanitize=address -g
-asan: all
-
-gdb: fclean
-gdb: CFLAGS += -g -O0
-gdb: all
-
-valgrind:
-	valgrind --leak-check=full --show-leak-kinds=definite --track-origins=yes --track-fds=yes  --quiet --suppressions=readline_suppress.supp ./minishell
-
-valchild:
-	valgrind --leak-check=full --show-leak-kinds=definite --track-origins=yes --track-fds=yes  --trace-children=yes --quiet --suppressions=readline_suppress.supp ./minishell
+	$(MAKE) -C $(LIBFT_PATH) fclean
+	rm -f $(NAME)
+	rm -rf $(MLX42_PATH)/build
 
 re: fclean all
 
-.PHONY: all clean fclean re compile asan
+# ---- Debug/analysis profiles ----
+asan: CFLAGS  += -fsanitize=address -g
+asan: LDFLAGS += -fsanitize=address
+asan: fclean all
+
+gdb:  CFLAGS  += -g -O0
+gdb:  fclean all
+
+valgrind: $(NAME)
+	valgrind --leak-check=full --show-leak-kinds=definite --track-origins=yes \
+	         --track-fds=yes --quiet ./$(NAME)
+
+valchild: $(NAME)
+	valgrind --leak-check=full --show-leak-kinds=definite --track-origins=yes \
+	         --track-fds=yes --trace-children=yes --quiet ./$(NAME)
+
+# Auto-include dependency files
+-include $(DEP)

@@ -1,7 +1,0 @@
-/home/hallison/MiniRT/lib/mlx/CMakeFiles/mlx42.dir
-/home/hallison/MiniRT/lib/mlx/CMakeFiles/edit_cache.dir
-/home/hallison/MiniRT/lib/mlx/CMakeFiles/rebuild_cache.dir
-/home/hallison/MiniRT/lib/mlx/CMakeFiles/list_install_components.dir
-/home/hallison/MiniRT/lib/mlx/CMakeFiles/install.dir
-/home/hallison/MiniRT/lib/mlx/CMakeFiles/install/local.dir
-/home/hallison/MiniRT/lib/mlx/CMakeFiles/install/strip.dir

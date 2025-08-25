@@ -6,18 +6,18 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/24 22:37:09 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/25 07:25:07 by matthias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# include "includes/libft.h"
+#include "libft.h"
+#include <MLX42/MLX42.h>
 # include <math.h>
 # include <unistd.h>
 # include <stdio.h>
-# include <mlx.h>
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <stdlib.h>
