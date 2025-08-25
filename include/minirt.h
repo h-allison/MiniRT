@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/25 14:29:53 by hallison         ###   ########.fr       */
+/*   Updated: 2025/08/25 15:19:45 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,8 @@ typedef struct s_cyl
 typedef struct s_data
 {
 	char		*filename;
-	void		*mlx_ptr;
-	void		*win_ptr;
-	void		*img_ptr;
+	mlx_t		*mlx;
+	mlx_image_t	*img;
 	t_ambient	*ambient;
 	t_camera	*camera;
 	t_light		*light;
@@ -129,7 +128,7 @@ int		parse_file(char *filename, t_data *data);
 //create_tuples.c
 t_tuple	point(float x, float y, float z);
 t_tuple vector(float x, float y, float z);
-t_rgb color(int r, int g, int b);
+t_rgb	color(int r, int g, int b);
 //math_float.c
 int		fisequal(float a, float b);
 //math_tuples_1.c

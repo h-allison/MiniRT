@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 19:18:37 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/24 23:40:07 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/25 14:50:03 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,6 @@ int	parse_file(char *filename, t_data *data)
 	scenefile_check_chars(data->filename);
 	fd = open_file(data->filename);
 	parse_lines(fd, data);
-/*
-	data->mlx_ptr = NULL; // TODO
-	data->win_ptr = NULL; // TODO*/
 	close(fd);
 	return (0);
 }
