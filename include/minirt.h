@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/25 07:25:07 by matthias         ###   ########.fr       */
+/*   Updated: 2025/08/25 13:30:01 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,13 @@ typedef struct s_tuple
 	float			z;
 	float			w;
 }	t_tuple;
+
+typedef struct s_rgb
+{
+	float			r;
+	float			g;
+	float			b;
+}	t_rgb;
 
 typedef struct s_camera
 {
