@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/25 13:30:01 by hallison         ###   ########.fr       */
+/*   Updated: 2025/08/25 14:29:53 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ int		parse_file(char *filename, t_data *data);
 //create_tuples.c
 t_tuple	point(float x, float y, float z);
 t_tuple vector(float x, float y, float z);
+t_rgb color(int r, int g, int b);
 //math_float.c
 int		fisequal(float a, float b);
 //math_tuples_1.c
@@ -144,5 +145,14 @@ t_tuple	tnorm(t_tuple a);
 //math_tuples_3.c
 float	dot(t_tuple a, t_tuple b);
 t_tuple	cross(t_tuple a, t_tuple b);
+//math_colors.c
+t_rgb   cadd(t_rgb *c1, t_rgb *c2);
+t_rgb   csub(t_rgb *c1, t_rgb *c2);
+t_rgb   cscale(t_rgb *c1, float s);
+t_rgb	cmult(t_rgb *c1, t_rgb *c2);
+
+
+
+
 
 #endif
