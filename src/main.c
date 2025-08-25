@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:54:44 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/25 15:53:45 by hallison         ###   ########.fr       */
+/*   Updated: 2025/08/25 17:50:28 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,27 +34,27 @@ static void ft_error(void)
 
 void	render(void *param)
 {
-	typedef struct	s_proj
+	struct	s_proj
 	{
 		t_tuple position;
 		t_tuple velocity;
-	} t_proj;
+	} ;
 
-	typedef struct	s_env
+	struct	s_env
 	{
 		t_tuple	gravity;
 		t_tuple	wind;
-	} t_env;
+	} ;
 
 	t_data *data;
-	t_proj	ball;
-	t_env	env;
+	struct s_proj	ball;
+	struct s_env	env;
 
 	data = (t_data *) param;
-	ball.position = point(0, 1, 0);
-	ball.velocity = tnorm(vector(0.5, 1, 0));
-	env.gravity = vector(0, -0.001, 0);
-	env.wind = vector(-0.0003, 0, 0);
+	ball.position = create_point(0, 1, 0);
+	ball.velocity = tnorm(create_vector(0.5, 1, 0));
+	env.gravity = create_vector(0, -0.001, 0);
+	env.wind = create_vector(-0.0001, 0, 0);
 
 	while (ball.position.y > 0)
 	{
@@ -62,6 +62,37 @@ void	render(void *param)
 		ball.position = tadd(ball.position, ball.velocity);
 		ball.velocity = tadd(ball.velocity, tadd(env.gravity, env.wind));
 	}
+}
+
+int	color_to_hex(t_rgb color)
+{
+	int hex_color;
+
+	hex_color = (int)(color.r * 255);
+	hex_color = hex_color << 8;
+	hex_color = hex_color + (int)(color.g * 255);
+	hex_color = hex_color << 8;
+	hex_color = hex_color + (int)(color.b * 255);
+	hex_color = hex_color << 8;
+	hex_color = hex_color + 0xFF;
+	return (hex_color);
+}
+
+void	img_wipe(t_data *data, t_rgb color)
+{
+	int		y;
+	int		x;
+
+	y = 0;
+	x = 0;
+	while (y < data->mlx->height)
+	{
+		x = 0;
+		while (x < data->mlx->width)
+			mlx_put_pixel(data->img, x++, y, color_to_hex(color));
+		y++;
+	}
+	return ;
 }
 
 int	mlx_handling(t_data *data)
@@ -72,6 +103,7 @@ int	mlx_handling(t_data *data)
 	data->img = mlx_new_image(data->mlx, 800, 600);
 	if (!data->img || (mlx_image_to_window(data->mlx, data->img, 0, 0) < 0))
 		ft_error(); // TODO
+	img_wipe(data, create_color(0x20, 0x00, 0x20));
 	mlx_loop_hook(data->mlx, render, data);
 	mlx_loop(data->mlx);
 	mlx_terminate(data->mlx);

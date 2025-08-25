@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 16:10:50 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/25 13:14:40 by hallison         ###   ########.fr       */
+/*   Updated: 2025/08/25 17:58:25 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@ int	main(void)
 	t_tuple b;
 	t_tuple c;
 
-	a = point(4.3, -4.2, 3.1);
-	b = vector(4.3, -4.2, 3.1);
+	a = create_point(4.3, -4.2, 3.1);
+	b = create_vector(4.3, -4.2, 3.1);
 
 	printf("create tuples\n");
 	print_tuple("a: ", a);
 	print_tuple("b: ", b);
 	printf("\n");
 
-	a = point(4.3, -4.2, 3.1);
-	b = point(4.3, -4.19999, 3.10001);
-	c = vector(4.3, -4.1, 3.2);
+	a = create_point(4.3, -4.2, 3.1);
+	b = create_point(4.3, -4.19999, 3.10001);
+	c = create_vector(4.3, -4.1, 3.2);
 	
 	printf("is equal?\n");
 	print_tuple("a: ", a);
@@ -42,8 +42,8 @@ int	main(void)
 	printf("a == b: %i\n", tisequal(a, b));
 	printf("a == c: %i\n\n", tisequal(b, c));
 
-	a = point(3, -2, 5);
-	b = vector(-2, 3, 1);
+	a = create_point(3, -2, 5);
+	b = create_vector(-2, 3, 1);
 
 	printf("add tuples\n");
 	print_tuple("a: ", a);
@@ -51,8 +51,8 @@ int	main(void)
 	print_tuple("a + b: ", tadd(a, b));
 	printf("\n");
 
-	a = point(3, 2, 1);
-	b = point(5, 6, 7);
+	a = create_point(3, 2, 1);
+	b = create_point(5, 6, 7);
 
 	printf("subtract tuples\n");
 	print_tuple("a: ", a);
@@ -72,8 +72,8 @@ int	main(void)
 	print_tuple("b / 2: ", tdiv(b, 2));
 	printf("\n");
 
-	a = vector(0, 1, 0);
-	b = vector(-1, -2, -3);
+	a = create_vector(0, 1, 0);
+	b = create_vector(-1, -2, -3);
 	print_tuple("a: ", a);
 	printf("magnitude a: %f\n\n", tmag(a));
 	print_tuple("b: ", b);
@@ -81,8 +81,8 @@ int	main(void)
 	print_tuple("normalized b :", tnorm(b));
 	printf("\n");
 	
-	a = vector(1, 2, 3);
-	b = vector(2, 3, 4);
+	a = create_vector(1, 2, 3);
+	b = create_vector(2, 3, 4);
 	print_tuple("a: ", a);
 	print_tuple("b: ", b);
 	printf("dot product a, b: %f\n", dot(a, b));

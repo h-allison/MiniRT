@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/25 15:19:45 by hallison         ###   ########.fr       */
+/*   Updated: 2025/08/25 17:32:08 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,9 +126,9 @@ void	rt_early_exit(int error);
 //parsing.c
 int		parse_file(char *filename, t_data *data);
 //create_tuples.c
-t_tuple	point(float x, float y, float z);
-t_tuple vector(float x, float y, float z);
-t_rgb	color(int r, int g, int b);
+t_tuple	create_point(float x, float y, float z);
+t_tuple create_vector(float x, float y, float z);
+t_rgb	create_color(int r, int g, int b);
 //math_float.c
 int		fisequal(float a, float b);
 //math_tuples_1.c
@@ -145,13 +145,9 @@ t_tuple	tnorm(t_tuple a);
 float	dot(t_tuple a, t_tuple b);
 t_tuple	cross(t_tuple a, t_tuple b);
 //math_colors.c
-t_rgb   cadd(t_rgb *c1, t_rgb *c2);
-t_rgb   csub(t_rgb *c1, t_rgb *c2);
-t_rgb   cscale(t_rgb *c1, float s);
-t_rgb	cmult(t_rgb *c1, t_rgb *c2);
-
-
-
-
+t_rgb   cadd(t_rgb c1, t_rgb c2);
+t_rgb   csub(t_rgb c1, t_rgb c2);
+t_rgb   cscale(t_rgb c1, float s);
+t_rgb	cmult(t_rgb c1, t_rgb c2);
 
 #endif
