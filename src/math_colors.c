@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 13:47:05 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/25 17:24:57 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/25 18:48:05 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,3 +61,20 @@ t_rgb	cmult(t_rgb c1, t_rgb c2)
 	product.b = c1.b * c2.b;
 	return (product);
 }
+
+/* Convert t_rgb color to int / hex */
+
+int color_to_hex(t_rgb color)
+{
+    int hex_color;
+
+    hex_color = (int)(color.r * 255);
+    hex_color = hex_color << 8;
+    hex_color = hex_color + (int)(color.g * 255);
+    hex_color = hex_color << 8;
+    hex_color = hex_color + (int)(color.b * 255);
+    hex_color = hex_color << 8;
+    hex_color = hex_color + 0xFF;
+    return (hex_color);
+}
+
