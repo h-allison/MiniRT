@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:54:44 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/25 20:27:29 by hallison         ###   ########.fr       */
+/*   Updated: 2025/08/26 08:30:05 by matthias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	render(void *param)
 
 	while (ball.position.y > 0)
 	{
-		mlx_put_pixel(data->img, ball.position.x, 600 - ball.position.y, 0xE09558FF);
+		mlx_put_pixel(data->img, ball.position.x, 600 - ball.position.y, 0x201508FF);
 		ball.position = tadd(ball.position, ball.velocity);
 		ball.velocity = tadd(ball.velocity, tadd(env.gravity, env.wind));
 	}
@@ -83,7 +83,12 @@ void	img_wipe(t_data *data, t_rgb color)
 	{
 		x = 0;
 		while (x < data->mlx->width)
-			mlx_put_pixel(data->img, x++, y, color_to_hex(color));
+		{
+			color.g = (float)x / data->img->width;
+			color.b = (float)y / data->img->height;
+			mlx_put_pixel(data->img, x, y, color_to_hex(color));
+			x++;
+		}
 		y++;
 	}
 	return ;
@@ -95,12 +100,11 @@ int	mlx_handling(t_data *data)
 	if (!data->mlx)
 		ft_error(); // TODO
 	data->img = mlx_new_image(data->mlx, 800, 600);
+	img_wipe(data, create_color(0x60, 0x00, 0x00));
 	if (!data->img || (mlx_image_to_window(data->mlx, data->img, 0, 0) < 0))
 		ft_error(); // TODO
-	img_wipe(data, create_color(0x00, 0x0F, 0x99));
 	mlx_loop_hook(data->mlx, render, data);
 	mlx_loop(data->mlx);
 	mlx_terminate(data->mlx);
 	return (EXIT_SUCCESS);
 }
-
