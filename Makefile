@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/08/25 20:42:38 by hallison         ###   ########.fr        #
+#    Updated: 2025/08/26 14:16:17 by hallison         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRC         := src/main.c \
                src/math_tuples_3.c \
 			   src/math_colors.c\
                src/create_tuples.c\
-			   src/export_ppm.c
+			   src/create_matrices.c\
+			   src/export_ppm.c\
 
 # ---- Paths ----
 LIBFT_PATH  := lib/libft
