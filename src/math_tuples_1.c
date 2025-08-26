@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 15:20:01 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/25 10:49:11 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/26 15:26:52 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@
 // if err, returns 0 ("isequal" is false)
 // if no err, returns 1 ("isequal" is true)
 
-int	tisequal(t_tuple a, t_tuple b)
+bool	tisequal(t_tuple a, t_tuple b)
 {
 	int	err;
 
 	err = 0;
+
 	err += !fisequal(a.x, b.x);
 	err += !fisequal(a.y, b.y);
 	err += !fisequal(a.z, b.z);
