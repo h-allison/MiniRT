@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 13:59:07 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/26 17:39:22 by hallison         ###   ########.fr       */
+/*   Updated: 2025/08/26 18:01:03 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(void)
 	print_matrix(m, 10);
 	free_matrix(m, 10);
 	printf("\n");
-	
+
 	/* Test Matrices Equal? */
 
 	m1 = alloc_matrix(4);
@@ -50,7 +50,7 @@ int	main(void)
 	free_matrix(m1, 4);
 	free_matrix(m2, 4);
 	printf("\n");
-	
+
 	m1 = alloc_matrix(5);
 	m2 = alloc_matrix(5);
 	fill_matrix(m1, 5, 0.3);
@@ -65,34 +65,46 @@ int	main(void)
 
 	float m3[4][4] = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 8, 7, 6}, {5, 4, 3, 2}};
 	float m4[4][4] = {{-2, 1, 2, 3}, {3, 2, 1, -1}, {4, 3, 6, 5}, {1, 2, 7, 8}};
-   	
+
 	float *m5[4];
-    
+
 	for (int i = 0; i < 4; i++) {
-        m5[i] = m3[i];
-    }
+		m5[i] = m3[i];
+	}
 
 	float *m6[4];
-    
+
 	for (int i = 0; i < 4; i++) {
-        m6[i] = m4[i];
-    }
+		m6[i] = m4[i];
+	}
 	m = matrixmult(m5, m6);
 	print_matrix(m, 4);
 	free_matrix(m, 4);
 	printf("\n");
-	
+
 	/* Test Tuple Matrix Multiply */
-	
+
 	float m7[4][4] = {{1, 2, 3, 4}, {2, 4, 4, 2}, {8, 6, 4, 1}, {0, 0, 0, 1}};
-   	
+
 	float *m8[4];
 	for (int i = 0; i < 4; i++) {
-        m8[i] = m7[i];
-    }
+		m8[i] = m7[i];
+	}
 
 	t_tuple	t = create_point(1, 2, 3); 
 	t_tuple tuple = tmatrixmult(m8, t);
+	print_tuple("t", tuple);
+
+	/* Test Identity Matrix */
+
+	float id_0[4][4] = {{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}};
+	float *id[4];
+	for (int i = 0; i < 4; i++) {
+		id[i] = id_0[i];
+	}
+
+	t = create_point(1, 2, 3); 
+	tuple = tmatrixmult(id, t);
 	print_tuple("t", tuple);
 	return (0);
 }
@@ -135,14 +147,14 @@ void	fill_matrix(float **m, int size, float steps)
 
 static void print_tuple(char *str, t_tuple a)
 {
-    printf("%s x = %f ", str, a.x);
-    printf("y = %f ", a.y);
-    printf("z = %f ", a.z);
-    printf("w = %f", a.w);
-    if (a.w == 0)
-        printf("  > is a vector\n");
-    else if (a.w == 1)
-        printf("  > is a point\n");
-    else
-        printf("\n");
+	printf("%s x = %f ", str, a.x);
+	printf("y = %f ", a.y);
+	printf("z = %f ", a.z);
+	printf("w = %f", a.w);
+	if (a.w == 0)
+		printf("  > is a vector\n");
+	else if (a.w == 1)
+		printf("  > is a point\n");
+	else
+		printf("\n");
 }
