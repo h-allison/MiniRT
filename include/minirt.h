@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/25 19:19:55 by hallison         ###   ########.fr       */
+/*   Updated: 2025/08/26 14:15:37 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,4 +152,6 @@ t_rgb	cmult(t_rgb c1, t_rgb c2);
 int		color_to_hex(t_rgb color);
 //export_ppmm.c
 int		canvas_export_ppm(t_data *data);
+void    free_4x4_matrix(float **m);
+float **alloc_4x4_matrix(void);
 #endif
