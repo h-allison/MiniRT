@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 13:59:07 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/26 18:01:03 by hallison         ###   ########.fr       */
+/*   Updated: 2025/08/27 17:53:46 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ int	main(void)
 	}
 	m = matrixmult(m5, m6);
 	print_matrix(m, 4);
-	free_matrix(m, 4);
 	printf("\n");
+	free_matrix(m, 4);
 
 	/* Test Tuple Matrix Multiply */
 
@@ -94,18 +94,67 @@ int	main(void)
 	t_tuple	t = create_point(1, 2, 3); 
 	t_tuple tuple = tmatrixmult(m8, t);
 	print_tuple("t", tuple);
+	printf("\n");
 
 	/* Test Identity Matrix */
 
-	float id_0[4][4] = {{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}};
-	float *id[4];
-	for (int i = 0; i < 4; i++) {
-		id[i] = id_0[i];
-	}
+	float	**id;
 
+	id = create_id_matrix();
 	t = create_point(1, 2, 3); 
-	tuple = tmatrixmult(id, t);
+	tuple = tmatrixmult(id , t);
 	print_tuple("t", tuple);
+	printf("\n");
+	free_matrix(id,4);
+
+
+	float	**mt;
+
+	m1 = alloc_matrix(4);
+	fill_matrix(m1, 4, 0.11111);
+	mt = mtranspose(m1, 4);
+	print_matrix(mt, 4);
+	printf("\n");
+	free_matrix(m1, 4);
+	free_matrix(mt, 4);
+
+
+	float	**submatrix;
+
+	m1 = alloc_matrix(4);
+	fill_matrix(m1, 4, 1);
+	submatrix = msubmatrix(m1, 4, 1, 2);
+	print_matrix(m1, 4);
+	printf("\n");
+	print_matrix(submatrix, 3);
+	printf("\n");
+	free_matrix(m1, 4);
+	free_matrix(submatrix, 3);
+
+	m1 = alloc_matrix(3);
+	fill_matrix(m1, 3, 1);
+	submatrix = msubmatrix(m1, 3, 0, 2);
+	print_matrix(m1, 3);
+	printf("\n");
+	print_matrix(submatrix, 2);
+	printf("\n");
+	free_matrix(m1, 3);
+	free_matrix(submatrix, 2);
+
+	float mtemp[3][3] = {{3, 5, 0}, {2, -1, -7}, {6, -1, 5}};
+
+	float *mminor[3];
+	for (int i = 0; i < 3; i++) {
+		mminor[i] = mtemp[i];
+	}
+	print_matrix(mminor, 3);
+	printf("\n");
+	printf("minor (0, 0): %f\n", mminor3x3(mminor, 0 ,0));
+	printf("minor (1, 0): %f\n", mminor3x3(mminor, 1 ,0));
+	printf("\n");
+	printf("cofactor (0, 0): %f\n", mcofactor3x3(mminor, 0 ,0));
+	printf("cofactor (1, 0): %f\n", mcofactor3x3(mminor, 1 ,0));
+	printf("\n");
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/08/26 15:46:20 by hallison         ###   ########.fr        #
+#    Updated: 2025/08/27 16:33:54 by mmillhof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRC         := src/main.c \
                src/parsing.c \
                src/math_float.c \
 			   src/math_matrices.c \
+			   src/math_matrices_2.c \
                src/math_tuples_1.c \
                src/math_tuples_2.c \
                src/math_tuples_3.c \

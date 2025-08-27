@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 15:09:54 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/26 17:37:04 by hallison         ###   ########.fr       */
+/*   Updated: 2025/08/27 15:37:58 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,25 @@ t_tuple	tmatrixmult(float **m, t_tuple t)
 	tuple.z = matrixdot(m, 2, t);
 	tuple.w = matrixdot(m, 3, t);
 	return(tuple);
+}
+
+float	**mtranspose(float **m1, int size)
+{
+	int		x;
+	int		y;
+	float	**m2;
+
+	m2 = alloc_matrix(size);
+	x = 0;
+	while (x < size)
+	{
+		y = 0;
+		while (y < size)
+		{
+			m2[x][y] = m1[y][x];
+			y++;
+		}
+		x++;
+	}	
+	return (m2);
 }

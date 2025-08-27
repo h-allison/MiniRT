@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/26 17:34:46 by hallison         ###   ########.fr       */
+/*   Updated: 2025/08/27 17:47:38 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ t_rgb	create_color(int r, int g, int b);
 //create_matrices.c
 void	free_matrix(float **m, int size);
 float	**alloc_matrix(int size);
+float	**create_id_matrix(void);
 
 //math_float.c
 bool	fisequal(float a, float b);
@@ -165,6 +166,13 @@ int		color_to_hex(t_rgb color);
 bool	misequal(float **m1, float **m2, int size);
 float	**matrixmult(float **m1, float **m2);
 t_tuple tmatrixmult(float **m, t_tuple t);
+float	**mtranspose(float **m1, int size);
+
+//math_matrices_2.c
+float	det_2x2(float **m);
+float	**msubmatrix(float **m, int size, int row, int col);
+float	mminor3x3(float **m, int row, int col);
+float	mcofactor3x3(float **m, int row, int col);
 
 //export_ppmm.c
 int		canvas_export_ppm(t_data *data);

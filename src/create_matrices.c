@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 13:20:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/26 14:48:03 by hallison         ###   ########.fr       */
+/*   Updated: 2025/08/27 15:28:58 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	free_matrix(float **m, int size)
 	}
 }
 
-float **alloc_matrix(int size)
+float	**alloc_matrix(int size)
 {
 	int		i;
 	float	**m;
@@ -51,4 +51,19 @@ float **alloc_matrix(int size)
 		i++;
 	}
 	return (m);
+}
+
+float	**create_id_matrix(void)
+{
+	float	**id;
+	int		i;
+	
+	id = alloc_matrix(4);
+	i = 0;
+	while (i < 4)
+	{
+		id[i][i] = 1;
+		i++;
+	}
+	return (id);
 }
