@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 13:59:07 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/27 17:53:46 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/28 12:46:41 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,17 @@ int	main(void)
 	printf("\n");
 	printf("cofactor (0, 0): %f\n", mcofactor3x3(mminor, 0 ,0));
 	printf("cofactor (1, 0): %f\n", mcofactor3x3(mminor, 1 ,0));
+	printf("\n");
+
+	float temp_det_4x4[4][4] = {{-2, -8, 3, 5}, {-3, 1, 7, 3}, {1, 2, -9, 6}, {-6, 7, 7, -9}};
+
+	float *m_det_4x4[4];
+	for (int i = 0; i < 4; i++) {
+		m_det_4x4[i] = temp_det_4x4[i];
+	}
+	print_matrix(m_det_4x4, 4);
+	printf("\n");
+	printf("determinant: %f\n", mdet(m_det_4x4, 4));
 	printf("\n");
 	return (0);
 }

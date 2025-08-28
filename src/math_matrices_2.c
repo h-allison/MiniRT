@@ -6,16 +6,13 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 16:02:00 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/27 17:51:06 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/28 13:48:32 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-/* Matrix Determinant */
-// Only for 2 X 2 matrices
-
-float	det_2x2(float **m)
+float	mdet_2x2(float **m)
 {
 	return ((m[0][0] * m[1][1]) - (m[0][1] * m[1][0]));
 }
@@ -57,7 +54,7 @@ float	mminor3x3(float **m, int row, int col)
 	float **sub;
 
 	sub = msubmatrix(m, 3, row, col);
-	minor = det_2x2(sub);
+	minor = mdet_2x2(sub);
 	free_matrix(sub, 2);
 	return (minor);
 }
@@ -68,9 +65,38 @@ float	mcofactor3x3(float **m, int row, int col)
 	float **sub;
 
 	sub = msubmatrix(m, 3, row, col);
-	cofactor = det_2x2(sub);
+	cofactor = mdet_2x2(sub);
 	free_matrix(sub, 2);
 	if ((row + col) % 2)
 		cofactor = -cofactor;
+	printf("cof (%i, %i): %f\n", row, col, cofactor);
 	return (cofactor);
+}
+
+
+/* Flexible function matrixes up to 4x4*/
+
+float	mdet(float **m, int size)
+{
+	int		j;
+	int		i;
+	float	det;
+	float	**mtemp;
+
+	if (size == 2)
+		return (mdet_2x2(m));
+	det = 0;
+	j = 0;
+	while (j < size);
+	{
+		mtemp = msubmatrix(m, 0, j++);
+		i = 0;
+		while (i < size - 1)
+		{
+			det += m[0][i] * mcofactor3x3(m, 1, i);
+			i++;
+		}
+		free_matrix(mtemp, 3);
+	}
+	return (det);
 }
