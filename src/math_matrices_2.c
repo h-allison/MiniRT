@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 16:02:00 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/28 13:48:32 by hallison         ###   ########.fr       */
+/*   Updated: 2025/08/28 14:39:36 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,11 @@ float	mminor3x3(float **m, int row, int col)
 float	mcofactor3x3(float **m, int row, int col)
 {
 	float cofactor;
-	float **sub;
 
-	sub = msubmatrix(m, 3, row, col);
-	cofactor = mdet_2x2(sub);
-	free_matrix(sub, 2);
+	cofactor = mminor3x3(m, row, col);
 	if ((row + col) % 2)
 		cofactor = -cofactor;
-	printf("cof (%i, %i): %f\n", row, col, cofactor);
+	printf("  cof (%i, %i): %f\n", row, col, cofactor);
 	return (cofactor);
 }
 
@@ -87,16 +84,18 @@ float	mdet(float **m, int size)
 		return (mdet_2x2(m));
 	det = 0;
 	j = 0;
-	while (j < size);
+	while (j < size)
 	{
-		mtemp = msubmatrix(m, 0, j++);
+		printf("subm (0, %i)\n", j);
+		mtemp = msubmatrix(m, 4, 0, j++);
 		i = 0;
 		while (i < size - 1)
 		{
-			det += m[0][i] * mcofactor3x3(m, 1, i);
+			det += mtemp[0][i] * mcofactor3x3(mtemp, 0, i);
 			i++;
 		}
 		free_matrix(mtemp, 3);
+		printf("det (0, %i): %f", j, det);
 	}
 	return (det);
 }
