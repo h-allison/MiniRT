@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/28 12:28:18 by hallison         ###   ########.fr       */
+/*   Updated: 2025/08/28 15:27:16 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,7 @@ float	mdet_2x2(float **m);
 float	**msubmatrix(float **m, int size, int row, int col);
 float	mminor3x3(float **m, int row, int col);
 float	mcofactor3x3(float **m, int row, int col);
+float	mdet3x3(float **m, int size);
 float	mdet(float **m, int size);
 
 //export_ppmm.c

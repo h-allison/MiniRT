@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 16:02:00 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/28 14:39:36 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/28 15:52:38 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,36 +66,49 @@ float	mcofactor3x3(float **m, int row, int col)
 	cofactor = mminor3x3(m, row, col);
 	if ((row + col) % 2)
 		cofactor = -cofactor;
-	printf("  cof (%i, %i): %f\n", row, col, cofactor);
 	return (cofactor);
 }
 
 
-/* Flexible function matrixes up to 4x4*/
+/* determinants */
 
-float	mdet(float **m, int size)
+float	mdet3x3(float **m, int size)
 {
-	int		j;
 	int		i;
 	float	det;
-	float	**mtemp;
 
 	if (size == 2)
 		return (mdet_2x2(m));
+	i = 0;
 	det = 0;
-	j = 0;
-	while (j < size)
+	while (i < size)
 	{
-		printf("subm (0, %i)\n", j);
-		mtemp = msubmatrix(m, 4, 0, j++);
-		i = 0;
-		while (i < size - 1)
-		{
-			det += mtemp[0][i] * mcofactor3x3(mtemp, 0, i);
-			i++;
-		}
+		det += m[0][i] * mcofactor3x3(m, 0, i);
+		i++;
+	}
+	return (det);
+}
+
+float	mdet(float **m, int size)
+{
+	int		i;
+	float	det;
+	float	cof;
+	float	**mtemp;
+
+	if (size == 2 || size == 3)
+		return (mdet3x3(m, size));
+	i = 0;
+	det = 0;
+	while (i < size)
+	{
+		mtemp = msubmatrix(m, 4, 0, i);
+		cof = mdet3x3(mtemp, 3);
 		free_matrix(mtemp, 3);
-		printf("det (0, %i): %f", j, det);
+		if (i % 2)
+			cof = -cof;
+		det += cof * m[0][i];
+		i++;
 	}
 	return (det);
 }
