@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 13:59:07 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/28 12:46:41 by hallison         ###   ########.fr       */
+/*   Updated: 2025/08/28 18:38:51 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,73 @@ int	main(void)
 	printf("\n");
 	printf("determinant: %f\n", mdet(m_det_4x4, 4));
 	printf("\n");
-	return (0);
+
+	/* Test Matrix Inversion */
+
+	float temp_m_toinvert[4][4] = {{-5, 2, 6, -8}, {1, -5, 1, 8}, {7, 7, -6, -7}, {1, -3, 7, 4}};
+
+	float *m_toinvert[4];
+	for (int i = 0; i < 4; i++) {
+		m_toinvert[i] = temp_m_toinvert[i];
+	}
+	print_matrix(m_toinvert, 4);
+	printf("\nInverted:\n");
+	float **m_inverted;
+	m_inverted = minvert(m_toinvert, 4);
+	print_matrix(m_inverted, 4);
+	printf("\n");
+	
+	//
+
+	float a_temp_m_toinvert[4][4] = {{8, -5, 9, 2}, {7, 5, 6, 1}, {-6, 0, 9, 6}, {-3, 0, -9, -4}};
+
+	float *a_m_toinvert[4];
+	for (int i = 0; i < 4; i++) {
+		a_m_toinvert[i] = a_temp_m_toinvert[i];
+	}
+	print_matrix(a_m_toinvert, 4);
+	printf("\nInverted:\n");
+	float **a_m_inverted;
+	a_m_inverted = minvert(a_m_toinvert, 4);
+	print_matrix(a_m_inverted, 4);
+	printf("\n");
+
+	//
+
+	float b_temp_m_toinvert[4][4] = {{9, 3, 0, 9}, {-5, -2, -6, -3}, {-4, 9, 6, 4}, {-7, 6, 6, 2}};
+
+	float *b_m_toinvert[4];
+	for (int i = 0; i < 4; i++) {
+		b_m_toinvert[i] = b_temp_m_toinvert[i];
+	}
+	print_matrix(b_m_toinvert, 4);
+	printf("\nInverted:\n");
+	float **b_m_inverted;
+	b_m_inverted = minvert(b_m_toinvert, 4);
+	print_matrix(b_m_inverted, 4);
+	printf("\n");
+	
+	//
+
+	float **multiplied_matrix;
+	multiplied_matrix = matrixmult(a_m_toinvert, b_m_toinvert);
+	printf("\nA * B = C:\n");
+	print_matrix(multiplied_matrix, 4);
+	float **original_matrix;
+	printf("\nA:\n");
+	print_matrix(a_m_toinvert, 4);
+	original_matrix = matrixmult(multiplied_matrix, b_m_inverted);
+	printf("\nC * inverse of B should equal A:\n");
+	print_matrix(original_matrix, 4);
+	free_matrix(original_matrix, 4);
+	free_matrix(multiplied_matrix, 4);
+
+	//
+	float **is_it_id;
+	printf("\nMultiplying a matrix by its inverse =\n");
+	is_it_id = matrixmult(a_m_toinvert, a_m_inverted);
+	print_matrix(is_it_id, 4);
+	free_matrix(is_it_id, 4);
 }
 
 void	print_matrix(float **m, int size)

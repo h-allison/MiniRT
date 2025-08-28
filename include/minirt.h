@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/28 15:27:16 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/28 18:00:30 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,12 +169,17 @@ t_tuple tmatrixmult(float **m, t_tuple t);
 float	**mtranspose(float **m1, int size);
 
 //math_matrices_2.c
-float	mdet_2x2(float **m);
 float	**msubmatrix(float **m, int size, int row, int col);
 float	mminor3x3(float **m, int row, int col);
 float	mcofactor3x3(float **m, int row, int col);
+float   mcofactor4x4(float **m, int size, int row, int col);
+
+//math_matrices_3.c
+float	mdet2x2(float **m);
 float	mdet3x3(float **m, int size);
 float	mdet(float **m, int size);
+float   **minvert(float **m, int size);
+bool    minvertable(float **m, int size);
 
 //export_ppmm.c
 int		canvas_export_ppm(t_data *data);
