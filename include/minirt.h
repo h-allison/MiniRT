@@ -6,15 +6,15 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/28 18:00:30 by hallison         ###   ########.fr       */
+/*   Updated: 2025/08/29 15:17:34 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-#include "libft.h"
-#include <MLX42/MLX42.h>
+# include "libft.h"
+# include <MLX42/MLX42.h>
 # include <math.h>
 # include <unistd.h>
 # include <stdio.h>
@@ -32,6 +32,8 @@
 # define B 2
 
 # define EPSILON 0.0001
+# define DEG2RAD (M_PI / 180.0)
+# define RAD2DEG (180.0 / M_PI)
 
 typedef enum e_error
 {
@@ -43,8 +45,8 @@ typedef enum e_error
 
 typedef struct s_ambient
 {
-	float			ratio; // range [0.0, 1.0]
-	unsigned int	rgb[3]; // [0-255]
+	float			ratio;
+	unsigned int	rgb[3];
 }	t_ambient;
 
 typedef struct s_tuple
@@ -64,37 +66,36 @@ typedef struct s_rgb
 
 typedef struct s_camera
 {
-	float			viewpoint[3]; // zB. -50.0,0,20
-	float			vector; // range [-1,1]
-	unsigned int	fov; // field of view, range [0,180]
+	float			viewpoint[3];
+	float			vector;
+	unsigned int	fov;
 }	t_camera;
 
 typedef struct s_light
 {
-	float			light_point[3]; // X, Y, Z
-	float			brightness; // range [0.0,1.0]
-	// for bonus only:
+	float			light_point[3];
+	float			brightness;
 	unsigned int	rgb[3];	
 }	t_light;
 
 typedef struct s_sphere
 {
-	float			center[3]; // signed?
+	float			center[3];
 	float			diameter;
 	unsigned int	rgb[3];
 }	t_sphere;
 
 typedef struct s_plane
 {
-	float	point[3]; // coordinates
-	float	vectors[3]; // range [-1.1]
+	float	point[3];
+	float	vectors[3];
 	int		rgb[3];
 }	t_plane;
 
 typedef struct s_cyl
 {
-	float			center[3]; // signed?
-	float			axis[3]; // range [-1,1], 1 each coordinate
+	float			center[3];
+	float			axis[3];
 	float			diam;
 	float			height;
 	unsigned int	rgb[3];
@@ -128,7 +129,7 @@ int		parse_file(char *filename, t_data *data);
 
 //create_tuples.c
 t_tuple	create_point(float x, float y, float z);
-t_tuple create_vector(float x, float y, float z);
+t_tuple	create_vector(float x, float y, float z);
 t_rgb	create_color(int r, int g, int b);
 
 //create_matrices.c
@@ -156,31 +157,42 @@ float	dot(t_tuple a, t_tuple b);
 t_tuple	cross(t_tuple a, t_tuple b);
 
 //math_colors.c
-t_rgb   cadd(t_rgb c1, t_rgb c2);
-t_rgb   csub(t_rgb c1, t_rgb c2);
-t_rgb   cscale(t_rgb c1, float s);
+t_rgb	cadd(t_rgb c1, t_rgb c2);
+t_rgb	csub(t_rgb c1, t_rgb c2);
+t_rgb	cscale(t_rgb c1, float s);
 t_rgb	cmult(t_rgb c1, t_rgb c2);
 int		color_to_hex(t_rgb color);
 
 //math_matrices.c
 bool	misequal(float **m1, float **m2, int size);
 float	**matrixmult(float **m1, float **m2);
-t_tuple tmatrixmult(float **m, t_tuple t);
+t_tuple	tmatrixmult(float **m, t_tuple t);
 float	**mtranspose(float **m1, int size);
 
 //math_matrices_2.c
 float	**msubmatrix(float **m, int size, int row, int col);
 float	mminor3x3(float **m, int row, int col);
 float	mcofactor3x3(float **m, int row, int col);
-float   mcofactor4x4(float **m, int size, int row, int col);
+float	mcofactor4x4(float **m, int size, int row, int col);
 
 //math_matrices_3.c
 float	mdet2x2(float **m);
 float	mdet3x3(float **m, int size);
 float	mdet(float **m, int size);
-float   **minvert(float **m, int size);
-bool    minvertable(float **m, int size);
+float	**minvert(float **m, int size);
+bool	minvertable(float **m, int size);
+
+//transform.c
+float	**translation(float x, float y, float z);
+float	**scaling(float x, float y, float z);
+float	**rotation_x(float r);
+float	**rotation_y(float r);
+float	**rotation_z(float r);
+
+//transform_2.c
+float	**shearing(float *shear);
 
 //export_ppmm.c
 int		canvas_export_ppm(t_data *data);
+
 #endif

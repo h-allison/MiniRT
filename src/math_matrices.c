@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 15:09:54 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/27 15:37:58 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/29 12:35:44 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ float	**matrixmult(float **m1, float **m2)
 	return(m);
 }
 
-/* Multiples one 4 X 4 matrix with one tuple*/
-
 float	matrixdot(float **m, int y, t_tuple t)
 {
 	t_tuple	temp;
@@ -71,6 +69,8 @@ float	matrixdot(float **m, int y, t_tuple t)
 	temp.w = m[y][3];
 	return (dot(temp, t));
 }
+
+/* Multiples one 4 X 4 matrix with one tuple*/
 
 t_tuple	tmatrixmult(float **m, t_tuple t)
 {

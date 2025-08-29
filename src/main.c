@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:54:44 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/26 08:30:05 by matthias         ###   ########.fr       */
+/*   Updated: 2025/08/29 17:14:37 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,35 +35,25 @@ static void ft_error(void)
 void	render(void *param)
 {
 	static bool	render_done;
-
-	render_done = false;
-	struct	s_proj
-	{
-		t_tuple position;
-		t_tuple velocity;
-	} ;
-
-	struct	s_env
-	{
-		t_tuple	gravity;
-		t_tuple	wind;
-	} ;
-
 	t_data *data;
-	struct s_proj	ball;
-	struct s_env	env;
+	t_tuple	point;
+	int	i;
+	float	**mtranslate;
+	float	**mrotate;
+	float	**mcombined;
 
-	data = (t_data *) param;
-	ball.position = create_point(0, 1, 0);
-	ball.velocity = tnorm(create_vector(0.8, 1, 0));
-	env.gravity = create_vector(0, -0.001, 0);
-	env.wind = create_vector(-0.0005, 0, 0);
-
-	while (ball.position.y > 0)
+	data = (t_data *)param;
+	render_done = false;
+	i = 0;
+	while (i < 360)
 	{
-		mlx_put_pixel(data->img, ball.position.x, 600 - ball.position.y, 0x201508FF);
-		ball.position = tadd(ball.position, ball.velocity);
-		ball.velocity = tadd(ball.velocity, tadd(env.gravity, env.wind));
+		point = create_point(0, -200, 0);
+		mrotate = rotation_z(i * DEG2RAD);
+		mtranslate = translation(400, 300, 0);
+		mcombined = matrixmult(mtranslate, mrotate);
+		point = tmatrixmult(mcombined, point);
+		mlx_put_pixel(data->img, point.x, point.y, 0xFFFFFFFF);
+		i++;
 	}
 	if (render_done == false)
 	{
@@ -84,8 +74,6 @@ void	img_wipe(t_data *data, t_rgb color)
 		x = 0;
 		while (x < data->mlx->width)
 		{
-			color.g = (float)x / data->img->width;
-			color.b = (float)y / data->img->height;
 			mlx_put_pixel(data->img, x, y, color_to_hex(color));
 			x++;
 		}
@@ -100,7 +88,7 @@ int	mlx_handling(t_data *data)
 	if (!data->mlx)
 		ft_error(); // TODO
 	data->img = mlx_new_image(data->mlx, 800, 600);
-	img_wipe(data, create_color(0x60, 0x00, 0x00));
+	img_wipe(data, create_color(0x00, 0x00, 0x00));
 	if (!data->img || (mlx_image_to_window(data->mlx, data->img, 0, 0) < 0))
 		ft_error(); // TODO
 	mlx_loop_hook(data->mlx, render, data);
