@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/30 20:47:22 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/30 22:35:18 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ typedef struct s_ray
 typedef struct s_sphere
 {
 	t_tuple			origin;
-	float			diameter;
-	t_rgb			rgb;
+	float			radius;
+	t_rgb			color;
 }	t_sphere;
 
 
@@ -133,6 +133,9 @@ void	rt_early_exit(int error);
 
 //parsing.c
 int		parse_file(char *filename, t_data *data);
+
+//create_objects.c
+t_sphere sphere(t_tuple origin, float radius, t_rgb color);
 
 //create_tuples.c
 t_tuple	point(float x, float y, float z);
@@ -202,6 +205,7 @@ float	**shearing(float *shear);
 //math_rays.c
 t_ray	ray(t_tuple point, t_tuple vector);
 t_tuple	position(t_ray ray, float t);
+float	*intersect(t_sphere s, t_ray r);
 
 //export_ppmm.c
 int		canvas_export_ppm(t_data *data);
