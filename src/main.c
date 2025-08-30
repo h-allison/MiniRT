@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:54:44 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/30 20:02:44 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/30 23:57:40 by matthias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,11 @@ void	render(void *param)
 	data = (t_data *)param;
 	render_done = false;
 	i = 0;
-	while (i < 360)
+	while (i < 3600)
 	{
 		digit = point(0, -200, 0);
 		mrotate = rotation_z(i * DEG2RAD);
+		mrotate = matrixmult(rotation_y((i * DEG2RAD) / 5), mrotate); 
 		mtranslate = translation(400, 300, 0);
 		mcombined = matrixmult(mtranslate, mrotate);
 		digit = tmatrixmult(mcombined, digit);
