@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 15:35:53 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/30 18:26:27 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/30 20:43:53 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,5 @@ int main (void)
 	printf("position (r, -1): point(%f, %f, %f, %f)\n", target.x, target.y, target.z, target.w);
 	target = position(r, 2.5);
 	printf("position (r, 2.5): point(%f, %f, %f, %f)\n", target.x, target.y, target.z, target.w);
-
 	return (0);
 }

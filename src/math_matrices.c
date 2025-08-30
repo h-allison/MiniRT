@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 15:09:54 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/29 12:35:44 by hallison         ###   ########.fr       */
+/*   Updated: 2025/08/30 20:25:47 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool	misequal(float **m1, float **m2, int size)
 			y++;
 		}
 		x++;
-	}	
+	}
 	return (true);
 }
 
@@ -37,9 +37,9 @@ bool	misequal(float **m1, float **m2, int size)
 
 float	**matrixmult(float **m1, float **m2)
 {
-	int	x;
-	int	y;
-	float **m;
+	int		x;
+	int		y;
+	float	**m;
 
 	m = alloc_matrix(4);
 	y = 0;
@@ -56,7 +56,7 @@ float	**matrixmult(float **m1, float **m2)
 		}
 		y++;
 	}
-	return(m);
+	return (m);
 }
 
 float	matrixdot(float **m, int y, t_tuple t)
@@ -74,13 +74,13 @@ float	matrixdot(float **m, int y, t_tuple t)
 
 t_tuple	tmatrixmult(float **m, t_tuple t)
 {
-	t_tuple tuple;
+	t_tuple	tuple;
 
 	tuple.x = matrixdot(m, 0, t);
 	tuple.y = matrixdot(m, 1, t);
 	tuple.z = matrixdot(m, 2, t);
 	tuple.w = matrixdot(m, 3, t);
-	return(tuple);
+	return (tuple);
 }
 
 float	**mtranspose(float **m1, int size)
@@ -100,6 +100,6 @@ float	**mtranspose(float **m1, int size)
 			y++;
 		}
 		x++;
-	}	
+	}
 	return (m2);
 }

@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/30 18:10:07 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/30 20:47:22 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,60 +64,61 @@ typedef struct s_ray
 	t_tuple			direction;
 }	t_ray;
 
-typedef struct s_ambient
-{
-	float			ratio;
-	unsigned int	rgb[3];
-}	t_ambient;
-
-typedef struct s_camera
-{
-	float			viewpoint[3];
-	float			vector;
-	unsigned int	fov;
-}	t_camera;
-
-typedef struct s_light
-{
-	float			light_point[3];
-	float			brightness;
-	unsigned int	rgb[3];	
-}	t_light;
-
 typedef struct s_sphere
 {
-	float			center[3];
+	t_tuple			origin;
 	float			diameter;
-	unsigned int	rgb[3];
+	t_rgb			rgb;
 }	t_sphere;
 
-typedef struct s_plane
-{
-	float			point[3];
-	float			vectors[3];
-	int				rgb[3];
-}	t_plane;
 
-typedef struct s_cyl
-{
-	float			center[3];
-	float			axis[3];
-	float			diam;
-	float			height;
-	unsigned int	rgb[3];
-}	t_cyl;
+//typedef struct s_ambient
+//{
+//	float			ratio;
+//	t_rgb			rgb;
+//}	t_ambient;
+//
+//typedef struct s_camera
+//{
+//	float			viewpoint[3];
+//	float			vector;
+//	unsigned int	fov;
+//}	t_camera;
+//
+//typedef struct s_light
+//{
+//	float			light_point[3];
+//	float			brightness;
+//	t_rgb			rgb;
+//}	t_light;
+//
+//typedef struct s_plane
+//{
+//	float			point[3];
+//	float			vectors[3];
+//	t_rgb			rgb;
+//}	t_plane;
+//
+//typedef struct s_cyl
+//{
+//	float			center[3];
+//	float			axis[3];
+//	float			diam;
+//	float			height;
+//	int				rgb[3];
+//}	t_cyl;
 
 typedef struct s_data
 {
 	char		*filename;
 	mlx_t		*mlx;
 	mlx_image_t	*img;
-	t_ambient	*ambient;
-	t_camera	*camera;
-	t_light		*light;
 	t_sphere	**sphere;
-	t_plane		**plane;
-	t_cyl		**cyl;
+//	t_ambient	*ambient;
+//	t_camera	*camera;
+//	t_light		*light;
+//	t_plane		**plane;
+//	t_cyl		**cyl;
 }	t_data;
 
 //check_file.c

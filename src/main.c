@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:54:44 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/30 17:27:30 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/30 20:02:44 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 	exit(0);
 }
 
-static void ft_error(void)
+static void	ft_error(void)
 {
 	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
 	exit(EXIT_FAILURE);
@@ -35,12 +35,12 @@ static void ft_error(void)
 void	render(void *param)
 {
 	static bool	render_done;
-	t_data 	*data;
-	t_tuple	digit;
-	int	i;
-	float	**mtranslate;
-	float	**mrotate;
-	float	**mcombined;
+	t_data		*data;
+	t_tuple		digit;
+	int			i;
+	float		**mtranslate;
+	float		**mrotate;
+	float		**mcombined;
 
 	data = (t_data *)param;
 	render_done = false;
