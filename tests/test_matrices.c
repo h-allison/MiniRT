@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 13:59:07 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/28 18:38:51 by hallison         ###   ########.fr       */
+/*   Updated: 2025/08/30 17:11:48 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	main(void)
 		m8[i] = m7[i];
 	}
 
-	t_tuple	t = create_point(1, 2, 3); 
+	t_tuple	t = point(1, 2, 3); 
 	t_tuple tuple = tmatrixmult(m8, t);
 	print_tuple("t", tuple);
 	printf("\n");
@@ -101,7 +101,7 @@ int	main(void)
 	float	**id;
 
 	id = create_id_matrix();
-	t = create_point(1, 2, 3); 
+	t = point(1, 2, 3); 
 	tuple = tmatrixmult(id , t);
 	print_tuple("t", tuple);
 	printf("\n");

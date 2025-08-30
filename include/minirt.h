@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/29 15:17:34 by hallison         ###   ########.fr       */
+/*   Updated: 2025/08/30 18:10:07 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,6 @@ typedef enum e_error
 	ERROR_WRONG_CHARS,
 }	t_error;
 
-typedef struct s_ambient
-{
-	float			ratio;
-	unsigned int	rgb[3];
-}	t_ambient;
-
 typedef struct s_tuple
 {
 	float			x;
@@ -63,6 +57,18 @@ typedef struct s_rgb
 	float			g;
 	float			b;
 }	t_rgb;
+
+typedef struct s_ray
+{
+	t_tuple			origin;
+	t_tuple			direction;
+}	t_ray;
+
+typedef struct s_ambient
+{
+	float			ratio;
+	unsigned int	rgb[3];
+}	t_ambient;
 
 typedef struct s_camera
 {
@@ -87,9 +93,9 @@ typedef struct s_sphere
 
 typedef struct s_plane
 {
-	float	point[3];
-	float	vectors[3];
-	int		rgb[3];
+	float			point[3];
+	float			vectors[3];
+	int				rgb[3];
 }	t_plane;
 
 typedef struct s_cyl
@@ -128,9 +134,9 @@ void	rt_early_exit(int error);
 int		parse_file(char *filename, t_data *data);
 
 //create_tuples.c
-t_tuple	create_point(float x, float y, float z);
-t_tuple	create_vector(float x, float y, float z);
-t_rgb	create_color(int r, int g, int b);
+t_tuple	point(float x, float y, float z);
+t_tuple	vector(float x, float y, float z);
+t_rgb	color(int r, int g, int b);
 
 //create_matrices.c
 void	free_matrix(float **m, int size);
@@ -182,15 +188,19 @@ float	mdet(float **m, int size);
 float	**minvert(float **m, int size);
 bool	minvertable(float **m, int size);
 
-//transform.c
+//math_transform.c
 float	**translation(float x, float y, float z);
 float	**scaling(float x, float y, float z);
 float	**rotation_x(float r);
 float	**rotation_y(float r);
 float	**rotation_z(float r);
 
-//transform_2.c
+//math_transform_2.c
 float	**shearing(float *shear);
+
+//math_rays.c
+t_ray	ray(t_tuple point, t_tuple vector);
+t_tuple	position(t_ray ray, float t);
 
 //export_ppmm.c
 int		canvas_export_ppm(t_data *data);

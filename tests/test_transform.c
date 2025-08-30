@@ -6,41 +6,38 @@ static void print_tuple(char *str, t_tuple a);
 
 int	main(void)
 {
-	t_tuple point;
-	float  **transform;
+	t_tuple source;
 	t_tuple	target;
+	float  **transform;
+	float **inv;
 
-	point = create_point(-3, 4, 5);
+	source = point(-3, 4, 5);
 	transform = translation(5, -3, 2);
-	target = tmatrixmult(transform, point);
+	target = tmatrixmult(transform, source);
 	printf("Translation matrix:\n");
 	print_matrix(transform, 4);
 	free_matrix(transform, 4);
-	print_tuple("Source: ", point);
+	print_tuple("Source: ", source);
 	print_tuple("Target: ", target);
 	printf("\n");
 
 	//
 
-	float **inv;
-
-	point = create_point(-3, 4, 5);
+	source = point(-3, 4, 5);
 	transform = translation(5, -3, 2);
 	inv = minvert(transform, 4);
-	target = tmatrixmult(inv, point);
+	target = tmatrixmult(inv, source);
 	free_matrix(transform, 4);
-	print_tuple("source: ", point);
+	print_tuple("source: ", source);
 	print_tuple("target: ", target);
 
 	// testing with vector
 
-	t_tuple vector;
-
 	printf("\n Now with a vector...\n");
-    vector = create_vector(-3, 4, 5);
+    source = vector(-3, 4, 5);
     transform = translation(5, -3, 2); 
-    target = tmatrixmult(transform, vector);
-    print_tuple("Source: ", vector);
+    target = tmatrixmult(transform, source);
+    print_tuple("Source: ", source);
     print_tuple("Target: ", target);
 	free_matrix(transform, 4);
     printf("\n");
@@ -48,43 +45,43 @@ int	main(void)
 	// scaling
 
 	printf("\nSCALING a point\n");
-    point = create_point(-4, 6, 8);
+    source = point(-4, 6, 8);
     transform = scaling(2, 3, 4); 
-    target = tmatrixmult(transform, point);
-    print_tuple("Source: ", point);
+    target = tmatrixmult(transform, source);
+    print_tuple("Source: ", source);
     print_tuple("Target: ", target);
 	free_matrix(transform, 4);
     printf("\n");
 
 	printf("\nSCALING a vector\n");
-    vector = create_vector(-4, 6, 8);
+    source = vector(-4, 6, 8);
     transform = scaling(2, 3, 4); 
-    target = tmatrixmult(transform, vector);
-    print_tuple("Source: ", vector);
+    target = tmatrixmult(transform, source);
+    print_tuple("Source: ", source);
     print_tuple("Target: ", target);
 	free_matrix(transform, 4);
     printf("\n");
 	
 	printf("\nSCALING point with inverse\n");
-    vector = create_vector(-4, 6, 8);
+    source = vector(-4, 6, 8);
     transform = scaling(2, 3, 4); 
 	inv = minvert(transform, 4);
-    target = tmatrixmult(inv, vector);
+    target = tmatrixmult(inv, source);
     printf("\ntransform:\n");
 	print_matrix(transform, 4);
     printf("\ninverted transform:\n");
 	print_matrix(inv, 4);
-    print_tuple("\nSource: ", vector);
+    print_tuple("\nSource: ", source);
     print_tuple("Target: ", target);
 	free_matrix(transform, 4);
 	free_matrix(inv, 4);
     printf("\n");
 
 	printf("\nREFLECTING a point\n");
-    point = create_point(2, 3, 4);
+    source = point(2, 3, 4);
     transform = scaling(-1, 1, 1); 
-    target = tmatrixmult(transform, point);
-    print_tuple("Source: ", point);
+    target = tmatrixmult(transform, source);
+    print_tuple("Source: ", source);
     print_tuple("Target: ", target);
 	free_matrix(transform, 4);
     printf("\n");
@@ -92,81 +89,81 @@ int	main(void)
 	// rotating
 
 	printf("\nROTATING a point around x, half quarter\n");
-    point = create_point(0, 1, 0);
+    source = point(0, 1, 0);
     transform = rotation_x(M_PI / 4); 
-    target = tmatrixmult(transform, point);
-    print_tuple("Source: ", point);
+    target = tmatrixmult(transform, source);
+    print_tuple("Source: ", source);
     print_tuple("Target: ", target);
 	free_matrix(transform, 4);
     printf("\n");
 	
 	printf("ROTATING a point around x, full quarter\n");
-    point = create_point(0, 1, 0);
+    source = point(0, 1, 0);
     transform = rotation_x(M_PI / 2); 
-    target = tmatrixmult(transform, point);
-    print_tuple("Source: ", point);
+    target = tmatrixmult(transform, source);
+    print_tuple("Source: ", source);
     print_tuple("Target: ", target);
 	free_matrix(transform, 4);
     printf("\n");
 	
 	printf("ROTATING a point around x, half quarter, opposite dir (inv)\n");
-    point = create_point(0, 1, 0);
+    source = point(0, 1, 0);
     transform = rotation_x(M_PI / 4); 
 	inv = minvert(transform, 4);
-    target = tmatrixmult(inv, point);
-    print_tuple("Source: ", point);
+    target = tmatrixmult(inv, source);
+    print_tuple("Source: ", source);
     print_tuple("Target: ", target);
 	free_matrix(transform, 4);
 	free_matrix(inv, 4);
     printf("\n");
 	
 	printf("\nROTATING a point around y, half quarter\n");
-    point = create_point(0, 0, 1);
+    source = point(0, 0, 1);
     transform = rotation_y(M_PI / 4); 
-    target = tmatrixmult(transform, point);
-    print_tuple("Source: ", point);
+    target = tmatrixmult(transform, source);
+    print_tuple("Source: ", source);
     print_tuple("Target: ", target);
 	free_matrix(transform, 4);
     printf("\n");
 	
 	printf("\nROTATING a point around z, full quarter\n");
-    point = create_point(0, 1, 0);
+    source = point(0, 1, 0);
     transform = rotation_z(M_PI / 2); 
-    target = tmatrixmult(transform, point);
-    print_tuple("Source: ", point);
+    target = tmatrixmult(transform, source);
+    print_tuple("Source: ", source);
     print_tuple("Target: ", target);
 	free_matrix(transform, 4);
     printf("\n");
 	
 	printf("\nSHEARING x in proportion to z\n");
-    point = create_point(2, 3, 4);
+    source = point(2, 3, 4);
 	static float	s[6];
 	s[1] = 1;
     transform = shearing(s);
-    target = tmatrixmult(transform, point);
-    print_tuple("Source: ", point);
+    target = tmatrixmult(transform, source);
+    print_tuple("Source: ", source);
     print_tuple("Target: ", target);
 	free_matrix(transform, 4);
 	s[1] = 0;
     printf("\n");
 	
 	printf("SHEARING y in proportion to x\n");
-    point = create_point(2, 3, 4);
+    source = point(2, 3, 4);
 	s[2] = 1;
     transform = shearing(s);
-    target = tmatrixmult(transform, point);
-    print_tuple("Source: ", point);
+    target = tmatrixmult(transform, source);
+    print_tuple("Source: ", source);
     print_tuple("Target: ", target);
 	free_matrix(transform, 4);
 	s[2] = 0;
     printf("\n");
 	
 	printf("SHEARING y in proportion to z\n");
-    point = create_point(2, 3, 4);
+    source = point(2, 3, 4);
 	s[3] = 1;
     transform = shearing(s);
-    target = tmatrixmult(transform, point);
-    print_tuple("Source: ", point);
+    target = tmatrixmult(transform, source);
+    print_tuple("Source: ", source);
     print_tuple("Target: ", target);
 	free_matrix(transform, 4);
 	s[3] = 0;
@@ -177,31 +174,31 @@ int	main(void)
 	float	**tc;
 
 	printf("CHAINING TRANSFORMS\n");
-    point = create_point(1, 0, 1);
+    source = point(1, 0, 1);
     ta = rotation_x(M_PI / 2);
 	tb = scaling(5, 5, 5);
 	tc = translation(10, 5, 7);
-    print_tuple("Source: ", point);
-	point = tmatrixmult(ta, point);
-    print_tuple("Target: ", point);
-	point = tmatrixmult(tb, point);
-    print_tuple("Target: ", point);
-	point = tmatrixmult(tc, point);
-    print_tuple("Target: ", point);
+    print_tuple("Source: ", source);
+	source = tmatrixmult(ta, source);
+    print_tuple("Target: ", source);
+	source = tmatrixmult(tb, source);
+    print_tuple("Target: ", source);
+	source = tmatrixmult(tc, source);
+    print_tuple("Target: ", source);
 	free_matrix(ta, 4);
 	free_matrix(tb, 4);
 	free_matrix(tc, 4);
     printf("\n");
 	
 	printf("COMBINING TRANSFORMS\n");
-    point = create_point(1, 0, 1);
+    source = point(1, 0, 1);
     ta = rotation_x(M_PI / 2);
 	tb = scaling(5, 5, 5);
 	tc = translation(10, 5, 7);
 	transform = matrixmult(tc, tb);
 	transform = matrixmult(transform, ta);
-	point = tmatrixmult(transform, point);
-    print_tuple("Target: ", point);
+	source = tmatrixmult(transform, source);
+    print_tuple("Target: ", source);
 	free_matrix(ta, 4);
 	free_matrix(tb, 4);
 	free_matrix(tc, 4);
