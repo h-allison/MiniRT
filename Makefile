@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/08/30 22:02:22 by mmillhof         ###   ########.fr        #
+#    Updated: 2025/08/31 17:41:11 by mmillhof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC         := src/main.c \
 			   src/math_transform.c \
 			   src/math_transform_2.c \
 			   src/math_rays.c \
+			   src/math_intersections.c \
 			   src/math_colors.c \
 			   src/create_objects.c \
                src/create_tuples.c \

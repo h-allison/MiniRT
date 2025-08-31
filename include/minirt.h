@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/30 22:35:18 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/31 18:25:59 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,13 @@ typedef enum e_error
 	ERROR_WRONG_CHARS,
 }	t_error;
 
+typedef enum e_objtype
+{	
+	OBJ_SPHERE,
+	OBJ_PLANE,
+	OBJ_CYL,
+}	t_objtype;
+
 typedef struct s_tuple
 {
 	float			x;
@@ -71,6 +78,11 @@ typedef struct s_sphere
 	t_rgb			color;
 }	t_sphere;
 
+typedef	struct s_intersection
+{
+	t_sphere		*object;
+	float			t;
+}	t_intersection;
 
 //typedef struct s_ambient
 //{
@@ -205,9 +217,14 @@ float	**shearing(float *shear);
 //math_rays.c
 t_ray	ray(t_tuple point, t_tuple vector);
 t_tuple	position(t_ray ray, float t);
-float	*intersect(t_sphere s, t_ray r);
 
-//export_ppmm.c
+//math_intersections.c
+t_intersection	*intersect(t_sphere s, t_ray r);
+t_intersection	intersection(float t, t_sphere *s);
+t_intersection	*intersections(t_intersection i1, t_intersection i2);
+t_intersection	*hit(t_intersection *xs);
+
+//export_ppm.c
 int		canvas_export_ppm(t_data *data);
 
 #endif
