@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 17:55:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/01 18:34:44 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/01 19:29:43 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,26 @@
 
 /* Calculates intersections with one object */
 
+static t_ray	invtransform(t_ray r, float **t)
+{
+	t_ray	r2;
+	float	**invt;
+
+	invt = minvert(t, 4);
+	r2 = transform(r, invt);
+	free_matrix(invt, 4);
+	return (r2);
+}
+
 t_intersection	*intersect(t_sphere s, t_ray r)
 {
 	t_tuple			sphere_to_ray;
 	float			a;
 	float			b;
 	float			discriminant;
-	float			**inv;
 	t_intersection	*xs;
 	
-	inv = minvert(s.transform, 4);
-	r = *transform(r, inv);
-	free_matrix(inv, 4);
+	r = invtransform(r, s.transform);
 	sphere_to_ray = tsub(r.origin, s.origin);
 	a = dot(r.direction, r.direction);
 	b = 2 * dot(r.direction, sphere_to_ray);
@@ -36,7 +44,6 @@ t_intersection	*intersect(t_sphere s, t_ray r)
 		xs = intersections(intersection((-b - sqrtf(discriminant))
 					/ (2 * a), &s), intersection((-b + sqrtf(discriminant))
 					/ (2 * a), &s));
-	free(&r);
 	return (xs);
 }
 

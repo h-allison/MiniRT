@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 15:59:09 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/30 20:12:00 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/01 19:21:58 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ float	**minvert(float **m, int size)
 
 	det = mdet(m, size);
 	if (!det)
-		return (NULL);
+		return (m);
 	m2 = alloc_matrix(size);
 	x = 0;
 	while (x < size)

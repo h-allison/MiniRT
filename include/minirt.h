@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/01 17:39:27 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/01 19:27:17 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,7 @@ float	**shearing(float *shear);
 //math_rays.c
 t_ray	ray(t_tuple point, t_tuple vector);
 t_tuple	position(t_ray ray, float t);
-t_ray	*transform(t_ray r, float **m);
+t_ray	transform(t_ray r, float **m);
 void	set_transform(t_sphere *s, float **t);
 //math_intersections.c
 t_intersection	*intersect(t_sphere s, t_ray r);

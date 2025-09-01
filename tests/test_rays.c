@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 15:35:53 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/01 18:13:36 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/01 19:43:41 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int main (void)
 	r = ray(point(0, 0, -5), vector(0, 0, 1));
 	s = sphere(point(0, 0, 0), color(0, 0, 0));
 	xs = intersect(s, r);
-	if (xs)
+	if (xs && xs[0].object)
 	{
 		printf("intersect 0: %f\n", xs[0].t);
 		printf("intersect 1: %f\n", xs[1].t);
@@ -63,7 +63,7 @@ int main (void)
 	s = sphere(point(0, 0, 0), color(0, 0, 0));
 	xs[0].object = NULL;
 	xs = intersect(s, r);
-	if (xs)
+	if (xs && xs[0].object)
 	{
 		printf("intersect 0: %f\n", xs[0].t);
 		printf("intersect 1: %f\n", xs[1].t);
@@ -78,7 +78,7 @@ int main (void)
 	s = sphere(point(0, 0, 0), color(0, 0, 0));
 	xs[0].object = NULL;
 	xs = intersect(s, r);
-	if (xs)
+	if (xs && xs[0].object)
 	{
 		printf("intersect 0: %f\n", xs[0].t);
 		printf("intersect 1: %f\n", xs[1].t);
@@ -90,10 +90,10 @@ int main (void)
 	
 	printf("intersect(sphere(0, 0, 0), ray(p(0, 0, 0), v(0, 0, 1))\n");
 	r = ray(point(0, 0, 0), vector(0, 0, 1));
-	s = sphere(point(0, 0, 0),  color(0, 0, 0));
+	s = sphere(point(0, 0, 0), color(0, 0, 0));
 	xs[0].object = NULL;
 	xs = intersect(s, r);
-	if (xs)
+	if (xs && xs[0].object)
 	{
 		printf("intersect 0: %f\n", xs[0].t);
 		printf("intersect 1: %f\n", xs[1].t);
@@ -108,7 +108,7 @@ int main (void)
 	s = sphere(point(0, 0, 0), color(0, 0, 0));
 	xs[0].object = NULL;
 	xs = intersect(s, r);
-	if (xs)
+	if (xs && xs[0].object)
 	{
 		printf("intersect 0: %f\n", xs[0].t);
 		printf("intersect 1: %f\n", xs[1].t);
@@ -138,7 +138,7 @@ int main (void)
 	xs = intersections(intersection(1, &s), intersection(2, &s));
 	inter = hit(xs);
 	if (!inter)
-		printf("i: nothing\n");
+		printf("i: no hits\n");
 	else
 		printf("i: %f\n", inter->t);
 	free(inter);
@@ -146,12 +146,12 @@ int main (void)
 	printf("\n");
 	
 	printf("hit: sphere(0, 0, 0), i1(-1, s), i2(1, s)\n");
-	s = sphere(point(0, 0, 0),  color(0, 0, 0));
+	s = sphere(point(0, 0, 0), color(0, 0, 0));
 	xs[0].object = NULL;
 	xs = intersections(intersection(-1, &s), intersection(1, &s));
 	inter = hit(xs);
 	if (!inter)
-		printf("i: nothing\n");
+		printf("i: no hits\n");
 	else
 		printf("i: %f\n", inter->t);
 	free(inter);
@@ -159,39 +159,36 @@ int main (void)
 	printf("\n");
 	
 	printf("hit: sphere(0, 0, 0), i1(-2, s), i2(-1, s)\n");
-	s = sphere(point(0, 0, 0),  color(0, 0, 0));
+	s = sphere(point(0, 0, 0), color(0, 0, 0));
 	xs[0].object = NULL;
 	xs = intersections(intersection(-2, &s), intersection(-1, &s));
 	inter = hit(xs);
 	if (!inter)
-		printf("i: nothing\n");
+		printf("i: no hits\n");
 	else
 		printf("i: %f\n", inter->t);
 	free(inter);
 	free_matrix(s.transform, 4);
 	printf("\n");
 
-	t_ray	*r2;
+	t_ray	r2;
 	float	**m;
 	printf("transform: ray(point(1, 2, 3), vector(0, 1, 0)), mtr(3, 4, 5))\n");
 	r = ray(point(1, 2, 3), vector(0, 1, 0));
 	m = translation(3, 4, 5);
 	r2 = transform(r, m);
-	printf("r2->origin = %f, %f, %f, %f\n", r2->origin.x, r2->origin.y, r2->origin.z, r2->origin.w);
-	printf("r2->direction = %f, %f, %f, %f\n", r2->direction.x, r2->direction.y, r2->direction.z, r2->direction.w);
+	printf("r2->origin = %f, %f, %f, %f\n", r2.origin.x, r2.origin.y, r2.origin.z, r2.origin.w);
+	printf("r2->direction = %f, %f, %f, %f\n", r2.direction.x, r2.direction.y, r2.direction.z, r2.direction.w);
 	printf("\n");
 	free_matrix(m, 4);
-	free(r2);
 	
 	printf("transform: ray(point(1, 2, 3), vector(0, 1, 0)), msc(2, 3, 4))\n");
 	r = ray(point(1, 2, 3), vector(0, 1, 0));
 	m = scaling(2, 3, 4);
 	r2 = transform(r, m);
-	printf("r2->origin = %f, %f, %f, %f\n", r2->origin.x, r2->origin.y, r2->origin.z, r2->origin.w);
-	printf("r2->direction = %f, %f, %f, %f\n", r2->direction.x, r2->direction.y, r2->direction.z, r2->direction.w);
-
+	printf("r2->origin = %f, %f, %f, %f\n", r2.origin.x, r2.origin.y, r2.origin.z, r2.origin.w);
+	printf("r2->direction = %f, %f, %f, %f\n", r2.direction.x, r2.direction.y, r2.direction.z, r2.direction.w);
 	free_matrix(m, 4);
-	free (r2);
 
 	printf("\n");
 	
@@ -208,10 +205,10 @@ int main (void)
 	print_matrix(s.transform, 4);
 	free_matrix(s.transform, 4);
 	free_matrix(m, 4);
-	
 	printf("\n");
+    
+	// intersecting a scaled sphere with a ray
     printf("Intersecting a scaled sphere with a ray\n");
-    // intersecting a scaled sphere with a ray
     r = ray(point(0, 0, -5), vector(0, 0, 1));
     s = sphere(point(0, 0, 0), color(0, 0, 0));
 	m = scaling(2, 2, 2);
@@ -219,9 +216,31 @@ int main (void)
 	print_matrix(s.transform, 4);
 	xs[0].object = NULL;
     xs = intersect(s, r); 
-    // Should we include "count" in xs?
-    printf("xs[0].t = %f\n", xs[0].t);
-    printf("xs[1].t = %f\n", xs[1].t);
+	if (xs && xs[0].object)
+	{
+		printf("intersect 0: %f\n", xs[0].t);
+		printf("intersect 1: %f\n", xs[1].t);
+	}
+	else
+		printf("no intersect\n");
+	free_matrix(m, 4);
+	free_matrix(s.transform, 4);
+	printf("\n");
+    
+	r = ray(point(0, 0, -5), vector(0, 0, 1));
+    s = sphere(point(0, 0, 0), color(0, 0, 0));
+	m = translation(5, 0, 0);
+	set_transform(&s, m);
+	print_matrix(s.transform, 4);
+	xs[0].object = NULL;
+    xs = intersect(s, r);
+	if (xs && xs[0].object)
+	{
+		printf("intersect 0: %f\n", xs[0].t);
+		printf("intersect 1: %f\n", xs[1].t);
+	}
+	else
+		printf("no intersect\n");
 	free_matrix(m, 4);
 	free_matrix(s.transform, 4);
    	free(xs);

@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 17:55:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/01 16:41:06 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/01 19:28:21 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,12 @@ t_tuple	position(t_ray ray, float t)
 
 // TODO malloc free and exit
 
-t_ray	*transform(t_ray r, float **m)
+t_ray	transform(t_ray r, float **m)
 {
-	t_ray	*r2;
+	t_ray	r2;
 
-	r2 = malloc(sizeof(t_ray));
-	if (!r2)
-		exit(1);
-	r2->origin = tmatrixmult(m, r.origin);
-	r2->direction = tmatrixmult(m, r.direction);
+	r2.origin = tmatrixmult(m, r.origin);
+	r2.direction = tmatrixmult(m, r.direction);
 	return (r2);
 }
 
