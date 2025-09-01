@@ -6,11 +6,13 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 17:55:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/31 18:41:05 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/01 18:34:44 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+/* Calculates intersections with one object */
 
 t_intersection	*intersect(t_sphere s, t_ray r)
 {
@@ -18,18 +20,27 @@ t_intersection	*intersect(t_sphere s, t_ray r)
 	float			a;
 	float			b;
 	float			discriminant;
+	float			**inv;
 	t_intersection	*xs;
-
+	
+	inv = minvert(s.transform, 4);
+	r = *transform(r, inv);
+	free_matrix(inv, 4);
 	sphere_to_ray = tsub(r.origin, s.origin);
 	a = dot(r.direction, r.direction);
 	b = 2 * dot(r.direction, sphere_to_ray);
 	discriminant = powf(b, 2) - 4 * a * (dot(sphere_to_ray, sphere_to_ray) - 1);
 	if (discriminant < 0)
-		return (NULL);
-	xs = intersections(intersection((-b - sqrtf(discriminant)) / (2 * a), &s),
-			intersection((-b + sqrtf(discriminant)) / (2 * a), &s));
+		xs = intersections(intersection(0, NULL), intersection(0, NULL));
+	else
+		xs = intersections(intersection((-b - sqrtf(discriminant))
+					/ (2 * a), &s), intersection((-b + sqrtf(discriminant))
+					/ (2 * a), &s));
+	free(&r);
 	return (xs);
 }
+
+/* Store 1 intersection in a t_intersect */
 
 t_intersection	intersection(float t, t_sphere *s)
 {
@@ -42,18 +53,35 @@ t_intersection	intersection(float t, t_sphere *s)
 
 //TODO FREE
 
+/* Append to a list of all intersections */
+
 t_intersection	*intersections(t_intersection i1, t_intersection i2)
 {
-	t_intersection	*xs;
+	static t_intersection	*xs;
+	int						i;
 
-	xs = malloc(3 * sizeof(t_intersection));
+	if (!xs)
+	{
+		xs = malloc(1000 * sizeof(t_intersection));
+		xs[0].object = NULL;
+	}
 	if (!xs)
 		exit (1);
-	xs[0].object = i1.object;
-	xs[0].t = i1.t;
-	xs[1].object = i2.object;
-	xs[1].t = i2.t;
-	xs[2].object = NULL;
+	i = 0;
+	while (xs[i].object)
+	{
+		if (i == 1000)
+		{
+			printf("You need to increase your xs malloc in intersections();");
+			exit(1);
+		}
+		i++;
+	}
+	xs[i].object = i1.object;
+	xs[i].t = i1.t;
+	xs[i + 1].object = i2.object;
+	xs[i + 1].t = i2.t;
+	xs[i + 2].object = NULL;
 	return (xs);
 }
 
@@ -64,7 +92,7 @@ t_intersection	*hit(t_intersection *xs)
 	int				n;
 	t_intersection	*hit;
 
-	if (!xs)
+	if (!xs[0].object)
 		return (NULL);
 	hit = malloc(sizeof(t_intersection));
 	if (!hit)

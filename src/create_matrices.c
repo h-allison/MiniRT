@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 13:20:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/30 20:05:24 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/01 16:26:55 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	free_matrix(float **m, int size)
 			i++;
 		}
 		free(m);
+		m = NULL;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 17:55:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/31 17:40:11 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/01 16:41:06 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,39 @@ t_tuple	position(t_ray ray, float t)
 
 	position = tadd(ray.origin, tmult(ray.direction, t));
 	return (position);
+}
+
+// TODO malloc free and exit
+
+t_ray	*transform(t_ray r, float **m)
+{
+	t_ray	*r2;
+
+	r2 = malloc(sizeof(t_ray));
+	if (!r2)
+		exit(1);
+	r2->origin = tmatrixmult(m, r.origin);
+	r2->direction = tmatrixmult(m, r.direction);
+	return (r2);
+}
+
+/* For now, just for spheres*/
+
+void	set_transform(t_sphere *s, float **t)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			s->transform[i][j] = t[i][j];
+			j++;
+		}
+		i++;
+
+	}
 }
