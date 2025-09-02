@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:54:44 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/02 14:22:34 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/02 18:12:54 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,49 +37,68 @@ void	render(void *param)
 	static bool	render_done;
 	t_data			*data;
 	t_sphere		s;
-	float			**st;
-	float			**sc;
-	float			**m;
 	t_ray			r;
+	t_tuple			ray_origin;
+	t_tuple			position;
+//	float			**m;
+//	float			**m2;
+	float			wall_z;
+	float			wall_size;
+	float			half;
+	float			pixel_size;
+	float			world_x;
+	float			world_y;
 	int				x;
 	int				y;
 	t_intersection	*t;
 	t_intersection	*xs;
 
 	data = (t_data *)param;
-	render_done = false;
-	st = translation(400, 300, 300);
-	sc = scaling(200, 200, 200);
-	m = matrixmult(st, sc);
-	free(st);
-	free(sc);
-	s = sphere(point(0, 0, 0), color(1, 1, 1));
-	set_transform(&s, m);
-	free(m);
-	y = 0;
-	while (!render_done && y < 600)
+	if (!render_done)
 	{
-		x = 0;
-		while (x < 800)
+		ray_origin = point(0, 0, -5);
+		s = sphere(point(0, 0, 0), color(0xFF, 0x00, 0));
+//		m = scaling(0.5, 1, 1);
+//		set_transform(&s, m);
+//		free(m);
+//		float shear[6] = {1, 0, 0, 0, 0, 0};
+//		m = shearing(shear);
+//		m2 = matrixmult(m, s.transform);
+//		set_transform(&s, m2);
+//		free(m);
+//		free(m2);
+		wall_z = 10;
+		wall_size = 7;
+		half = wall_size / 2;
+		pixel_size = wall_size / WIN_WIDTH;
+		y = 0;
+		while (y < WIN_HEIGHT)
 		{
-			
-			r = ray(point(0, 0, 0), vector((x - 400), (y - 300), 1));
-			xs = intersect(s, r);
-			t = hit(xs);
-			if (t)
+			world_y = half - pixel_size * y;
+			x = 0; 
+			while (x < WIN_WIDTH)
 			{
-				printf("I");
-				mlx_put_pixel(data->img, x, y, color_to_hex(t->object->color));
-				free(t);
+				world_x = -half + pixel_size * x;
+				position = point(world_x, world_y, wall_z);
+				r = ray(ray_origin, tnorm(tsub(position, ray_origin)));
+				xs = intersect(s, r);
+				t = hit(xs);
+				if (t)
+				{
+					mlx_put_pixel(data->img, x, y, color_to_hex(t->object->color));
+					free(t);
+				}
+				xs[0].object = NULL;
+				x++;
 			}
-			xs[0].object = NULL;
-			x++;
+			y++;
 		}
-		y++;
 	}
-	free(xs);
-	if (render_done == false)
+	if (!render_done)
 	{
+		free(xs);
+		free(s.transform );
+		printf("render done!\n");
 		canvas_export_ppm(data);
 		render_done = true;
 	}
@@ -107,10 +126,10 @@ void	img_wipe(t_data *data, t_rgb color)
 
 int	mlx_handling(t_data *data)
 {
-	data->mlx = mlx_init(800, 600, data->filename, true);
+	data->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, data->filename, true);
 	if (!data->mlx)
 		ft_error(); // TODO
-	data->img = mlx_new_image(data->mlx, 800, 600);
+	data->img = mlx_new_image(data->mlx, WIN_WIDTH,	WIN_HEIGHT);
 	img_wipe(data, color(0x00, 0x00, 0x00));
 	if (!data->img || (mlx_image_to_window(data->mlx, data->img, 0, 0) < 0))
 		ft_error(); // TODO

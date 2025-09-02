@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/01 19:27:17 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/02 18:13:28 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,8 @@
 # include <stdlib.h>
 # include <errno.h>
 
-# define X 0
-# define Y 1
-# define Z 2
-
-# define R 0
-# define G 1
-# define B 2
+# define WIN_WIDTH 600
+# define WIN_HEIGHT 600
 
 # define EPSILON 0.0001
 # define DEG2RAD (M_PI / 180.0)
