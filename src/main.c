@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:54:44 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/02 12:08:01 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/02 14:22:34 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,27 +35,49 @@ static void	ft_error(void)
 void	render(void *param)
 {
 	static bool	render_done;
-	t_data		*data;
-	t_tuple		digit;
-	int			i;
-	float		**mtranslate;
-	float		**mrotate;
-	float		**mcombined;
+	t_data			*data;
+	t_sphere		s;
+	float			**st;
+	float			**sc;
+	float			**m;
+	t_ray			r;
+	int				x;
+	int				y;
+	t_intersection	*t;
+	t_intersection	*xs;
 
 	data = (t_data *)param;
 	render_done = false;
-	i = 0;
-	while (i < 3600)
+	st = translation(400, 300, 300);
+	sc = scaling(200, 200, 200);
+	m = matrixmult(st, sc);
+	free(st);
+	free(sc);
+	s = sphere(point(0, 0, 0), color(1, 1, 1));
+	set_transform(&s, m);
+	free(m);
+	y = 0;
+	while (!render_done && y < 600)
 	{
-		digit = point(0, -200, 0);
-		mrotate = rotation_z(i * DEG2RAD);
-		mrotate = matrixmult(rotation_y((i * DEG2RAD) / 5), mrotate); 
-		mtranslate = translation(400, 300, 0);
-		mcombined = matrixmult(mtranslate, mrotate);
-		digit = tmatrixmult(mcombined, digit);
-		mlx_put_pixel(data->img, digit.x, digit.y, 0xFFFFFFFF);
-		i++;
+		x = 0;
+		while (x < 800)
+		{
+			
+			r = ray(point(0, 0, 0), vector((x - 400), (y - 300), 1));
+			xs = intersect(s, r);
+			t = hit(xs);
+			if (t)
+			{
+				printf("I");
+				mlx_put_pixel(data->img, x, y, color_to_hex(t->object->color));
+				free(t);
+			}
+			xs[0].object = NULL;
+			x++;
+		}
+		y++;
 	}
+	free(xs);
 	if (render_done == false)
 	{
 		canvas_export_ppm(data);
