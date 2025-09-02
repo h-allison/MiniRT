@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/29 15:17:34 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/01 19:27:17 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,12 @@ typedef enum e_error
 	ERROR_WRONG_CHARS,
 }	t_error;
 
-typedef struct s_ambient
-{
-	float			ratio;
-	unsigned int	rgb[3];
-}	t_ambient;
+typedef enum e_objtype
+{	
+	OBJ_SPHERE,
+	OBJ_PLANE,
+	OBJ_CYL,
+}	t_objtype;
 
 typedef struct s_tuple
 {
@@ -64,54 +65,72 @@ typedef struct s_rgb
 	float			b;
 }	t_rgb;
 
-typedef struct s_camera
+typedef struct s_ray
 {
-	float			viewpoint[3];
-	float			vector;
-	unsigned int	fov;
-}	t_camera;
-
-typedef struct s_light
-{
-	float			light_point[3];
-	float			brightness;
-	unsigned int	rgb[3];	
-}	t_light;
+	t_tuple			origin;
+	t_tuple			direction;
+}	t_ray;
 
 typedef struct s_sphere
 {
-	float			center[3];
-	float			diameter;
-	unsigned int	rgb[3];
+	t_tuple			origin;
+	float			**transform;
+	t_rgb			color;
 }	t_sphere;
 
-typedef struct s_plane
+typedef	struct s_intersection
 {
-	float	point[3];
-	float	vectors[3];
-	int		rgb[3];
-}	t_plane;
+	t_sphere		*object;
+	float			t;
+}	t_intersection;
 
-typedef struct s_cyl
-{
-	float			center[3];
-	float			axis[3];
-	float			diam;
-	float			height;
-	unsigned int	rgb[3];
-}	t_cyl;
+//typedef struct s_ambient
+//{
+//	float			ratio;
+//	t_rgb			rgb;
+//}	t_ambient;
+//
+//typedef struct s_camera
+//{
+//	float			viewpoint[3];
+//	float			vector;
+//	unsigned int	fov;
+//}	t_camera;
+//
+//typedef struct s_light
+//{
+//	float			light_point[3];
+//	float			brightness;
+//	t_rgb			rgb;
+//}	t_light;
+//
+//typedef struct s_plane
+//{
+//	float			point[3];
+//	float			vectors[3];
+//	t_rgb			rgb;
+//}	t_plane;
+//
+//typedef struct s_cyl
+//{
+//	float			center[3];
+//	float			axis[3];
+//	float			diam;
+//	float			height;
+//	int				rgb[3];
+//}	t_cyl;
 
 typedef struct s_data
 {
 	char		*filename;
 	mlx_t		*mlx;
 	mlx_image_t	*img;
-	t_ambient	*ambient;
-	t_camera	*camera;
-	t_light		*light;
 	t_sphere	**sphere;
-	t_plane		**plane;
-	t_cyl		**cyl;
+//	t_ambient	*ambient;
+//	t_camera	*camera;
+//	t_light		*light;
+//	t_plane		**plane;
+//	t_cyl		**cyl;
 }	t_data;
 
 //check_file.c
@@ -127,10 +146,13 @@ void	rt_early_exit(int error);
 //parsing.c
 int		parse_file(char *filename, t_data *data);
 
+//create_objects.c
+t_sphere sphere(t_tuple origin, t_rgb color);
+
 //create_tuples.c
-t_tuple	create_point(float x, float y, float z);
-t_tuple	create_vector(float x, float y, float z);
-t_rgb	create_color(int r, int g, int b);
+t_tuple	point(float x, float y, float z);
+t_tuple	vector(float x, float y, float z);
+t_rgb	color(int r, int g, int b);
 
 //create_matrices.c
 void	free_matrix(float **m, int size);
@@ -182,17 +204,28 @@ float	mdet(float **m, int size);
 float	**minvert(float **m, int size);
 bool	minvertable(float **m, int size);
 
-//transform.c
+//math_transform.c
 float	**translation(float x, float y, float z);
 float	**scaling(float x, float y, float z);
 float	**rotation_x(float r);
 float	**rotation_y(float r);
 float	**rotation_z(float r);
 
-//transform_2.c
+//math_transform_2.c
 float	**shearing(float *shear);
 
-//export_ppmm.c
+//math_rays.c
+t_ray	ray(t_tuple point, t_tuple vector);
+t_tuple	position(t_ray ray, float t);
+t_ray	transform(t_ray r, float **m);
+void	set_transform(t_sphere *s, float **t);
+//math_intersections.c
+t_intersection	*intersect(t_sphere s, t_ray r);
+t_intersection	intersection(float t, t_sphere *s);
+t_intersection	*intersections(t_intersection i1, t_intersection i2);
+t_intersection	*hit(t_intersection *xs);
+
+//export_ppm.c
 int		canvas_export_ppm(t_data *data);
 
 #endif

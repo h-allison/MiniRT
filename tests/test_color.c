@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 16:10:50 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/25 18:02:58 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/30 16:31:22 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	main(void)
 
 /* Create create_colors */
 
-	c1 = create_color(255, 0, 0); // red
-	c2 = create_color(0, 255, 0); // green
-	c3 = create_color(0, 0, 255); // blue
+	c1 = color(255, 0, 0); // red
+	c2 = color(0, 255, 0); // green
+	c3 = color(0, 0, 255); // blue
 
 	printf("create colors\n");
 	print_color("c1: ", c1);
@@ -36,8 +36,8 @@ int	main(void)
 /* Add, subtract, scale, multiply create_colors */
 
 	printf("color maths\n");
-	c1 = create_color(230, 171, 191);
-	c2 = create_color(179, 26, 64);
+	c1 = color(230, 171, 191);
+	c2 = color(179, 26, 64);
 	float s = 2;
 
 	print_color("c1: ", c1);

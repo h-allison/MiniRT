@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 13:47:05 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/26 00:16:27 by matthias         ###   ########.fr       */
+/*   Updated: 2025/08/30 16:29:12 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,15 @@ t_rgb	cmult(t_rgb c1, t_rgb c2)
 
 /* Convert t_rgb color to int / hex */
 
-int	color_to_hex(t_rgb color)
+int	color_to_hex(t_rgb rgb)
 {
 	int	hex_color;
 
-	hex_color = (int)(color.r * 255);
+	hex_color = (int)(rgb.r * 255);
 	hex_color = hex_color << 8;
-	hex_color = hex_color + (int)(color.g * 255);
+	hex_color = hex_color + (int)(rgb.g * 255);
 	hex_color = hex_color << 8;
-	hex_color = hex_color + (int)(color.b * 255);
+	hex_color = hex_color + (int)(rgb.b * 255);
 	hex_color = hex_color << 8;
 	hex_color = hex_color + 0xFF;
 	return (hex_color);

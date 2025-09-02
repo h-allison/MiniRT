@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_projectile.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:54:44 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/29 15:55:48 by hallison         ###   ########.fr       */
+/*   Updated: 2025/08/30 20:24:51 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 	exit(0);
 }
 
-static void ft_error(void)
+static void	ft_error(void)
 {
 	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
 	exit(EXIT_FAILURE);
@@ -34,25 +34,22 @@ static void ft_error(void)
 
 void	render(void *param)
 {
-	static bool	render_done;
-
-	render_done = false;
-	struct	s_proj
+	struct s_proj
 	{
 		t_tuple position;
 		t_tuple velocity;
-	} ;
-
-	struct	s_env
+	}
+	struct s_env
 	{
 		t_tuple	gravity;
 		t_tuple	wind;
-	} ;
-
-	t_data *data;
+	}
 	struct s_proj	ball;
 	struct s_env	env;
-
+	t_data		*data;
+	static bool	render_done;
+	
+	render_done = false;
 	data = (t_data *) param;
 	ball.position = create_point(0, 1, 0);
 	ball.velocity = tnorm(create_vector(0.8, 1, 0));

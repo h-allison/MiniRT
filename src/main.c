@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:54:44 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/29 17:14:37 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/02 12:08:01 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 	exit(0);
 }
 
-static void ft_error(void)
+static void	ft_error(void)
 {
 	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
 	exit(EXIT_FAILURE);
@@ -35,24 +35,25 @@ static void ft_error(void)
 void	render(void *param)
 {
 	static bool	render_done;
-	t_data *data;
-	t_tuple	point;
-	int	i;
-	float	**mtranslate;
-	float	**mrotate;
-	float	**mcombined;
+	t_data		*data;
+	t_tuple		digit;
+	int			i;
+	float		**mtranslate;
+	float		**mrotate;
+	float		**mcombined;
 
 	data = (t_data *)param;
 	render_done = false;
 	i = 0;
-	while (i < 360)
+	while (i < 3600)
 	{
-		point = create_point(0, -200, 0);
+		digit = point(0, -200, 0);
 		mrotate = rotation_z(i * DEG2RAD);
+		mrotate = matrixmult(rotation_y((i * DEG2RAD) / 5), mrotate); 
 		mtranslate = translation(400, 300, 0);
 		mcombined = matrixmult(mtranslate, mrotate);
-		point = tmatrixmult(mcombined, point);
-		mlx_put_pixel(data->img, point.x, point.y, 0xFFFFFFFF);
+		digit = tmatrixmult(mcombined, digit);
+		mlx_put_pixel(data->img, digit.x, digit.y, 0xFFFFFFFF);
 		i++;
 	}
 	if (render_done == false)
@@ -88,7 +89,7 @@ int	mlx_handling(t_data *data)
 	if (!data->mlx)
 		ft_error(); // TODO
 	data->img = mlx_new_image(data->mlx, 800, 600);
-	img_wipe(data, create_color(0x00, 0x00, 0x00));
+	img_wipe(data, color(0x00, 0x00, 0x00));
 	if (!data->img || (mlx_image_to_window(data->mlx, data->img, 0, 0) < 0))
 		ft_error(); // TODO
 	mlx_loop_hook(data->mlx, render, data);

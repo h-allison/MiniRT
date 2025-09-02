@@ -6,13 +6,13 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 20:37:34 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/25 17:30:58 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/08/30 16:27:31 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_tuple	create_point(float x, float y, float z)
+t_tuple	point(float x, float y, float z)
 {
 	t_tuple	tuple;
 
@@ -23,7 +23,7 @@ t_tuple	create_point(float x, float y, float z)
 	return (tuple);
 }
 
-t_tuple	create_vector(float x, float y, float z)
+t_tuple	vector(float x, float y, float z)
 {
 	t_tuple	tuple;
 
@@ -34,12 +34,12 @@ t_tuple	create_vector(float x, float y, float z)
 	return (tuple);
 }
 
-t_rgb	create_color(int r, int g, int b)
+t_rgb	color(int r, int g, int b)
 {
-	t_rgb	color;
+	t_rgb	rgb;
 
-	color.r = (float) r / 255;
-	color.g = (float) g / 255;
-	color.b = (float) b / 255;
-	return (color);
+	rgb.r = (float) r / 255;
+	rgb.g = (float) g / 255;
+	rgb.b = (float) b / 255;
+	return (rgb);
 }

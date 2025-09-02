@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 16:02:00 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/28 18:00:57 by hallison         ###   ########.fr       */
+/*   Updated: 2025/08/30 20:11:33 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ float	**msubmatrix(float **m, int size, int row, int col)
 
 float	mminor3x3(float **m, int row, int col)
 {
-	float minor;
-	float **sub;
+	float	minor;
+	float	**sub;
 
 	sub = msubmatrix(m, 3, row, col);
 	minor = mdet2x2(sub);
@@ -54,22 +54,22 @@ float	mminor3x3(float **m, int row, int col)
 	return (minor);
 }
 
-float   mcofactor4x4(float **m, int size, int row, int col)
+float	mcofactor4x4(float **m, int size, int row, int col)
 {
-    float cofactor;
-    float **sub;
+	float	cofactor;
+	float	**sub;
 
-    sub = msubmatrix(m, size, row, col);
-    cofactor = mdet3x3(sub, 3); 
-    free_matrix(sub, size - 1); 
-    if ((row + col) % 2)
-        cofactor = -cofactor;
-    return (cofactor);
+	sub = msubmatrix(m, size, row, col);
+	cofactor = mdet3x3(sub, 3); 
+	free_matrix(sub, size - 1);
+	if ((row + col) % 2)
+		cofactor = -cofactor;
+	return (cofactor);
 }
 
 float	mcofactor3x3(float **m, int row, int col)
 {
-	float cofactor;
+	float	cofactor;
 
 	cofactor = mminor3x3(m, row, col);
 	if ((row + col) % 2)
