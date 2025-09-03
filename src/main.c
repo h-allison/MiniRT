@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:54:44 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/03 19:53:57 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/03 22:50:05 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char **argv)
 	parse_file(argv[1], &data);
 	printf("Time to raytrace!\n");
 	mlx_handling(&data);
-	exit(0);
+	return (0);
 }
 
 static void	ft_error(void)
@@ -57,10 +57,15 @@ void	render(void *param)
 	if (!render_done)
 	{	
 		s = sphere();
-		s.m.color = color(0xFF, 0x30, 0xFF);
-		s.m.shininess = 200;
-		largs.light = point_light(point(-10, 10, -10), color(255, 255, 255));
-		ray_origin = point(0, 0, -5);
+		s.m.color = color(0x30, 0xAA, 0xFF);
+		s.m.diffuse = 0.9;
+		s.m.specular = 0.9;
+		s.m.shininess = 50;
+		float	shear[6] = {1, 0, 0, 0, 0, 0};
+		s.transform = mmultfree(shearing(shear), s.transform);
+		s.transform = mmultfree(rotation_y(M_PI/6), s.transform);
+		largs.light = point_light(point(5, 10, -10), color(255, 255, 255));
+		ray_origin = point(0, 0, -8);
 		wall_z = 10;
 		wall_size = 7;
 		half = wall_size / 2;
@@ -95,8 +100,8 @@ void	render(void *param)
 	}
 	if (!render_done)
 	{
+		free_matrix(s.transform, 4);
 		free(xs);
-		free(s.transform );
 		printf("render done!\n");
 		canvas_export_ppm(data);
 		render_done = true;
@@ -133,7 +138,7 @@ int	mlx_handling(t_data *data)
 	if (!data->img || (mlx_image_to_window(data->mlx, data->img, 0, 0) < 0))
 		ft_error(); // TODO
 	mlx_loop_hook(data->mlx, render, data);
-	mlx_loop(data->mlx);
+	mlx_loop(data->mlx);	
 	mlx_terminate(data->mlx);
 	return (EXIT_SUCCESS);
 }
