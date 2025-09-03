@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/03 18:12:38 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/03 19:54:55 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <stdlib.h>
 # include <errno.h>
 
-# define WIN_WIDTH 100
-# define WIN_HEIGHT 100
+# define WIN_WIDTH 450
+# define WIN_HEIGHT 450
 
 # define EPSILON 0.0001
 # define DEG2RAD (M_PI / 180.0)
@@ -77,10 +77,8 @@ typedef struct s_light
 
 typedef struct s_sphere
 {
-	t_tuple			origin;
-	t_rgb			color;
 	float			**transform;
-	t_material		material;
+	t_material		m;
 }	t_sphere;
 
 typedef struct s_largs
@@ -104,46 +102,11 @@ typedef	struct s_intersection
 	float			t;
 }	t_intersection;
 
-//typedef struct s_ambient
-//{
-//	float			ratio;
-//	t_rgb			rgb;
-//}	t_ambient;
-//
-//typedef struct s_camera
-//{
-//	float			viewpoint[3];
-//	float			vector;
-//	unsigned int	fov;
-//}	t_camera;
-//
-//typedef struct s_plane
-//{
-//	float			point[3];
-//	float			vectors[3];
-//	t_rgb			rgb;
-//}	t_plane;
-//
-//typedef struct s_cyl
-//{
-//	float			center[3];
-//	float			axis[3];
-//	float			diam;
-//	float			height;
-//	int				rgb[3];
-//}	t_cyl;
-
 typedef struct s_data
 {
 	char		*filename;
 	mlx_t		*mlx;
 	mlx_image_t	*img;
-	t_sphere	**sphere;
-//	t_ambient	*ambient;
-//	t_camera	*camera;
-//	t_light		*light;
-//	t_plane		**plane;
-//	t_cyl		**cyl;
 }	t_data;
 
 //check_file.c
@@ -160,7 +123,7 @@ void	rt_early_exit(int error);
 int		parse_file(char *filename, t_data *data);
 
 //create_objects.c
-t_sphere sphere(t_tuple origin, t_rgb color);
+t_sphere sphere();
 t_light	point_light(t_tuple position, t_rgb intensity);
 
 //create_tuples.c
@@ -232,7 +195,7 @@ float	**rotation_z(float r);
 float	**shearing(float *shear);
 
 //math_shading.c
-t_tuple	normal_at(t_sphere s, t_tuple p);
+t_tuple	normal_at(t_sphere *s, t_tuple p);
 t_tuple	reflect(t_tuple in, t_tuple normal);
 t_rgb	lighting(t_largs *largs);
 
@@ -243,7 +206,7 @@ t_ray	transform(t_ray r, float **m);
 void	set_transform(t_sphere *s, float **t);
 
 //math_intersections.c
-t_intersection	*intersect(t_sphere s, t_ray r);
+t_intersection	*intersect(t_sphere *s, t_ray r);
 t_intersection	intersection(float t, t_sphere *s);
 t_intersection	*intersections(t_intersection i1, t_intersection i2);
 t_intersection	*hit(t_intersection *xs);

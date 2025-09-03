@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 15:35:53 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/03 16:41:19 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/03 19:17:58 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,31 +27,31 @@ int main (void)
 	t_rgb		result;
 
 	printf("n = normal_at(s, points(1, 0, 0)\n");
-	s = sphere(point(0, 0, 0), color(0, 0, 0));
-	n = normal_at(s, point(1, 0, 0));
+	s = sphere();
+	n = normal_at(&s, point(1, 0, 0));
 	printf("n: %f, %f, %f, %f\n", n.x, n.y, n.z, n.w);
 	free_matrix(s.transform, 4);
 	printf("\n");
 	
 	printf("n = normal_at(s, points(1, 0, 0)\n");
-	s = sphere(point(0, 0, 0), color(0, 0, 0));
-	n = normal_at(s, point(0, 1, 0));
+	s = sphere();
+	n = normal_at(&s, point(0, 1, 0));
 	printf("n: %f, %f, %f, %f\n", n.x, n.y, n.z, n.w);
 	free_matrix(s.transform, 4);
 	printf("\n");
 	
 	printf("n = normal_at(s, points(1, 0, 0)\n");
-	s = sphere(point(0, 0, 0), color(0, 0, 0));
-	n = normal_at(s, point(0, 0, 1));
+	s = sphere();
+	n = normal_at(&s, point(0, 0, 1));
 	printf("n: %f, %f, %f, %f\n", n.x, n.y, n.z, n.w);
 	free_matrix(s.transform, 4);
 	printf("\n");
 
 	printf("n = normal_at(s, points(1, 0, 0)\n");
-	s = sphere(point(0, 0, 0), color(0, 0, 0));
-	n = normal_at(s, point(sqrtf(3)/3, sqrtf(3)/3, sqrtf(3)/3));
+	s = sphere();
+	n = normal_at(&s, point(sqrtf(3)/3, sqrtf(3)/3, sqrtf(3)/3));
 	printf("n: %f, %f, %f, %f\n", n.x, n.y, n.z, n.w);
-	p = position(ray(s.origin, n), -1);
+	p = position(ray(point(0, 0, 0), n), -1);
 	printf("pos(t = -1): %f, %f, %f, %f\n", p.x, p.y, p.z, p.w);
 	free_matrix(s.transform, 4);
 	printf("\n");
@@ -60,18 +60,18 @@ int main (void)
 	//
 
 	printf("n = normal_at(s, points(0, 1, 0) (at a translated sphere)\n");
-	s = sphere(point(0, 0, 0), color(0, 0, 0));
+	s = sphere();
 	set_transform(&s, translation(0, 1, 0));
-	n = normal_at(s, point(0, 1.70711, -0.70711));
+	n = normal_at(&s, point(0, 1.70711, -0.70711));
 	printf("n: %f, %f, %f, %f\n", n.x, n.y, n.z, n.w);
 	free_matrix(s.transform, 4);
 	printf("\n");
 
 	printf("n = normal_at(s, points(0, 1, 0) (at a translated sphere)\n");
-	s = sphere(point(0, 0, 0), color(0, 0, 0));
+	s = sphere();
 	m = mmultfree(scaling(1, 0.5, 1), rotation_z(M_PI / 5));
 	set_transform(&s, m);
-	n = normal_at(s, point(0, sqrtf(2)/2, -sqrtf(2)/2));
+	n = normal_at(&s, point(0, sqrtf(2)/2, -sqrtf(2)/2));
 	printf("n: %f, %f, %f, %f\n", n.x, n.y, n.z, n.w);
 	free_matrix(s.transform, 4);
 	printf("\n");
@@ -101,9 +101,9 @@ int main (void)
 	printf("\n");
 
 	printf("eye between light and surface\n");
-	s = sphere(point(0, 0, 0), color(0xFF, 0xFF, 0xFF));
-	largs.material = s.material;
-	largs.position = point(0, 0, 0);
+	s = sphere();
+	largs.material = s.m;
+	largs.point = point(0, 0, 0);
 	largs.eyev = vector(0, 0, -1);
 	largs.normalv = vector(0, 0, -1);
 	largs.light = point_light(point(0, 0, -10), color(0xFF, 0xFF, 0xFF));
@@ -112,9 +112,9 @@ int main (void)
 	printf("\n");
 	
 	printf("eye between light and surface, eye offset 45deg\n");
-	s = sphere(point(0, 0, 0), color(0xFF, 0xFF, 0xFF));
-	largs.material = s.material;
-	largs.position = point(0, 0, 0);
+	s = sphere();
+	largs.material = s.m;
+	largs.point = point(0, 0, 0);
 	largs.eyev = vector(0, sqrtf(2)/2, -sqrt(2)/2);
 	largs.normalv = vector(0, 0, -1);
 	largs.light = point_light(point(0, 0, -10), color(0xFF, 0xFF, 0xFF));
@@ -123,9 +123,9 @@ int main (void)
 	printf("\n");
 	
 	printf("eye opposite surface, light offset 45deg\n");
-	s = sphere(point(0, 0, 0), color(0xFF, 0xFF, 0xFF));
-	largs.material = s.material;
-	largs.position = point(0, 0, 0);
+	s = sphere();
+	largs.material = s.m;
+	largs.point = point(0, 0, 0);
 	largs.eyev = vector(0, 0, -1);
 	largs.normalv = vector(0, 0, -1);
 	largs.light = point_light(point(0, 10, -10), color(0xFF, 0xFF, 0xFF));
@@ -134,9 +134,9 @@ int main (void)
 	printf("\n");
 	
 	printf("eye in path of reflection vector\n");
-	s = sphere(point(0, 0, 0), color(0xFF, 0xFF, 0xFF));
-	largs.material = s.material;
-	largs.position = point(0, 0, 0);
+	s = sphere();
+	largs.material = s.m;
+	largs.point = point(0, 0, 0);
 	largs.eyev = vector(0, -sqrtf(2)/2, -sqrt(2)/2);
 	largs.normalv = vector(0, 0, -1);
 	largs.light = point_light(point(0, 10, -10), color(0xFF, 0xFF, 0xFF));
@@ -145,9 +145,9 @@ int main (void)
 	printf("\n");
 	
 	printf("light behind the surface\n");
-	s = sphere(point(0, 0, 0), color(0xFF, 0xFF, 0xFF));
-	largs.material = s.material;
-	largs.position = point(0, 0, 0);
+	s = sphere();
+	largs.material = s.m;
+	largs.point = point(0, 0, 0);
 	largs.eyev = vector(0, 0, -1);
 	largs.normalv = vector(0, 0, -1);
 	largs.light = point_light(point(0, 0, 10), color(0xFF, 0xFF, 0xFF));

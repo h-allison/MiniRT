@@ -6,22 +6,22 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:25:23 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/03 18:15:23 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/03 19:52:41 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_tuple	normal_at(t_sphere s, t_tuple world_point)
+t_tuple	normal_at(t_sphere *s, t_tuple world_point)
 {
 	t_tuple	object_point;
 	t_tuple	object_normal;
 	t_tuple	world_normal;
 	float	**m;
-
-	object_point = tmmultfree(minvert(s.transform, 4), world_point);
-	object_normal = tsub(object_point, s.origin);
-	m = mtransposefree(minvert(s.transform, 4), 4);
+	
+	object_point = tmmultfree(minvert(s->transform, 4), world_point);
+	object_normal = tsub(object_point, point(0, 0, 0));
+	m = mtransposefree(minvert(s->transform, 4), 4);
 	world_normal = tmmultfree(m, object_normal);
 	world_normal.w = 0;
 	return (tnorm(world_normal));
@@ -45,6 +45,7 @@ t_rgb	lighting(t_largs *largs)
 	float	light_dot_normal;
 	float	reflect_dot_eye;
 	float	factor;
+	t_rgb	ret;
 
 	effective_color = cmult(largs->material.color, largs->light.intensity);
 	lightv = tnorm(tsub(largs->light.position, largs->point));
@@ -65,11 +66,17 @@ t_rgb	lighting(t_largs *largs)
 			specular = color(0, 0, 0);
 		else
 		{
-			printf(".");
 			factor = powf(reflect_dot_eye, largs->material.shininess);
 			specular = cscale(cscale(largs->light.intensity,
 						largs->material.specular), factor);
 		}
 	}
-	return (cadd(cadd(ambient, diffuse), specular));
+	ret = cadd(cadd(ambient, diffuse), specular);
+	if (ret.r > 1)
+		ret.r = 1;
+	if (ret.g > 1)
+		ret.g = 1;
+	if (ret.b > 1)
+		ret.b = 1;
+	return (ret);
 }

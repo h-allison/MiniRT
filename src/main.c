@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:54:44 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/03 18:20:33 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/03 19:53:57 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,11 @@ void	render(void *param)
 	data = (t_data *)param;
 	if (!render_done)
 	{	
+		s = sphere();
+		s.m.color = color(0xFF, 0x30, 0xFF);
+		s.m.shininess = 200;
 		largs.light = point_light(point(-10, 10, -10), color(255, 255, 255));
 		ray_origin = point(0, 0, -5);
-		s = sphere(point(0, 0, 0), color(255, 51, 255));
 		wall_z = 10;
 		wall_size = 7;
 		half = wall_size / 2;
@@ -73,14 +75,14 @@ void	render(void *param)
 				world_x = -half + pixel_size * x;
 				pos = point(world_x, world_y, wall_z);
 				r = ray(ray_origin, tnorm(tsub(pos, ray_origin)));
-				xs = intersect(s, r);
+				xs = intersect(&s, r);
 				ht = hit(xs);
 				if (ht)
 				{
 					largs.point = position(r, ht->t);
-					largs.normalv = normal_at(*ht->object, largs.point);
+					largs.normalv = normal_at(ht->object, largs.point);
 					largs.eyev = tneg(r.direction);
-					largs.material = ht->object->material;
+					largs.material = ht->object->m;
 					col = lighting(&largs);
 					mlx_put_pixel(data->img, x, y, color_to_hex(col));
 					free(ht);

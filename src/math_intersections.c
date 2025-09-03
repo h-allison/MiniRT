@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 17:55:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/03 14:20:02 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/03 19:02:30 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static t_ray	invtransform(t_ray r, float **t)
 	return (r2);
 }
 
-t_intersection	*intersect(t_sphere s, t_ray r)
+t_intersection	*intersect(t_sphere *s, t_ray r)
 {
 	t_tuple			sphere_to_ray;
 	float			a;
@@ -33,8 +33,8 @@ t_intersection	*intersect(t_sphere s, t_ray r)
 	float			discriminant;
 	t_intersection	*xs;
 
-	r = invtransform(r, s.transform);
-	sphere_to_ray = tsub(r.origin, s.origin);
+	r = invtransform(r, s->transform);
+	sphere_to_ray = tsub(r.origin, point(0, 0, 0));
 	a = dot(r.direction, r.direction);
 	b = 2 * dot(r.direction, sphere_to_ray);
 	discriminant = powf(b, 2) - 4 * a * (dot(sphere_to_ray, sphere_to_ray) - 1);
@@ -42,8 +42,8 @@ t_intersection	*intersect(t_sphere s, t_ray r)
 		xs = intersections(intersection(0, NULL), intersection(0, NULL));
 	else
 		xs = intersections(intersection((-b - sqrtf(discriminant))
-					/ (2 * a), &s), intersection((-b + sqrtf(discriminant))
-					/ (2 * a), &s));
+					/ (2 * a), s), intersection((-b + sqrtf(discriminant))
+					/ (2 * a), s));
 	return (xs);
 }
 
