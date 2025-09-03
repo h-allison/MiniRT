@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 15:20:01 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/24 23:36:45 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/03 11:45:54 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ float	tmag(t_tuple a)
 
 t_tuple	tnorm(t_tuple a)
 {
-	int		magnitude;
+	float	magnitude;
 	t_tuple	result;
 
 	magnitude = tmag(a);

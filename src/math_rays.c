@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 17:55:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/01 19:28:21 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/03 13:20:23 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,6 @@ void	set_transform(t_sphere *s, float **t)
 			j++;
 		}
 		i++;
-
 	}
+	free_matrix(t, 4);
 }

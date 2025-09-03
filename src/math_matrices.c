@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 15:09:54 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/30 20:25:47 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/03 13:18:20 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,32 @@ float	**matrixmult(float **m1, float **m2)
 	return (m);
 }
 
+float	**mmultfree(float **m1, float **m2)
+{
+	int		x;
+	int		y;
+	float	**m;
+
+	m = alloc_matrix(4);
+	y = 0;
+	while (y < 4)
+	{
+		x = 0;
+		while (x < 4)
+		{
+			m[x][y] = m1[x][0] * m2[0][y]
+				+ m1[x][1] * m2[1][y]
+				+ m1[x][2] * m2[2][y]
+				+ m1[x][3] * m2[3][y];
+			x++;
+		}
+		y++;
+	}
+	free_matrix(m1, 4);
+	free_matrix(m2, 4);
+	return (m);
+}
+
 float	matrixdot(float **m, int y, t_tuple t)
 {
 	t_tuple	temp;
@@ -83,6 +109,18 @@ t_tuple	tmatrixmult(float **m, t_tuple t)
 	return (tuple);
 }
 
+t_tuple	tmmultfree(float **m, t_tuple t)
+{
+	t_tuple	tuple;
+
+	tuple.x = matrixdot(m, 0, t);
+	tuple.y = matrixdot(m, 1, t);
+	tuple.z = matrixdot(m, 2, t);
+	tuple.w = matrixdot(m, 3, t);
+	free_matrix(m, 4);
+	return (tuple);
+}
+
 float	**mtranspose(float **m1, int size)
 {
 	int		x;
@@ -102,4 +140,26 @@ float	**mtranspose(float **m1, int size)
 		x++;
 	}
 	return (m2);
+}
+
+float	**mtransposefree(float **m, int size)
+{
+	int		x;
+	int		y;
+	float	**temp;
+
+	temp = alloc_matrix(size);
+	x = 0;
+	while (x < size)
+	{
+		y = 0;
+		while (y < size)
+		{
+			temp[x][y] = m[y][x];
+			y++;
+		}
+		x++;
+	}
+	free_matrix(m, 4);
+	return (temp);
 }

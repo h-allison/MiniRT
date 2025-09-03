@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/02 18:13:28 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/03 12:59:26 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,8 +183,11 @@ int		color_to_hex(t_rgb color);
 //math_matrices.c
 bool	misequal(float **m1, float **m2, int size);
 float	**matrixmult(float **m1, float **m2);
+float	**mmultfree(float **m1, float **m2);
 t_tuple	tmatrixmult(float **m, t_tuple t);
+t_tuple	tmmultfree(float **m, t_tuple t);
 float	**mtranspose(float **m1, int size);
+float	**mtransposefree(float **m, int size);
 
 //math_matrices_2.c
 float	**msubmatrix(float **m, int size, int row, int col);
@@ -208,6 +211,9 @@ float	**rotation_z(float r);
 
 //math_transform_2.c
 float	**shearing(float *shear);
+
+//math_shading.c
+t_tuple	normal_at(t_sphere s, t_tuple p);
 
 //math_rays.c
 t_ray	ray(t_tuple point, t_tuple vector);
