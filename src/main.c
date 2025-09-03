@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:54:44 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/02 18:12:54 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/03 16:43:20 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ void	render(void *param)
 	t_ray			r;
 	t_tuple			ray_origin;
 	t_tuple			position;
-//	float			**m;
-//	float			**m2;
 	float			wall_z;
 	float			wall_size;
 	float			half;
@@ -58,15 +56,6 @@ void	render(void *param)
 	{
 		ray_origin = point(0, 0, -5);
 		s = sphere(point(0, 0, 0), color(0xFF, 0x00, 0));
-//		m = scaling(0.5, 1, 1);
-//		set_transform(&s, m);
-//		free(m);
-//		float shear[6] = {1, 0, 0, 0, 0, 0};
-//		m = shearing(shear);
-//		m2 = matrixmult(m, s.transform);
-//		set_transform(&s, m2);
-//		free(m);
-//		free(m2);
 		wall_z = 10;
 		wall_size = 7;
 		half = wall_size / 2;

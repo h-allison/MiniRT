@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/03 12:59:26 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/03 16:26:28 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,43 @@ typedef struct s_rgb
 	float			b;
 }	t_rgb;
 
+typedef struct s_material
+{
+	t_rgb			color;
+	float			ambient;	
+	float			diffuse;
+	float			specular;
+	float			shininess;
+}	t_material;
+
+typedef struct s_light
+{
+	t_rgb			intensity;
+	t_tuple			position;
+}	t_light;
+
+typedef struct s_sphere
+{
+	t_tuple			origin;
+	t_rgb			color;
+	float			**transform;
+	t_material		material;
+}	t_sphere;
+
+typedef struct s_largs
+{
+	t_material		material;
+	t_tuple			position;
+	t_light			light;
+	t_tuple			eyev;
+	t_tuple			normalv;
+}	t_largs;
+
 typedef struct s_ray
 {
 	t_tuple			origin;
 	t_tuple			direction;
 }	t_ray;
-
-typedef struct s_sphere
-{
-	t_tuple			origin;
-	float			**transform;
-	t_rgb			color;
-}	t_sphere;
 
 typedef	struct s_intersection
 {
@@ -91,13 +116,6 @@ typedef	struct s_intersection
 //	float			vector;
 //	unsigned int	fov;
 //}	t_camera;
-//
-//typedef struct s_light
-//{
-//	float			light_point[3];
-//	float			brightness;
-//	t_rgb			rgb;
-//}	t_light;
 //
 //typedef struct s_plane
 //{
@@ -143,6 +161,7 @@ int		parse_file(char *filename, t_data *data);
 
 //create_objects.c
 t_sphere sphere(t_tuple origin, t_rgb color);
+t_light	point_light(t_tuple position, t_rgb intensity);
 
 //create_tuples.c
 t_tuple	point(float x, float y, float z);
@@ -214,12 +233,15 @@ float	**shearing(float *shear);
 
 //math_shading.c
 t_tuple	normal_at(t_sphere s, t_tuple p);
+t_tuple	reflect(t_tuple in, t_tuple normal);
+t_rgb	lighting(t_largs *largs);
 
 //math_rays.c
 t_ray	ray(t_tuple point, t_tuple vector);
 t_tuple	position(t_ray ray, float t);
 t_ray	transform(t_ray r, float **m);
 void	set_transform(t_sphere *s, float **t);
+
 //math_intersections.c
 t_intersection	*intersect(t_sphere s, t_ray r);
 t_intersection	intersection(float t, t_sphere *s);

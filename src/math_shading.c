@@ -6,13 +6,11 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:25:23 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/03 13:09:39 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/03 16:42:25 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-// TODO tnorm(), can it be removes?
 
 t_tuple	normal_at(t_sphere s, t_tuple world_point)
 {
@@ -27,4 +25,50 @@ t_tuple	normal_at(t_sphere s, t_tuple world_point)
 	world_normal = tmmultfree(m, object_normal);
 	world_normal.w = 0;
 	return (tnorm(world_normal));
+}
+
+
+t_tuple	reflect(t_tuple in, t_tuple normal)
+{
+	return (tsub(in, tmult(tmult(normal, 2), dot(in, normal))));
+}
+
+
+t_rgb	lighting(t_largs *largs)
+{
+	t_rgb	effective_color;
+	t_rgb	ambient;
+	t_rgb	diffuse;
+	t_rgb	specular;
+	t_tuple	lightv;
+	t_tuple	reflectv;
+	float	light_dot_normal;
+	float	reflect_dot_eye;
+	float	factor;
+
+	effective_color = cmult(largs->material.color, largs->light.intensity);
+	lightv = tnorm(tsub(largs->light.position, largs->position));
+	ambient = cscale(effective_color, largs->material.ambient);
+	light_dot_normal = dot(lightv, largs->normalv);
+	if (light_dot_normal < 0)
+	{
+		diffuse = color(0, 0, 0);
+		specular = color(0, 0, 0);
+	}
+	else
+	{
+		diffuse = cscale(cscale(effective_color, largs->material.diffuse),
+				light_dot_normal);
+		reflectv = reflect(tneg(lightv), largs->normalv);
+		reflect_dot_eye = dot(reflectv, largs->eyev);
+		if (reflect_dot_eye <= 0)
+			specular = color(0, 0, 0);
+		else
+		{
+			factor = powf(reflect_dot_eye, largs->material.shininess);
+			specular = cscale(cscale(largs->light.intensity,
+						largs->material.specular), factor);
+		}
+	}
+	return (cadd(cadd(ambient, diffuse), specular));
 }
