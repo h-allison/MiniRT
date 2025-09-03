@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:54:44 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/03 16:43:20 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/03 18:20:33 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ void	render(void *param)
 	t_data			*data;
 	t_sphere		s;
 	t_ray			r;
+	t_rgb			col;
 	t_tuple			ray_origin;
-	t_tuple			position;
+	t_tuple			pos;
+	t_largs			largs;
 	float			wall_z;
 	float			wall_size;
 	float			half;
@@ -48,14 +50,15 @@ void	render(void *param)
 	float			world_y;
 	int				x;
 	int				y;
-	t_intersection	*t;
+	t_intersection	*ht;
 	t_intersection	*xs;
 
 	data = (t_data *)param;
 	if (!render_done)
-	{
+	{	
+		largs.light = point_light(point(-10, 10, -10), color(255, 255, 255));
 		ray_origin = point(0, 0, -5);
-		s = sphere(point(0, 0, 0), color(0xFF, 0x00, 0));
+		s = sphere(point(0, 0, 0), color(255, 51, 255));
 		wall_z = 10;
 		wall_size = 7;
 		half = wall_size / 2;
@@ -68,14 +71,19 @@ void	render(void *param)
 			while (x < WIN_WIDTH)
 			{
 				world_x = -half + pixel_size * x;
-				position = point(world_x, world_y, wall_z);
-				r = ray(ray_origin, tnorm(tsub(position, ray_origin)));
+				pos = point(world_x, world_y, wall_z);
+				r = ray(ray_origin, tnorm(tsub(pos, ray_origin)));
 				xs = intersect(s, r);
-				t = hit(xs);
-				if (t)
+				ht = hit(xs);
+				if (ht)
 				{
-					mlx_put_pixel(data->img, x, y, color_to_hex(t->object->color));
-					free(t);
+					largs.point = position(r, ht->t);
+					largs.normalv = normal_at(*ht->object, largs.point);
+					largs.eyev = tneg(r.direction);
+					largs.material = ht->object->material;
+					col = lighting(&largs);
+					mlx_put_pixel(data->img, x, y, color_to_hex(col));
+					free(ht);
 				}
 				xs[0].object = NULL;
 				x++;

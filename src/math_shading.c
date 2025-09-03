@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:25:23 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/03 16:42:25 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/03 18:15:23 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_rgb	lighting(t_largs *largs)
 	float	factor;
 
 	effective_color = cmult(largs->material.color, largs->light.intensity);
-	lightv = tnorm(tsub(largs->light.position, largs->position));
+	lightv = tnorm(tsub(largs->light.position, largs->point));
 	ambient = cscale(effective_color, largs->material.ambient);
 	light_dot_normal = dot(lightv, largs->normalv);
 	if (light_dot_normal < 0)
@@ -65,6 +65,7 @@ t_rgb	lighting(t_largs *largs)
 			specular = color(0, 0, 0);
 		else
 		{
+			printf(".");
 			factor = powf(reflect_dot_eye, largs->material.shininess);
 			specular = cscale(cscale(largs->light.intensity,
 						largs->material.specular), factor);

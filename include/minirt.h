@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/03 16:26:28 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/03 18:12:38 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <stdlib.h>
 # include <errno.h>
 
-# define WIN_WIDTH 600
-# define WIN_HEIGHT 600
+# define WIN_WIDTH 100
+# define WIN_HEIGHT 100
 
 # define EPSILON 0.0001
 # define DEG2RAD (M_PI / 180.0)
@@ -86,7 +86,7 @@ typedef struct s_sphere
 typedef struct s_largs
 {
 	t_material		material;
-	t_tuple			position;
+	t_tuple			point;
 	t_light			light;
 	t_tuple			eyev;
 	t_tuple			normalv;
