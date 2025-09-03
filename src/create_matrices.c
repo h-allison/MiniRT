@@ -6,13 +6,13 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 13:20:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/01 16:26:55 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/03 14:17:42 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-/* Create X x Y Matrix */
+// Create X x Y Matrix
 
 void	free_matrix(float **m, int size)
 {
@@ -32,6 +32,8 @@ void	free_matrix(float **m, int size)
 	}
 }
 
+// TODO: handle malloc fail
+
 float	**alloc_matrix(int size)
 {
 	int		i;
@@ -39,7 +41,7 @@ float	**alloc_matrix(int size)
 
 	m = ft_calloc(sizeof(float *), size);
 	if (!m)
-		exit (1); // TODO
+		exit (1);
 	i = 0;
 	while (i < size)
 	{

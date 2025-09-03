@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 17:55:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/01 19:29:43 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/03 14:20:02 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_intersection	*intersect(t_sphere s, t_ray r)
 	float			b;
 	float			discriminant;
 	t_intersection	*xs;
-	
+
 	r = invtransform(r, s.transform);
 	sphere_to_ray = tsub(r.origin, s.origin);
 	a = dot(r.direction, r.direction);
