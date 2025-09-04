@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/03 22:49:07 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/04 12:01:24 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,12 @@ typedef struct s_sphere
 	float			**transform;
 	t_material		m;
 }	t_sphere;
+
+typedef struct s_world
+{
+	t_sphere	*s;
+	t_light		*light;
+}	t_world;
 
 typedef struct s_largs
 {
