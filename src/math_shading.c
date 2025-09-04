@@ -6,13 +6,13 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:25:23 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/03 19:52:41 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/04 17:36:24 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_tuple	normal_at(t_sphere *s, t_tuple world_point)
+t_tuple	normal_at(t_object *s, t_tuple world_point)
 {
 	t_tuple	object_point;
 	t_tuple	object_normal;

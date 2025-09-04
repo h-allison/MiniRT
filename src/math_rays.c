@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 17:55:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/03 13:20:23 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/04 17:36:37 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_ray	transform(t_ray r, float **m)
 
 /* For now, just for spheres*/
 
-void	set_transform(t_sphere *s, float **t)
+void	set_transform(t_object *s, float **t)
 {
 	int	i;
 	int	j;

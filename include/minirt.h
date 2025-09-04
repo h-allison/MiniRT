@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/04 12:01:24 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/04 17:37:53 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,26 @@ typedef struct s_light
 	t_tuple			position;
 }	t_light;
 
-typedef struct s_sphere
+typedef struct s_object
 {
+	int				objtype;
 	float			**transform;
 	t_material		m;
-}	t_sphere;
+}	t_object;
+
+typedef	struct	s_comps
+{
+	float			t;
+	t_object		*object;
+	t_tuple			point;
+	t_tuple			eyev;
+	t_tuple			normalv;
+	bool			inside;
+} t_comps;
 
 typedef struct s_world
 {
-	t_sphere	*s;
+	t_object	*s;
 	t_light		*light;
 }	t_world;
 
@@ -104,7 +115,7 @@ typedef struct s_ray
 
 typedef	struct s_intersection
 {
-	t_sphere		*object;
+	t_object		*object;
 	float			t;
 }	t_intersection;
 
@@ -129,13 +140,14 @@ void	rt_early_exit(int error);
 int		parse_file(char *filename, t_data *data);
 
 //create_objects.c
-t_sphere sphere();
+t_object sphere();
 t_light	point_light(t_tuple position, t_rgb intensity);
+t_world	default_world();
 
 //create_tuples.c
 t_tuple	point(float x, float y, float z);
 t_tuple	vector(float x, float y, float z);
-t_rgb	color(int r, int g, int b);
+t_rgb	color(float r, float g, float b);
 
 //create_matrices.c
 void	free_matrix(float **m, int size);
@@ -201,7 +213,7 @@ float	**rotation_z(float r);
 float	**shearing(float *shear);
 
 //math_shading.c
-t_tuple	normal_at(t_sphere *s, t_tuple p);
+t_tuple	normal_at(t_object *s, t_tuple p);
 t_tuple	reflect(t_tuple in, t_tuple normal);
 t_rgb	lighting(t_largs *largs);
 
@@ -209,13 +221,17 @@ t_rgb	lighting(t_largs *largs);
 t_ray	ray(t_tuple point, t_tuple vector);
 t_tuple	position(t_ray ray, float t);
 t_ray	transform(t_ray r, float **m);
-void	set_transform(t_sphere *s, float **t);
+void	set_transform(t_object *s, float **t);
 
 //math_intersections.c
-t_intersection	*intersect(t_sphere *s, t_ray r);
-t_intersection	intersection(float t, t_sphere *s);
+t_intersection	*intersect(t_object *s, t_ray r);
+t_intersection	intersection(float t, t_object *s);
 t_intersection	*intersections(t_intersection i1, t_intersection i2);
 t_intersection	*hit(t_intersection *xs);
+
+//math_intersections_2.c
+t_intersection	*intersect_world(t_world *w, t_ray *r);
+t_comps prepare_computations(t_intersection *i, t_ray *r);
 
 //export_ppm.c
 int		canvas_export_ppm(t_data *data);

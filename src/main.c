@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:54:44 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/03 22:50:05 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/04 17:48:03 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	render(void *param)
 {
 	static bool	render_done;
 	t_data			*data;
-	t_sphere		s;
+	t_object		s;
 	t_ray			r;
 	t_rgb			col;
 	t_tuple			ray_origin;
@@ -57,15 +57,15 @@ void	render(void *param)
 	if (!render_done)
 	{	
 		s = sphere();
-		s.m.color = color(0x30, 0xAA, 0xFF);
+		s.m.color = color(0x1F, 0xCE, 0xCB);
 		s.m.diffuse = 0.9;
-		s.m.specular = 0.9;
-		s.m.shininess = 50;
-		float	shear[6] = {1, 0, 0, 0, 0, 0};
+		s.m.specular = 0.1;
+		s.m.shininess = 5;
+		float	shear[6] = {.5, 0, 0, 0, 0, 0};
 		s.transform = mmultfree(shearing(shear), s.transform);
 		s.transform = mmultfree(rotation_y(M_PI/6), s.transform);
 		largs.light = point_light(point(5, 10, -10), color(255, 255, 255));
-		ray_origin = point(0, 0, -8);
+		ray_origin = point(0, 0, -10);
 		wall_z = 10;
 		wall_size = 7;
 		half = wall_size / 2;

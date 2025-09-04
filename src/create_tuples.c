@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 20:37:34 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/30 16:27:31 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/04 14:44:01 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,27 @@ t_tuple	vector(float x, float y, float z)
 	return (tuple);
 }
 
-t_rgb	color(int r, int g, int b)
+t_rgb	color(float r, float g, float b)
 {
 	t_rgb	rgb;
 
-	rgb.r = (float) r / 255;
-	rgb.g = (float) g / 255;
-	rgb.b = (float) b / 255;
+	if (r > 255 || r < 0)
+	{	
+		printf("ERROR: Color input out of range\n");
+		exit(1);
+	}
+	if (g > 255 || g < 0)
+	{
+		printf("ERROR: Color input out of range\n");
+		exit(1);
+	}
+	if (b > 255 || b < 0)
+	{
+		printf("ERROR: Color input out of range\n");
+		exit(1);
+	}
+	rgb.r = r / 255;
+	rgb.g = g / 255;
+	rgb.b = b / 255;
 	return (rgb);
 }
