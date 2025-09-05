@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/09/05 19:39:40 by mmillhof         ###   ########.fr        #
+#    Updated: 2025/09/05 23:44:36 by mmillhof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,10 @@ NAME        := miniRT
 SRC         := src/main.c \
                src/check_file.c \
                src/file_helpers.c \
-               src/error_handling.c \
                src/parsing.c \
+               src/error_handling.c \
+               src/mlx_handling.c \
+               src/rendering.c \
                src/math_float.c \
 			   src/math_matrices.c \
 			   src/math_matrices_2.c \

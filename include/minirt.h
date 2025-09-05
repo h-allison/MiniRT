@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/05 19:59:59 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/05 23:41:22 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,8 +149,16 @@ int		check_rt_filename(char	*filename);
 //error_handling.c
 void	rt_early_exit(int error);
 
+//mlx_handling.c
+int		mlx_handling(t_data *data);
+void	ft_hook(void* param);
+void	img_wipe(t_data *data, t_rgb color);
+
 //parsing.c
 int		parse_file(char *filename, t_data *data);
+
+//rendering.c
+void	render(void *param);
 
 //create_objects.c
 t_object sphere();
