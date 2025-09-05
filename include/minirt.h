@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/05 16:53:22 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/05 19:59:59 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,6 +249,9 @@ t_intersection	*hit(t_intersection *xs);
 //math_intersections_2.c
 t_intersection	*intersect_world(t_world *w, t_ray *r);
 t_comps prepare_computations(t_intersection *i, t_ray *r);
+
+//math_view.c
+float	**view_transform(t_tuple from, t_tuple to, t_tuple up);
 
 //export_ppm.c
 int		canvas_export_ppm(t_data *data);

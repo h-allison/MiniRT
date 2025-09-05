@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/09/05 13:58:48 by mmillhof         ###   ########.fr        #
+#    Updated: 2025/09/05 19:39:40 by mmillhof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRC         := src/main.c \
 			   src/math_colors.c \
 			   src/math_shading.c \
 			   src/math_shading_2.c \
+			   src/math_view.c \
 			   src/create_objects.c \
                src/create_tuples.c \
 			   src/create_matrices.c \

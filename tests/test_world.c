@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 12:45:58 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/05 19:04:08 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/05 20:07:21 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,58 @@ int	main(void)
 	free_matrix(w.s[1].transform, 4);
 	free(w.s);
 	free(xs);
+
+	// View transform
+
+	t_tuple	from;
+	t_tuple	to;
+	t_tuple	up;
+	float	**vt;
+	float	**temp_m;
+
+	from = point(0, 0, 0);
+	to = point(0, 0, -1);
+	up = vector(0, 1, 0);
+	vt = view_transform(from, to, up);
+	printf("should be id matrix:\n");
+	print_matrix(vt, 4);
+	
+	printf("\n");
+
+	from = point(0, 0, 0);
+	to = point(0, 0, 1);
+	up = vector(0, 1, 0);
+	vt = view_transform(from, to, up);
+	printf("view should == scaling matrix:\n");
+	temp_m = scaling(-1, 1, -1);
+	print_matrix(temp_m, 4);
+	printf("\n");
+	print_matrix(vt, 4);
+	free_matrix(temp_m, 4);
+	free_matrix(vt, 4);
+	
+	printf("\n");
+	
+	from = point(0, 0, 8);
+	to = point(0, 0, 0);
+	up = vector(0, 1, 0);
+	vt = view_transform(from, to, up);
+	printf("view should == tr matrix:\n");
+	temp_m = translation(0, 0, -8);
+	print_matrix(temp_m, 4);
+	printf("\n");
+	print_matrix(vt, 4);
+	free_matrix(temp_m, 4);
+	printf("\n");
+	free_matrix(vt, 4);
+
+	from = point(1, 3, 2);
+	to = point(4, -2, 8);
+	up = vector(1, 1, 0);
+	vt = view_transform(from, to, up);
+	print_matrix(vt, 4);
+	free_matrix(vt, 4);
+	
 	return (0);
 }
 
