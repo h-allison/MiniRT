@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 13:30:13 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/05 16:17:35 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/05 17:51:49 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,21 @@ t_rgb	shade_hit(t_world *w, t_comps *comps)
 	largs.eyev = comps->eyev;
 	largs.normalv = comps->normalv;
 	return (lighting(&largs));
+}
+
+t_rgb	color_at(t_world *w, t_ray *r)
+{
+	t_intersection	*xs;
+	t_intersection	*ht;
+	t_comps			comps;
+
+	xs = intersect_world(w, r);
+	ht = hit(xs);
+	if (!xs[0].object)
+		return (color(0, 0, 0));
+	if (!ht->object)
+		return (color(0, 0, 0));
+	free(ht);
+	comps = prepare_computations(xs, r);
+	return (shade_hit(w, &comps));
 }

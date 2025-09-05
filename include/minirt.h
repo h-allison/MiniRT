@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/05 14:37:11 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/05 16:53:22 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,6 +232,7 @@ t_rgb	lighting(t_largs *largs);
 
 //math_shading_2.c
 t_rgb	shade_hit(t_world *w, t_comps *comps);
+t_rgb	color_at(t_world *w, t_ray *r);
 
 //math_rays.c
 t_ray	ray(t_tuple point, t_tuple vector);

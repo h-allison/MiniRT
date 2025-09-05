@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 12:45:58 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/05 16:03:07 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/05 17:46:44 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int	main(void)
 	free_matrix(w.s[0].transform, 4);
 	free_matrix(w.s[1].transform, 4);
 	free(w.s);
-	free(xs);
 
 	// Precomputing the state of an intersection
 
@@ -124,7 +123,7 @@ int	main(void)
 	printf("\n");
 	
 	w = default_world();
-	w.light[0] = point_light(point(0, 0.25, 0), color(1, 1, 1));
+	w.light[0] = point_light(point(0, 0.25, 0), color(255, 255, 255));
 	r = ray(point(0, 0, 0), vector(0, 0, 1));
 	s = w.s[1];
 	is = intersection(0.5, &s);
@@ -140,7 +139,17 @@ int	main(void)
 	free_matrix(w.s[0].transform, 4);
 	free_matrix(w.s[1].transform, 4);
 	free(w.s);
-	
+
+	w = default_world();
+	r = ray(point(0, 0, -5), vector(0, 1, 0));
+	c = color_at(&w, &r);
+	xs[0].object = NULL;
+	printf("c should be (0, 0, 0): %f, %f, %f\n", c.r, c.g, c.b);
+	free(w.light);
+	free_matrix(w.s[0].transform, 4);
+	free_matrix(w.s[1].transform, 4);
+	free(w.s);
+	free(xs);
 	return (0);
 }
 
