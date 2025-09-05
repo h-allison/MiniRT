@@ -1,98 +1,78 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math_matrices_3.c                                  :+:      :+:    :+:   */
+/*   math_matrices_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/28 15:59:09 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/01 19:21:58 by mmillhof         ###   ########.fr       */
+/*   Created: 2025/08/27 16:02:00 by mmillhof          #+#    #+#             */
+/*   Updated: 2025/08/30 20:11:33 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-/* determinants */
-
-float	mdet2x2(float **m)
+float	**msubmatrix(float **m, int size, int row, int col)
 {
-	return ((m[0][0] * m[1][1]) - (m[0][1] * m[1][0]));
-}
+	int		x_m;
+	int		y_m;
+	int		x_sub;
+	int		y_sub;
+	float	**sub;
 
-float	mdet3x3(float **m, int size)
-{
-	int		i;
-	float	det;
-
-	if (size == 2)
-		return (mdet2x2(m));
-	i = 0;
-	det = 0;
-	while (i < size)
+	sub = alloc_matrix(size - 1);
+	x_sub = 0;
+	y_sub = 0;
+	y_m = 0;
+	while (y_m < size)
 	{
-		det += m[0][i] * mcofactor3x3(m, 0, i);
-		i++;
+		if (y_m != row)
+		{
+			x_m = 0;
+			x_sub = 0;
+			while (x_m < size)
+			{
+				if (x_m != col)
+					sub [y_sub][x_sub++] = m[y_m][x_m];
+				x_m++;
+			}
+			y_sub++;
+		}
+		y_m++;
 	}
-	return (det);
+	return (sub);
 }
 
-float	mdet(float **m, int size)
+float	mminor3x3(float **m, int row, int col)
 {
-	int		i;
-	float	det;
+	float	minor;
+	float	**sub;
+
+	sub = msubmatrix(m, 3, row, col);
+	minor = mdet2x2(sub);
+	free_matrix(sub, 2);
+	return (minor);
+}
+
+float	mcofactor4x4(float **m, int size, int row, int col)
+{
 	float	cofactor;
 	float	**sub;
 
-	if (size == 2 || size == 3)
-		return (mdet3x3(m, size));
-	i = 0;
-	det = 0;
-	while (i < size)
-	{
-		sub = msubmatrix(m, 4, 0, i);
-		cofactor = mdet3x3(sub, 3);
-		free_matrix(sub, 3);
-		if (i % 2)
-			cofactor = -cofactor;
-		det += cofactor * m[0][i];
-		i++;
-	}
-	return (det);
+	sub = msubmatrix(m, size, row, col);
+	cofactor = mdet3x3(sub, 3); 
+	free_matrix(sub, size - 1);
+	if ((row + col) % 2)
+		cofactor = -cofactor;
+	return (cofactor);
 }
 
-bool	minvertable(float **m, int size)
-{
-	float	det;
-
-	det = mdet(m, size);
-	if (det == 0)
-		return (false);
-	return (true);
-}
-
-float	**minvert(float **m, int size)
+float	mcofactor3x3(float **m, int row, int col)
 {
 	float	cofactor;
-	float	det;
-	float	**m2;
-	int		y;
-	int		x;
 
-	det = mdet(m, size);
-	if (!det)
-		return (m);
-	m2 = alloc_matrix(size);
-	x = 0;
-	while (x < size)
-	{
-		y = 0;
-		while (y < size)
-		{
-			cofactor = mcofactor4x4(m, size, y, x);
-			m2[x][y] = cofactor / det;
-			y++;
-		}
-		x++;
-	}
-	return (m2);
+	cofactor = mminor3x3(m, row, col);
+	if ((row + col) % 2)
+		cofactor = -cofactor;
+	return (cofactor);
 }

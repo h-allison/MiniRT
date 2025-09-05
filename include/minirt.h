@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/05 23:41:22 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/06 00:03:33 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,22 +201,25 @@ t_rgb	cscale(t_rgb c1, float s);
 t_rgb	cmult(t_rgb c1, t_rgb c2);
 int		color_to_hex(t_rgb color);
 
-//math_matrices.c
+//math_matrices_1.c
 bool	misequal(float **m1, float **m2, int size);
-float	**matrixmult(float **m1, float **m2);
-float	**mmultfree(float **m1, float **m2);
-t_tuple	tmatrixmult(float **m, t_tuple t);
-t_tuple	tmmultfree(float **m, t_tuple t);
+float	matrixdot(float **m, int y, t_tuple t);
 float	**mtranspose(float **m1, int size);
 float	**mtransposefree(float **m, int size);
 
 //math_matrices_2.c
+float	**matrixmult(float **m1, float **m2);
+float	**mmultfree(float **m1, float **m2);
+t_tuple	tmatrixmult(float **m, t_tuple t);
+t_tuple	tmmultfree(float **m, t_tuple t);
+
+//math_matrices_3.c
 float	**msubmatrix(float **m, int size, int row, int col);
 float	mminor3x3(float **m, int row, int col);
 float	mcofactor3x3(float **m, int row, int col);
 float	mcofactor4x4(float **m, int size, int row, int col);
 
-//math_matrices_3.c
+//math_matrices_4.c
 float	mdet2x2(float **m);
 float	mdet3x3(float **m, int size);
 float	mdet(float **m, int size);

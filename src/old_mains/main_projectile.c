@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:54:44 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/30 20:24:51 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/06 00:11:36 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	render(void *param)
 	}
 	struct s_proj	ball;
 	struct s_env	env;
-	t_data		*data;
-	static bool	render_done;
-	
+	t_data			*data;
+	static bool		render_done;
+
 	render_done = false;
 	data = (t_data *) param;
 	ball.position = create_point(0, 1, 0);

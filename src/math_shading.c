@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:25:23 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/05 15:00:23 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/05 23:56:38 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_tuple	normal_at(t_object *s, t_tuple world_point)
 	world_normal.w = 0;
 	return (tnorm(world_normal));
 }
-
 
 t_tuple	reflect(t_tuple in, t_tuple normal)
 {

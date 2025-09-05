@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 20:37:34 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/04 14:44:01 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/06 00:07:41 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_rgb	color(float r, float g, float b)
 	t_rgb	rgb;
 
 	if (r > 255 || r < 0)
-	{	
+	{
 		printf("ERROR: Color input out of range\n");
 		exit(1);
 	}

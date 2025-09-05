@@ -3,76 +3,89 @@
 /*                                                        :::      ::::::::   */
 /*   math_matrices_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/27 16:02:00 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/30 20:11:33 by mmillhof         ###   ########.fr       */
+/*   Created: 2025/08/26 15:09:54 by hallison          #+#    #+#             */
+/*   Updated: 2025/09/06 00:00:09 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-float	**msubmatrix(float **m, int size, int row, int col)
-{
-	int		x_m;
-	int		y_m;
-	int		x_sub;
-	int		y_sub;
-	float	**sub;
+/* ONLY for multiplying two 4 X 4 matrices */
+// Uses malloc()
 
-	sub = alloc_matrix(size - 1);
-	x_sub = 0;
-	y_sub = 0;
-	y_m = 0;
-	while (y_m < size)
+float	**matrixmult(float **m1, float **m2)
+{
+	int		x;
+	int		y;
+	float	**m;
+
+	m = alloc_matrix(4);
+	y = 0;
+	while (y < 4)
 	{
-		if (y_m != row)
+		x = 0;
+		while (x < 4)
 		{
-			x_m = 0;
-			x_sub = 0;
-			while (x_m < size)
-			{
-				if (x_m != col)
-					sub [y_sub][x_sub++] = m[y_m][x_m];
-				x_m++;
-			}
-			y_sub++;
+			m[x][y] = m1[x][0] * m2[0][y]
+				+ m1[x][1] * m2[1][y]
+				+ m1[x][2] * m2[2][y]
+				+ m1[x][3] * m2[3][y];
+			x++;
 		}
-		y_m++;
+		y++;
 	}
-	return (sub);
+	return (m);
 }
 
-float	mminor3x3(float **m, int row, int col)
+float	**mmultfree(float **m1, float **m2)
 {
-	float	minor;
-	float	**sub;
+	int		x;
+	int		y;
+	float	**m;
 
-	sub = msubmatrix(m, 3, row, col);
-	minor = mdet2x2(sub);
-	free_matrix(sub, 2);
-	return (minor);
+	m = alloc_matrix(4);
+	y = 0;
+	while (y < 4)
+	{
+		x = 0;
+		while (x < 4)
+		{
+			m[x][y] = m1[x][0] * m2[0][y]
+				+ m1[x][1] * m2[1][y]
+				+ m1[x][2] * m2[2][y]
+				+ m1[x][3] * m2[3][y];
+			x++;
+		}
+		y++;
+	}
+	free_matrix(m1, 4);
+	free_matrix(m2, 4);
+	return (m);
 }
 
-float	mcofactor4x4(float **m, int size, int row, int col)
-{
-	float	cofactor;
-	float	**sub;
+/* Multiples one 4 X 4 matrix with one tuple*/
 
-	sub = msubmatrix(m, size, row, col);
-	cofactor = mdet3x3(sub, 3); 
-	free_matrix(sub, size - 1);
-	if ((row + col) % 2)
-		cofactor = -cofactor;
-	return (cofactor);
+t_tuple	tmatrixmult(float **m, t_tuple t)
+{
+	t_tuple	tuple;
+
+	tuple.x = matrixdot(m, 0, t);
+	tuple.y = matrixdot(m, 1, t);
+	tuple.z = matrixdot(m, 2, t);
+	tuple.w = matrixdot(m, 3, t);
+	return (tuple);
 }
 
-float	mcofactor3x3(float **m, int row, int col)
+t_tuple	tmmultfree(float **m, t_tuple t)
 {
-	float	cofactor;
+	t_tuple	tuple;
 
-	cofactor = mminor3x3(m, row, col);
-	if ((row + col) % 2)
-		cofactor = -cofactor;
-	return (cofactor);
+	tuple.x = matrixdot(m, 0, t);
+	tuple.y = matrixdot(m, 1, t);
+	tuple.z = matrixdot(m, 2, t);
+	tuple.w = matrixdot(m, 3, t);
+	free_matrix(m, 4);
+	return (tuple);
 }

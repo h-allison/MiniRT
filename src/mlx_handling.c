@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 23:32:31 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/05 23:36:51 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/06 00:10:45 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,22 @@ int	mlx_handling(t_data *data)
 	data->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, data->filename, true);
 	if (!data->mlx)
 		ft_error(); // TODO
-	data->img = mlx_new_image(data->mlx, WIN_WIDTH,	WIN_HEIGHT);
+	data->img = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
 	if (!data->img || (mlx_image_to_window(data->mlx, data->img, 0, 0) < 0))
 		ft_error(); // TODO
 	img_wipe(data, color(0x00, 0x00, 0x00));
 	mlx_loop_hook(data->mlx, render, data);
 	mlx_loop_hook(data->mlx, ft_hook, data->mlx);
-	mlx_loop(data->mlx);	
+	mlx_loop(data->mlx);
 	mlx_terminate(data->mlx);
 	return (EXIT_SUCCESS);
 }
 
-void ft_hook(void* param)
+void	ft_hook(void *param)
 {
-	mlx_t* mlx = param;
+	mlx_t	*mlx; 
 
+	mlx = param;
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_UP))

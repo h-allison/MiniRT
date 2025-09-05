@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:54:44 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/05 23:42:37 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/06 00:16:13 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	render(void *param)
 {
-	static bool	render_done;
+	static bool		render_done;
 	t_data			*data;
 	t_object		s;
 	t_ray			r;
@@ -35,7 +35,7 @@ void	render(void *param)
 
 	data = (t_data *)param;
 	if (!render_done)
-	{	
+	{
 		s = sphere();
 		s.m.color = color(0x1F, 0xCE, 0xCB);
 		s.m.diffuse = 0.9;
@@ -43,7 +43,7 @@ void	render(void *param)
 		s.m.shininess = 200;
 		float	shear[6] = {.5, 0, 0, 0, 0, 0};
 		s.transform = mmultfree(shearing(shear), s.transform);
-		s.transform = mmultfree(rotation_y(M_PI/6), s.transform);
+		s.transform = mmultfree(rotation_y(M_PI / 6), s.transform);
 		largs.light = point_light(point(5, 10, -10), color(255, 255, 255));
 		ray_origin = point(0, 0, -10);
 		wall_z = 10;

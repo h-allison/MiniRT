@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 19:38:47 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/05 20:04:11 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/05 23:56:50 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ float	**view_transform(t_tuple from, t_tuple to, t_tuple up)
 	orientation[2][0] = -forward.x;
 	orientation[2][1] = -forward.y;
 	orientation[2][2] = -forward.z;
-	return(mmultfree(orientation, translation(-from.x, -from.y, -from.z)));
+	return (mmultfree(orientation, translation(-from.x, -from.y, -from.z)));
 }
