@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 17:55:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/05 17:39:34 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/05 18:51:18 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ t_intersection	*hit(t_intersection *xs)
 	int				n;
 	t_intersection	*hit;
 
-	if (!xs[0].object)
+	if (!xs || !xs[0].object)
 		return (NULL);
 	hit = malloc(sizeof(t_intersection));
 	if (!hit)

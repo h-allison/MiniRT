@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 12:45:58 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/05 17:46:44 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/05 19:04:08 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,19 +132,33 @@ int	main(void)
 	print_matrix(w.s[0].transform, 4);
 	printf("w.s[1].transform\n");
 	print_matrix(w.s[1].transform, 4);
-	printf("comps.inside (should be true) = %d\n", comps.inside);
 	c = shade_hit(&w, &comps);
 	printf("c should be (0.90498, 0.90498, 0.90498): %f, %f, %f\n", c.r, c.g, c.b);
 	free(w.light);
 	free_matrix(w.s[0].transform, 4);
 	free_matrix(w.s[1].transform, 4);
 	free(w.s);
+	printf("\n");
 
 	w = default_world();
 	r = ray(point(0, 0, -5), vector(0, 1, 0));
-	c = color_at(&w, &r);
 	xs[0].object = NULL;
+	c = color_at(&w, &r);
 	printf("c should be (0, 0, 0): %f, %f, %f\n", c.r, c.g, c.b);
+	free(w.light);
+	free_matrix(w.s[0].transform, 4);
+	free_matrix(w.s[1].transform, 4);
+	free(w.s);
+	printf("\n");
+	
+	w = default_world();
+	r = ray(point(0, 0, 0.75), vector(0, 0, -1));
+	xs[0].object = NULL;
+	w.s[0].m.ambient = 1;
+	w.s[1].m.ambient = 1;
+	c = color_at(&w, &r);
+	printf("c inner: %f, %f, %f\n", w.s[0].m.color.r, w.s[0].m.color.g, w.s[0].m.color.b);
+	printf("c (should match inner): %f, %f, %f\n", c.r, c.g, c.b);
 	free(w.light);
 	free_matrix(w.s[0].transform, 4);
 	free_matrix(w.s[1].transform, 4);
