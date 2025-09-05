@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 17:55:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/04 17:35:47 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/05 11:44:29 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ t_intersection	*hit(t_intersection *xs)
 	n = 0;
 	while (xs[n].object)
 	{
-		if ((xs[n].t >=0 && xs[n].t < hit->t) || hit->t < 0)
+		if ((xs[n].t >= 0 && xs[n].t < hit->t) || hit->t < 0)
 		{
 			hit->object = xs[n].object;
 			hit->t = xs[n].t;

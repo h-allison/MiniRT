@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 12:45:58 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/04 17:24:43 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/05 12:18:54 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(void)
 	t_ray			r;
 	t_intersection *xs;
 	t_intersection	is;
-	t_sphere		s;
+	t_object		s;
 	t_comps			comps;
 	int				i;
 

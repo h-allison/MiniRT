@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:25:23 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/04 17:36:24 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/05 12:13:33 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_tuple	normal_at(t_object *s, t_tuple world_point)
 	t_tuple	object_normal;
 	t_tuple	world_normal;
 	float	**m;
-	
+
 	object_point = tmmultfree(minvert(s->transform, 4), world_point);
 	object_normal = tsub(object_point, point(0, 0, 0));
 	m = mtransposefree(minvert(s->transform, 4), 4);
@@ -27,13 +27,63 @@ t_tuple	normal_at(t_object *s, t_tuple world_point)
 	return (tnorm(world_normal));
 }
 
-
 t_tuple	reflect(t_tuple in, t_tuple normal)
 {
 	return (tsub(in, tmult(tmult(normal, 2), dot(in, normal))));
 }
 
+void	set_spec_diffuse_black(t_lcalc *lcalc)
+{
+	lcalc->diffuse = color(0, 0, 0);
+	lcalc->specular = color(0, 0, 0);
+}
 
+void	calculate_lighting(t_lcalc *lcalc, t_largs *largs)
+{
+	lcalc->effective_color = cmult(largs->material.color,
+			largs->light.intensity);
+	lcalc->lightv = tnorm(tsub(largs->light.position, largs->point));
+	lcalc->ambient = cscale(lcalc->effective_color, largs->material.ambient);
+	lcalc->light_dot_normal = dot(lcalc->lightv, largs->normalv);
+	if (lcalc->light_dot_normal < 0)
+		set_spec_diffuse_black(lcalc);
+	else
+	{
+		lcalc->diffuse = cscale(cscale(lcalc->effective_color,
+					largs->material.diffuse), lcalc->light_dot_normal);
+		lcalc->reflectv = reflect(tneg(lcalc->lightv), largs->normalv);
+		lcalc->reflect_dot_eye = dot(lcalc->reflectv, largs->eyev);
+		if (lcalc->reflect_dot_eye <= 0)
+			lcalc->specular = color(0, 0, 0);
+		else
+		{
+			lcalc->factor = powf(lcalc->reflect_dot_eye,
+					largs->material.shininess);
+			lcalc->specular = cscale(cscale(largs->light.intensity,
+						largs->material.specular), lcalc->factor);
+		}
+	}
+}
+
+t_rgb	lighting(t_largs *largs)
+{
+	t_lcalc	lcalc;
+	t_rgb	ret;
+
+	calculate_lighting(&lcalc, largs);
+	ret = cadd(cadd(lcalc.ambient, lcalc.diffuse), lcalc.specular);
+	if (ret.r > 1)
+		ret.r = 1;
+	if (ret.g > 1)
+		ret.g = 1;
+	if (ret.b > 1)
+		ret.b = 1;
+	return (ret);
+}
+
+// original lighting function before refactor
+
+/*
 t_rgb	lighting(t_largs *largs)
 {
 	t_rgb	effective_color;
@@ -80,3 +130,4 @@ t_rgb	lighting(t_largs *largs)
 		ret.b = 1;
 	return (ret);
 }
+*/

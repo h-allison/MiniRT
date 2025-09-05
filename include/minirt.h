@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/04 17:37:53 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/05 12:09:10 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,19 @@ typedef struct s_rgb
 	float			g;
 	float			b;
 }	t_rgb;
+
+typedef struct s_lcalc
+{
+	t_rgb	effective_color;
+	t_rgb	ambient;
+	t_rgb	diffuse;
+	t_rgb	specular;
+	t_tuple	lightv;
+	t_tuple	reflectv;
+	float	light_dot_normal;
+	float	reflect_dot_eye;
+	float	factor;
+}	t_lcalc;
 
 typedef struct s_material
 {
