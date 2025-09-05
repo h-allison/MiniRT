@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 15:35:53 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/03 19:17:58 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/05 16:20:58 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	print_matrix(float **m, int size);
 
 int main (void)
 {
-	t_sphere	s;
+	t_object	s;
 	t_light		l;
 	t_tuple		n;
 	t_tuple		p;

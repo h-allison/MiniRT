@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/05 12:09:10 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/05 14:37:11 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,6 +229,9 @@ float	**shearing(float *shear);
 t_tuple	normal_at(t_object *s, t_tuple p);
 t_tuple	reflect(t_tuple in, t_tuple normal);
 t_rgb	lighting(t_largs *largs);
+
+//math_shading_2.c
+t_rgb	shade_hit(t_world *w, t_comps *comps);
 
 //math_rays.c
 t_ray	ray(t_tuple point, t_tuple vector);

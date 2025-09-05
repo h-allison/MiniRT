@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:25:23 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/05 12:13:33 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/05 15:00:23 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_tuple	normal_at(t_object *s, t_tuple world_point)
 	world_normal.w = 0;
 	return (tnorm(world_normal));
 }
+
 
 t_tuple	reflect(t_tuple in, t_tuple normal)
 {
@@ -72,12 +73,6 @@ t_rgb	lighting(t_largs *largs)
 
 	calculate_lighting(&lcalc, largs);
 	ret = cadd(cadd(lcalc.ambient, lcalc.diffuse), lcalc.specular);
-	if (ret.r > 1)
-		ret.r = 1;
-	if (ret.g > 1)
-		ret.g = 1;
-	if (ret.b > 1)
-		ret.b = 1;
 	return (ret);
 }
 
@@ -122,12 +117,6 @@ t_rgb	lighting(t_largs *largs)
 		}
 	}
 	ret = cadd(cadd(ambient, diffuse), specular);
-	if (ret.r > 1)
-		ret.r = 1;
-	if (ret.g > 1)
-		ret.g = 1;
-	if (ret.b > 1)
-		ret.b = 1;
 	return (ret);
 }
 */

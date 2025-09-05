@@ -6,13 +6,14 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 12:45:58 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/05 12:18:54 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/05 16:03:07 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 void	test_default_world(t_world *world);
+void	print_matrix(float **m, int size);
 
 int	main(void)
 {
@@ -22,21 +23,27 @@ int	main(void)
 	t_intersection	is;
 	t_object		s;
 	t_comps			comps;
+	t_rgb			c;
 	int				i;
 
 	// Testing default_world()
 	w = default_world();
 	printf("Testing default_world()\n\n");
 	printf("w.light.position = [%f, %f, %f, %f]\n",
-		w.light->position.x, w.light->position.y, w.light->position.z, w.light->position.w);
+			w.light->position.x, w.light->position.y, w.light->position.z, w.light->position.w);
 	printf("w.light.intensity = [%f, %f, %f]\n",
-		w.light->intensity.r, w.light->intensity.g, w.light->intensity.b);
+			w.light->intensity.r, w.light->intensity.g, w.light->intensity.b);
 	printf("pointer to s1 = %p\n", &w.s[0]);
 	printf("pointer to s2 = %p\n", &w.s[1]);
-	printf("\n");
 	test_default_world(&w);
+	free(w.light);
+	free_matrix(w.s[0].transform, 4);
+	free_matrix(w.s[1].transform, 4);
+	free(w.s);
+	printf("\n");
 
 	// Intersect a world with a ray
+	w = default_world();
 	r = ray(point(0, 0, -5), vector(0, 0, 1));
 	xs = intersect_world(&w, &r);
 	i = 0;
@@ -46,10 +53,15 @@ int	main(void)
 		i++;
 	}
 	printf("xs count = %i\n", i);
+	free(w.light);
+	free_matrix(w.s[0].transform, 4);
+	free_matrix(w.s[1].transform, 4);
+	free(w.s);
 	free(xs);
-	
+
 	// Precomputing the state of an intersection
 
+	w = default_world();
 	s = sphere();
 	r = ray(point(0, 0, -5), vector(0, 0, 1));
 	is = intersection(4, &s);
@@ -60,17 +72,23 @@ int	main(void)
 	printf("\n");
 
 	printf("comps.object is %p\n", comps.object);
+	printf("comps.object.objtype = %i\n", comps.object->objtype);
 	printf("should be is.object %p\n", is.object);
-	
+	printf("is.object.objtype = %i\n", is.object->objtype);
+
 	printf("\n");
-	
+
 	printf("comps.point (0, 0, -1, 1) = %f, %f, %f, %f\n", comps.point.x, comps.point.y, comps.point.z, comps.point.w);
 	printf("comps.eyev (0, 0, -1, 0) = %f, %f, %f, %f\n", comps.eyev.x, comps.eyev.y, comps.eyev.z, comps.eyev.w);
 	printf("comps.normalv (0, 0, -1, 0) = %f, %f, %f, %f\n", comps.normalv.x, comps.normalv.y, comps.normalv.z, comps.normalv.w);
 	printf("comps.inside = %d\n", comps.inside);
 	free_matrix(s.transform, 4);
+	free(w.light);
+	free_matrix(w.s[0].transform, 4);
+	free_matrix(w.s[1].transform, 4);
+	free(w.s);
 	printf("\n");
-
+	
 	s = sphere();
 	r = ray(point(0, 0, -5), vector(0, 0, 1));
 	is = intersection(4, &s);
@@ -78,7 +96,7 @@ int	main(void)
 	printf("comps.inside = %d\n", comps.inside);
 	free_matrix(s.transform, 4);
 	printf("\n");
-	
+
 	s = sphere();
 	r = ray(point(0, 0, 0), vector(0, 0, 1));
 	is = intersection(1, &s);
@@ -86,12 +104,61 @@ int	main(void)
 	printf("comps.point (0, 0, 1, 1) = %f, %f, %f, %f\n", comps.point.x, comps.point.y, comps.point.z, comps.point.w);
 	printf("comps.eyev (0, 0, -1, 0) = %f, %f, %f, %f\n", comps.eyev.x, comps.eyev.y, comps.eyev.z, comps.eyev.w);
 	printf("comps.inside (should be true) = %d\n", comps.inside);
+	printf("comps.normalv (0, 0, -1, 0) = %f, %f, %f, %f\n", comps.normalv.x, comps.normalv.y, comps.normalv.z, comps.normalv.w);
 	free_matrix(s.transform, 4);
 	printf("\n");
 
-	// Shading and Intersection
+	// Shading an Intersection
+
+	w = default_world();
+	r = ray(point(0, 0, -5), vector(0, 0, 1));
+	s = w.s[0];
+	is = intersection(4, &s);
+	comps = prepare_computations(&is, &r);
+	c = shade_hit(&w, &comps);
+	printf("c should be (0.38066, 0.47583, 0.2855): %f, %f, %f\n", c.r, c.g, c.b);
+	free(w.light);
+	free_matrix(w.s[0].transform, 4);
+	free_matrix(w.s[1].transform, 4);
+	free(w.s);
+	printf("\n");
+	
+	w = default_world();
+	w.light[0] = point_light(point(0, 0.25, 0), color(1, 1, 1));
+	r = ray(point(0, 0, 0), vector(0, 0, 1));
+	s = w.s[1];
+	is = intersection(0.5, &s);
+	comps = prepare_computations(&is, &r);
+	printf("w.s[0].transform\n");
+	print_matrix(w.s[0].transform, 4);
+	printf("w.s[1].transform\n");
+	print_matrix(w.s[1].transform, 4);
+	printf("comps.inside (should be true) = %d\n", comps.inside);
+	c = shade_hit(&w, &comps);
+	printf("c should be (0.90498, 0.90498, 0.90498): %f, %f, %f\n", c.r, c.g, c.b);
+	free(w.light);
+	free_matrix(w.s[0].transform, 4);
+	free_matrix(w.s[1].transform, 4);
+	free(w.s);
+	
+	return (0);
 }
 
+void	print_matrix(float **m, int size)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < size)
+	{
+		x = 0;
+		while (x < size)
+			printf("%f ", m[y][x++]);
+		printf("\n");
+		y++;
+	}
+}
 
 void	test_default_world(t_world *w)
 {
@@ -110,7 +177,7 @@ void	test_default_world(t_world *w)
 	else
 		printf("	❌ ");
 	printf("\n");
-	
+
 	printf("	checking w.light.intensity:\n");
 	if (w->light->intensity.r == 1)
 		printf("	✅ ");
@@ -125,7 +192,7 @@ void	test_default_world(t_world *w)
 	else
 		printf("	❌ ");
 	printf("\n");
-	
+
 	printf("	t_world w contains s1 <-- sphere with\n");
 	printf("	material.color (0.8, 1.0, 0.6)\n");
 	printf("	%f, %f, %f\n", w->s[0].m.color.r, w->s[0].m.color.g, w->s[0].m.color.b);

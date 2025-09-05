@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 13:47:05 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/30 16:29:12 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/05 13:24:53 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,12 @@ int	color_to_hex(t_rgb rgb)
 {
 	int	hex_color;
 
+	if (rgb.r > 1)
+		rgb.r = 1;
+	if (rgb.g > 1)
+		rgb.g = 1;
+	if (rgb.b > 1)
+		rgb.b = 1;
 	hex_color = (int)(rgb.r * 255);
 	hex_color = hex_color << 8;
 	hex_color = hex_color + (int)(rgb.g * 255);

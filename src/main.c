@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:54:44 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/04 17:48:03 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/05 12:52:35 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ void	render(void *param)
 		s = sphere();
 		s.m.color = color(0x1F, 0xCE, 0xCB);
 		s.m.diffuse = 0.9;
-		s.m.specular = 0.1;
-		s.m.shininess = 5;
+		s.m.specular = 0.9;
+		s.m.shininess = 200;
 		float	shear[6] = {.5, 0, 0, 0, 0, 0};
 		s.transform = mmultfree(shearing(shear), s.transform);
 		s.transform = mmultfree(rotation_y(M_PI/6), s.transform);

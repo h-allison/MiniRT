@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:14:22 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/04 17:38:54 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/05 15:24:14 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ t_light	point_light(t_tuple position, t_rgb intensity)
 {
 	t_light light;
 
-	printf("intensity.r = %f\n", intensity.r);
 	light.position = position;
 	light.intensity = intensity;
 	return (light);
@@ -45,7 +44,6 @@ t_world	default_world()
 	
 	light = point_light(point(-10, 10, -10), color(255, 255, 255));
 	s1 = sphere();
-	
 	s1.m.color = color(204, 255, 153);
 	s1.m.diffuse = 0.7;
 	s1.m.specular = 0.2;
