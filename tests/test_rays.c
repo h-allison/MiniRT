@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 15:35:53 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/03 11:16:30 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/05 18:28:26 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int main (void)
 {
 	t_tuple			target;
 	t_ray			r;
-	t_sphere		s;
+	t_object		s;
 	t_intersection	i;
 	t_intersection	*xs;
 
@@ -31,7 +31,7 @@ int main (void)
 	//
 
 	printf("r = ray(point(2, 3, 4), vector(1, 2, 0))\n");
-	r = ray(point(2, 3, 4), vector(1, 2, 0));
+	r = ray(point(2, 3, 4), vector(1, 0, 0));
 	target = position(r, 0);
 	printf("position (r, t = 0): point(%f, %f, %f, %f)\n", target.x, target.y, target.z, target.w);
 	target = position(r, 1);
@@ -44,10 +44,10 @@ int main (void)
 	
 	//
 	
-	printf("intersect(sphere(0, 0, 0), ray(p(0, 0, -5), v(0, 0, 1))\n");
+	printf("intersect(s, ray(p(0, 0, -5), v(0, 0, 1))\n");
 	r = ray(point(0, 0, -5), vector(0, 0, 1));
-	s = sphere(point(0, 0, 0), color(0, 0, 0));
-	xs = intersect(s, r);
+	s = sphere();
+	xs = intersect(&s, r);
 	if (xs && xs[0].object)
 	{
 		printf("intersect 0: %f\n", xs[0].t);
@@ -58,11 +58,11 @@ int main (void)
 	free_matrix(s.transform, 4);
 	printf("\n");
 	
-	printf("intersect(sphere(0, 0, 0), ray(p(0, 1, -5), v(0, 0, 1))\n");
+	printf("intersect(s, ray(p(0, 1, -5), v(0, 0, 1))\n");
 	r = ray(point(0, 1, -5), vector(0, 0, 1));
-	s = sphere(point(0, 0, 0), color(0, 0, 0));
+	s = sphere();
 	xs[0].object = NULL;
-	xs = intersect(s, r);
+	xs = intersect(&s, r);
 	if (xs && xs[0].object)
 	{
 		printf("intersect 0: %f\n", xs[0].t);
@@ -73,11 +73,11 @@ int main (void)
 	free_matrix(s.transform, 4);
 	printf("\n");
 	
-	printf("intersect(sphere(0, 0, 0), ray(p(0, 2, -5), v(0, 0, 1))\n");
+	printf("intersect(s, ray(p(0, 2, -5), v(0, 0, 1))\n");
 	r = ray(point(0, 2, -5), vector(0, 0, 1));
-	s = sphere(point(0, 0, 0), color(0, 0, 0));
+	s = sphere();
 	xs[0].object = NULL;
-	xs = intersect(s, r);
+	xs = intersect(&s, r);
 	if (xs && xs[0].object)
 	{
 		printf("intersect 0: %f\n", xs[0].t);
@@ -88,11 +88,11 @@ int main (void)
 	free_matrix(s.transform, 4);
 	printf("\n");
 	
-	printf("intersect(sphere(0, 0, 0), ray(p(0, 0, 0), v(0, 0, 1))\n");
+	printf("intersect(s, ray(p(0, 0, 0), v(0, 0, 1))\n");
 	r = ray(point(0, 0, 0), vector(0, 0, 1));
-	s = sphere(point(0, 0, 0), color(0, 0, 0));
+	s = sphere();
 	xs[0].object = NULL;
-	xs = intersect(s, r);
+	xs = intersect(&s, r);
 	if (xs && xs[0].object)
 	{
 		printf("intersect 0: %f\n", xs[0].t);
@@ -103,11 +103,11 @@ int main (void)
 	free_matrix(s.transform, 4);
 	printf("\n");
 	
-	printf("intersect(sphere(0, 0, 0), ray(p(0, 0, 5), v(0, 0, 1))\n");
+	printf("intersect(s, ray(p(0, 0, 5), v(0, 0, 1))\n");
 	r = ray(point(0, 0, 5), vector(0, 0, 1));
-	s = sphere(point(0, 0, 0), color(0, 0, 0));
+	s = sphere();
 	xs[0].object = NULL;
-	xs = intersect(s, r);
+	xs = intersect(&s, r);
 	if (xs && xs[0].object)
 	{
 		printf("intersect 0: %f\n", xs[0].t);
@@ -121,19 +121,19 @@ int main (void)
 	printf("i = intersection(type, object, t)\n");
 	i.t = 3.5;
 //	i.type = OBJ_SPHERE;
-	s = sphere(point(1, 4, 3), color(0, 0, 0));
+	s = sphere();
 	i.object = &s;
 //	if (i.type == OBJ_SPHERE)
-//		s = *(t_sphere *)i.object;
+//		s = *(t_object *)i.object;
 	printf("i.t: %f\n", i.t);
-	printf("i.object: %f, %f\n", s.origin.x, s.origin.y);
+	printf("i.object.objtype: %i\n", s.objtype);
 	free_matrix(s.transform, 4);
 	printf("\n");
 
 	t_intersection *inter;
 
-	printf("hit: sphere(0, 0, 0), i1(1, s), i2(2, s)\n");
-	s = sphere(point(0, 0, 0), color(0, 0, 0));
+	printf("hit: s, i1(1, s), i2(2, s)\n");
+	s = sphere();
 	xs[0].object = NULL;
 	xs = intersections(intersection(1, &s), intersection(2, &s));
 	inter = hit(xs);
@@ -145,8 +145,8 @@ int main (void)
 	free_matrix(s.transform, 4);
 	printf("\n");
 	
-	printf("hit: sphere(0, 0, 0), i1(-1, s), i2(1, s)\n");
-	s = sphere(point(0, 0, 0), color(0, 0, 0));
+	printf("hit: s, i1(-1, s), i2(1, s)\n");
+	s = sphere();
 	xs[0].object = NULL;
 	xs = intersections(intersection(-1, &s), intersection(1, &s));
 	inter = hit(xs);
@@ -158,8 +158,8 @@ int main (void)
 	free_matrix(s.transform, 4);
 	printf("\n");
 	
-	printf("hit: sphere(0, 0, 0), i1(-2, s), i2(-1, s)\n");
-	s = sphere(point(0, 0, 0), color(0, 0, 0));
+	printf("hit: s, i1(-2, s), i2(-1, s)\n");
+	s = sphere();
 	xs[0].object = NULL;
 	xs = intersections(intersection(-2, &s), intersection(-1, &s));
 	inter = hit(xs);
@@ -193,29 +193,29 @@ int main (void)
 	printf("\n");
 	
 	// set transform sphere
-	s = sphere(point(0, 0, 0), color(0, 0, 0));
+	s = sphere();
 	print_matrix(s.transform, 4);
 	printf("\n");
 
 	// changing a sphere's transformation
 	m = translation(2, 3, 4);
-	set_transform(&s, m);
 	print_matrix(m, 4);
 	printf("\n");
+	set_transform(&s, m);
 	print_matrix(s.transform, 4);
+	printf("\n");
 	free_matrix(s.transform, 4);
-	free_matrix(m, 4);
 	printf("\n");
     
 	// intersecting a scaled sphere with a ray
     printf("Intersecting a scaled sphere with a ray\n");
     r = ray(point(0, 0, -5), vector(0, 0, 1));
-    s = sphere(point(0, 0, 0), color(0, 0, 0));
+    s = sphere();
 	m = scaling(2, 2, 2);
 	set_transform(&s, m);
 	print_matrix(s.transform, 4);
 	xs[0].object = NULL;
-    xs = intersect(s, r); 
+    xs = intersect(&s, r); 
 	if (xs && xs[0].object)
 	{
 		printf("intersect 0: %f\n", xs[0].t);
@@ -223,17 +223,16 @@ int main (void)
 	}
 	else
 		printf("no intersect\n");
-	free_matrix(m, 4);
 	free_matrix(s.transform, 4);
 	printf("\n");
     
 	r = ray(point(0, 0, -5), vector(0, 0, 1));
-    s = sphere(point(0, 0, 0), color(0, 0, 0));
+    s = sphere();
 	m = translation(5, 0, 0);
 	set_transform(&s, m);
 	print_matrix(s.transform, 4);
 	xs[0].object = NULL;
-    xs = intersect(s, r);
+    xs = intersect(&s, r);
 	if (xs && xs[0].object)
 	{
 		printf("intersect 0: %f\n", xs[0].t);
@@ -241,7 +240,6 @@ int main (void)
 	}
 	else
 		printf("no intersect\n");
-	free_matrix(m, 4);
 	free_matrix(s.transform, 4);
    	free(xs);
 	return (0);
