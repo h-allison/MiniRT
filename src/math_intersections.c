@@ -6,12 +6,11 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 17:55:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/08 18:27:58 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/08 23:58:40 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
 
 static t_ray	invtransform(t_ray r, float **t)
 {
@@ -38,7 +37,7 @@ t_intersection	*intersect(t_object *s, t_ray r)
 	sphere_to_ray = tsub(r.origin, point(0, 0, 0));
 	a = dot(r.direction, r.direction);
 	b = 2 * dot(r.direction, sphere_to_ray);
-	discriminant = powf(b, 2) - 4 * a * (dot(sphere_to_ray, sphere_to_ray) - 1);
+	discriminant = b * b - 4 * a * (dot(sphere_to_ray, sphere_to_ray) - 1);
 	if (discriminant < 0)
 		xs = intersections(intersection(0, NULL), intersection(0, NULL));
 	else
@@ -70,7 +69,7 @@ t_intersection	*intersections(t_intersection i1, t_intersection i2)
 
 	if (!xs)
 	{
-		xs = malloc(10 * sizeof(t_intersection));
+		xs = malloc(101 * sizeof(t_intersection));
 		xs[0].object = NULL;
 	}
 	if (!xs)
@@ -78,7 +77,7 @@ t_intersection	*intersections(t_intersection i1, t_intersection i2)
 	i = 0;
 	while (xs[i].object)
 	{
-		if (i == 9)
+		if (i == 100)
 		{
 			printf("You need to increase your xs malloc in intersections();");
 			exit(1);
@@ -88,7 +87,7 @@ t_intersection	*intersections(t_intersection i1, t_intersection i2)
 	xs[i].object = i1.object;
 	xs[i].t = i1.t;
 	xs[i + 1].object = NULL;
-	if(!fisequal(i1.t, i2.t))
+	if (!fisequal(i1.t, i2.t))
 	{
 		xs[i + 1].object = i2.object;
 		xs[i + 1].t = i2.t;

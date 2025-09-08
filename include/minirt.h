@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/08 21:20:42 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/08 23:31:32 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <stdlib.h>
 # include <errno.h>
 
-# define WIN_WIDTH 640
-# define WIN_HEIGHT 400
+# define WIN_WIDTH 480
+# define WIN_HEIGHT 320
 
 # define EPSILON 0.0001
 # define DEG2RAD (M_PI / 180.0)
@@ -171,7 +171,6 @@ int		parse_file(char *filename, t_data *data);
 
 //rendering.c
 void	render(void *param);
-void	render_loop(t_camera *cam, t_world *world, mlx_image_t *img);
 
 //create_objects.c
 t_object sphere();

@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/09/06 00:17:21 by mmillhof         ###   ########.fr        #
+#    Updated: 2025/09/08 23:47:19 by mmillhof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,7 +79,7 @@ all: $(NAME)
 
 # Compile C -> .o into build/
 $(OBJDIR)/%.o: src/%.c | $(OBJDIR)
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(CPPFLAGS) -O3 -c $< -o $@
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
@@ -97,7 +97,7 @@ $(MLX42_A):
 
 # Build target
 $(NAME): $(OBJ) $(LIBFT) $(MLX42_A)
-	$(CC) $(OBJ) $(LDFLAGS) $(LDLIBS) -o $@
+	$(CC) $(OBJ) $(LDFLAGS) $(LDLIBS) -O3 -o $@
 
 clean:
 	$(MAKE) -C $(LIBFT_PATH) clean

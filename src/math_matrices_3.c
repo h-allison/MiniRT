@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math_matrices_2.c                                  :+:      :+:    :+:   */
+/*   math_matrices_3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 16:02:00 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/30 20:11:33 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/09 00:18:37 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ float	**msubmatrix(float **m, int size, int row, int col)
 			while (x_m < size)
 			{
 				if (x_m != col)
-					sub [y_sub][x_sub++] = m[y_m][x_m];
+					sub[y_sub][x_sub++] = m[y_m][x_m];
 				x_m++;
 			}
 			y_sub++;
