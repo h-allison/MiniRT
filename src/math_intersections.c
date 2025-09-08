@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 17:55:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/05 18:51:18 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/08 17:25:44 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_intersection	*intersections(t_intersection i1, t_intersection i2)
 	i = 0;
 	while (xs[i].object)
 	{
-		if (i == 1000)
+		if (i == 10000)
 		{
 			printf("You need to increase your xs malloc in intersections();");
 			exit(1);

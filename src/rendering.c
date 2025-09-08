@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:54:44 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/08 16:42:16 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/08 17:13:17 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	render(void *param)
 	if (!render_done)
 	{
 		data = (t_data *)param;
-		world = default_world();
-		cam = camera(WIN_WIDTH, WIN_HEIGHT, M_PI / 4);
-		cam.transform = view_transform(point(0, 0, -5),
-				point(0, 0, 0), point(0, 1, 0));
+		world = default_world_2();
+		cam = camera(WIN_WIDTH, WIN_HEIGHT, M_PI / 3);
+		cam.transform = view_transform(point(0, 1.5, -5),
+				point(0, 1, 0), point(0, 1, 0));
 		render_loop(&cam, &world, data->img);
 		printf("render done!\n");
 		canvas_export_ppm(data);

@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/08 16:42:44 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/08 17:09:51 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,7 @@ void	render_loop(t_camera *cam, t_world *world, mlx_image_t *img);
 t_object sphere();
 t_light	point_light(t_tuple position, t_rgb intensity);
 t_world	default_world();
+t_world	default_world_2();
 t_camera	camera(float hsize, float vsize, float field_of_view);
 
 //create_tuples.c
