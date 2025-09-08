@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 17:55:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/08 15:20:52 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/08 16:10:23 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	set_transform(t_object *s, float **t)
 	free_matrix(t, 4);
 }
 
-t_ray	ray_for_pixel(t_camera c, float px, float py)
+t_ray	ray_for_pixel(t_camera *c, float px, float py)
 {
 	float	world_x;
 	float	world_y;
@@ -69,10 +69,10 @@ t_ray	ray_for_pixel(t_camera c, float px, float py)
 	t_tuple	origin;
 	t_tuple	direction;
 
-	world_x = c.half_width - (px + 0.5) * c.pixel_size;
-	world_y = c.half_height - (py + 0.5) * c.pixel_size;
-	pixel = tmmultfree(minvert(c.transform, 4), point(world_x, world_y, -1));
-	origin = tmmultfree(minvert(c.transform, 4), point(0, 0, 0));
+	world_x = c->half_width - (px + 0.5) * c->pixel_size;
+	world_y = c->half_height - (py + 0.5) * c->pixel_size;
+	pixel = tmmultfree(minvert(c->transform, 4), point(world_x, world_y, -1));
+	origin = tmmultfree(minvert(c->transform, 4), point(0, 0, 0));
 	direction = tnorm(tsub(pixel, origin));
 	return (ray(origin, direction));
 }

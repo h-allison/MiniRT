@@ -6,7 +6,7 @@
 /*   By: smargine <smargine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 18:52:32 by smargine          #+#    #+#             */
-/*   Updated: 2025/09/08 15:20:31 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/08 16:12:12 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,12 @@ int test_camera_rayforpixel_2(void)
 	int			err;
 
 	c = camera(201, 101, M_PI / 2);
-	r = ray_for_pixel(c, 0, 0);
-	err = 0;
+	r = ray_for_pixel(&c, 0, 0);
 	err = !fisequal(r.origin.x, 0);
 	err += !fisequal(r.origin.y, 0);
 	err += !fisequal(r.origin.z, 0);
 	err += !fisequal(r.origin.w, 1);
-	err = !fisequal(r.direction.x, 0.66519);
+	err += !fisequal(r.direction.x, 0.66519);
 	err += !fisequal(r.direction.y, 0.33259);
 	err += !fisequal(r.direction.z, -0.66851);
 	if (err)

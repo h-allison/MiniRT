@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 13:30:13 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/05 18:51:06 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/08 16:24:10 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ t_rgb	color_at(t_world *w, t_ray *r)
 		return (color(0, 0, 0));
 	free(ht);
 	comps = prepare_computations(xs, r);
+	xs[0].object = NULL;
 	return (shade_hit(w, &comps));
 }

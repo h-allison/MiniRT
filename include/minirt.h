@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/08 15:08:34 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/08 16:42:44 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <stdlib.h>
 # include <errno.h>
 
-# define WIN_WIDTH 600
-# define WIN_HEIGHT 600
+# define WIN_WIDTH 480
+# define WIN_HEIGHT 320
 
 # define EPSILON 0.0001
 # define DEG2RAD (M_PI / 180.0)
@@ -171,6 +171,7 @@ int		parse_file(char *filename, t_data *data);
 
 //rendering.c
 void	render(void *param);
+void	render_loop(t_camera *cam, t_world *world, mlx_image_t *img);
 
 //create_objects.c
 t_object sphere();
@@ -263,7 +264,7 @@ t_ray	ray(t_tuple point, t_tuple vector);
 t_tuple	position(t_ray ray, float t);
 t_ray	transform(t_ray r, float **m);
 void	set_transform(t_object *s, float **t);
-t_ray	ray_for_pixel(t_camera c, float px, float py);
+t_ray	ray_for_pixel(t_camera *c, float px, float py);
 
 //math_intersections.c
 t_intersection	*intersect(t_object *s, t_ray r);
