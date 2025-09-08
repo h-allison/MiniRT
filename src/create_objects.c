@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:14:22 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/08 18:30:46 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/08 20:56:59 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,12 +141,12 @@ t_world	default_world_2(void)
 	w.light[0] = point_light(point(-10, 10, -10), color(255, 255, 255));
 	
 	w.s = malloc(7 * sizeof(t_object));
-//	w.s[0] = floor;
-//	w.s[1] = left_wall;
-//	w.s[2] = right_wall;
-	w.s[0] = middle;
-	w.s[1] = right;
-	w.s[2] = left;
-	w.s[3].transform = NULL;
+	w.s[0] = floor;
+	w.s[1] = left_wall;
+	w.s[2] = right_wall;
+	w.s[3] = middle;
+	w.s[4] = right;
+	w.s[5] = left;
+	w.s[6].transform = NULL;
 	return (w);
 }
