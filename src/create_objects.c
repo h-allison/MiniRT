@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:14:22 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/06 00:07:16 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/08 14:41:34 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,32 @@ t_light	point_light(t_tuple position, t_rgb intensity)
 	light.position = position;
 	light.intensity = intensity;
 	return (light);
+}
+
+t_camera	camera(float hsize, float vsize, float field_of_view)
+{
+	t_camera	c;
+	float		half_view;
+	float		aspect;
+
+	c.hsize = hsize;
+	c.vsize = vsize;
+	c.field_of_view = field_of_view;
+	c.transform = create_id_matrix();
+	half_view = tanf(field_of_view / 2);
+	aspect = hsize / vsize;
+	if (aspect >= 1)
+	{
+		c.half_width = half_view;
+		c.half_height = half_view / aspect;
+	}
+	if (aspect < 1)
+	{
+		c.half_width = half_view * aspect;
+		c.half_height = half_view;
+	}
+	c.pixel_size = (c.half_width * 2) / c.hsize;
+	return (c);
 }
 
 t_world	default_world(void)

@@ -6,7 +6,7 @@
 /*   By: smargine <smargine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 18:57:05 by smargine          #+#    #+#             */
-/*   Updated: 2025/09/08 11:34:45 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/08 15:33:09 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,12 @@ void	print_banner(void)
 
 int	main(void)
 {
-	int	nbr_of_tests;
-	int	passed;
+	int	err;
 
 	print_banner();
-	passed = 0;
-	nbr_of_tests = 1;
-	passed += camera_tests_launcher();
-	if (passed == nbr_of_tests)
+	err = 0;
+	err += camera_tests_launcher();
+	if (!err)
 		write(1, GREEN "All tests passed!\n\n" RESET, 28);
 	return (0);
 }

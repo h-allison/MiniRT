@@ -1,7 +1,0 @@
-/home/mmillhof/Documents/42/42cursus/04/miniRT/miniRT_github/lib/MLX42/build/CMakeFiles/mlx42.dir
-/home/mmillhof/Documents/42/42cursus/04/miniRT/miniRT_github/lib/MLX42/build/CMakeFiles/edit_cache.dir
-/home/mmillhof/Documents/42/42cursus/04/miniRT/miniRT_github/lib/MLX42/build/CMakeFiles/rebuild_cache.dir
-/home/mmillhof/Documents/42/42cursus/04/miniRT/miniRT_github/lib/MLX42/build/CMakeFiles/list_install_components.dir
-/home/mmillhof/Documents/42/42cursus/04/miniRT/miniRT_github/lib/MLX42/build/CMakeFiles/install.dir
-/home/mmillhof/Documents/42/42cursus/04/miniRT/miniRT_github/lib/MLX42/build/CMakeFiles/install/local.dir
-/home/mmillhof/Documents/42/42cursus/04/miniRT/miniRT_github/lib/MLX42/build/CMakeFiles/install/strip.dir

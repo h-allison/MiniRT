@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/08 11:03:53 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/08 15:08:34 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,9 @@ typedef struct s_camera
 	float			hsize;
 	float			vsize;
 	float			field_of_view;
+	float			half_width;
+	float			half_height;
+	float			pixel_size;
 	float			**transform;
 }	t_camera;
 
@@ -173,7 +176,7 @@ void	render(void *param);
 t_object sphere();
 t_light	point_light(t_tuple position, t_rgb intensity);
 t_world	default_world();
-t_camera	camera(void);
+t_camera	camera(float hsize, float vsize, float field_of_view);
 
 //create_tuples.c
 t_tuple	point(float x, float y, float z);
@@ -260,6 +263,7 @@ t_ray	ray(t_tuple point, t_tuple vector);
 t_tuple	position(t_ray ray, float t);
 t_ray	transform(t_ray r, float **m);
 void	set_transform(t_object *s, float **t);
+t_ray	ray_for_pixel(t_camera c, float px, float py);
 
 //math_intersections.c
 t_intersection	*intersect(t_object *s, t_ray r);

@@ -7,21 +7,27 @@ PRG_DIR        := ../..
 FRAMEWORK_DIR  := ../libunit
 LIBFT_DIR      := $(FRAMEWORK_DIR)/libft
 MLX42_PATH     := $(PRG_DIR)/lib/MLX42
-MLX42_A        := $(MLX42_PATH)/build/libmlx42.a
+MLX42_BUILD    := $(MLX42_PATH)/build
+MLX42_A        := $(MLX42_BUILD)/libmlx42.a
 
 # Includes & warnings
 CFLAGS  := -Wall -Wextra -Werror -g
 CFLAGS  += -Iincludes -I$(PRG_DIR)/include -I$(FRAMEWORK_DIR)/includes -I$(LIBFT_DIR) -I$(MLX42_PATH)/include
 
-# Link libs (use archive paths to avoid -L/-l for mlx42/libunit/libft)
+# Link libs (archives first, then system libs)
 LDLIBS := $(FRAMEWORK_DIR)/libunit.a $(LIBFT_DIR)/libft.a $(MLX42_A) -lglfw -lm
 
-SRC_DIR := camera_tests
+SRC_DIR := tests_camera
 
 SRCS := \
 	main.c \
-	$(SRC_DIR)/00_camera_tests_launcher.c \
-	$(SRC_DIR)/01_create_camera_test.c \
+	$(SRC_DIR)/00_test_camera_launcher.c \
+	$(SRC_DIR)/01_test_camera_floats.c \
+	$(SRC_DIR)/02_test_camera_idm.c \
+	$(SRC_DIR)/03_test_camera_pixel.c \
+	$(SRC_DIR)/04_test_camera_rayforpixel_1.c \
+	$(SRC_DIR)/05_test_camera_rayforpixel_2.c \
+	$(SRC_DIR)/06_test_camera_rayforpixel_3.c \
 	$(PRG_DIR)/src/check_file.c \
 	$(PRG_DIR)/src/file_helpers.c \
 	$(PRG_DIR)/src/parsing.c \
@@ -57,6 +63,11 @@ all: $(LIBFT_DIR)/libft.a $(FRAMEWORK_DIR)/libunit.a $(NAME)
 $(NAME): $(OBJS) $(MLX42_A)
 	$(CC) $(CFLAGS) $(OBJS) $(LDLIBS) -o $@
 
+# Build MLX42 (once) with CMake
+$(MLX42_A):
+	cmake -S $(MLX42_PATH) -B $(MLX42_BUILD)
+	cmake --build $(MLX42_BUILD) -j
+
 # Build local libraries via their own Makefiles
 $(LIBFT_DIR)/libft.a:
 	$(MAKE) -C $(LIBFT_DIR)
@@ -72,6 +83,9 @@ clean:
 fclean: clean
 	$(RM) $(NAME)
 	-$(MAKE) -C $(FRAMEWORK_DIR) fclean
+
+test: $(NAME)
+	./$(NAME)
 
 re: fclean all
 
