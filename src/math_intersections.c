@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 17:55:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/08 23:58:40 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/09 01:27:44 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,26 +64,12 @@ t_intersection	intersection(float t, t_object *s)
 
 t_intersection	*intersections(t_intersection i1, t_intersection i2)
 {
-	static t_intersection	*xs;
+	static t_intersection	xs[100];
 	int						i;
 
-	if (!xs)
-	{
-		xs = malloc(101 * sizeof(t_intersection));
-		xs[0].object = NULL;
-	}
-	if (!xs)
-		exit (1);
 	i = 0;
 	while (xs[i].object)
-	{
-		if (i == 100)
-		{
-			printf("You need to increase your xs malloc in intersections();");
-			exit(1);
-		}
 		i++;
-	}
 	xs[i].object = i1.object;
 	xs[i].t = i1.t;
 	xs[i + 1].object = NULL;

@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 18:40:41 by hallison          #+#    #+#             */
-/*   Updated: 2025/08/30 20:04:27 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/09 00:46:46 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,24 @@ int	write_ppm_header(int fd, t_data *data)
 	ft_putstr_fd(height, fd);
 	write(fd, "\n", 1);
 	write(fd, "255\n", 4);
+	free(width);
+	free(height);
 	return (0);
 }
 
 void	write_pixel_fd(int fd, uint8_t *pixel)
 {
-	ft_putstr_fd(ft_itoa(*pixel), fd);
-	write(fd, " ", 1);
-	ft_putstr_fd(ft_itoa(*(pixel + 1)), fd);
-	write(fd, " ", 1);
-	ft_putstr_fd(ft_itoa(*(pixel + 2)), fd);
+	char	*str;
+	int		i;
+
+	i = 0;
+	while (i < 3)
+	{
+		str = ft_itoa(*(pixel + i++));
+		ft_putstr_fd(str, fd);
+		free(str);
+		write(fd, " ", 1);
+	}
 }
 
 int	write_pixel_data(int fd, t_data *data)
@@ -51,8 +59,6 @@ int	write_pixel_data(int fd, t_data *data)
 		write_pixel_fd(fd, pixel + i);
 		if (i % 50 == 0)
 			write(fd, "\n", 1);
-		else
-			write(fd, " ", 1);
 		i = i + 4;
 	}
 	return (0);
