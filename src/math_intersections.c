@@ -6,13 +6,12 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 17:55:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/08 17:25:44 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/08 18:27:58 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-/* Calculates intersections with one object */
 
 static t_ray	invtransform(t_ray r, float **t)
 {
@@ -24,6 +23,8 @@ static t_ray	invtransform(t_ray r, float **t)
 	free_matrix(invt, 4);
 	return (r2);
 }
+
+/* Calculates intersections with one object */
 
 t_intersection	*intersect(t_object *s, t_ray r)
 {
@@ -69,7 +70,7 @@ t_intersection	*intersections(t_intersection i1, t_intersection i2)
 
 	if (!xs)
 	{
-		xs = malloc(1000 * sizeof(t_intersection));
+		xs = malloc(10 * sizeof(t_intersection));
 		xs[0].object = NULL;
 	}
 	if (!xs)
@@ -77,7 +78,7 @@ t_intersection	*intersections(t_intersection i1, t_intersection i2)
 	i = 0;
 	while (xs[i].object)
 	{
-		if (i == 10000)
+		if (i == 9)
 		{
 			printf("You need to increase your xs malloc in intersections();");
 			exit(1);
@@ -86,9 +87,13 @@ t_intersection	*intersections(t_intersection i1, t_intersection i2)
 	}
 	xs[i].object = i1.object;
 	xs[i].t = i1.t;
-	xs[i + 1].object = i2.object;
-	xs[i + 1].t = i2.t;
-	xs[i + 2].object = NULL;
+	xs[i + 1].object = NULL;
+	if(!fisequal(i1.t, i2.t))
+	{
+		xs[i + 1].object = i2.object;
+		xs[i + 1].t = i2.t;
+		xs[i + 2].object = NULL;
+	}
 	return (xs);
 }
 
