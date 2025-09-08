@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 13:30:13 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/09 01:31:06 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/09 01:44:32 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_rgb	shade_hit(t_world *w, t_comps *comps)
 
 t_rgb	color_at(t_world *w, t_ray *r)
 {
-	t_intersection *xs;
+	t_intersection	*xs;
 	t_intersection	*ht;
 	t_comps			comps;
 

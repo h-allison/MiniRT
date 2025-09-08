@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:54:44 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/09 01:40:28 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/09 01:46:19 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 
 static int	render_chunk(t_camera *cam, t_world *world, mlx_image_t *img)
 {
-	static int  			y;
-	int         			x;
-	t_ray       			r;
-	t_rgb       			col;
+	static int	y;
+	int			x;
+	t_ray		r;
+	t_rgb		col;
 
 	x = 0;
 	while (x < cam->hsize)
@@ -35,13 +35,13 @@ static int	render_chunk(t_camera *cam, t_world *world, mlx_image_t *img)
 	return (1);
 }
 
-void    render(void *param)
+void	render(void *param)
 {
 	static int		status;
-	static t_camera cam;
-	static t_world  world;
-	t_data          *data;
 	int				i;
+	static t_camera	cam;
+	static t_world	world;
+	t_data			*data;
 
 	if (status == 0)
 	{
