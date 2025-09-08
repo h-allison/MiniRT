@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/06 00:03:33 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/08 11:03:53 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,16 @@ typedef struct s_object
 	t_material		m;
 }	t_object;
 
-typedef	struct	s_comps
+
+typedef struct s_camera
+{
+	float			hsize;
+	float			vsize;
+	float			field_of_view;
+	float			**transform;
+}	t_camera;
+
+typedef	struct s_comps
 {
 	float			t;
 	t_object		*object;
@@ -103,7 +112,7 @@ typedef	struct	s_comps
 	t_tuple			eyev;
 	t_tuple			normalv;
 	bool			inside;
-} t_comps;
+}	t_comps;
 
 typedef struct s_world
 {
@@ -164,6 +173,7 @@ void	render(void *param);
 t_object sphere();
 t_light	point_light(t_tuple position, t_rgb intensity);
 t_world	default_world();
+t_camera	camera(void);
 
 //create_tuples.c
 t_tuple	point(float x, float y, float z);
