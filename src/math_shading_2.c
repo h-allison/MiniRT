@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 13:30:13 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/09 15:44:45 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/09 17:03:56 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,9 @@ t_rgb	shade_hit(t_world *w, t_comps *comps)
 
 	largs.material = comps->object->m;
 	largs.light = w->light[0];
-//	largs.point = comps->over_point;
-	largs.point = comps->point;
-	largs.over_point = comps->over_point;
+	largs.point = comps->over_point;
 	largs.eyev = comps->eyev;
 	largs.normalv = comps->normalv;
-	if (largs.over_point.z > largs.point.z)
-		printf("point.z = %f, over_point.z = %f\n", largs.point.z, largs.over_point.z);
 	largs.in_shadow = is_shadowed(w, comps->over_point);
 	return (lighting(&largs));
 }

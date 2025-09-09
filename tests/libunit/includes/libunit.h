@@ -6,7 +6,7 @@
 /*   By: smargine <smargine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 11:30:07 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/07 16:51:30 by smargine         ###   ########.fr       */
+/*   Updated: 2025/09/09 17:16:16 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <sys/wait.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include "libft.h"
+# include <string.h>
 # include "color.h"
 
 # define TIMEOUT_SEC 5

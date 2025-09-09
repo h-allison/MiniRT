@@ -6,7 +6,7 @@
 /*   By: smargine <smargine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 11:18:03 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/08 15:34:26 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/09 17:10:54 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	launch_tests(t_unit_test *testlist)
 		pid = fork();
 		if (pid == 0)
 			child(testlist, i);
-		write(1, testlist[i].name, ft_strlen(testlist[i].name));
+		write(1, testlist[i].name, strlen(testlist[i].name));
 		while (wait(&status) > 0)
 			;
 		passed += !print_status(status);

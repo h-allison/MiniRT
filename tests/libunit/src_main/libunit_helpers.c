@@ -6,11 +6,14 @@
 /*   By: smargine <smargine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 11:18:03 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/07 16:53:55 by smargine         ###   ########.fr       */
+/*   Updated: 2025/09/09 17:17:29 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libunit.h"
+
+static void	write_nbr(int n, int fd);
+static void	ft_putnbr_fd(int n, int fd);
 
 int	print_status(int status)
 {
@@ -58,4 +61,28 @@ void	print_signals(int status)
 		write(1, MAGENTA" [PIPE] >>> Pipe error\n"RESET, 32);
 	if (WTERMSIG(status) == SIGILL)
 		write(1, MAGENTA" [ILL] >>>  Illegal operation\n"RESET, 39);
+}
+
+static void	ft_putnbr_fd(int n, int fd)
+{
+	if (n == -2147483648)
+	{
+		write(fd, "-2147483648", 11);
+		return ;
+	}
+	if (n < 0)
+	{
+		write (fd, "-", 1);
+		n = -n;
+	}
+	write_nbr(n, fd);
+	return ;
+}
+
+static void	write_nbr(int n, int fd)
+{
+	if (n > 9)
+		write_nbr(n / 10, fd);
+	write(fd, &"0123456789"[n % 10], 1);
+	return ;
 }

@@ -1,5 +1,3 @@
-# Minimal Makefile
-
 NAME := unit_test
 CC   := cc
 
@@ -10,11 +8,9 @@ MLX42_PATH     := $(PRG_DIR)/lib/MLX42
 MLX42_BUILD    := $(MLX42_PATH)/build
 MLX42_A        := $(MLX42_BUILD)/libmlx42.a
 
-# Includes & warnings
 CFLAGS  := -Wall -Wextra -Werror -g
 CFLAGS  += -Iincludes -I$(PRG_DIR)/include -I$(FRAMEWORK_DIR)/includes -I$(LIBFT_DIR) -I$(MLX42_PATH)/include
 
-# Link libs (archives first, then system libs)
 LDLIBS := $(FRAMEWORK_DIR)/libunit.a $(LIBFT_DIR)/libft.a $(MLX42_A) -lglfw -lm
 
 SRC_DIR_CAMERA := tests_camera
@@ -71,12 +67,10 @@ all: $(LIBFT_DIR)/libft.a $(FRAMEWORK_DIR)/libunit.a $(NAME)
 $(NAME): $(OBJS) $(MLX42_A)
 	$(CC) $(CFLAGS) $(OBJS) $(LDLIBS) -o $@
 
-# Build MLX42 (once) with CMake
 $(MLX42_A):
 	cmake -S $(MLX42_PATH) -B $(MLX42_BUILD)
 	cmake --build $(MLX42_BUILD) -j
 
-# Build local libraries via their own Makefiles
 $(LIBFT_DIR)/libft.a:
 	$(MAKE) -C $(LIBFT_DIR)
 
@@ -98,4 +92,3 @@ test: $(NAME)
 re: fclean all
 
 .PHONY: all clean fclean re
-
