@@ -21,6 +21,8 @@ SRCS := \
 	main.c \
 	$(SRC_DIR_SHAPES)/00_test_shapes_launcher.c \
 	$(SRC_DIR_SHAPES)/01_test_shape.c \
+	$(SRC_DIR_SHAPES)/02_test_shape_transform.c \
+	$(SRC_DIR_SHAPES)/03_test_shape_material.c \
 	$(SRC_DIR_CAMERA)/00_test_camera_launcher.c \
 	$(SRC_DIR_CAMERA)/01_test_camera_floats.c \
 	$(SRC_DIR_CAMERA)/02_test_camera_idm.c \
@@ -93,5 +95,9 @@ test: all
 	./$(NAME)
 
 re: fclean all
+
+asan: CFLAGS  += -fsanitize=address -g
+asan: LDLIBS += -fsanitize=address
+asan: fclean all
 
 .PHONY: all clean fclean re
