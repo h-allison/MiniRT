@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/09 14:33:23 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/09 15:40:22 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@
 # include <stdlib.h>
 # include <errno.h>
 
-# define WIN_WIDTH 160
-# define WIN_HEIGHT 120
+# define WIN_WIDTH 1200
+# define WIN_HEIGHT 900
 
+# define OFFSET	 0.01
 # define EPSILON 0.0001
 # define DEG2RAD (M_PI / 180.0)
 # define RAD2DEG (180.0 / M_PI)
@@ -128,6 +129,7 @@ typedef struct s_largs
 {
 	t_material		material;
 	t_tuple			point;
+	t_tuple			over_point;
 	t_light			light;
 	t_tuple			eyev;
 	t_tuple			normalv;
