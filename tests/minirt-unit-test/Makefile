@@ -89,7 +89,7 @@ fclean: clean
 	$(RM) $(NAME)
 	-$(MAKE) -C $(FRAMEWORK_DIR) fclean
 
-test: $(NAME)
+test: all
 	./$(NAME)
 
 re: fclean all
