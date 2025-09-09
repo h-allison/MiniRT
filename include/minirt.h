@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/09 17:05:01 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/09 17:45:51 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,7 @@ int		parse_file(char *filename, t_data *data);
 void	render(void *param);
 
 //create_objects.c
+t_object	create_test_shape(void);
 t_object sphere();
 t_light	point_light(t_tuple position, t_rgb intensity);
 t_world	default_world();

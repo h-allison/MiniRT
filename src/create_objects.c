@@ -6,11 +6,20 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:14:22 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/09 10:32:19 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/09 17:44:44 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+
+t_object	create_test_shape(void)
+{
+	t_object	s;
+
+	s.transform = create_id_matrix();
+	return(s);
+}
 
 t_object	sphere(void)
 {

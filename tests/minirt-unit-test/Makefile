@@ -15,9 +15,12 @@ LDLIBS := $(FRAMEWORK_DIR)/libunit.a $(LIBFT_DIR)/libft.a $(MLX42_A) -lglfw -lm
 
 SRC_DIR_CAMERA := tests_camera
 SRC_DIR_SHADOW := tests_shadow
+SRC_DIR_SHAPES := tests_shapes
 
 SRCS := \
 	main.c \
+	$(SRC_DIR_SHAPES)/00_test_shapes_launcher.c \
+	$(SRC_DIR_SHAPES)/01_test_shape.c \
 	$(SRC_DIR_CAMERA)/00_test_camera_launcher.c \
 	$(SRC_DIR_CAMERA)/01_test_camera_floats.c \
 	$(SRC_DIR_CAMERA)/02_test_camera_idm.c \

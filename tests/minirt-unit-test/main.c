@@ -6,12 +6,13 @@
 /*   By: smargine <smargine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 18:57:05 by smargine          #+#    #+#             */
-/*   Updated: 2025/09/09 11:01:56 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/09 17:33:48 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "camera_tests.h"
 #include "shadow_tests.h"
+#include "shapes_tests.h"
 
 void	print_banner(void)
 {
@@ -38,6 +39,7 @@ int	main(void)
 	err = 0;
 	err += camera_tests_launcher();
 	err += shadow_tests_launcher();
+	err += shapes_tests_launcher();
 	if (!err)
 		write(1, GREEN "All tests passed!\n\n" RESET, 28);
 	return (0);
