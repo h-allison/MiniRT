@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 14:56:16 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/09 15:39:04 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/09 15:48:58 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ t_comps	prepare_computations(t_intersection *i, t_ray *r)
 	if (dot(comps.normalv, comps.eyev) < 0)
 	{
 		comps.inside = true;
-		printf("inside\n");
 		comps.normalv = tneg(comps.normalv);
 	}
 	else
