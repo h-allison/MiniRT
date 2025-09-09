@@ -6,7 +6,7 @@
 /*   By: smargine <smargine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 18:52:32 by smargine          #+#    #+#             */
-/*   Updated: 2025/09/09 13:46:10 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/09 18:55:18 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ int test_over_point(void)
 	c = prepare_computations(&i, &r);
 	if (c.over_point.z < -EPSILON/2 && c.point.z > c.over_point.z)
 	{
+		free_matrix(s.transform, 4);
 		return (0);
 	}
+	free_matrix(s.transform, 4);
 	return (-1);
 }
