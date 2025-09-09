@@ -6,7 +6,7 @@
 /*   By: smargine <smargine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 12:10:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/09 11:55:06 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/09 13:45:11 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ int	test_is_shad_1(void);
 int	test_is_shad_2(void);
 int	test_is_shad_3(void);
 int	test_is_shad_4(void);
+int test_over_point(void);
 
 #endif

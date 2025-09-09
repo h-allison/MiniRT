@@ -35,6 +35,7 @@ SRCS := \
 	$(SRC_DIR_SHADOW)/03_test_is_shad_2.c \
 	$(SRC_DIR_SHADOW)/04_test_is_shad_3.c \
 	$(SRC_DIR_SHADOW)/05_test_is_shad_4.c \
+	$(SRC_DIR_SHADOW)/06_test_over_point.c \
 	$(PRG_DIR)/src/check_file.c \
 	$(PRG_DIR)/src/file_helpers.c \
 	$(PRG_DIR)/src/parsing.c \

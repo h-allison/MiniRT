@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/09 12:29:52 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/09 13:39:39 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ typedef	struct s_comps
 	float			t;
 	t_object		*object;
 	t_tuple			point;
+	t_tuple			over_point;
 	t_tuple			eyev;
 	t_tuple			normalv;
 	bool			inside;

@@ -6,7 +6,7 @@
 /*   By: smargine <smargine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 14:38:10 by smargine          #+#    #+#             */
-/*   Updated: 2025/09/09 12:23:51 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/09 13:44:02 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	shadow_tests_launcher(void)
 {
-	t_unit_test	testlist[6];
+	t_unit_test	testlist[7];
 	int			ret;
 
 	testlist[0].test = NULL;
@@ -24,6 +24,7 @@ int	shadow_tests_launcher(void)
 	load_test(testlist, "SHADOWS: test is_shadowed(); : object in between", &test_is_shad_2);
 	load_test(testlist, "SHADOWS: test is_shadowed(); : object behind light", &test_is_shad_3);
 	load_test(testlist, "SHADOWS: test is_shadowed(); : point in between", &test_is_shad_4);
+	load_test(testlist, "SHADOWS: test comps.over_point", &test_over_point);
 	ret = launch_tests(testlist);
 	return (ret);
 }
