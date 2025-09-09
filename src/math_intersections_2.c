@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 14:56:16 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/08 18:20:44 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/09 14:46:36 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_comps	prepare_computations(t_intersection *i, t_ray *r)
 	{
 		comps.inside = true;
 		comps.normalv = tneg(comps.normalv);
+		comps.over_point = tadd(comps.point, (tmult(comps.normalv, EPSILON)));
 	}
 	else
 		comps.inside = false;
