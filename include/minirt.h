@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/09 01:41:02 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/09 12:29:52 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <stdlib.h>
 # include <errno.h>
 
-# define WIN_WIDTH 480
-# define WIN_HEIGHT 320
+# define WIN_WIDTH 1024
+# define WIN_HEIGHT 768
 
 # define EPSILON 0.0001
 # define DEG2RAD (M_PI / 180.0)
@@ -130,6 +130,7 @@ typedef struct s_largs
 	t_light			light;
 	t_tuple			eyev;
 	t_tuple			normalv;
+	bool			in_shadow;
 }	t_largs;
 
 typedef struct s_ray
@@ -258,6 +259,7 @@ t_rgb	lighting(t_largs *largs);
 //math_shading_2.c
 t_rgb	shade_hit(t_world *w, t_comps *comps);
 t_rgb	color_at(t_world *w, t_ray *r);
+bool	is_shadowed(t_world *world, t_tuple point);
 
 //math_rays.c
 t_ray	ray(t_tuple point, t_tuple vector);

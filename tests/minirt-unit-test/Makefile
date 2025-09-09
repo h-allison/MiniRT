@@ -17,17 +17,24 @@ CFLAGS  += -Iincludes -I$(PRG_DIR)/include -I$(FRAMEWORK_DIR)/includes -I$(LIBFT
 # Link libs (archives first, then system libs)
 LDLIBS := $(FRAMEWORK_DIR)/libunit.a $(LIBFT_DIR)/libft.a $(MLX42_A) -lglfw -lm
 
-SRC_DIR := tests_camera
+SRC_DIR_CAMERA := tests_camera
+SRC_DIR_SHADOW := tests_shadow
 
 SRCS := \
 	main.c \
-	$(SRC_DIR)/00_test_camera_launcher.c \
-	$(SRC_DIR)/01_test_camera_floats.c \
-	$(SRC_DIR)/02_test_camera_idm.c \
-	$(SRC_DIR)/03_test_camera_pixel.c \
-	$(SRC_DIR)/04_test_camera_rayforpixel_1.c \
-	$(SRC_DIR)/05_test_camera_rayforpixel_2.c \
-	$(SRC_DIR)/06_test_camera_rayforpixel_3.c \
+	$(SRC_DIR_CAMERA)/00_test_camera_launcher.c \
+	$(SRC_DIR_CAMERA)/01_test_camera_floats.c \
+	$(SRC_DIR_CAMERA)/02_test_camera_idm.c \
+	$(SRC_DIR_CAMERA)/03_test_camera_pixel.c \
+	$(SRC_DIR_CAMERA)/04_test_camera_rayforpixel_1.c \
+	$(SRC_DIR_CAMERA)/05_test_camera_rayforpixel_2.c \
+	$(SRC_DIR_CAMERA)/06_test_camera_rayforpixel_3.c \
+	$(SRC_DIR_SHADOW)/00_test_shadow_launcher.c \
+	$(SRC_DIR_SHADOW)/01_test_shadow_in.c \
+	$(SRC_DIR_SHADOW)/02_test_is_shad_1.c \
+	$(SRC_DIR_SHADOW)/03_test_is_shad_2.c \
+	$(SRC_DIR_SHADOW)/04_test_is_shad_3.c \
+	$(SRC_DIR_SHADOW)/05_test_is_shad_4.c \
 	$(PRG_DIR)/src/check_file.c \
 	$(PRG_DIR)/src/file_helpers.c \
 	$(PRG_DIR)/src/parsing.c \

@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:25:23 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/05 23:56:38 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/09 11:27:24 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ t_tuple	reflect(t_tuple in, t_tuple normal)
 	return (tsub(in, tmult(tmult(normal, 2), dot(in, normal))));
 }
 
+// new lighting function
+/*
 void	set_spec_diffuse_black(t_lcalc *lcalc)
 {
 	lcalc->diffuse = color(0, 0, 0);
@@ -74,10 +76,10 @@ t_rgb	lighting(t_largs *largs)
 	ret = cadd(cadd(lcalc.ambient, lcalc.diffuse), lcalc.specular);
 	return (ret);
 }
-
+*/
 // original lighting function before refactor
 
-/*
+
 t_rgb	lighting(t_largs *largs)
 {
 	t_rgb	effective_color;
@@ -94,8 +96,10 @@ t_rgb	lighting(t_largs *largs)
 	effective_color = cmult(largs->material.color, largs->light.intensity);
 	lightv = tnorm(tsub(largs->light.position, largs->point));
 	ambient = cscale(effective_color, largs->material.ambient);
+	if (largs->in_shadow)
+		return (ambient);
 	light_dot_normal = dot(lightv, largs->normalv);
-	if (light_dot_normal < 0)
+	if (light_dot_normal < 0 || largs->in_shadow)
 	{
 		diffuse = color(0, 0, 0);
 		specular = color(0, 0, 0);
@@ -118,4 +122,3 @@ t_rgb	lighting(t_largs *largs)
 	ret = cadd(cadd(ambient, diffuse), specular);
 	return (ret);
 }
-*/

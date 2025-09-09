@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 13:30:13 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/09 01:44:32 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/09 12:28:22 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_rgb	shade_hit(t_world *w, t_comps *comps)
 	largs.point = comps->point;
 	largs.eyev = comps->eyev;
 	largs.normalv = comps->normalv;
+	largs.in_shadow = is_shadowed(w, comps->point);
 	return (lighting(&largs));
 }
 
@@ -41,4 +42,29 @@ t_rgb	color_at(t_world *w, t_ray *r)
 	free(ht);
 	xs[0].object = NULL;
 	return (shade_hit(w, &comps));
+}
+
+bool	is_shadowed(t_world *world, t_tuple point)
+{
+	t_tuple			v;
+	float			distance;
+	t_tuple 		direction;
+	t_ray			r;
+	t_intersection	*xs;
+	t_intersection *ht;
+
+	v = tsub(world->light->position, point);
+	distance = tmag(v);
+	direction = tnorm(v);
+	r = ray(point, direction);
+	xs = intersect_world(world, &r);
+	ht = hit(xs);
+	xs[0].object = NULL;
+	if (ht && ht->t < distance)
+	{
+		free(ht);
+		return (true);
+	}
+	free(ht);
+	return (false);
 }
