@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 18:35:47 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/10 01:46:19 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/10 03:11:15 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int test_shape_ass_material(void)
 {
-	t_object	s;
+	t_shape	s;
 	t_material	m;
 
 	s = create_test_shape();

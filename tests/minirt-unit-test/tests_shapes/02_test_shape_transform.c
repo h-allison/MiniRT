@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 18:22:10 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/10 01:46:52 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/10 03:10:56 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int test_shape_transform(void)
 {
-	t_object	s;
+	t_shape	s;
 	int			x;
 	int			y;
 	float		**tm;

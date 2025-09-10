@@ -6,7 +6,7 @@
 /*   By: smargine <smargine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 18:52:32 by smargine          #+#    #+#             */
-/*   Updated: 2025/09/09 18:55:18 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/10 03:14:30 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int test_over_point(void)
 {
 	t_ray			r;
-	t_object		s;
+	t_shape			s;
 	t_comps			c;
 	t_intersection	i;
 

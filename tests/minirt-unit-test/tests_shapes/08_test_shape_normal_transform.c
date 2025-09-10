@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 18:35:47 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/10 02:39:29 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/10 03:12:21 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int test_shape_normal_transform(void)
 {
-	t_object	s;
-	float		**m;
-	t_tuple		n;
+	t_shape	s;
+	float	**m;
+	t_tuple	n;
 
 	s = create_test_shape();
 	m = mmultfree(scaling(1, 0.5, 1), rotation_z(M_PI / 5));

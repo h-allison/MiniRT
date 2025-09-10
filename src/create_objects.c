@@ -6,12 +6,11 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:14:22 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/10 01:07:26 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/10 03:04:15 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
 
 t_material	material(void)
 {
@@ -25,27 +24,23 @@ t_material	material(void)
 	return(m);
 }
 
-t_object	create_test_shape(void)
+t_shape	create_test_shape(void)
 {
-	t_object	s;
+	t_shape	s;
 
 	s.transform = create_id_matrix();
 	s.m = material();
 	return(s);
 }
 
-t_object	sphere(void)
+t_shape	sphere(void)
 {
-	t_object	sphere;
+	t_shape	s;
 
-	sphere.objtype = OBJ_SPHERE; 
-	sphere.transform = create_id_matrix();
-	sphere.m.color = color(0xFF, 0xFF, 0xFF);
-	sphere.m.ambient = 0.1;
-	sphere.m.diffuse = 0.9;
-	sphere.m.specular = 0.9;
-	sphere.m.shininess = 200;
-	return (sphere);
+	s.type = OBJ_SPHERE; 
+	s.transform = create_id_matrix();
+	s.m = material();
+	return (s);
 }
 
 t_light	point_light(t_tuple position, t_rgb intensity)
@@ -86,8 +81,8 @@ t_camera	camera(float hsize, float vsize, float field_of_view)
 t_world	default_world(void)
 {
 	t_world		w;
-	t_object	s1;
-	t_object	s2;
+	t_shape	s1;
+	t_shape	s2;
 	t_light		light;
 
 	light = point_light(point(-10, 10, -10), color(255, 255, 255));
@@ -97,7 +92,7 @@ t_world	default_world(void)
 	s1.m.specular = 0.2;
 	s2 = sphere();
 	s2.transform = mmultfree(scaling(0.5, 0.5, 0.5), s2.transform);
-	w.s = malloc(3 * sizeof(t_object));
+	w.s = malloc(3 * sizeof(t_shape));
 	w.s[0] = s1;
 	w.s[1] = s2;
 	w.s[2].transform = NULL;
@@ -111,12 +106,12 @@ t_world	default_world(void)
 t_world	default_world_2(void)
 {
 	t_world		w;
-	t_object	floor;
-	t_object	left_wall;
-	t_object	right_wall;
-	t_object	middle;
-	t_object	right;
-	t_object	left;
+	t_shape	floor;
+	t_shape	left_wall;
+	t_shape	right_wall;
+	t_shape	middle;
+	t_shape	right;
+	t_shape	left;
 
 	floor = sphere();
 	floor.transform = mmultfree(scaling(10, 0.01, 10), floor.transform);
@@ -162,7 +157,7 @@ t_world	default_world_2(void)
 		exit (1);
 	w.light[0] = point_light(point(-10, 10, -10), color(255, 255, 255));
 	
-	w.s = malloc(7 * sizeof(t_object));
+	w.s = malloc(7 * sizeof(t_shape));
 	w.s[0] = floor;
 	w.s[1] = left_wall;
 	w.s[2] = right_wall;

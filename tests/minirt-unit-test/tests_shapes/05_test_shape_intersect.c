@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 18:35:47 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/10 01:46:11 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/10 03:11:34 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int test_shape_intersect(void)
 {
-	t_object		s;
+	t_shape			s;
 	t_ray			r;
 	t_intersection	*xs;
 

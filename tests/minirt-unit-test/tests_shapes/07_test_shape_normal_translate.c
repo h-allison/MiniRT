@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 18:35:47 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/10 02:37:59 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/10 03:12:02 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int test_shape_normal_translate(void)
 {
-	t_object	s;
-	t_tuple		n;
+	t_shape	s;
+	t_tuple	n;
 
 	s = create_test_shape();
 	set_transform(&s, translation(0, 1, 0));

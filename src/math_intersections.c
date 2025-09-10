@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 17:55:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/10 01:45:17 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/10 02:57:16 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static t_ray	invtransform(t_ray r, float **t)
 
 /* Calculates intersections with one object */
 
-t_intersection	*intersect(t_object *s, t_ray r)
+t_intersection	*intersect(t_shape *s, t_ray r)
 {
 	t_ray	local_r;
 
@@ -34,7 +34,7 @@ t_intersection	*intersect(t_object *s, t_ray r)
 	return (local_intersect(s, local_r));
 }
 
-t_intersection	*local_intersect(t_object *s, t_ray r)
+t_intersection	*local_intersect(t_shape *s, t_ray r)
 {
 	t_tuple			sphere_to_ray;
 	float			a;
@@ -57,7 +57,7 @@ t_intersection	*local_intersect(t_object *s, t_ray r)
 
 /* Store 1 intersection in a t_intersect */
 
-t_intersection	intersection(float t, t_object *s)
+t_intersection	intersection(float t, t_shape *s)
 {
 	t_intersection	i;
 

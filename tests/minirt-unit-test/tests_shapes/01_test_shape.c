@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 17:03:46 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/10 01:46:32 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/10 03:10:45 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int test_shape_basic(void)
 {
-	t_object	s;
+	t_shape	s;
 	int			x;
 	int			y;
 	float		**idm;

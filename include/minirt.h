@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/10 01:09:06 by mmillhof         ###   ########.fr       */
+/*   Created: 2025/09/10 03:02:27 by mmillhof          #+#    #+#             */
+/*   Updated: 2025/09/10 03:02:30 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,13 @@ typedef struct s_ray
 	t_tuple			direction;
 }	t_ray;
 
-typedef struct s_object
+typedef struct s_shape
 {
-	int				objtype;
+	int				type;
 	float			**transform;
 	t_material		m;
 	t_ray			saved_ray;
-}	t_object;
+}	t_shape;
 
 
 typedef struct s_camera
@@ -118,7 +118,7 @@ typedef struct s_camera
 typedef	struct s_comps
 {
 	float			t;
-	t_object		*object;
+	t_shape		*object;
 	t_tuple			point;
 	t_tuple			over_point;
 	t_tuple			eyev;
@@ -128,7 +128,7 @@ typedef	struct s_comps
 
 typedef struct s_world
 {
-	t_object	*s;
+	t_shape	*s;
 	t_light		*light;
 }	t_world;
 
@@ -144,7 +144,7 @@ typedef struct s_largs
 
 typedef	struct s_intersection
 {
-	t_object		*object;
+	t_shape		*object;
 	float			t;
 }	t_intersection;
 
@@ -178,8 +178,8 @@ void	render(void *param);
 
 //create_objects.c
 t_material	material(void);
-t_object	create_test_shape(void);
-t_object	sphere();
+t_shape	create_test_shape(void);
+t_shape	sphere();
 t_light		point_light(t_tuple position, t_rgb intensity);
 t_world		default_world();
 t_world		default_world_2();
@@ -257,7 +257,7 @@ float	**rotation_z(float r);
 float	**shearing(float *shear);
 
 //math_shading.c
-t_tuple	normal_at(t_object *s, t_tuple p);
+t_tuple	normal_at(t_shape *s, t_tuple p);
 t_tuple	reflect(t_tuple in, t_tuple normal);
 t_rgb	lighting(t_largs *largs);
 
@@ -270,13 +270,13 @@ bool	is_shadowed(t_world *world, t_tuple point);
 t_ray	ray(t_tuple point, t_tuple vector);
 t_tuple	position(t_ray ray, float t);
 t_ray	transform(t_ray r, float **m);
-void	set_transform(t_object *s, float **t);
+void	set_transform(t_shape *s, float **t);
 t_ray	ray_for_pixel(t_camera *c, float px, float py);
 
 //math_intersections.c
-t_intersection	*local_intersect(t_object *s, t_ray r);
-t_intersection	*intersect(t_object *s, t_ray r);
-t_intersection	intersection(float t, t_object *s);
+t_intersection	*local_intersect(t_shape *s, t_ray r);
+t_intersection	*intersect(t_shape *s, t_ray r);
+t_intersection	intersection(float t, t_shape *s);
 t_intersection	*intersections(t_intersection i1, t_intersection i2);
 t_intersection	*hit(t_intersection *xs);
 

@@ -6,13 +6,13 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:25:23 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/10 02:13:56 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/10 02:57:49 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static t_tuple	local_normal_at(t_object *s, t_tuple local_point)
+static t_tuple	local_normal_at(t_shape *s, t_tuple local_point)
 {
 	t_tuple	local_normal;
 
@@ -21,7 +21,7 @@ static t_tuple	local_normal_at(t_object *s, t_tuple local_point)
 	return (local_normal);
 }
 
-t_tuple	normal_at(t_object *s, t_tuple world_point)
+t_tuple	normal_at(t_shape *s, t_tuple world_point)
 {
 	t_tuple	local_point;
 	t_tuple	local_normal;
