@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 17:55:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/10 14:56:14 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/10 16:25:22 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_intersection	*intersect(t_shape *s, t_ray r)
 
 	local_r = transform(r, s->invtrans);;
 	s->saved_ray = local_r;
-	return (local_intersect(s));
+	return (s->local_intersect(s));
 }
 
 /* Store 1 intersection in a t_intersect */

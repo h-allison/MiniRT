@@ -6,13 +6,22 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:25:23 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/10 14:56:16 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/10 16:24:25 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static t_tuple	local_normal_at(t_shape *s, t_tuple local_point)
+t_tuple	local_normal_at_sphere(t_shape *s, t_tuple local_point)
+{
+	t_tuple	local_normal;
+
+	(void)s;
+	local_normal = tsub(local_point, point(0, 0, 0));
+	return (local_normal);
+}
+
+t_tuple	local_normal_at(t_shape *s, t_tuple local_point)
 {
 	t_tuple	local_normal;
 
@@ -28,9 +37,9 @@ t_tuple	normal_at(t_shape *s, t_tuple world_point)
 	t_tuple	world_normal;
 	float	**m;
 
-	local_point = s.invtrans;
-	local_normal = local_normal_at(s, local_point);
-	m = mtranspose(s.invtrans, 4);
+	local_point = tmatrixmult(s->invtrans, world_point);
+	local_normal = s->local_normal_at(s, local_point);
+	m = mtranspose(s->invtrans, 4);
 	world_normal = tmmultfree(m, local_normal);
 	world_normal.w = 0;
 	return (tnorm(world_normal));

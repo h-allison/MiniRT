@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:14:22 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/10 14:54:58 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/10 16:09:33 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ t_shape	sphere(void)
 
 	s.type = OBJ_SPHERE; 
 	s.transform = create_id_matrix();
+	s.local_normal_at = local_normal_at_sphere;
+	s.local_intersect = local_intersect_sphere;
 	s.m = material();
 	return (s);
 }
