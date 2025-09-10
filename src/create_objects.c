@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:14:22 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/10 03:04:15 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/10 14:54:58 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ t_world	default_world_2(void)
 
 	floor = sphere();
 	floor.transform = mmultfree(scaling(10, 0.01, 10), floor.transform);
+	floor.invtrans = minvert(floor.transform, 4);
 	floor.m.color = color(255, 230, 230);
 	floor.m.specular = 0;
 
@@ -123,6 +124,7 @@ t_world	default_world_2(void)
 	left_wall.transform = mmultfree(rotation_x(M_PI / 2), left_wall.transform);
 	left_wall.transform = mmultfree(rotation_y(-M_PI / 4), left_wall.transform);
 	left_wall.transform = mmultfree(translation(0, 0, 5), left_wall.transform);
+	left_wall.invtrans = minvert(left_wall.transform, 4);
 	left_wall.m = floor.m;
 
 	right_wall = sphere();
@@ -130,10 +132,12 @@ t_world	default_world_2(void)
 	right_wall.transform = mmultfree(rotation_x(M_PI / 2), right_wall.transform);
 	right_wall.transform = mmultfree(rotation_y(M_PI / 4), right_wall.transform);
 	right_wall.transform = mmultfree(translation(0, 0, 5), right_wall.transform);
+	right_wall.invtrans = minvert(right_wall.transform, 4);
 	right_wall.m = floor.m;
 
 	middle = sphere();
 	middle.transform = mmultfree(translation(-0.5, 1, 0.5), middle.transform);
+	middle.invtrans = minvert(middle.transform, 4);
 	middle.m.color = color(26, 255, 128);
 	middle.m.diffuse = 0.7;
 	middle.m.specular = 0.3;
@@ -141,6 +145,7 @@ t_world	default_world_2(void)
 	right = sphere();
 	right.transform = mmultfree(scaling(0.5, 0.5, 0.5), right.transform);
 	right.transform = mmultfree(translation(1.5, 0.5, -0.5), right.transform);
+	right.invtrans = minvert(right.transform, 4);
 	right.m.color = color(128, 255, 26);
 	right.m.diffuse = 0.7;
 	right.m.specular = 0.3;
@@ -148,6 +153,7 @@ t_world	default_world_2(void)
 	left = sphere();
 	left.transform = mmultfree(scaling(0.33, 0.33, 0.33), left.transform);
 	left.transform = mmultfree(translation(-1.5, 0.33, -0.75), left.transform);
+	left.invtrans = minvert(left.transform, 4);
 	left.m.color = color(255, 204, 26);
 	left.m.diffuse = 0.7;
 	left.m.specular = 0.3;

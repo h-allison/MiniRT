@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 03:02:27 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/10 10:42:17 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/10 14:43:47 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <stdlib.h>
 # include <errno.h>
 
-# define WIN_WIDTH 120
-# define WIN_HEIGHT 100
+# define WIN_WIDTH 640
+# define WIN_HEIGHT 400
 
 # define OFFSET	 0.01
 # define EPSILON 0.0001
@@ -99,6 +99,7 @@ typedef struct s_shape
 {
 	int				type;
 	float			**transform;
+	float			**invtrans;
 	t_material		m;
 	t_ray			saved_ray;
 }	t_shape;

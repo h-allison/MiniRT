@@ -6,13 +6,34 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 17:55:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/10 10:43:45 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/10 14:56:14 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 /* Calculates intersections with one object */
+
+t_intersection	*local_intersect_sphere(t_shape *s)
+{
+	t_tuple			sphere_to_ray;
+	float			a;
+	float			b;
+	float			discriminant;
+	t_intersection	*xs;
+
+	sphere_to_ray = tsub(s->saved_ray.origin, point(0, 0, 0));
+	a = dot(s->saved_ray.direction, s->saved_ray.direction);
+	b = 2 * dot(s->saved_ray.direction, sphere_to_ray);
+	discriminant = b * b - 4 * a * (dot(sphere_to_ray, sphere_to_ray) - 1);
+	if (discriminant < 0)
+		xs = intersections(intersection(0, NULL), intersection(0, NULL));
+	else
+		xs = intersections(intersection((-b - sqrtf(discriminant))
+					/ (2 * a), s), intersection((-b + sqrtf(discriminant))
+					/ (2 * a), s));
+	return (xs);
+}
 
 t_intersection	*local_intersect(t_shape *s)
 {
@@ -38,10 +59,8 @@ t_intersection	*local_intersect(t_shape *s)
 t_intersection	*intersect(t_shape *s, t_ray r)
 {
 	t_ray	local_r;
-	float	**invt;
 
-	invt = minvert(s->transform, 4);
-	local_r = transform(r, invt);;
+	local_r = transform(r, s->invtrans);;
 	s->saved_ray = local_r;
 	return (local_intersect(s));
 }
