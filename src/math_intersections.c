@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 17:55:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/10 16:25:22 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/10 17:52:48 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,21 @@ t_intersection	*local_intersect_sphere(t_shape *s)
 		xs = intersections(intersection((-b - sqrtf(discriminant))
 					/ (2 * a), s), intersection((-b + sqrtf(discriminant))
 					/ (2 * a), s));
+	return (xs);
+}
+
+t_intersection	*local_intersect_plane(t_shape *s)
+{
+	t_intersection	*xs;
+	float			t;
+
+	if (fabs(s->saved_ray.direction.y) < EPSILON)
+		xs = intersections(intersection(0, NULL), intersection(0, NULL));
+	else
+	{
+		t = -s->saved_ray.origin.y / s->saved_ray.direction.y;
+		xs = intersections(intersection(t, s), intersection(0, NULL));
+	}
 	return (xs);
 }
 

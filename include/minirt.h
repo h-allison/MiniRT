@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 16:28:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/10 16:28:55 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/10 18:01:03 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <stdlib.h>
 # include <errno.h>
 
-# define WIN_WIDTH 640
-# define WIN_HEIGHT 400
+# define WIN_WIDTH 1024
+# define WIN_HEIGHT 768
 
 # define OFFSET	 0.01
 # define EPSILON 0.0001
@@ -187,9 +187,11 @@ void			render(void *param);
 t_material		material(void);
 t_shape			create_test_shape(void);
 t_shape			sphere(void);
+t_shape			plane(void);
 t_light			point_light(t_tuple position, t_rgb intensity);
 t_world			default_world(void);
 t_world			default_world_2(void);
+t_world			default_world_3(void);
 t_camera		camera(float hsize, float vsize, float field_of_view);
 
 //create_tuples.c
@@ -265,6 +267,7 @@ float			**shearing(float *shear);
 
 //math_shading.c
 t_tuple			local_normal_at_sphere(t_shape *s, t_tuple local_point);
+t_tuple			local_normal_at_plane(t_shape *s, t_tuple local_point);
 t_tuple			local_normal_at(t_shape *s, t_tuple local_point);
 t_tuple			normal_at(t_shape *s, t_tuple p);
 t_tuple			reflect(t_tuple in, t_tuple normal);
@@ -284,6 +287,7 @@ t_ray			ray_for_pixel(t_camera *c, float px, float py);
 
 //math_intersections.c
 t_intersection	*local_intersect_sphere(t_shape *s);
+t_intersection	*local_intersect_plane(t_shape *s);
 t_intersection	*local_intersect(t_shape *s);
 t_intersection	*intersect(t_shape *s, t_ray r);
 t_intersection	intersection(float t, t_shape *s);
@@ -299,8 +303,5 @@ float			**view_transform(t_tuple from, t_tuple to, t_tuple up);
 
 //export_ppm.c
 int				canvas_export_ppm(t_data *data);
-
-//planes.c
-t_shape	plane(void);
 
 #endif

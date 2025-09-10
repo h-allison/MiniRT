@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:25:23 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/10 16:24:25 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/10 17:35:55 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@ t_tuple	local_normal_at_sphere(t_shape *s, t_tuple local_point)
 	(void)s;
 	local_normal = tsub(local_point, point(0, 0, 0));
 	return (local_normal);
+}
+
+t_tuple	local_normal_at_plane(t_shape *s, t_tuple local_point)
+{
+	(void)s;
+	(void)local_point;
+	return (vector(0, 1, 0));
 }
 
 t_tuple	local_normal_at(t_shape *s, t_tuple local_point)

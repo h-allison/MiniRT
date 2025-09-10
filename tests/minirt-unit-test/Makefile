@@ -72,7 +72,6 @@ SRCS := \
 	$(PRG_DIR)/src/create_tuples.c \
 	$(PRG_DIR)/src/create_matrices.c \
 	$(PRG_DIR)/src/export_ppm.c \
-	$(PRG_DIR)/src/planes.c
 
 OBJS := $(SRCS:.c=.o)
 

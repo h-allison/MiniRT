@@ -6,10 +6,9 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:14:22 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/10 16:09:33 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/10 18:06:29 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "minirt.h"
 
 t_material	material(void)
@@ -29,6 +28,9 @@ t_shape	create_test_shape(void)
 	t_shape	s;
 
 	s.transform = create_id_matrix();
+	s.invtrans = minvert(s.transform, 4);
+	s.local_normal_at = local_normal_at;
+	s.local_intersect = local_intersect;
 	s.m = material();
 	return(s);
 }
@@ -39,8 +41,22 @@ t_shape	sphere(void)
 
 	s.type = OBJ_SPHERE; 
 	s.transform = create_id_matrix();
+	s.invtrans = minvert(s.transform, 4);
 	s.local_normal_at = local_normal_at_sphere;
 	s.local_intersect = local_intersect_sphere;
+	s.m = material();
+	return (s);
+}
+
+t_shape	plane(void)
+{
+	t_shape	s;
+
+	s.type = OBJ_PLANE; 
+	s.transform = create_id_matrix();
+	s.invtrans = minvert(s.transform, 4);
+	s.local_normal_at = local_normal_at_plane;
+	s.local_intersect = local_intersect_plane;
 	s.m = material();
 	return (s);
 }
@@ -89,11 +105,13 @@ t_world	default_world(void)
 
 	light = point_light(point(-10, 10, -10), color(255, 255, 255));
 	s1 = sphere();
+	s1.invtrans = minvert(s1.transform, 4);
 	s1.m.color = color(204, 255, 153);
 	s1.m.diffuse = 0.7;
 	s1.m.specular = 0.2;
 	s2 = sphere();
 	s2.transform = mmultfree(scaling(0.5, 0.5, 0.5), s2.transform);
+	s2.invtrans = minvert(s2.transform, 4);
 	w.s = malloc(3 * sizeof(t_shape));
 	w.s[0] = s1;
 	w.s[1] = s2;
@@ -173,5 +191,57 @@ t_world	default_world_2(void)
 	w.s[4] = right;
 	w.s[5] = left;
 	w.s[6].transform = NULL;
+	return (w);
+}
+
+t_world	default_world_3(void)
+{
+	t_world		w;
+	t_shape	floor;
+	t_shape	middle;
+	t_shape	right;
+	t_shape	left;
+
+	floor = plane();
+	floor.invtrans = minvert(floor.transform, 4);
+	floor.m.color = color(255, 230, 230);
+	floor.m.diffuse = .4;
+	floor.m.ambient = 0;
+	floor.m.specular = 0;
+
+	middle = sphere();
+	middle.transform = mmultfree(translation(-0.5, 1, 0.5), middle.transform);
+	middle.invtrans = minvert(middle.transform, 4);
+	middle.m.color = color(26, 150, 200);
+	middle.m.diffuse = 0.7;
+	middle.m.specular = 0.3;
+
+	right = sphere();
+	right.transform = mmultfree(scaling(0.5, 0.5, 0.5), right.transform);
+	right.transform = mmultfree(translation(1.5, 0.5, -0.5), right.transform);
+	right.invtrans = minvert(right.transform, 4);
+	right.m.color = color(128, 255, 26);
+	right.m.diffuse = 0.7;
+	right.m.specular = 0.3;
+
+	left = sphere();
+	left.transform = mmultfree(scaling(0.33, 0.33, 0.33), left.transform);
+	left.transform = mmultfree(translation(-1.5, 0.33, -0.75), left.transform);
+	left.invtrans = minvert(left.transform, 4);
+	left.m.color = color(255, 204, 26);
+	left.m.diffuse = 0.7;
+	left.m.specular = 0.3;
+
+	w.light = malloc(sizeof(t_light));
+	if (!w.light)
+		exit (1);
+	w.light[0] = point_light(point(-10, 10, -10), color(255, 255, 255));
+	
+	w.s = malloc(5 * sizeof(t_shape));
+	w.s[0] = floor;
+	w.s[1] = middle;
+	w.s[2] = right;
+	w.s[3] = left;
+	w.s[4].transform = NULL;
 	return (w);
 }

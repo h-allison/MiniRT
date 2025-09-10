@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 18:35:47 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/10 03:11:34 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/10 17:10:52 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int test_shape_intersect(void)
 	s = create_test_shape();
 	r = ray(point(0, 0, -5), vector(0, 0, 1));
 	set_transform(&s, scaling(2, 2, 2));
+	s.invtrans = minvert(s.transform, 4);
 	xs = intersect(&s, r);
 	if (fisequal(s.saved_ray.origin.x, 0)
 			&& fisequal(s.saved_ray.origin.y, 0)
