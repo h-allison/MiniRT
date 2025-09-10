@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 03:02:27 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/10 10:42:17 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/10 13:18:35 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,5 +289,8 @@ float	**view_transform(t_tuple from, t_tuple to, t_tuple up);
 
 //export_ppm.c
 int		canvas_export_ppm(t_data *data);
+
+//planes.c
+t_shape	plane(void);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/09/08 23:47:19 by mmillhof         ###   ########.fr        #
+#    Updated: 2025/09/10 13:19:08 by hallison         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,8 @@ SRC         := src/main.c \
 			   src/create_objects.c \
                src/create_tuples.c \
 			   src/create_matrices.c \
-			   src/export_ppm.c 
+			   src/export_ppm.c \
+			   src/planes.c
 
 # ---- Paths ----
 LIBFT_PATH  := lib/libft

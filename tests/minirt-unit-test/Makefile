@@ -16,9 +16,12 @@ LDLIBS := $(FRAMEWORK_DIR)/libunit.a $(LIBFT_DIR)/libft.a $(MLX42_A) -lglfw -lm
 SRC_DIR_CAMERA := tests_camera
 SRC_DIR_SHADOW := tests_shadow
 SRC_DIR_SHAPES := tests_shapes
+SRC_DIR_PLANES := tests_planes
 
 SRCS := \
 	main.c \
+	$(SRC_DIR_PLANES)/00_test_planes_launcher.c \
+	$(SRC_DIR_PLANES)/01_test_plane.c \
 	$(SRC_DIR_SHAPES)/00_test_shapes_launcher.c \
 	$(SRC_DIR_SHAPES)/01_test_shape.c \
 	$(SRC_DIR_SHAPES)/02_test_shape_transform.c \
@@ -68,7 +71,8 @@ SRCS := \
 	$(PRG_DIR)/src/create_objects.c \
 	$(PRG_DIR)/src/create_tuples.c \
 	$(PRG_DIR)/src/create_matrices.c \
-	$(PRG_DIR)/src/export_ppm.c
+	$(PRG_DIR)/src/export_ppm.c \
+	$(PRG_DIR)/src/planes.c
 
 OBJS := $(SRCS:.c=.o)
 
