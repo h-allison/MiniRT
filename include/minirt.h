@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/10 03:02:27 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/10 16:16:35 by mmillhof         ###   ########.fr       */
+/*   Created: 2025/09/10 16:28:25 by mmillhof          #+#    #+#             */
+/*   Updated: 2025/09/10 16:28:55 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -299,5 +299,8 @@ float			**view_transform(t_tuple from, t_tuple to, t_tuple up);
 
 //export_ppm.c
 int				canvas_export_ppm(t_data *data);
+
+//planes.c
+t_shape	plane(void);
 
 #endif
