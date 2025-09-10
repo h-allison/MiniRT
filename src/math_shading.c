@@ -6,23 +6,32 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:25:23 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/09 14:41:56 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/10 02:13:56 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+static t_tuple	local_normal_at(t_object *s, t_tuple local_point)
+{
+	t_tuple	local_normal;
+
+	(void)s;
+	local_normal = tsub(local_point, point(0, 0, 0));
+	return (local_normal);
+}
+
 t_tuple	normal_at(t_object *s, t_tuple world_point)
 {
-	t_tuple	object_point;
-	t_tuple	object_normal;
+	t_tuple	local_point;
+	t_tuple	local_normal;
 	t_tuple	world_normal;
 	float	**m;
 
-	object_point = tmmultfree(minvert(s->transform, 4), world_point);
-	object_normal = tsub(object_point, point(0, 0, 0));
+	local_point = tmmultfree(minvert(s->transform, 4), world_point);
+	local_normal = local_normal_at(s, local_point);
 	m = mtransposefree(minvert(s->transform, 4), 4);
-	world_normal = tmmultfree(m, object_normal);
+	world_normal = tmmultfree(m, local_normal);
 	world_normal.w = 0;
 	return (tnorm(world_normal));
 }

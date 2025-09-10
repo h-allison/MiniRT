@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:14:22 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/09 18:44:21 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/10 01:07:26 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@ t_material	material(void)
 {
 	t_material	m;
 
-	m.ambient = 1;
+	m.color = color(0xFF, 0xFF, 0xFF);
+	m.ambient = 0.1;
+	m.diffuse = 0.9;
+	m.specular = 0.9;
+	m.shininess = 200;
 	return(m);
 }
 

@@ -23,6 +23,11 @@ SRCS := \
 	$(SRC_DIR_SHAPES)/01_test_shape.c \
 	$(SRC_DIR_SHAPES)/02_test_shape_transform.c \
 	$(SRC_DIR_SHAPES)/03_test_shape_material.c \
+	$(SRC_DIR_SHAPES)/04_test_shape_ass_material.c \
+	$(SRC_DIR_SHAPES)/05_test_shape_intersect.c \
+	$(SRC_DIR_SHAPES)/06_test_shape_translate.c \
+	$(SRC_DIR_SHAPES)/07_test_shape_normal_translate.c \
+	$(SRC_DIR_SHAPES)/08_test_shape_normal_transform.c \
 	$(SRC_DIR_CAMERA)/00_test_camera_launcher.c \
 	$(SRC_DIR_CAMERA)/01_test_camera_floats.c \
 	$(SRC_DIR_CAMERA)/02_test_camera_idm.c \

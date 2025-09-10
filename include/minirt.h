@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:03:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/09 18:40:27 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/10 01:09:06 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,18 @@ typedef struct s_light
 	t_tuple			position;
 }	t_light;
 
+typedef struct s_ray
+{
+	t_tuple			origin;
+	t_tuple			direction;
+}	t_ray;
+
 typedef struct s_object
 {
 	int				objtype;
 	float			**transform;
 	t_material		m;
+	t_ray			saved_ray;
 }	t_object;
 
 
@@ -134,12 +141,6 @@ typedef struct s_largs
 	t_tuple			normalv;
 	bool			in_shadow;
 }	t_largs;
-
-typedef struct s_ray
-{
-	t_tuple			origin;
-	t_tuple			direction;
-}	t_ray;
 
 typedef	struct s_intersection
 {
@@ -273,6 +274,7 @@ void	set_transform(t_object *s, float **t);
 t_ray	ray_for_pixel(t_camera *c, float px, float py);
 
 //math_intersections.c
+t_intersection	*local_intersect(t_object *s, t_ray r);
 t_intersection	*intersect(t_object *s, t_ray r);
 t_intersection	intersection(float t, t_object *s);
 t_intersection	*intersections(t_intersection i1, t_intersection i2);

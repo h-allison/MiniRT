@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 17:55:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/09 01:27:44 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/10 01:45:17 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,21 @@ static t_ray	invtransform(t_ray r, float **t)
 
 t_intersection	*intersect(t_object *s, t_ray r)
 {
+	t_ray	local_r;
+
+	local_r = invtransform(r, s->transform);
+	s->saved_ray = local_r;
+	return (local_intersect(s, local_r));
+}
+
+t_intersection	*local_intersect(t_object *s, t_ray r)
+{
 	t_tuple			sphere_to_ray;
 	float			a;
 	float			b;
 	float			discriminant;
 	t_intersection	*xs;
 
-	r = invtransform(r, s->transform);
 	sphere_to_ray = tsub(r.origin, point(0, 0, 0));
 	a = dot(r.direction, r.direction);
 	b = 2 * dot(r.direction, sphere_to_ray);
