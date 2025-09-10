@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 03:02:27 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/10 03:02:30 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/10 10:42:17 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,7 +274,7 @@ void	set_transform(t_shape *s, float **t);
 t_ray	ray_for_pixel(t_camera *c, float px, float py);
 
 //math_intersections.c
-t_intersection	*local_intersect(t_shape *s, t_ray r);
+t_intersection	*local_intersect(t_shape *s);
 t_intersection	*intersect(t_shape *s, t_ray r);
 t_intersection	intersection(float t, t_shape *s);
 t_intersection	*intersections(t_intersection i1, t_intersection i2);
