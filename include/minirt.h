@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 16:28:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/10 18:01:03 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/11 01:52:32 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,12 @@ typedef struct s_rgb
 	float			g;
 	float			b;
 }	t_rgb;
+
+typedef struct s_pattern
+{
+	t_rgb			a;
+	t_rgb			b;
+}	t_pattern;
 
 typedef struct s_lcalc
 {
@@ -303,5 +309,9 @@ float			**view_transform(t_tuple from, t_tuple to, t_tuple up);
 
 //export_ppm.c
 int				canvas_export_ppm(t_data *data);
+
+//patterns.c
+t_pattern		stripe_pattern(t_rgb a, t_rgb b);
+t_rgb			stripe_at(t_pattern pat, t_tuple point);
 
 #endif

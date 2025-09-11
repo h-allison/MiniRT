@@ -17,6 +17,7 @@ SRC_DIR_CAMERA := tests_camera
 SRC_DIR_SHADOW := tests_shadow
 SRC_DIR_SHAPES := tests_shapes
 SRC_DIR_PLANES := tests_planes
+SRC_DIR_PATTERNS := tests_patterns
 
 SRCS := \
 	main.c \
@@ -45,6 +46,11 @@ SRCS := \
 	$(SRC_DIR_SHADOW)/04_test_is_shad_3.c \
 	$(SRC_DIR_SHADOW)/05_test_is_shad_4.c \
 	$(SRC_DIR_SHADOW)/06_test_over_point.c \
+	$(SRC_DIR_PATTERNS)/00_test_patterns_launcher.c \
+	$(SRC_DIR_PATTERNS)/01_test_pattern.c \
+	$(SRC_DIR_PATTERNS)/02_test_pattern_stripe_y.c \
+	$(SRC_DIR_PATTERNS)/03_test_pattern_stripe_z.c \
+	$(SRC_DIR_PATTERNS)/04_test_pattern_stripe_x.c \
 	$(PRG_DIR)/src/check_file.c \
 	$(PRG_DIR)/src/file_helpers.c \
 	$(PRG_DIR)/src/parsing.c \
@@ -72,6 +78,7 @@ SRCS := \
 	$(PRG_DIR)/src/create_tuples.c \
 	$(PRG_DIR)/src/create_matrices.c \
 	$(PRG_DIR)/src/export_ppm.c \
+	$(PRG_DIR)/src/patterns.c \
 
 OBJS := $(SRCS:.c=.o)
 
