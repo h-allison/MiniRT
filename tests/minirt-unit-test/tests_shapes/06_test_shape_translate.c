@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 18:35:47 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/10 17:11:54 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/11 08:22:35 by matthias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@ int test_shape_translate(void)
 {
 	t_shape			s;
 	t_ray			r;
-	t_intersection	*xs;
 
 	s = create_test_shape();
 	r = ray(point(0, 0, -5), vector(0, 0, 1));
 	set_transform(&s, translation(5, 0, 0));
 	s.invtrans = minvert(s.transform, 4);
-	xs = intersect(&s, r);
+	intersect(&s, r);
 	if (fisequal(s.saved_ray.origin.x, -5)
 			&& fisequal(s.saved_ray.origin.y, 0)
 			&& fisequal(s.saved_ray.origin.z, -5))
