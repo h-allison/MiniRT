@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:14:22 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/10 18:06:29 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/11 19:07:23 by matthias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -20,6 +20,7 @@ t_material	material(void)
 	m.diffuse = 0.9;
 	m.specular = 0.9;
 	m.shininess = 200;
+	m.pattern.status = false;
 	return(m);
 }
 
@@ -208,6 +209,7 @@ t_world	default_world_3(void)
 	floor.m.diffuse = .4;
 	floor.m.ambient = 0;
 	floor.m.specular = 0;
+	floor.m.pattern = stripe_pattern(color(160, 130, 130), floor.m.color);
 
 	middle = sphere();
 	middle.transform = mmultfree(translation(-0.5, 1, 0.5), middle.transform);
