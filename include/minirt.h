@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 16:28:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/11 01:52:32 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/11 11:32:04 by matthias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_pattern
 {
 	t_rgb			a;
 	t_rgb			b;
+	bool			status;
 }	t_pattern;
 
 typedef struct s_lcalc
@@ -85,6 +86,7 @@ typedef struct s_lcalc
 typedef struct s_material
 {
 	t_rgb			color;
+	t_pattern		pattern;
 	float			ambient;	
 	float			diffuse;
 	float			specular;

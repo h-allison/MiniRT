@@ -6,7 +6,7 @@
 /*   By: smargine <smargine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 18:52:32 by smargine          #+#    #+#             */
-/*   Updated: 2025/09/09 11:39:54 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/11 11:44:16 by matthias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int test_shadow_in(void)
 	largs.material.diffuse = 0.9;
 	largs.material.specular = 0.9;
 	largs.material.shininess = 200;
+	largs.material.pattern.status = false;
 	largs.point = point(0, 0, 0);
 	largs.eyev = vector(0, 0, -1);
 	largs.normalv = vector(0, 0, -1);

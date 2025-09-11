@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 01:46:21 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/11 01:56:55 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/11 11:19:01 by matthias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	patterns_tests_launcher(void)
 {
-	t_unit_test	testlist[5];
+	t_unit_test	testlist[6];
 	int			ret;
 
 	testlist[0].test = NULL;
@@ -23,6 +23,7 @@ int	patterns_tests_launcher(void)
 	load_test(testlist, "PATTERNS: Stripe is constant in y", &test_pattern_stripe_y);
 	load_test(testlist, "PATTERNS: Stripe is constant in z", &test_pattern_stripe_z);
 	load_test(testlist, "PATTERNS: Stripe alternates in x", &test_pattern_stripe_x);
+	load_test(testlist, "PATTERNS: lighting with pattern applied", &test_pattern_lighting);
 	ret = launch_tests(testlist);
 	return (ret);
 }

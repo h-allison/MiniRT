@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 00:07:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/11 10:56:48 by matthias         ###   ########.fr       */
+/*   Updated: 2025/09/11 11:36:49 by matthias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_pattern	stripe_pattern(t_rgb a, t_rgb b)
 
 	pat.a = a;
 	pat.b = b;
+	pat.status = true;
 	return (pat);
 }
 

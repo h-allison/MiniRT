@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:25:23 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/10 17:35:55 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/11 11:39:31 by matthias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ t_rgb	lighting(t_largs *largs)
 
 t_rgb	lighting(t_largs *largs)
 {
+	t_rgb	col;
 	t_rgb	effective_color;
 	t_rgb	ambient;
 	t_rgb	diffuse;
@@ -118,7 +119,11 @@ t_rgb	lighting(t_largs *largs)
 	float	factor;
 	t_rgb	ret;
 
-	effective_color = cmult(largs->material.color, largs->light.intensity);
+	if (largs->material.pattern.status)
+		col = stripe_at(largs->material.pattern, largs->point);
+	else
+		col = largs->material.color;
+	effective_color = cmult(col, largs->light.intensity);
 	lightv = tnorm(tsub(largs->light.position, largs->point));
 	ambient = cscale(effective_color, largs->material.ambient);
 	if (largs->in_shadow)
