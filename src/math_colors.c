@@ -64,9 +64,9 @@ t_rgb	cmult(t_rgb c1, t_rgb c2)
 
 /* Convert t_rgb color to int / hex */
 
-int	color_to_hex(t_rgb rgb)
+unsigned int	color_to_hex(t_rgb rgb)
 {
-	int	hex_color;
+	unsigned int	hex_color;
 
 	if (rgb.r > 1)
 		rgb.r = 1;
@@ -74,6 +74,12 @@ int	color_to_hex(t_rgb rgb)
 		rgb.g = 1;
 	if (rgb.b > 1)
 		rgb.b = 1;
+	if (rgb.r < 0)
+		rgb.r = 0;
+	if (rgb.g < 0)
+		rgb.g = 0;
+	if (rgb.b < 0)
+		rgb.b = 0;
 	hex_color = (int)(rgb.r * 255);
 	hex_color = hex_color << 8;
 	hex_color = hex_color + (int)(rgb.g * 255);
