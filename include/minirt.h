@@ -23,8 +23,10 @@
 # include <stdlib.h>
 # include <errno.h>
 
-# define WIN_WIDTH 1024
-# define WIN_HEIGHT 768
+# define MULTILIGHT_ALLOWED true
+
+# define WIN_WIDTH 1024 / 2
+# define WIN_HEIGHT 768 / 2
 
 # define OFFSET	 0.01
 # define EPSILON 0.0001
@@ -200,6 +202,7 @@ t_light			point_light(t_tuple position, t_rgb intensity);
 t_world			default_world(void);
 t_world			default_world_2(void);
 t_world			default_world_3(void);
+t_world			default_world_4(void);
 t_camera		camera(float hsize, float vsize, float field_of_view);
 
 //create_tuples.c
@@ -284,7 +287,7 @@ t_rgb			lighting(t_largs *largs);
 //math_shading_2.c
 t_rgb			shade_hit(t_world *w, t_comps *comps);
 t_rgb			color_at(t_world *w, t_ray *r);
-bool			is_shadowed(t_world *world, t_tuple point);
+bool			is_shadowed(t_world *world, int i, t_tuple point);
 
 //math_rays.c
 t_ray			ray(t_tuple point, t_tuple vector);

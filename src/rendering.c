@@ -46,7 +46,7 @@ void	render(void *param)
 	if (status == 0)
 	{
 		data = (t_data *)param;
-		world = default_world_3();
+		world = default_world_4();
 		cam = camera(WIN_WIDTH, WIN_HEIGHT, M_PI / 3);
 		cam.transform = view_transform(point(0, 1.5, -5),
 				point(0, 1, 0), vector(0, 1, 0));

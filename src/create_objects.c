@@ -245,3 +245,71 @@ t_world	default_world_3(void)
 	w.s[4].transform = NULL;
 	return (w);
 }
+
+t_world	default_world_4(void)
+{
+	t_world		w;
+	t_shape	floor;
+	t_shape	wall_back;
+	t_shape	middle;
+	t_shape	right;
+	t_shape	left;
+
+	floor = plane();
+	floor.invtrans = minvert(floor.transform, 4);
+	floor.m.color = color(255, 255, 255);
+	floor.m.diffuse = 1;
+	floor.m.ambient = 0;
+	floor.m.specular = 1;
+	
+	wall_back = plane();
+	wall_back.transform = mmultfree(rotation_x(M_PI / 2), wall_back.transform);
+	wall_back.transform = mmultfree(translation(0, 0, 4), wall_back.transform);
+	wall_back.invtrans = minvert(wall_back.transform, 4);
+	wall_back.m.color = color(255, 255, 255);
+	wall_back.m.diffuse = 1;
+	wall_back.m.ambient = 0.3;
+	wall_back.m.specular = 0.3;
+
+	left = sphere();
+	left.transform = mmultfree(scaling(0.33, 0.33, 0.33), left.transform);
+	left.transform = mmultfree(translation(-1.5, 0.33, -0.75), left.transform);
+	left.invtrans = minvert(left.transform, 4);
+	left.m.color = color(255, 0, 0);
+	left.m.diffuse = 0.7;
+	left.m.specular = 0.3;
+	
+	middle = sphere();
+	middle.transform = mmultfree(translation(-0.5, 1, 0.5), middle.transform);
+	middle.invtrans = minvert(middle.transform, 4);
+	middle.m.color = color(0, 255, 0);
+	middle.m.diffuse = 0.7;
+	middle.m.specular = 0.3;
+
+	right = sphere();
+	right.transform = mmultfree(scaling(0.5, 0.5, 0.5), right.transform);
+	right.transform = mmultfree(translation(1.5, 0.5, -0.5), right.transform);
+	right.invtrans = minvert(right.transform, 4);
+	right.m.color = color(0, 0, 255);
+	right.m.diffuse = 0.7;
+	right.m.specular = 0.3;
+
+
+	w.light = malloc(2 * sizeof(t_light));
+	if (!w.light)
+		exit (1);
+	w.light[0] = point_light(point(-10, 10, -10), color(255, 128, 128));
+	w.light[1] = point_light(point(10, 10, -10), color(128, 128, 255));
+	
+	w.s = malloc(6 * sizeof(t_shape));
+	w.s[0] = floor;
+	w.s[1] = middle;
+	w.s[2] = right;
+	w.s[3] = left;
+	w.s[4] = wall_back;
+	w.s[5].transform = NULL;
+	return (w);
+}
+
+
+
