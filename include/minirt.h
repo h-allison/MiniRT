@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 16:28:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/11 21:40:35 by matthias         ###   ########.fr       */
+/*   Updated: 2025/09/11 22:52:33 by matthias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,15 @@
 # include <stdlib.h>
 # include <errno.h>
 
-# define MULTILIGHT_ALLOWED true
-
 # define WIN_WIDTH 1024
 # define WIN_HEIGHT 768
 
-# define OFFSET	 0.01
+# define OFFSET	 0.02
 # define EPSILON 0.0001
 # define DEG2RAD 0.017453292519943
 # define RAD2DEG 57.295779513082
 /*# define DEG2RAD  M_PI / 180.0
 # define RAD2DEG 180.0 / M_PI*/
-
-
 
 typedef enum e_error
 {
@@ -103,6 +99,7 @@ typedef struct s_light
 {
 	t_rgb			intensity;
 	t_tuple			position;
+	bool			last;
 }	t_light;
 
 typedef struct s_ray

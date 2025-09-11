@@ -6,7 +6,7 @@
 /*   By: smargine <smargine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 18:52:32 by smargine          #+#    #+#             */
-/*   Updated: 2025/09/09 12:16:44 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/11 22:31:44 by matthias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int test_is_shad_4(void)
 	bool	shadowed;
 
 	w = default_world();
-	shadowed = is_shadowed(&w, point(-2, 2, -2));
+	shadowed = is_shadowed(&w, 0, point(-2, 2, -2));
 	free_matrix(w.s[0].transform, 4);
 	free_matrix(w.s[1].transform, 4);
 	free(w.light);
