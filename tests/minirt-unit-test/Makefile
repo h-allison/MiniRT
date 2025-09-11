@@ -52,6 +52,9 @@ SRCS := \
 	$(SRC_DIR_PATTERNS)/03_test_pattern_stripe_z.c \
 	$(SRC_DIR_PATTERNS)/04_test_pattern_stripe_x.c \
 	$(SRC_DIR_PATTERNS)/05_test_pattern_lighting.c \
+	$(SRC_DIR_PATTERNS)/06_test_stripes_obj_transform.c \
+	$(SRC_DIR_PATTERNS)/07_test_stripes_pat_transform.c \
+	$(SRC_DIR_PATTERNS)/08_test_stripes_all_transform.c \
 	$(PRG_DIR)/src/check_file.c \
 	$(PRG_DIR)/src/file_helpers.c \
 	$(PRG_DIR)/src/parsing.c \

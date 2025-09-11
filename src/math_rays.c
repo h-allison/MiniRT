@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 17:55:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/10 02:57:40 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/12 00:20:18 by matthias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ t_ray	transform(t_ray r, float **m)
 	return (r2);
 }
 
-/* For now, just for spheres*/
-
 void	set_transform(t_shape *s, float **t)
 {
 	int	i;
@@ -59,6 +57,7 @@ void	set_transform(t_shape *s, float **t)
 		i++;
 	}
 	free_matrix(t, 4);
+	s->invtrans = minvert(s->transform, 4);
 }
 
 t_ray	ray_for_pixel(t_camera *c, float px, float py)

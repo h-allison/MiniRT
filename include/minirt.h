@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 16:28:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/11 22:52:33 by matthias         ###   ########.fr       */
+/*   Updated: 2025/09/12 00:35:24 by matthias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define WIN_WIDTH 1024
 # define WIN_HEIGHT 768
 
-# define OFFSET	 0.02
+# define OFFSET	 0.01
 # define EPSILON 0.0001
 # define DEG2RAD 0.017453292519943
 # define RAD2DEG 57.295779513082
@@ -241,7 +241,7 @@ t_rgb			cadd(t_rgb c1, t_rgb c2);
 t_rgb			csub(t_rgb c1, t_rgb c2);
 t_rgb			cscale(t_rgb c1, float s);
 t_rgb			cmult(t_rgb c1, t_rgb c2);
-unsigned int	color_to_hex(t_rgb color);
+int				color_to_hex(t_rgb color);
 
 //math_matrices_1.c
 bool			misequal(float **m1, float **m2, int size);

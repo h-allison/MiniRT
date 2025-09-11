@@ -56,6 +56,3 @@ dkms.conf
 
 #isc
 *.swp
-
-#misc
-.DS_Store

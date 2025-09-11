@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 00:07:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/11 11:36:49 by matthias         ###   ########.fr       */
+/*   Updated: 2025/09/12 00:28:00 by matthias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,34 @@ t_rgb	stripe_at(t_pattern pat, t_tuple point)
 	if (pint % 2 == 0)
 		return (pat.a);
 	return (pat.b);
+}
+
+t_rgb	stripe_at_object(t_pattern pat, t_shape s, t_tuple point)
+{
+	t_tuple	object_point;
+	t_tuple pattern_point;
+
+	object_point = tmatrixmult(s.invtrans, point);
+	pattern_point = tmatrixmult(pat.invtrans, object_point);
+	return (stripe_at(pat, pattern_point));
+}
+
+void	set_pattern_transform(t_pattern *pat, float **t)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			pat->transform[i][j] = t[i][j];
+			j++;
+		}
+		i++;
+	}
+	free_matrix(t, 4);
+	pat->invtrans = minvert(pat->transform, 4);
 }
