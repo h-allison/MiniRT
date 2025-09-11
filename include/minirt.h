@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 16:28:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/11 11:32:04 by matthias         ###   ########.fr       */
+/*   Updated: 2025/09/11 21:40:35 by matthias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "libft.h"
 # include <MLX42/MLX42.h>
-# include <string.h>
 # include <math.h>
 # include <unistd.h>
 # include <stdio.h>
@@ -26,8 +25,8 @@
 
 # define MULTILIGHT_ALLOWED true
 
-# define WIN_WIDTH 1024 / 2
-# define WIN_HEIGHT 768 / 2
+# define WIN_WIDTH 1024
+# define WIN_HEIGHT 768
 
 # define OFFSET	 0.01
 # define EPSILON 0.0001
@@ -35,6 +34,8 @@
 # define RAD2DEG 57.295779513082
 /*# define DEG2RAD  M_PI / 180.0
 # define RAD2DEG 180.0 / M_PI*/
+
+
 
 typedef enum e_error
 {
@@ -70,6 +71,8 @@ typedef struct s_pattern
 {
 	t_rgb			a;
 	t_rgb			b;
+	float			**transform;
+	float			**invtrans;
 	bool			status;
 }	t_pattern;
 
@@ -113,7 +116,6 @@ typedef struct s_intersection t_intersection;
 
 typedef struct s_shape
 {
-	bool			is_wall;
 	int				type;
 	t_tuple			(*local_normal_at)(t_shape *, t_tuple);
 	t_intersection	*(*local_intersect)(t_shape *);
@@ -196,6 +198,7 @@ int				parse_file(char *filename, t_data *data);
 void			render(void *param);
 
 //create_objects.c
+t_pattern		pattern(void);
 t_material		material(void);
 t_shape			create_test_shape(void);
 t_shape			sphere(void);
@@ -241,7 +244,7 @@ t_rgb			cadd(t_rgb c1, t_rgb c2);
 t_rgb			csub(t_rgb c1, t_rgb c2);
 t_rgb			cscale(t_rgb c1, float s);
 t_rgb			cmult(t_rgb c1, t_rgb c2);
-unsigned int			color_to_hex(t_rgb color);
+unsigned int	color_to_hex(t_rgb color);
 
 //math_matrices_1.c
 bool			misequal(float **m1, float **m2, int size);
@@ -319,10 +322,8 @@ int				canvas_export_ppm(t_data *data);
 
 //patterns.c
 t_pattern		stripe_pattern(t_rgb a, t_rgb b);
+void			set_pattern_transform(t_pattern *pat, float **t);
 t_rgb			stripe_at(t_pattern pat, t_tuple point);
-
-// debug_print.c
-void	print_vector(char *str, t_tuple a);
-void	print_tuple(char *str, t_tuple a);
+t_rgb			stripe_at_object(t_pattern pat, t_shape s, t_tuple point);
 
 #endif

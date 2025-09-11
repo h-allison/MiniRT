@@ -6,10 +6,22 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:14:22 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/11 19:07:23 by matthias         ###   ########.fr       */
+/*   Updated: 2025/09/11 21:41:56 by matthias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
+
+t_pattern	pattern(void)
+{
+	t_pattern	p;
+
+	p.a = color(255, 255, 255);
+	p.b = color(0, 0, 0);
+	p.transform = create_id_matrix();
+	p.invtrans = minvert(p.transform, 4);
+	p.status = false;
+	return (p);
+}
 
 t_material	material(void)
 {
@@ -20,8 +32,7 @@ t_material	material(void)
 	m.diffuse = 0.9;
 	m.specular = 0.9;
 	m.shininess = 200;
-	m.pattern.status = false;
-    
+	m.pattern = pattern();
 	return(m);
 }
 
@@ -112,8 +123,7 @@ t_world	default_world(void)
 	s1.m.diffuse = 0.7;
 	s1.m.specular = 0.2;
 	s2 = sphere();
-	s2.transform = mmultfree(scaling(0.5, 0.5, 0.5), s2.transform);
-	s2.invtrans = minvert(s2.transform, 4);
+	set_transform(&s2, scaling(0.5, 0.5, 0.5));
 	w.s = malloc(3 * sizeof(t_shape));
 	w.s[0] = s1;
 	w.s[1] = s2;
@@ -184,7 +194,7 @@ t_world	default_world_2(void)
 	if (!w.light)
 		exit (1);
 	w.light[0] = point_light(point(-10, 10, -10), color(255, 255, 255));
-	
+
 	w.s = malloc(7 * sizeof(t_shape));
 	w.s[0] = floor;
 	w.s[1] = left_wall;
@@ -239,7 +249,7 @@ t_world	default_world_3(void)
 	if (!w.light)
 		exit (1);
 	w.light[0] = point_light(point(-10, 10, -10), color(255, 255, 255));
-	
+
 	w.s = malloc(5 * sizeof(t_shape));
 	w.s[0] = floor;
 	w.s[1] = middle;
@@ -265,8 +275,7 @@ t_world	default_world_4(void)
 	floor.m.diffuse = 1;
 	floor.m.ambient = 0;
 	floor.m.specular = 1;
-	floor.is_wall = false;
-	
+
 	wall_back = plane();
 	wall_back.transform = mmultfree(rotation_x(M_PI / 2), wall_back.transform);
 	wall_back.transform = mmultfree(translation(0, 0, 50), wall_back.transform);
@@ -275,7 +284,6 @@ t_world	default_world_4(void)
 	wall_back.m.diffuse = 0;
 	wall_back.m.ambient = 1;
 	wall_back.m.specular = 0;
-	wall_back.is_wall = true;
 
 	wall_left = plane();
 	wall_left.transform = mmultfree(rotation_x(M_PI / 2), wall_left.transform);
@@ -286,7 +294,6 @@ t_world	default_world_4(void)
 	wall_left.m.diffuse = 0;
 	wall_left.m.ambient = 1;
 	wall_left.m.specular = 0;
-	wall_left.is_wall = true;
 
 	left = sphere();
 	left.transform = mmultfree(scaling(0.33, 0.33, 0.33), left.transform);
@@ -298,16 +305,14 @@ t_world	default_world_4(void)
 	left.m.color = color(255, 128, 128);
 	left.m.diffuse = 0.7;
 	left.m.specular = 0.3;
-	left.is_wall = false;
-	
+
 	middle = sphere();
 	middle.transform = mmultfree(translation(-0.5, 1, 0.5), middle.transform);
 	middle.invtrans = minvert(middle.transform, 4);
 	middle.m.color = color(128, 255, 128);
 	middle.m.diffuse = 0.7;
 	middle.m.specular = 0.3;
-	middle.is_wall = false;
-	
+
 	right = sphere();
 	right.transform = mmultfree(scaling(0.5, 0.5, 0.5), right.transform);
 	right.transform = mmultfree(translation(1.5, 0.5, -0.5), right.transform);
@@ -315,14 +320,13 @@ t_world	default_world_4(void)
 	right.m.color = color(128, 128, 255);
 	right.m.diffuse = 0.7;
 	right.m.specular = 0.3;
-	right.is_wall = false;
 
 	w.light = malloc(2 * sizeof(t_light));
 	if (!w.light)
 		exit (1);
 	w.light[0] = point_light(point(-10, 10, -10), color(255, 128, 128));
 	w.light[1] = point_light(point(10, 10, -10), color(128, 128, 255));
-	
+
 	w.s = malloc(7 * sizeof(t_shape));
 	w.s[0] = floor;
 	w.s[1] = middle;
@@ -331,10 +335,5 @@ t_world	default_world_4(void)
 	w.s[4] = wall_back;
 	w.s[5] = wall_left;
 	w.s[6].transform = NULL;
-	//	printf("left_sphere.z=%f, light.z=%f, plane.z=%f\n", left.transform[2][3], w.light[0].position.z, wall_back.transform[2][3]);
-
 	return (w);
 }
-
-
-
