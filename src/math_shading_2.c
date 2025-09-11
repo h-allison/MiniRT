@@ -12,6 +12,27 @@
 
 #include "minirt.h"
 
+t_rgb	shade_hit_double(t_world *w, t_comps *comps)
+{
+	t_largs	largs;
+	t_rgb	ret_light;
+	int	i;
+
+	i = 0;
+	ret_light = color(0, 0, 0);
+	while (i < 2)
+	{
+		largs.material = comps->object->m;
+		largs.light = w->light[i];
+		largs.point = comps->over_point;
+		largs.eyev = comps->eyev;
+		largs.normalv = comps->normalv;
+		largs.in_shadow = is_shadowed(w, i, comps->over_point);
+		ret_light = cadd(ret_light, lighting(&largs));
+		i++;
+	}
+	return(ret_light);
+}
 
 //TODO largs.point = comps->over_point
 // Keeping 2 separate values (point & over_point)
@@ -20,13 +41,17 @@
 t_rgb	shade_hit(t_world *w, t_comps *comps)
 {
 	t_largs	largs;
+	bool	two_lights;
 
+	two_lights = MULTILIGHT_ALLOWED;
+	if (two_lights == true)
+		return(shade_hit_double(w, comps));
 	largs.material = comps->object->m;
 	largs.light = w->light[0];
 	largs.point = comps->over_point;
 	largs.eyev = comps->eyev;
 	largs.normalv = comps->normalv;
-	largs.in_shadow = is_shadowed(w, comps->over_point);
+	largs.in_shadow = is_shadowed(w, 0, comps->over_point);
 	return (lighting(&largs));
 }
 
@@ -49,7 +74,7 @@ t_rgb	color_at(t_world *w, t_ray *r)
 	return (shade_hit(w, &comps));
 }
 
-bool	is_shadowed(t_world *world, t_tuple point)
+bool	is_shadowed(t_world *world, int i, t_tuple point)
 {
 	t_tuple			v;
 	float			distance;
@@ -58,7 +83,7 @@ bool	is_shadowed(t_world *world, t_tuple point)
 	t_intersection	*xs;
 	t_intersection *ht;
 
-	v = tsub(world->light->position, point);
+	v = tsub(world->light[i].position, point);
 	distance = tmag(v);
 	direction = tnorm(v);
 	r = ray(point, direction);

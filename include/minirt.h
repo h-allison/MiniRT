@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include <MLX42/MLX42.h>
+# include <string.h>
 # include <math.h>
 # include <unistd.h>
 # include <stdio.h>
@@ -23,8 +24,10 @@
 # include <stdlib.h>
 # include <errno.h>
 
-# define WIN_WIDTH 1024
-# define WIN_HEIGHT 768
+# define MULTILIGHT_ALLOWED true
+
+# define WIN_WIDTH 1024 / 2
+# define WIN_HEIGHT 768 / 2
 
 # define OFFSET	 0.01
 # define EPSILON 0.0001
@@ -110,6 +113,7 @@ typedef struct s_intersection t_intersection;
 
 typedef struct s_shape
 {
+	bool			is_wall;
 	int				type;
 	t_tuple			(*local_normal_at)(t_shape *, t_tuple);
 	t_intersection	*(*local_intersect)(t_shape *);
@@ -200,6 +204,7 @@ t_light			point_light(t_tuple position, t_rgb intensity);
 t_world			default_world(void);
 t_world			default_world_2(void);
 t_world			default_world_3(void);
+t_world			default_world_4(void);
 t_camera		camera(float hsize, float vsize, float field_of_view);
 
 //create_tuples.c
@@ -284,7 +289,7 @@ t_rgb			lighting(t_largs *largs);
 //math_shading_2.c
 t_rgb			shade_hit(t_world *w, t_comps *comps);
 t_rgb			color_at(t_world *w, t_ray *r);
-bool			is_shadowed(t_world *world, t_tuple point);
+bool			is_shadowed(t_world *world, int i, t_tuple point);
 
 //math_rays.c
 t_ray			ray(t_tuple point, t_tuple vector);
@@ -315,5 +320,9 @@ int				canvas_export_ppm(t_data *data);
 //patterns.c
 t_pattern		stripe_pattern(t_rgb a, t_rgb b);
 t_rgb			stripe_at(t_pattern pat, t_tuple point);
+
+// debug_print.c
+void	print_vector(char *str, t_tuple a);
+void	print_tuple(char *str, t_tuple a);
 
 #endif

@@ -14,6 +14,7 @@
 NAME        := miniRT
 
 SRC         := src/main.c \
+	       src/debug_prints.c \
                src/check_file.c \
                src/file_helpers.c \
                src/parsing.c \
@@ -87,7 +88,7 @@ $(OBJDIR):
 
 # Build libft if needed
 $(LIBFT):
-	$(MAKE) -C $(LIBFT_PATH) CFLAGS+=' -Iinclude'
+	$(MAKE) -C $(LIBFT_PATH) CFLAGS+=' -Iinclude '
 
 # Build MLX42 if needed
 mlx42: $(MLX42_A)
@@ -113,8 +114,8 @@ fclean: clean
 re: fclean all
 
 # ---- Debug/analysis profiles ----
-asan: CFLAGS  += -fsanitize=address -g
-asan: LDFLAGS += -fsanitize=address
+asan: CFLAGS  += -fsanitize=address -fsanitize=undefined -g
+asan: LDFLAGS += -fsanitize=address -fsanitize=undefined -g
 asan: fclean all
 
 gdb:  CFLAGS  += -g -O0
