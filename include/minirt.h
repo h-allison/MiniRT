@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include <MLX42/MLX42.h>
+# include <string.h>
 # include <math.h>
 # include <unistd.h>
 # include <stdio.h>
@@ -112,6 +113,7 @@ typedef struct s_intersection t_intersection;
 
 typedef struct s_shape
 {
+	bool			is_wall;
 	int				type;
 	t_tuple			(*local_normal_at)(t_shape *, t_tuple);
 	t_intersection	*(*local_intersect)(t_shape *);
@@ -318,5 +320,9 @@ int				canvas_export_ppm(t_data *data);
 //patterns.c
 t_pattern		stripe_pattern(t_rgb a, t_rgb b);
 t_rgb			stripe_at(t_pattern pat, t_tuple point);
+
+// debug_print.c
+void	print_vector(char *str, t_tuple a);
+void	print_tuple(char *str, t_tuple a);
 
 #endif

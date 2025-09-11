@@ -20,6 +20,7 @@ t_material	material(void)
 	m.diffuse = 0.9;
 	m.specular = 0.9;
 	m.shininess = 200;
+	m.pattern = false;
 	return(m);
 }
 
@@ -251,6 +252,7 @@ t_world	default_world_4(void)
 	t_world		w;
 	t_shape	floor;
 	t_shape	wall_back;
+	t_shape	wall_left;
 	t_shape	middle;
 	t_shape	right;
 	t_shape	left;
@@ -261,39 +263,57 @@ t_world	default_world_4(void)
 	floor.m.diffuse = 1;
 	floor.m.ambient = 0;
 	floor.m.specular = 1;
+	floor.is_wall = false;
 	
 	wall_back = plane();
 	wall_back.transform = mmultfree(rotation_x(M_PI / 2), wall_back.transform);
-	wall_back.transform = mmultfree(translation(0, 0, 4), wall_back.transform);
+	wall_back.transform = mmultfree(translation(0, 0, 50), wall_back.transform);
 	wall_back.invtrans = minvert(wall_back.transform, 4);
-	wall_back.m.color = color(255, 255, 255);
-	wall_back.m.diffuse = 1;
-	wall_back.m.ambient = 0.3;
-	wall_back.m.specular = 0.3;
+	wall_back.m.color = color(255, 200, 255);
+	wall_back.m.diffuse = 0;
+	wall_back.m.ambient = 1;
+	wall_back.m.specular = 0;
+	wall_back.is_wall = true;
+
+	wall_left = plane();
+	wall_left.transform = mmultfree(rotation_x(M_PI / 2), wall_left.transform);
+	wall_left.transform = mmultfree(rotation_y(M_PI / 2), wall_left.transform);
+	wall_left.transform = mmultfree(translation(-10, 0, 50), wall_left.transform);
+	wall_left.invtrans = minvert(wall_left.transform, 4);
+	wall_left.m.color = color(255, 255, 255);
+	wall_left.m.diffuse = 0;
+	wall_left.m.ambient = 1;
+	wall_left.m.specular = 0;
+	wall_left.is_wall = true;
+
+	left = sphere();
+	left.transform = mmultfree(scaling(0.33, 0.33, 0.33), left.transform);
 
 	left = sphere();
 	left.transform = mmultfree(scaling(0.33, 0.33, 0.33), left.transform);
 	left.transform = mmultfree(translation(-1.5, 0.33, -0.75), left.transform);
 	left.invtrans = minvert(left.transform, 4);
-	left.m.color = color(255, 0, 0);
+	left.m.color = color(255, 128, 128);
 	left.m.diffuse = 0.7;
 	left.m.specular = 0.3;
+	left.is_wall = false;
 	
 	middle = sphere();
 	middle.transform = mmultfree(translation(-0.5, 1, 0.5), middle.transform);
 	middle.invtrans = minvert(middle.transform, 4);
-	middle.m.color = color(0, 255, 0);
+	middle.m.color = color(128, 255, 128);
 	middle.m.diffuse = 0.7;
 	middle.m.specular = 0.3;
-
+	middle.is_wall = false;
+	
 	right = sphere();
 	right.transform = mmultfree(scaling(0.5, 0.5, 0.5), right.transform);
 	right.transform = mmultfree(translation(1.5, 0.5, -0.5), right.transform);
 	right.invtrans = minvert(right.transform, 4);
-	right.m.color = color(0, 0, 255);
+	right.m.color = color(128, 128, 255);
 	right.m.diffuse = 0.7;
 	right.m.specular = 0.3;
-
+	right.is_wall = false;
 
 	w.light = malloc(2 * sizeof(t_light));
 	if (!w.light)
@@ -301,13 +321,16 @@ t_world	default_world_4(void)
 	w.light[0] = point_light(point(-10, 10, -10), color(255, 128, 128));
 	w.light[1] = point_light(point(10, 10, -10), color(128, 128, 255));
 	
-	w.s = malloc(6 * sizeof(t_shape));
+	w.s = malloc(7 * sizeof(t_shape));
 	w.s[0] = floor;
 	w.s[1] = middle;
 	w.s[2] = right;
 	w.s[3] = left;
 	w.s[4] = wall_back;
-	w.s[5].transform = NULL;
+	w.s[5] = wall_left;
+	w.s[6].transform = NULL;
+	//	printf("left_sphere.z=%f, light.z=%f, plane.z=%f\n", left.transform[2][3], w.light[0].position.z, wall_back.transform[2][3]);
+
 	return (w);
 }
 
