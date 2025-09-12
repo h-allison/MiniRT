@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 16:28:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/12 11:29:47 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/12 12:41:40 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -323,5 +323,8 @@ t_pattern		stripe_pattern(t_rgb a, t_rgb b);
 void			set_pattern_transform(t_pattern *pat, float **t);
 t_rgb			stripe_at(t_pattern pat, t_tuple point);
 t_rgb			stripe_at_object(t_pattern pat, t_shape s, t_tuple point);
+
+//free.c
+int				free_matrices_and_ret(t_shape *p, int ret);
 
 #endif
