@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:49:07 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/12 21:32:13 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/13 01:21:48 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -273,7 +273,6 @@ t_world	default_world_4(void)
 {
 	t_world		w;
 	t_shape	floor;
-	t_shape	ceiling;
 	t_shape	wall_back;
 	t_shape	wall_left;
 	t_shape	middle;
@@ -284,34 +283,30 @@ t_world	default_world_4(void)
 	floor.invtrans = minvert(floor.transform, 4);
 	floor.m.color = color(200, 200, 200);
 	floor.m.diffuse = 0.7;
-	floor.m.ambient = 0.1;
+	floor.m.ambient = 0.0;
 	floor.m.specular = 0.1;
-	floor.m.pattern = stripe_pattern(color(100, 80, 60), floor.m.color);
-
-	ceiling = plane();
-	ceiling.transform = mmultfree(translation(0, 7, 0), ceiling.transform);
-	ceiling.invtrans = minvert(floor.transform, 4);
-	ceiling.m.color = color(200, 200, 200);
-	ceiling.m.diffuse = 0.7;
-	ceiling.m.ambient = 0.1;
-	ceiling.m.specular = 0.1;
-	ceiling.m.pattern = stripe_pattern(color(100, 80, 60), floor.m.color);
+	floor.m.pattern = checkers_pattern(color(100, 80, 60), floor.m.color);
 
 	wall_back = plane();
 	wall_back.transform = mmultfree(rotation_x(M_PI / 2), wall_back.transform);
 	wall_back.transform = mmultfree(translation(0, 0, 20), wall_back.transform);
 	wall_back.invtrans = minvert(wall_back.transform, 4);
-	wall_back.m.color = color(180, 120, 180);
+	wall_back.m.color = color(80, 0, 0);
 	wall_back.m.diffuse = 0.5;
 	wall_back.m.ambient = 0.0;
 	wall_back.m.specular = 0.0;
+	wall_back.m.pattern = gradient_pattern(wall_back.m.color, color(0, 0, 180)) ; 
+	wall_back.m.pattern.transform = mmultfree(scaling(12, 1, 1), wall_back.m.pattern.transform);
+	wall_back.m.pattern.transform = mmultfree(rotation_y(90 * DEG2RAD), wall_back.m.pattern.transform);
+	wall_back.m.pattern.invtrans = minvert(wall_back.m.pattern.transform, 4);
 
 	wall_left = plane();
 	wall_left.transform = mmultfree(rotation_x(M_PI / 2), wall_left.transform);
 	wall_left.transform = mmultfree(rotation_y(M_PI / 2), wall_left.transform);
-	wall_left.transform = mmultfree(translation(-12, 0, 0), wall_left.transform);
+	wall_left.transform = mmultfree(translation(-11, 0, 0), wall_left.transform);
 	wall_left.invtrans = minvert(wall_left.transform, 4);
 	wall_left.m.color = color(160, 160, 160);
+	wall_left.m.pattern = stripe_pattern(color(20, 80, 60), wall_left.m.color);
 	wall_left.m.diffuse = 0.5;
 	wall_left.m.ambient = 0.0;
 	wall_left.m.specular = 0.1;
@@ -325,7 +320,7 @@ t_world	default_world_4(void)
 	left.m.specular = 0.5;
 
 	middle = sphere();
-	middle.transform = mmultfree(translation(-0.5, 1, 0.5), middle.transform);
+	middle.transform = mmultfree(translation(-0.5, 1, 1.5), middle.transform);
 	middle.invtrans = minvert(middle.transform, 4);
 	middle.m.color = color(128, 255, 128);
 	middle.m.diffuse = 0.5;
@@ -335,13 +330,11 @@ t_world	default_world_4(void)
 	right.transform = mmultfree(scaling(0.5, 0.5, 0.5), right.transform);
 	right.transform = mmultfree(translation(1.5, 0.5, -0.5), right.transform);
 	right.invtrans = minvert(right.transform, 4);
-	right.m.color = color(255, 255, 255);
+	right.m.color = color(140, 100, 255);
 	right.m.diffuse = 0.7;
 	right.m.specular = 0.4;
-	right.m.pattern = stripe_pattern(color(20, 80, 60), right.m.color);
-	right.m.pattern.transform = mmultfree(scaling(0.1, 0.1, 0.1), right.m.pattern.transform);
-	right.m.pattern.transform = mmultfree(rotation_y(300 * DEG2RAD), right.m.pattern.transform);
-	right.m.pattern.transform = mmultfree(rotation_x(90 * DEG2RAD), right.m.pattern.transform);
+	right.m.pattern = ring_pattern(color(20, 80, 60), right.m.color);
+	right.m.pattern.transform = mmultfree(scaling(0.1, 0.2, 0.2), right.m.pattern.transform);
 	right.m.pattern.invtrans = minvert(right.m.pattern.transform, 4);
 
 	w.light = malloc(3 * sizeof(t_light));
@@ -355,12 +348,11 @@ t_world	default_world_4(void)
 
 	w.s = malloc(8 * sizeof(t_shape));
 	w.s[0] = floor;
-	w.s[1] = ceiling;
-	w.s[2] = wall_back;
-	w.s[3] = wall_left;
-	w.s[4] = middle;
-	w.s[5] = right;
-	w.s[6] = left;
-	w.s[7].transform = NULL;
+	w.s[1] = wall_back;
+	w.s[2] = wall_left;
+	w.s[3] = middle;
+	w.s[4] = right;
+	w.s[5] = left;
+	w.s[6].transform = NULL;
 	return (w);
 }

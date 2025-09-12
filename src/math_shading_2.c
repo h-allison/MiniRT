@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 13:30:13 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/12 14:33:37 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/12 23:10:25 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_rgb	shade_hit(t_world *w, t_comps *comps)
 	i = 0;
 	while (1)
 	{
-		largs.object = comps->object;
+		largs.shape = comps->object;
 		largs.material = comps->object->m;
 		largs.light = w->light[i];
 		largs.point = comps->over_point;

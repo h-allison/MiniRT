@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:48:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/12 21:21:20 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/13 01:09:54 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <stdlib.h>
 # include <errno.h>
 
-# define WIN_WIDTH 1024
+# define WIN_WIDTH  1024
 # define WIN_HEIGHT 768
 
 # define OFFSET	 0.01
@@ -63,12 +63,15 @@ typedef struct s_rgb
 	float			b;
 }	t_rgb;
 
+typedef struct s_pattern t_pattern;
+
 typedef struct s_pattern
 {
 	t_rgb			a;
 	t_rgb			b;
 	float			**transform;
 	float			**invtrans;
+	t_rgb			(*pattern_at)(t_pattern *, t_tuple);
 	bool			status;
 }	t_pattern;
 
@@ -152,7 +155,7 @@ typedef struct s_world
 
 typedef struct s_largs
 {
-	t_shape			*object;
+	t_shape			*shape;
 	t_material		material;
 	t_tuple			point;
 	t_light			light;
@@ -322,11 +325,17 @@ int				canvas_export_ppm(t_data *data);
 
 //patterns.c
 t_pattern		stripe_pattern(t_rgb a, t_rgb b);
-void			set_pattern_transform(t_pattern *pat, float **t);
 t_rgb			stripe_at(t_pattern *pat, t_tuple point);
 t_rgb			stripe_at_object(t_pattern *pat, t_shape *object, t_tuple point);
+t_pattern		gradient_pattern(t_rgb a, t_rgb b);
+t_rgb			gradient_at(t_pattern *gradient, t_tuple point);
+t_pattern		ring_pattern(t_rgb a, t_rgb b);
+t_rgb			ring_at(t_pattern *ring, t_tuple point);
+t_pattern		checkers_pattern(t_rgb a, t_rgb b);
+t_rgb			checkers_at(t_pattern *checkers, t_tuple point);
 t_rgb			pattern_at(t_pattern *pat, t_tuple point);
 t_rgb			pattern_at_shape(t_pattern *pat, t_shape *shape, t_tuple point);
+void			set_pattern_transform(t_pattern *pat, float **t);
 
 //free.c
 int				free_matrices_and_ret(t_shape *p, int ret);

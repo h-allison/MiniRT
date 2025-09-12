@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 00:07:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/12 21:22:10 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/13 00:50:30 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_pattern	stripe_pattern(t_rgb a, t_rgb b)
 	pat.b = b;
 	pat.transform = create_id_matrix();
 	pat.invtrans = minvert(pat.transform, 4);
+	pat.pattern_at = stripe_at;
 	pat.status = true;
 	return (pat);
 }
@@ -32,6 +33,69 @@ t_rgb	stripe_at(t_pattern *pat, t_tuple point)
 	if (pint % 2 == 0)
 		return (pat->a);
 	return (pat->b);
+}
+
+t_pattern	gradient_pattern(t_rgb a, t_rgb b)
+{
+	t_pattern	gradient;
+
+	gradient.a = a;
+	gradient.b = b;
+	gradient.transform = create_id_matrix();
+	gradient.invtrans = minvert(gradient.transform, 4);
+	gradient.pattern_at = gradient_at;
+	gradient.status = true;
+	return (gradient);
+}
+
+t_rgb	gradient_at(t_pattern *gradient, t_tuple point)
+{
+	t_rgb	distance;
+	float	fraction;
+
+	distance = csub(gradient->b, gradient->a);
+	fraction = point.x - floorf(point.x);
+	return cadd(gradient->a, cscale(distance, fraction));
+}
+
+t_pattern	ring_pattern(t_rgb a, t_rgb b)
+{
+	t_pattern	ring;
+
+	ring.a = a;
+	ring.b = b;
+	ring.transform = create_id_matrix();
+	ring.invtrans = minvert(ring.transform, 4);
+	ring.pattern_at = ring_at;
+	ring.status = true;
+	return (ring);
+}
+
+t_rgb	ring_at(t_pattern *ring, t_tuple point)
+{
+	if ((int)floorf(sqrtf(point.x * point.x + point.z * point.z)) % 2 == 0)
+		return (ring->a);
+	return (ring->b);
+}
+
+t_pattern	checkers_pattern(t_rgb a, t_rgb b)
+{
+	t_pattern	checkers;
+
+	checkers.a = a;
+	checkers.b = b;
+	checkers.transform = create_id_matrix();
+	checkers.invtrans = minvert(checkers.transform, 4);
+	checkers.pattern_at = checkers_at;
+	checkers.status = true;
+	return (checkers);
+}
+
+t_rgb	checkers_at(t_pattern *checkers, t_tuple point)
+{
+	if ((int)(floorf(point.x) + floorf(point.y) + floorf(point.z)) % 2 == 0)
+		return (checkers->a);
+	return (checkers->b);
 }
 
 t_rgb	stripe_at_object(t_pattern *pat, t_shape *object, t_tuple point)
@@ -54,7 +118,6 @@ t_rgb	pattern_at(t_pattern *pat, t_tuple point)
 	col.b = point.z;
 	return (col);
 }
-
 t_rgb	pattern_at_shape(t_pattern *pat, t_shape *shape, t_tuple point)
 {
 	t_tuple	shape_point;
@@ -62,7 +125,7 @@ t_rgb	pattern_at_shape(t_pattern *pat, t_shape *shape, t_tuple point)
 
 	shape_point = tmatrixmult(shape->invtrans, point);
 	pattern_point = tmatrixmult(pat->invtrans, shape_point);
-	return (pattern_at(pat, pattern_point));
+	return (pat->pattern_at(pat, pattern_point));
 }
 
 void	set_pattern_transform(t_pattern *pat, float **t)
