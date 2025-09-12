@@ -6,13 +6,26 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 18:22:10 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/10 03:10:56 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/12 11:59:22 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shapes_tests.h"
 
 // Tests that transforms can be applied to shapes
+
+static int	free_matrices_and_return(t_shape *p, int ret)
+{
+	if (p->transform)
+		free_matrix(p->transform, 4);
+	if (p->invtrans)
+		free_matrix(p->invtrans, 4);
+	if (p->m.pattern.transform)
+		free_matrix(p->m.pattern.transform, 4);
+	if (p->m.pattern.invtrans)
+		free_matrix(p->m.pattern.invtrans, 4);
+	return (ret);
+}
 
 int test_shape_transform(void)
 {
@@ -33,14 +46,12 @@ int test_shape_transform(void)
 			if (!fisequal(s.transform[y][x], tm[y][x]))
 			{
 				free_matrix(tm, 4);
-				free_matrix(s.transform, 4);
-				return(-1);
+				return(free_matrices_and_return(&s, -1));
 			}
 			x++;
 		}
 		y++;
 	}
 	free_matrix(tm, 4);
-	free_matrix(s.transform, 4);
-	return (0);
+	return(free_matrices_and_return(&s, 0));
 }

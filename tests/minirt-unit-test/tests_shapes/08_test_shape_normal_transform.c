@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 18:35:47 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/12 11:22:10 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/12 11:57:49 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ int test_shape_normal_transform(void)
 	s = create_test_shape();
 	m = mmultfree(scaling(1, 0.5, 1), rotation_z(M_PI / 5));
 	set_transform(&s, m);
+	free_matrix(s.invtrans, 4);
 	s.invtrans = minvert(s.transform, 4);
 	n = normal_at(&s, point(0, M_PI / 2, -M_PI / 2));
-//	free_matrix(s.transform, 4);
 	if (fisequal(n.x, 0)
 			&& fisequal(n.y, 0.97014)
 			&& fisequal(n.z, -0.24254)
