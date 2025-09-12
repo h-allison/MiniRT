@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/10 16:28:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/12 14:41:36 by mmillhof         ###   ########.fr       */
+/*   Created: 2025/09/12 14:48:25 by mmillhof          #+#    #+#             */
+/*   Updated: 2025/09/12 14:48:41 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,6 +267,7 @@ float			mdet2x2(float **m);
 float			mdet3x3(float **m, int size);
 float			mdet(float **m, int size);
 float			**minvert(float **m, int size);
+float			**minvert_free(float **m, int size);
 bool			minvertable(float **m, int size);
 
 //math_transform.c
@@ -323,5 +324,8 @@ t_pattern		stripe_pattern(t_rgb a, t_rgb b);
 void			set_pattern_transform(t_pattern *pat, float **t);
 t_rgb			stripe_at(t_pattern *pat, t_tuple point);
 t_rgb			stripe_at_object(t_pattern *pat, t_shape *object, t_tuple point);
+
+//free.c
+int				free_matrices_and_ret(t_shape *p, int ret);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 17:55:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/12 00:20:18 by matthias         ###   ########.fr       */
+/*   Updated: 2025/09/12 12:25:29 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	set_transform(t_shape *s, float **t)
 		i++;
 	}
 	free_matrix(t, 4);
+	free_matrix(s->invtrans, 4);
 	s->invtrans = minvert(s->transform, 4);
 }
 

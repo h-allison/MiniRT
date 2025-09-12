@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math_matrices_3.c                                  :+:      :+:    :+:   */
+/*   math_matrices_4.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 15:59:09 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/01 19:21:58 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/12 11:29:07 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,34 @@ bool	minvertable(float **m, int size)
 	if (det == 0)
 		return (false);
 	return (true);
+}
+
+float	**minvert_free(float **m, int size)
+{
+	float	cofactor;
+	float	det;
+	float	**m2;
+	int		y;
+	int		x;
+
+	det = mdet(m, size);
+	if (!det)
+		return (m);
+	m2 = alloc_matrix(size);
+	x = 0;
+	while (x < size)
+	{
+		y = 0;
+		while (y < size)
+		{
+			cofactor = mcofactor4x4(m, size, y, x);
+			m2[x][y] = cofactor / det;
+			y++;
+		}
+		x++;
+	}
+	free_matrix(m, 4);
+	return (m2);
 }
 
 float	**minvert(float **m, int size)

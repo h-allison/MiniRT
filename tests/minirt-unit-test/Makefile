@@ -83,6 +83,7 @@ SRCS := \
 	$(PRG_DIR)/src/create_matrices.c \
 	$(PRG_DIR)/src/export_ppm.c \
 	$(PRG_DIR)/src/patterns.c \
+	$(PRG_DIR)/src/free.c \
 
 OBJS := $(SRCS:.c=.o)
 
