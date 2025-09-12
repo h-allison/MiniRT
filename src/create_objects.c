@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:14:22 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/11 23:36:20 by matthias         ###   ########.fr       */
+/*   Updated: 2025/09/12 14:44:25 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -316,9 +316,14 @@ t_world	default_world_4(void)
 	right.transform = mmultfree(scaling(0.5, 0.5, 0.5), right.transform);
 	right.transform = mmultfree(translation(1.5, 0.5, -0.5), right.transform);
 	right.invtrans = minvert(right.transform, 4);
-	right.m.color = color(128, 128, 255);
+	right.m.color = color(255, 255, 255);
 	right.m.diffuse = 0.7;
-	right.m.specular = 0.4;
+	right.m.specular = 0.8;
+	right.m.pattern = stripe_pattern(color(20, 80, 60), right.m.color);
+	right.m.pattern.transform = mmultfree(scaling(0.1, 0.1, 0.1), right.m.pattern.transform);
+	right.m.pattern.transform = mmultfree(rotation_y(300 * DEG2RAD), right.m.pattern.transform);
+	right.m.pattern.transform = mmultfree(rotation_x(90 * DEG2RAD), right.m.pattern.transform);
+	right.m.pattern.invtrans = minvert(right.m.pattern.transform, 4);
 
 	w.light = malloc(3 * sizeof(t_light));
 	if (!w.light)

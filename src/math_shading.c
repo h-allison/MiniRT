@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:25:23 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/11 11:39:31 by matthias         ###   ########.fr       */
+/*   Updated: 2025/09/12 14:41:05 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ t_rgb	lighting(t_largs *largs)
 	t_rgb	ret;
 
 	if (largs->material.pattern.status)
-		col = stripe_at(largs->material.pattern, largs->point);
+		col = stripe_at_object(&largs->material.pattern, largs->object, largs->point);
 	else
 		col = largs->material.color;
 	effective_color = cmult(col, largs->light.intensity);
