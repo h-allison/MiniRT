@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:48:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/12 14:48:41 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/12 21:21:20 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,7 @@ void			render(void *param);
 t_pattern		pattern(void);
 t_material		material(void);
 t_shape			create_test_shape(void);
+t_pattern		create_test_pattern(void);
 t_shape			sphere(void);
 t_shape			plane(void);
 t_light			point_light(t_tuple position, t_rgb intensity);
@@ -324,6 +325,8 @@ t_pattern		stripe_pattern(t_rgb a, t_rgb b);
 void			set_pattern_transform(t_pattern *pat, float **t);
 t_rgb			stripe_at(t_pattern *pat, t_tuple point);
 t_rgb			stripe_at_object(t_pattern *pat, t_shape *object, t_tuple point);
+t_rgb			pattern_at(t_pattern *pat, t_tuple point);
+t_rgb			pattern_at_shape(t_pattern *pat, t_shape *shape, t_tuple point);
 
 //free.c
 int				free_matrices_and_ret(t_shape *p, int ret);

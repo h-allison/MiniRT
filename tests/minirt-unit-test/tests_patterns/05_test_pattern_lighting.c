@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 01:45:38 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/11 11:49:36 by matthias         ###   ########.fr       */
+/*   Updated: 2025/09/12 20:09:23 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ int test_pattern_lighting(void)
 	t_rgb		c1;
 	t_rgb		c2;
 	t_largs		largs;
+	t_shape		s;
 
+	s = sphere();
+	largs.object = &s;
 	largs.eyev = vector(0, 0, -1);
 	largs.normalv = vector(0, 0, -1);
 	largs.light = point_light(point(0, 0, -10), color(255, 255, 255));
@@ -30,6 +33,7 @@ int test_pattern_lighting(void)
 	c1 = lighting(&largs);
 	largs.point = point(1.1, 0, 0);
 	c2 = lighting(&largs);
+	free_matrices_and_ret(largs.object, 0);
 	if (c1.r != 1 || c1.g != 1 || c1.b != 1)
 		return (-1);
 	if (c2.r != 0 || c2.g != 0 || c2.b != 0)

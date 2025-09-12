@@ -1,0 +1,43 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   09_test_pattern.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/09 17:03:46 by hallison          #+#    #+#             */
+/*   Updated: 2025/09/12 20:52:16 by mmillhof         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "patterns_tests.h"
+
+int test_pattern_gen_basic(void)
+{
+	t_pattern	pat;
+	int			x;
+	int			y;
+	float		**idm;
+
+	pat = create_test_pattern();
+	idm = create_id_matrix();
+	y = 0;
+	while (y < 4)
+	{
+		x = 0;
+		while (x < 4)
+		{
+			if (!fisequal(pat.transform[y][x], idm[y][x]))
+			{
+				free_matrix(idm, 4);
+				free_matrix(pat.transform, 4);
+				return (-1);
+			}
+			x++;
+		}
+		y++;
+	}
+	free_matrix(idm, 4);
+	free_matrix(pat.transform, 4);
+	return (0);
+}

@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   08_test_stripes_all_transform.c                    :+:      :+:    :+:   */
+/*   08_test_pattern_all_transform.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 01:45:38 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/12 00:46:40 by matthias         ###   ########.fr       */
+/*   Updated: 2025/09/12 21:13:37 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "patterns_tests.h"
 
-int test_stripes_all_transform(void)
+int test_pattern_all_transform(void)
 {
-	t_rgb		black;
-	t_rgb		white;
 	t_rgb		c;
 	t_shape		obj;
 	t_pattern	pat;
 
-	black = color(0 ,0 ,0);
-	white = color(255, 255, 255);
 	obj = sphere();
 	set_transform(&obj, scaling(2, 2, 2));
-	pat = stripe_pattern(white, black);
-	set_pattern_transform(&pat, scaling(0.5, 0, 0));
-	c = stripe_at_object(pat, obj, point(2.5, 0, 0));
-	if (c.r != 1 || c.g != 1 || c.b != 1)
+	pat = create_test_pattern();
+	set_pattern_transform(&pat, translation(0.5, 1, 1.5));
+	c = pattern_at_shape(&pat, &obj, point(2.5, 3, 3.5));
+	free_matrices_and_ret(&obj, 0);
+	if (c.r != 0.75 || c.g != 0.5 || c.b != 0.25)
 		return (-1);
 	return (0);
 }
