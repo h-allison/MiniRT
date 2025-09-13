@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:48:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/13 01:09:54 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/13 18:35:04 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ typedef struct s_material
 	float			diffuse;
 	float			specular;
 	float			shininess;
+	float			reflective;
 }	t_material;
 
 typedef struct s_light
@@ -144,6 +145,7 @@ typedef struct s_comps
 	t_tuple			over_point;
 	t_tuple			eyev;
 	t_tuple			normalv;
+	t_tuple			reflectv;
 	bool			inside;
 }	t_comps;
 

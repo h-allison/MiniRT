@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 14:56:16 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/09 15:48:58 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/13 18:45:32 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_comps	prepare_computations(t_intersection *i, t_ray *r)
 	comps.point = position(*r, comps.t);
 	comps.eyev = tneg(r->direction);
 	comps.normalv = normal_at(comps.object, comps.point);
+	comps.reflectv = reflect(r->direction, comps.normalv);
 	if (dot(comps.normalv, comps.eyev) < 0)
 	{
 		comps.inside = true;

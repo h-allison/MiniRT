@@ -6,7 +6,7 @@
 /*   By: smargine <smargine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 18:57:05 by smargine          #+#    #+#             */
-/*   Updated: 2025/09/12 13:31:06 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/13 18:23:45 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "shapes_tests.h"
 #include "planes_tests.h"
 #include "patterns_tests.h"
+#include "reflection_tests.h"
 
 void	print_banner(void)
 {
@@ -44,6 +45,7 @@ int	main(void)
 	err += shapes_tests_launcher();
 	err += planes_tests_launcher();
 	err += patterns_tests_launcher();
+	err += reflect_tests_launcher();
 	if (!err)
 		write(1, GREEN "All tests passed!\n\n" RESET, 28);
 	return (0);

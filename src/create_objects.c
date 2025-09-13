@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:49:07 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/13 01:21:48 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/13 18:22:03 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_material	material(void)
 	m.diffuse = 0.9;
 	m.specular = 0.9;
 	m.shininess = 200;
+	m.reflective = 0.0;
 	m.pattern = pattern();
 	return(m);
 }
@@ -55,6 +56,7 @@ t_pattern	create_test_pattern(void)
 
 	pat.transform = create_id_matrix();
 	pat.invtrans = minvert(pat.transform, 4);
+	pat.pattern_at = &pattern_at;
 	return(pat);
 }
 
