@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   02_test_reflect_comps.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/09 17:03:46 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/13 18:46:15 by mmillhof         ###   ########.fr       */
+/*   Created: 2025/09/13 23:02:40 by mmillhof          #+#    #+#             */
+/*   Updated: 2025/09/13 23:02:41 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

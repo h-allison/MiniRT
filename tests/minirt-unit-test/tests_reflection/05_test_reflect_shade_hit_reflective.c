@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   05_test_reflect_shade_hit_reflective.c             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/09 17:03:46 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/13 21:49:48 by mmillhof         ###   ########.fr       */
+/*   Created: 2025/09/13 23:01:53 by mmillhof          #+#    #+#             */
+/*   Updated: 2025/09/13 23:17:11 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int test_reflect_shade_hit_reflective(void)
 	i = intersection(sqrtf(2), &s);
 	c = prepare_computations(&i, &r);
 	col = shade_hit(&w, &c);
-	printf("   %f %f %f   ",col.r, col.g, col.b);
 	if (!fisequal(col.r, 0.876886) || !fisequal(col.g, 0.924509)
 			|| !fisequal(col.b, 0.829263))
 		return (-1);

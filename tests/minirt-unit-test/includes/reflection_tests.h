@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 17:16:24 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/13 21:46:57 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/13 23:15:23 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ int test_reflect_comps(void);
 int test_reflect_col_nonreflect(void);
 int test_reflect_col_reflective(void);
 int test_reflect_shade_hit_reflective(void);
+int test_reflect_mutually_reflective(void);
 
 #endif

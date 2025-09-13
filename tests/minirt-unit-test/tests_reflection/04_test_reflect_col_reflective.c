@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   04_test_reflect_col_reflective.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/09 17:03:46 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/13 20:07:51 by mmillhof         ###   ########.fr       */
+/*   Created: 2025/09/13 23:02:04 by mmillhof          #+#    #+#             */
+/*   Updated: 2025/09/13 23:02:06 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

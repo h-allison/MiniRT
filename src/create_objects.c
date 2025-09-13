@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:49:07 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/13 22:52:40 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/13 23:18:27 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,10 +124,10 @@ t_camera	camera(float hsize, float vsize, float field_of_view)
 
 t_world	default_world(void)
 {
-	t_world		w;
+	t_world	w;
 	t_shape	s1;
 	t_shape	s2;
-	t_light		light;
+	t_light	light;
 
 	light = point_light(point(-10, 10, -10), color(255, 255, 255));
 	s1 = sphere();
@@ -137,7 +137,7 @@ t_world	default_world(void)
 	s2 = sphere();
 	set_transform(&s2, scaling(0.5, 0.5, 0.5));
 	s2.invtrans = minvert(s2.transform, 4);
-	w.s = malloc(4 * sizeof(t_shape));
+	w.s = malloc(5 * sizeof(t_shape));
 	w.s[0] = s1;
 	w.s[1] = s2;
 	w.s[2].transform = NULL;
