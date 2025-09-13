@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:49:07 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/13 20:12:40 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/13 22:52:40 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,13 +280,14 @@ t_world	default_world_4(void)
 	t_shape	middle;
 	t_shape	right;
 	t_shape	left;
-
+	
 	floor = plane();
 	floor.invtrans = minvert(floor.transform, 4);
 	floor.m.color = color(200, 200, 200);
 	floor.m.diffuse = 0.7;
 	floor.m.ambient = 0.0;
 	floor.m.specular = 0.1;
+	floor.m.reflective = 0.1;
 	floor.m.pattern = checkers_pattern(color(100, 80, 60), floor.m.color);
 
 	wall_back = plane();
@@ -295,8 +296,8 @@ t_world	default_world_4(void)
 	wall_back.invtrans = minvert(wall_back.transform, 4);
 	wall_back.m.color = color(80, 0, 0);
 	wall_back.m.diffuse = 0.5;
-	wall_back.m.ambient = 0.0;
-	wall_back.m.specular = 0.0;
+	wall_back.m.ambient = 0;
+	wall_back.m.specular = 0;
 	wall_back.m.pattern = gradient_pattern(wall_back.m.color, color(0, 0, 180)) ; 
 	wall_back.m.pattern.transform = mmultfree(scaling(18, 1, 1), wall_back.m.pattern.transform);
 	wall_back.m.pattern.transform = mmultfree(rotation_y(90 * DEG2RAD), wall_back.m.pattern.transform);
@@ -313,9 +314,10 @@ t_world	default_world_4(void)
 	middle = sphere();
 	middle.transform = mmultfree(translation(-0.5, 1, 1.5), middle.transform);
 	middle.invtrans = minvert(middle.transform, 4);
-	middle.m.color = color(128, 255, 128);
-	middle.m.diffuse = 0.5;
-	middle.m.specular = 0.6;
+	middle.m.color = color(10, 10, 10);
+	middle.m.diffuse = 1;
+	middle.m.specular = 0.1;
+	middle.m.reflective = 1;
 
 	right = sphere();
 	right.transform = mmultfree(scaling(0.5, 0.5, 0.5), right.transform);
@@ -327,15 +329,15 @@ t_world	default_world_4(void)
 	right.m.pattern = ring_pattern(color(20, 80, 60), right.m.color);
 	right.m.pattern.transform = mmultfree(scaling(0.1, 0.2, 0.2), right.m.pattern.transform);
 	right.m.pattern.invtrans = minvert(right.m.pattern.transform, 4);
-
+	
 	w.light = malloc(3 * sizeof(t_light));
 	if (!w.light)
 		exit (1);
-	w.light[0] = point_light(point(-7, 7, -10), color(160, 40, 40));
+	w.light[0] = point_light(point(-7, 7, -6), color(160, 40, 40));
 	w.light[0].last = false;
-	w.light[1] = point_light(point(7, 7, -10), color(40, 40, 160));
+	w.light[1] = point_light(point(7, 7, -6), color(40, 40, 160));
 	w.light[1].last = false;
-	w.light[2] = point_light(point(-2, 3, -10), color(40, 160, 40));
+	w.light[2] = point_light(point(-2, 3, -6), color(40, 160, 40));
 
 	w.s = malloc(8 * sizeof(t_shape));
 	w.s[0] = floor;

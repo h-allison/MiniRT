@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 13:30:13 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/12 23:10:25 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/13 21:43:40 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_rgb	shade_hit(t_world *w, t_comps *comps)
 	t_largs	largs;
 	int		i;
 	t_rgb	col;
+	t_rgb	reflected_col;
 
 	col = color(0, 0, 0);
 	i = 0;
@@ -34,7 +35,8 @@ t_rgb	shade_hit(t_world *w, t_comps *comps)
 			break ;
 		i++;
 	}
-	return (col);
+	reflected_col = reflected_color(w, comps);
+	return (cadd(col, reflected_col));
 }
 
 t_rgb	color_at(t_world *w, t_ray *r)

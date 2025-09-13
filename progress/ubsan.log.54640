@@ -1,9 +1,0 @@
-src/math_colors.c:77:14: runtime error: nan is outside the range of representable values of type 'int'
-    #0 0x0001094c7e31 in color_to_hex math_colors.c:77
-    #1 0x0001094c095e in render rendering.c:56
-    #2 0x0001094cf074 in mlx_loop+0x114 (miniRT:x86_64+0x100010074)
-    #3 0x0001094c0156 in mlx_handling mlx_handling.c:32
-    #4 0x0001094bf8dc in main main.c:23
-    #5 0x7ff814c2f52f in start+0xbef (dyld:x86_64+0xfffffffffffde52f)
-
-SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior src/math_colors.c:77:14 
