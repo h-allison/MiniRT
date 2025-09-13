@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/09/12 12:43:13 by hallison         ###   ########.fr        #
+#    Updated: 2025/09/13 19:31:19 by mmillhof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRC         := src/main.c \
 			   src/create_matrices.c \
 			   src/export_ppm.c \
 			   src/patterns.c \
+			   src/reflection.c \
 			   src/free.c
 
 # ---- Paths ----

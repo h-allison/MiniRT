@@ -61,6 +61,8 @@ SRCS := \
 	$(SRC_DIR_REFLECT)/00_test_reflect_launcher.c \
 	$(SRC_DIR_REFLECT)/01_test_reflective.c \
 	$(SRC_DIR_REFLECT)/02_test_reflect_comps.c \
+	$(SRC_DIR_REFLECT)/03_test_reflect_col_nonreflect.c \
+	$(SRC_DIR_REFLECT)/04_test_reflect_col_reflective.c \
 	$(PRG_DIR)/src/check_file.c \
 	$(PRG_DIR)/src/file_helpers.c \
 	$(PRG_DIR)/src/parsing.c \
@@ -89,6 +91,7 @@ SRCS := \
 	$(PRG_DIR)/src/create_matrices.c \
 	$(PRG_DIR)/src/export_ppm.c \
 	$(PRG_DIR)/src/patterns.c \
+	$(PRG_DIR)/src/reflection.c \
 	$(PRG_DIR)/src/free.c \
 
 OBJS := $(SRCS:.c=.o)

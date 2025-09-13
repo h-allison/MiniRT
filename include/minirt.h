@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:48:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/13 18:35:04 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/13 20:06:55 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define WIN_WIDTH  1024
 # define WIN_HEIGHT 768
 
-# define OFFSET	 0.01
+# define OFFSET	 0.001
 # define EPSILON 0.0001
 # define DEG2RAD 0.017453292519943
 # define RAD2DEG 57.295779513082
@@ -338,6 +338,9 @@ t_rgb			checkers_at(t_pattern *checkers, t_tuple point);
 t_rgb			pattern_at(t_pattern *pat, t_tuple point);
 t_rgb			pattern_at_shape(t_pattern *pat, t_shape *shape, t_tuple point);
 void			set_pattern_transform(t_pattern *pat, float **t);
+
+//reflection.c
+t_rgb			reflected_color(t_world *w, t_comps *comps);
 
 //free.c
 int				free_matrices_and_ret(t_shape *p, int ret);
