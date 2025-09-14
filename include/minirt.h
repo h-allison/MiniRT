@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:48:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/14 01:04:56 by matthias         ###   ########.fr       */
+/*   Updated: 2025/09/14 12:06:05 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <stdlib.h>
 # include <errno.h>
 
-# define WIN_WIDTH  1024
-# define WIN_HEIGHT 768
+# define WIN_WIDTH 1920
+# define WIN_HEIGHT 1080
 
 # define OFFSET	 0.001
 # define EPSILON 0.0001
@@ -296,8 +296,8 @@ t_tuple			reflect(t_tuple in, t_tuple normal);
 t_rgb			lighting(t_largs *largs);
 
 //math_shading_2.c
-t_rgb			shade_hit(t_world *w, t_comps *comps);
-t_rgb			color_at(t_world *w, t_ray *r);
+t_rgb			shade_hit(t_world *w, t_comps *comps, int remaining);
+t_rgb			color_at(t_world *w, t_ray *r, int remaining);
 bool			is_shadowed(t_world *world, int i, t_tuple point);
 
 //math_rays.c
@@ -341,7 +341,7 @@ t_rgb			pattern_at_shape(t_pattern *pat, t_shape *shape, t_tuple point);
 void			set_pattern_transform(t_pattern *pat, float **t);
 
 //reflection.c
-t_rgb			reflected_color(t_world *w, t_comps *comps);
+t_rgb			reflected_color(t_world *w, t_comps *comps, int remaining);
 
 //free.c
 int				free_matrices_and_ret(t_shape *p, int ret);

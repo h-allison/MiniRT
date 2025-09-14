@@ -6,13 +6,13 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 13:30:13 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/13 21:43:40 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/14 12:05:15 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_rgb	shade_hit(t_world *w, t_comps *comps)
+t_rgb	shade_hit(t_world *w, t_comps *comps, int remaining)
 {
 	t_largs	largs;
 	int		i;
@@ -35,11 +35,11 @@ t_rgb	shade_hit(t_world *w, t_comps *comps)
 			break ;
 		i++;
 	}
-	reflected_col = reflected_color(w, comps);
+	reflected_col = reflected_color(w, comps, remaining);
 	return (cadd(col, reflected_col));
 }
 
-t_rgb	color_at(t_world *w, t_ray *r)
+t_rgb	color_at(t_world *w, t_ray *r, int remaining)
 {
 	t_intersection	*xs;
 	t_intersection	*ht;
@@ -55,7 +55,7 @@ t_rgb	color_at(t_world *w, t_ray *r)
 	comps = prepare_computations(ht, r);
 	free(ht);
 	xs[0].object = NULL;
-	return (shade_hit(w, &comps));
+	return (shade_hit(w, &comps, remaining));
 }
 
 bool	is_shadowed(t_world *world, int i, t_tuple point)

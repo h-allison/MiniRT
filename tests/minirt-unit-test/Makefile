@@ -65,6 +65,7 @@ SRCS := \
 	$(SRC_DIR_REFLECT)/04_test_reflect_col_reflective.c \
 	$(SRC_DIR_REFLECT)/05_test_reflect_shade_hit_reflective.c \
 	$(SRC_DIR_REFLECT)/06_test_reflect_mutually_reflective.c \
+	$(SRC_DIR_REFLECT)/07_test_reflect_col_max_recursion.c \
 	$(PRG_DIR)/src/check_file.c \
 	$(PRG_DIR)/src/file_helpers.c \
 	$(PRG_DIR)/src/parsing.c \

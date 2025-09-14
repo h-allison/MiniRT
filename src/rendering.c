@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:54:44 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/14 01:04:04 by matthias         ###   ########.fr       */
+/*   Updated: 2025/09/14 12:04:00 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	render_chunk(t_camera *cam, t_world *world, mlx_image_t *img)
 	while (x < cam->hsize)
 	{
 		r = ray_for_pixel(cam, x, y);
-		col = color_at(world, &r);
+		col = color_at(world, &r, 10);
 		mlx_put_pixel(img, x, y, color_to_hex(col));
 		x++;
 	}
