@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:48:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/14 12:06:05 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/14 12:17:11 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <stdlib.h>
 # include <errno.h>
 
-# define WIN_WIDTH 1920
-# define WIN_HEIGHT 1080
+# define WIN_WIDTH 1024
+# define WIN_HEIGHT 768
 
 # define OFFSET	 0.001
 # define EPSILON 0.0001
