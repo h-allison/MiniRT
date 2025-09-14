@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:48:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/13 20:06:55 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/14 01:04:56 by matthias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,7 @@ t_world			default_world(void);
 t_world			default_world_2(void);
 t_world			default_world_3(void);
 t_world			default_world_4(void);
+t_world			default_world_5(void);
 t_camera		camera(float hsize, float vsize, float field_of_view);
 
 //create_tuples.c
