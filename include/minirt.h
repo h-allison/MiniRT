@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:48:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/15 15:24:15 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/16 00:11:09 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ typedef struct s_comps
 	t_shape			*object;
 	t_tuple			point;
 	t_tuple			over_point;
+	t_tuple			under_point;
 	t_tuple			eyev;
 	t_tuple			normalv;
 	t_tuple			reflectv;
@@ -348,6 +349,7 @@ void			set_pattern_transform(t_pattern *pat, float **t);
 
 //reflection.c
 t_rgb			reflected_color(t_world *w, t_comps *comps, int remaining);
+t_rgb			refracted_color(t_world *w, t_comps *comps, int remaining);
 
 //free.c
 int				free_matrices_and_ret(t_shape *p, int ret);

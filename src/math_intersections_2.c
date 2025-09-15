@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 14:56:16 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/15 20:24:44 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/15 23:34:48 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,13 +105,6 @@ void	prepare_n(t_comps *comps, t_intersection *ht, t_intersection *xs)
 t_comps	prepare_computations(t_intersection *ht, t_ray *r, t_intersection *xs)
 {
 	t_comps	comps;
-/*
-	if (xs == NULL)
-	{
-		xs = intersections(*ht, *ht);
-		xs[1].object = NULL;
-	}
-*/
 	comps.t = ht->t;
 	comps.object = ht->object;
 	comps.point = position(*r, comps.t);
@@ -126,6 +119,7 @@ t_comps	prepare_computations(t_intersection *ht, t_ray *r, t_intersection *xs)
 	else
 		comps.inside = false;
 	comps.over_point = tadd(comps.point, (tmult(comps.normalv, OFFSET)));
+	comps.under_point = tsub(comps.point, (tmult(comps.normalv, OFFSET)));
 	prepare_n(&comps, ht, xs);
 	return (comps);
 }

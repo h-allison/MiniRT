@@ -71,6 +71,9 @@ SRCS := \
 	$(SRC_DIR_REFRACT)/01_test_refract_and_transp.c \
 	$(SRC_DIR_REFRACT)/02_test_refract_glass_sphere.c \
 	$(SRC_DIR_REFRACT)/03_test_refract_find_n1_n2.c \
+	$(SRC_DIR_REFRACT)/04_test_refract_under_point.c \
+	$(SRC_DIR_REFRACT)/05_test_refract_color_opaque.c \
+	$(SRC_DIR_REFRACT)/06_test_refract_max_recursion.c \
 	$(PRG_DIR)/src/check_file.c \
 	$(PRG_DIR)/src/file_helpers.c \
 	$(PRG_DIR)/src/parsing.c \

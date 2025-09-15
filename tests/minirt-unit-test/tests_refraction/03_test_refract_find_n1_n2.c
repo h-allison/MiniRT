@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 23:02:50 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/15 18:53:07 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/15 23:55:02 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int test_refract_find_n1_n2(void)
 	t_ray			r;
 	t_intersection	*xs;
 	t_comps			comps;
-	int				i;
 
 	sa = glass_sphere();
 	set_transform(&sa, scaling(2, 2, 2));
@@ -35,21 +34,23 @@ int test_refract_find_n1_n2(void)
 	xs = intersections(intersection(2, &sa), intersection(2.75, &sb));
 	xs = intersections(intersection(3.25, &sc), intersection(4.75, &sb));
 	xs = intersections(intersection(5.25, &sc), intersection(6, &sa));
-	i = 0;
-	printf("\n\n");
-	while (xs[i].object)
-	{
-		printf("xs[%i] = %f , %d\n", i, xs[i].t, xs[i].object->type);
-		i++;
-	}
-	printf("\n");
-	printf("index 	| n1 		| n2\n");
-	i = 0;
-	while (i < 6)
-	{
-		comps = prepare_computations(&xs[i], &r, xs);
-		printf("%i 	| %f | %f\n", i, comps.n1, comps.n2);
-		i++;
-	}
+	comps = prepare_computations(&xs[0], &r, xs);
+	if (!fisequal(comps.n1, 1) || !fisequal(comps.n2, 1.5))
+		return (-1);
+	comps = prepare_computations(&xs[1], &r, xs);
+	if (!fisequal(comps.n1, 1.5) || !fisequal(comps.n2, 2))
+		return (-1);
+	comps = prepare_computations(&xs[2], &r, xs);
+	if (!fisequal(comps.n1, 2) || !fisequal(comps.n2, 2.5))
+		return (-1);
+	comps = prepare_computations(&xs[3], &r, xs);
+	if (!fisequal(comps.n1, 2.5) || !fisequal(comps.n2, 2.5))
+		return (-1);
+	comps = prepare_computations(&xs[4], &r, xs);
+	if (!fisequal(comps.n1, 2.5) || !fisequal(comps.n2, 1.5))
+		return (-1);
+	comps = prepare_computations(&xs[5], &r, xs);
+	if (!fisequal(comps.n1, 1.5) || !fisequal(comps.n2, 1))
+		return (-1);
 	return (0);
 }
