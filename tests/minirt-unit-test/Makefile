@@ -19,6 +19,7 @@ SRC_DIR_SHAPES := tests_shapes
 SRC_DIR_PLANES := tests_planes
 SRC_DIR_PATTERNS := tests_patterns
 SRC_DIR_REFLECT := tests_reflection
+SRC_DIR_REFRACT := tests_refraction
 
 SRCS := \
 	main.c \
@@ -66,6 +67,9 @@ SRCS := \
 	$(SRC_DIR_REFLECT)/05_test_reflect_shade_hit_reflective.c \
 	$(SRC_DIR_REFLECT)/06_test_reflect_mutually_reflective.c \
 	$(SRC_DIR_REFLECT)/07_test_reflect_col_max_recursion.c \
+	$(SRC_DIR_REFRACT)/00_test_refract_launcher.c \
+	$(SRC_DIR_REFRACT)/01_test_refract_and_transp.c \
+	$(SRC_DIR_REFRACT)/02_test_refract_glass_sphere.c \
 	$(PRG_DIR)/src/check_file.c \
 	$(PRG_DIR)/src/file_helpers.c \
 	$(PRG_DIR)/src/parsing.c \

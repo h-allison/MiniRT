@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:48:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/14 12:17:11 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/15 12:40:07 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # define WIN_WIDTH 1024
 # define WIN_HEIGHT 768
 
+# define MAX_RECURSION 5
+
 # define OFFSET	 0.001
 # define EPSILON 0.0001
 # define DEG2RAD 0.017453292519943
@@ -40,13 +42,6 @@ typedef enum e_error
 	ERROR_OPEN,
 	ERROR_WRONG_CHARS,
 }	t_error;
-
-typedef enum e_objtype
-{
-	OBJ_SPHERE,
-	OBJ_PLANE,
-	OBJ_CYL,
-}	t_objtype;
 
 typedef struct s_tuple
 {
@@ -97,6 +92,8 @@ typedef struct s_material
 	float			specular;
 	float			shininess;
 	float			reflective;
+	float			transparency;
+	float			refractive_index;
 }	t_material;
 
 typedef struct s_light
@@ -146,6 +143,8 @@ typedef struct s_comps
 	t_tuple			eyev;
 	t_tuple			normalv;
 	t_tuple			reflectv;
+	float			n1;
+	float			n2;
 	bool			inside;
 }	t_comps;
 
@@ -205,6 +204,7 @@ t_pattern		pattern(void);
 t_material		material(void);
 t_shape			create_test_shape(void);
 t_pattern		create_test_pattern(void);
+t_shape			glass_sphere(void);
 t_shape			sphere(void);
 t_shape			plane(void);
 t_light			point_light(t_tuple position, t_rgb intensity);

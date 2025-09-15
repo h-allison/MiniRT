@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:49:07 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/14 02:01:00 by matthias         ###   ########.fr       */
+/*   Updated: 2025/09/14 19:19:03 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ t_material	material(void)
 	m.specular = 0.9;
 	m.shininess = 200;
 	m.reflective = 0.0;
+	m.transparency = 0.0;
+	m.refractive_index = 1.0;
 	m.pattern = pattern();
 	return(m);
 }
@@ -60,11 +62,24 @@ t_pattern	create_test_pattern(void)
 	return(pat);
 }
 
+t_shape	glass_sphere(void)
+{
+	t_shape	s;
+
+	s.transform = create_id_matrix();
+	s.invtrans = minvert(s.transform, 4);
+	s.local_normal_at = local_normal_at_sphere;
+	s.local_intersect = local_intersect_sphere;
+	s.m = material();
+	s.m.transparency = 1.0;
+	s.m.refractive_index = 1.5;
+	return (s);
+}
+
 t_shape	sphere(void)
 {
 	t_shape	s;
 
-	s.type = OBJ_SPHERE; 
 	s.transform = create_id_matrix();
 	s.invtrans = minvert(s.transform, 4);
 	s.local_normal_at = local_normal_at_sphere;
@@ -77,7 +92,6 @@ t_shape	plane(void)
 {
 	t_shape	s;
 
-	s.type = OBJ_PLANE; 
 	s.transform = create_id_matrix();
 	s.invtrans = minvert(s.transform, 4);
 	s.local_normal_at = local_normal_at_plane;
