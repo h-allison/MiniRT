@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 14:56:16 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/15 17:48:49 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/15 20:00:51 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	lst_findobject(t_list *containers, t_shape *object)
 	return;
 }
 
+// This version assumes that "the hit" is the hit passed to prepare_computations
 void	prepare_n(t_comps *comps, t_intersection *ht, t_intersection *xs)
 {
 	t_list			*containers;
@@ -58,11 +59,11 @@ void	prepare_n(t_comps *comps, t_intersection *ht, t_intersection *xs)
 	
 	containers = ft_lstnew(NULL);
 	i = 0;
-	while (xs[i].object)
+	while (xs && xs[i].object)
 	{
 		if (xs[i].t == ht->t && xs[i].object == ht->object)
 		{
-			if (!containers->next)
+			if (containers->next == NULL)
 				comps->n1 = 1.0;
 			else
 			{
@@ -70,15 +71,15 @@ void	prepare_n(t_comps *comps, t_intersection *ht, t_intersection *xs)
 				comps->n1 = object->m.refractive_index;
 			}
 		}
-		lst_findobject(containers, ht->object); // check if containers includes xs[i].object
+		lst_findobject(containers, xs[i].object);
 		if (xs[i].t == ht->t && xs[i].object == ht->object)
 		{
-			if (!containers->next)
+			if (containers->next == NULL)
 				comps->n2 = 1.0;
 			else
 			{
 				object = (t_shape *)ft_lstlast(containers)->content;
-				comps->n1 = object->m.refractive_index;
+				comps->n2 = object->m.refractive_index;
 			}
 		}
 		i++;
@@ -89,7 +90,13 @@ void	prepare_n(t_comps *comps, t_intersection *ht, t_intersection *xs)
 t_comps	prepare_computations(t_intersection *ht, t_ray *r, t_intersection *xs)
 {
 	t_comps	comps;
-
+/*
+	if (xs == NULL)
+	{
+		xs = intersections(*ht, *ht);
+		xs[1].object = NULL;
+	}
+*/
 	comps.t = ht->t;
 	comps.object = ht->object;
 	comps.point = position(*r, comps.t);

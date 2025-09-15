@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:23:07 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/15 14:07:39 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/15 19:55:49 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define LIBFT_H
 # include <stddef.h>
 # include "get_next_line.h"
-
+# include <stdlib.h>
 
 typedef struct s_list
 {
