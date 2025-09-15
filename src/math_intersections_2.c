@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 14:56:16 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/15 20:00:51 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/15 20:24:44 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,22 @@ void	lst_findobject(t_list *containers, t_shape *object)
 	return;
 }
 
-// This version assumes that "the hit" is the hit passed to prepare_computations
+void    clear_list(t_list **lst) 
+{
+    t_list  *node;
+    t_list  *temp;
+
+    node = *lst;
+    while (node)
+    {   
+        temp = node->next;
+        free(node);
+        node = temp;
+    }
+    *lst = NULL;
+}
+
+
 void	prepare_n(t_comps *comps, t_intersection *ht, t_intersection *xs)
 {
 	t_list			*containers;
@@ -84,7 +99,7 @@ void	prepare_n(t_comps *comps, t_intersection *ht, t_intersection *xs)
 		}
 		i++;
 	}
-	ft_lstclear(&containers, &free);
+	clear_list(&containers);
 }
 
 t_comps	prepare_computations(t_intersection *ht, t_ray *r, t_intersection *xs)
