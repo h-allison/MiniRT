@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:48:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/15 12:40:07 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/15 15:24:15 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,12 @@ typedef struct s_shape
 	t_material		m;
 	t_ray			saved_ray;
 }	t_shape;
+
+typedef struct s_containers
+{
+	t_shape				*content;
+	struct s_containers	*next;
+} t_containers;
 
 typedef struct s_camera
 {
@@ -318,7 +324,7 @@ t_intersection	*hit(t_intersection *xs);
 
 //math_intersections_2.c
 t_intersection	*intersect_world(t_world *w, t_ray *r);
-t_comps			prepare_computations(t_intersection *i, t_ray *r);
+t_comps			prepare_computations(t_intersection *i, t_ray *r, t_intersection *xs);
 
 //math_view.c
 float			**view_transform(t_tuple from, t_tuple to, t_tuple up);

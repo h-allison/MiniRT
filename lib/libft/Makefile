@@ -53,7 +53,16 @@ ft_print_s.c\
 ft_print_p.c\
 ft_flexitoa.c\
 ft_print_b.c\
-get_next_line.c
+get_next_line.c\
+ft_lstadd_back.c\
+ft_lstadd_front.c\
+ft_lstclear.c\
+ft_lstdelone.c\
+ft_lstiter.c\
+ft_lstlast.c\
+ft_lstmap.c\
+ft_lstnew.c\
+ft_lstsize.c
 
 OBJ = $(SRC:.c=.o)
 

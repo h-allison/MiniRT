@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:23:07 by hallison          #+#    #+#             */
-/*   Updated: 2025/03/24 17:42:20 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/15 14:07:39 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define LIBFT_H
 # include <stddef.h>
 # include "get_next_line.h"
+
+
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+} t_list;
 
 int		ft_atoi(const char *nptr);
 void	ft_bzero(void *s, size_t n);
@@ -58,5 +65,14 @@ int		ft_print_d(int arg);
 int		ft_flexitoa(size_t nbr, int base, const char *radix);
 int		ft_print_b(size_t nbr, int base, const char *radix);
 int		ft_realloc(char *ptr, size_t size);
+t_list	*ft_lstnew(void *content);
+void	ft_lstadd_front(t_list **lst, t_list *new);
+int		ft_lstsize(t_list *lst);
+t_list	*ft_lstlast(t_list *lst);
+void	ft_lstadd_back(t_list **lst, t_list *new);
+void	ft_lstdelone(t_list *lst, void (*del)(void *));
+void	ft_lstclear(t_list **lst, void (*del)(void *));
+void	ft_lstiter(t_list *lst, void (*f)(void *));
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 #endif

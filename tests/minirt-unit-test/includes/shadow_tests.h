@@ -6,7 +6,7 @@
 /*   By: smargine <smargine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 12:10:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/09 13:45:11 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/15 15:39:26 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libunit.h"
 # include "minirt.h"
+# include "libft.h"
 
 int	shadow_tests_launcher(void);
 int	test_shadow_in(void);

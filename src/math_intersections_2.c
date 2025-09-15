@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 14:56:16 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/13 18:45:32 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:48:49 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,72 @@ t_intersection	*intersect_world(t_world *w, t_ray *r)
 	return (xs);
 }
 
-t_comps	prepare_computations(t_intersection *i, t_ray *r)
+void	lst_findobject(t_list *containers, t_shape *object)
+{
+	t_list	*new_next;
+	t_list  *new_node;
+
+	while (containers->next)
+	{
+		if (containers->next->content == object)
+		{
+			if (containers->next)
+				new_next = containers->next->next;
+			else
+				new_next = NULL;
+			free(containers->next);
+			containers->next = new_next;
+			return;
+		}
+		containers = containers->next;
+	}
+	new_node = ft_lstnew(object);
+	containers->next = new_node;
+	return;
+}
+
+void	prepare_n(t_comps *comps, t_intersection *ht, t_intersection *xs)
+{
+	t_list			*containers;
+	int				i;
+	t_shape			*object;
+	
+	containers = ft_lstnew(NULL);
+	i = 0;
+	while (xs[i].object)
+	{
+		if (xs[i].t == ht->t && xs[i].object == ht->object)
+		{
+			if (!containers->next)
+				comps->n1 = 1.0;
+			else
+			{
+				object = (t_shape *)ft_lstlast(containers)->content;
+				comps->n1 = object->m.refractive_index;
+			}
+		}
+		lst_findobject(containers, ht->object); // check if containers includes xs[i].object
+		if (xs[i].t == ht->t && xs[i].object == ht->object)
+		{
+			if (!containers->next)
+				comps->n2 = 1.0;
+			else
+			{
+				object = (t_shape *)ft_lstlast(containers)->content;
+				comps->n1 = object->m.refractive_index;
+			}
+		}
+		i++;
+	}
+	ft_lstclear(&containers, &free);
+}
+
+t_comps	prepare_computations(t_intersection *ht, t_ray *r, t_intersection *xs)
 {
 	t_comps	comps;
 
-	comps.t = i->t;
-	comps.object = i->object;
+	comps.t = ht->t;
+	comps.object = ht->object;
 	comps.point = position(*r, comps.t);
 	comps.eyev = tneg(r->direction);
 	comps.normalv = normal_at(comps.object, comps.point);
@@ -44,5 +104,6 @@ t_comps	prepare_computations(t_intersection *i, t_ray *r)
 	else
 		comps.inside = false;
 	comps.over_point = tadd(comps.point, (tmult(comps.normalv, OFFSET)));
+	prepare_n(&comps, ht, xs);
 	return (comps);
 }

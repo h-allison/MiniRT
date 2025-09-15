@@ -6,7 +6,7 @@
 /*   By: smargine <smargine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 18:52:32 by smargine          #+#    #+#             */
-/*   Updated: 2025/09/12 13:29:30 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/15 15:26:11 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int test_over_point(void)
 	s = sphere();
 	set_transform(&s, translation(0, 0, 1));
 	i = intersection(5, &s);
-	c = prepare_computations(&i, &r);
+	c = prepare_computations(&i, &r, NULL);
 	if (c.over_point.z < -EPSILON/2 && c.point.z > c.over_point.z)
 	{
 		return (free_matrices_and_ret(&s, 0));

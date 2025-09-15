@@ -70,6 +70,7 @@ SRCS := \
 	$(SRC_DIR_REFRACT)/00_test_refract_launcher.c \
 	$(SRC_DIR_REFRACT)/01_test_refract_and_transp.c \
 	$(SRC_DIR_REFRACT)/02_test_refract_glass_sphere.c \
+	$(SRC_DIR_REFRACT)/03_test_refract_find_n1_n2.c \
 	$(PRG_DIR)/src/check_file.c \
 	$(PRG_DIR)/src/file_helpers.c \
 	$(PRG_DIR)/src/parsing.c \
@@ -100,6 +101,16 @@ SRCS := \
 	$(PRG_DIR)/src/patterns.c \
 	$(PRG_DIR)/src/reflection.c \
 	$(PRG_DIR)/src/free.c \
+	$(LIBFT_DIR)/ft_lstadd_back.c\
+	$(LIBFT_DIR)/ft_lstadd_front.c\
+	$(LIBFT_DIR)/ft_lstclear.c\
+	$(LIBFT_DIR)/ft_lstdelone.c\
+	$(LIBFT_DIR)/ft_lstiter.c\
+	$(LIBFT_DIR)/ft_lstlast.c\
+	$(LIBFT_DIR)/ft_lstmap.c\
+	$(LIBFT_DIR)/ft_lstnew.c\
+	$(LIBFT_DIR)/ft_lstsize.c
+
 
 OBJS := $(SRCS:.c=.o)
 
@@ -135,5 +146,9 @@ re: fclean all
 asan: CFLAGS  += -fsanitize=address -g
 asan: LDLIBS += -fsanitize=address
 asan: fclean all
+
+gdb:  CFLAGS  += -g -O0 
+gdb:  fclean all 
+
 
 .PHONY: all clean fclean re

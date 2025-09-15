@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 23:02:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/14 12:12:10 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/15 15:27:56 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int test_reflect_col_reflective(void)
 	w.s[3].transform = NULL;
 	r = ray(point(0, 0, -3), vector(0, -sqrtf(2)/2, sqrtf(2)/2));
 	i = intersection(sqrtf(2), &s);
-	c = prepare_computations(&i, &r);
+	c = prepare_computations(&i, &r, NULL);
 	col = reflected_color(&w, &c, 10);
 	if (!fisequal(col.r, 0.190491) || !fisequal(col.g, 0.238114)
 			|| !fisequal(col.b, 0.142868))

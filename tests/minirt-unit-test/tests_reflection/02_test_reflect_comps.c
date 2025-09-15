@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 23:02:40 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/13 23:02:41 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/15 15:26:59 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int test_reflect_comps(void)
 	s = plane();
 	r = ray(point(0, 1, -1), vector(0, -sqrtf(2)/2, sqrtf(2)/2));
 	i = intersection(sqrtf(2), &s);
-	c = prepare_computations(&i, &r);
+	c = prepare_computations(&i, &r, NULL);
 	if (!fisequal(c.reflectv.x, 0) || !fisequal(c.reflectv.y, sqrtf(2)/2)
 			|| !fisequal(c.reflectv.z, sqrtf(2)/2))
 		return (-1);
