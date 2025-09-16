@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 17:16:24 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/16 12:53:27 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/16 17:18:01 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,10 @@ int test_refract_color_opaque(void);
 int test_refract_max_recursion(void);
 int test_refract_total(void);
 int test_refract_color(void);
+int	test_refract_shade_hit(void);	
+int	test_refract_schlick_total(void);
+int	test_refract_schlick_perpendicular(void);
+int	test_schlick_n2_bigger_n1(void);
+int	test_shadehit_reflective_and_transparent(void);
 
 #endif

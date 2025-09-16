@@ -6,11 +6,32 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 19:21:19 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/16 15:23:13 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/16 17:03:02 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+float	schlick(t_comps *comps)
+{
+	float	cos;
+	float	n;
+	float	sin2_t;
+	float	r0;
+
+	cos = dot(comps->eyev, comps->normalv);
+	if (comps->n1 > comps->n2)
+	{
+		n = comps->n1 / comps->n2;
+		sin2_t = n * n * (1.0 - cos * cos);
+		if (sin2_t > 1.0)
+			return (1.0);
+		cos = sqrtf(1.0 - sin2_t);
+	}
+	r0 = (comps->n1 - comps->n2) / (comps->n1 + comps->n2);
+	r0 = r0 * r0;
+	return(r0 + (1 - r0) * pow((1 - cos), 5));
+}
 
 t_rgb	reflected_color(t_world *w, t_comps *comps, int remaining)
 {

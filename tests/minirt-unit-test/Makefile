@@ -76,6 +76,11 @@ SRCS := \
 	$(SRC_DIR_REFRACT)/06_test_refract_max_recursion.c \
 	$(SRC_DIR_REFRACT)/07_test_refract_total.c \
 	$(SRC_DIR_REFRACT)/08_test_refract_color.c \
+	$(SRC_DIR_REFRACT)/09_test_refract_shade_hit.c \
+	$(SRC_DIR_REFRACT)/10_schlick_total.c \
+	$(SRC_DIR_REFRACT)/11_schlick_perpendicular.c \
+	$(SRC_DIR_REFRACT)/12_schlick_n2_bigger_n1.c \
+	$(SRC_DIR_REFRACT)/13_shadehit_reflective_and_transparent.c \
 	$(PRG_DIR)/src/check_file.c \
 	$(PRG_DIR)/src/file_helpers.c \
 	$(PRG_DIR)/src/parsing.c \

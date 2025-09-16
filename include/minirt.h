@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:48:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/16 14:57:57 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/16 18:14:39 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -350,8 +350,11 @@ void			set_pattern_transform(t_pattern *pat, float **t);
 //reflection.c
 t_rgb			reflected_color(t_world *w, t_comps *comps, int remaining);
 t_rgb			refracted_color(t_world *w, t_comps *comps, int remaining);
+float			schlick(t_comps *comps);
 
 //free.c
 int				free_matrices_and_ret(t_shape *p, int ret);
 
+//world_scenes.c
+t_world			default_world_6(void);
 #endif

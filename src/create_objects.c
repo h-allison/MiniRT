@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:49:07 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/16 15:10:49 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/16 16:23:21 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -409,7 +409,9 @@ t_world	default_world_5(void)
 	middle.m.color = color(138, 132, 70);
 	middle.m.diffuse = 0.1;
 	middle.m.specular = 0.2;
-	middle.m.reflective = 1;
+	middle.m.reflective = 0;
+	middle.m.refractive_index = 1.5;
+	middle.m.transparency = 1;
 
 	right = sphere();
 	right.transform = mmultfree(scaling(0.5, 0.5, 0.5), right.transform);
