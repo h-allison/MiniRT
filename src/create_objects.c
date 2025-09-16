@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/12 14:49:07 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/16 16:23:21 by hallison         ###   ########.fr       */
+/*   Created: 2025/09/16 19:13:39 by mmillhof          #+#    #+#             */
+/*   Updated: 2025/09/16 19:13:56 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,18 @@ t_shape	plane(void)
 	s.invtrans = minvert(s.transform, 4);
 	s.local_normal_at = local_normal_at_plane;
 	s.local_intersect = local_intersect_plane;
+	s.m = material();
+	return (s);
+}
+
+t_shape	cube(void)
+{
+	t_shape	s;
+
+	s.transform = create_id_matrix();
+	s.invtrans = minvert(s.transform, 4);
+	s.local_normal_at = local_normal_at_cube;
+	s.local_intersect = local_intersect_cube;
 	s.m = material();
 	return (s);
 }

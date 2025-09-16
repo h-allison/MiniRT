@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 17:55:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/10 17:52:48 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/16 19:06:02 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,72 @@ t_intersection	*local_intersect_plane(t_shape *s)
 		xs = intersections(intersection(t, s), intersection(0, NULL));
 	}
 	return (xs);
+}
+
+static	swap(float *a, float *b)
+{
+	float	tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+static	min(float a, float b, float c)
+{
+	if (a < b && a < c)
+		return (a);
+	if (b < a && b < c)
+		return (b);
+	return (c);
+}
+
+static	max(float a, float b, float c)
+{
+	if (a > b && a > c)
+		return (a);
+	if (b > a && b > c)
+		return (b);
+	return (c);
+}
+
+static	check_axis(float *tmin, float *tmax, float origin, float direction);
+{
+	float	t_min_numerator;
+	float	t_max_numerator;
+
+	t_min_numerator = (-1 - origin);
+	t_max_numerator = (1 - origin);
+	if (absf(direction) >= EPSILON)
+	{
+		*tmin = tmin_numerator / direction;
+		*tmax = tmax_numerator / direction;
+	}
+	else
+	{
+		*tmin = tmin_numerator * DBL_MAX;
+		*tmax = tmax_numerator * DBL_MAX;
+	}
+	if (*tmin > *tmax)
+		swap(tmin, tmax);
+	return ;
+}
+
+t_intersection	*local_intersect_cube(t_shape *s)
+{
+	t_minmax	t;
+	float		tmin;
+	float		tmax;
+
+	check_axis(&t.xtmin, &t.xtmax,
+		s->saved_ray.origin.x, s->saved_ray.direction.x);
+	check_axis(&t.ytmin, &t.ytmax,
+		s->saved_ray.origin.y, s->saved_ray.direction.y);
+	check_axis(&t.ztmin, &ztmax,
+		s->saved_ray.origin.z, s->saved_ray.direction.z);
+	tmin = max(t.xtmin, t.ytmin, t.ztmin);
+	tmax = min(t.xtmax, t.ytmax, t.ztmax);
+	return (intersections(intersection(tmin, s), intersection(tmax, s));
 }
 
 t_intersection	*local_intersect(t_shape *s)

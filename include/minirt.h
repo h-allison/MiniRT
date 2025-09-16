@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/12 14:48:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/16 18:14:39 by hallison         ###   ########.fr       */
+/*   Created: 2025/09/16 19:12:25 by mmillhof          #+#    #+#             */
+/*   Updated: 2025/09/16 19:12:57 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@
 # define WIN_HEIGHT 768
 
 # define MAX_RECURSION 5
-
 # define OFFSET	 0.001
 # define EPSILON 0.0001
+
 # define DEG2RAD 0.017453292519943
 # define RAD2DEG 57.295779513082
 /*# define DEG2RAD  M_PI / 180.0
@@ -185,6 +185,16 @@ typedef struct s_data
 	mlx_image_t	*img;
 }	t_data;
 
+typedef strunct s_tminmax
+{
+	float	xtmin;
+	float	ytmin;
+	float	ztmin;
+	float	xtmax;
+	float	ytmin;
+	float	ztmin;
+}	t_tminmax
+
 //check_file.c
 int				scenefile_check_chars(char *filename);
 
@@ -214,6 +224,7 @@ t_pattern		create_test_pattern(void);
 t_shape			glass_sphere(void);
 t_shape			sphere(void);
 t_shape			plane(void);
+t_shape			cube(void);
 t_light			point_light(t_tuple position, t_rgb intensity);
 t_world			default_world(void);
 t_world			default_world_2(void);
@@ -297,6 +308,7 @@ float			**shearing(float *shear);
 //math_shading.c
 t_tuple			local_normal_at_sphere(t_shape *s, t_tuple local_point);
 t_tuple			local_normal_at_plane(t_shape *s, t_tuple local_point);
+t_tuple			local_normal_at_cube(t_shape *s, t_tuple local_point);
 t_tuple			local_normal_at(t_shape *s, t_tuple local_point);
 t_tuple			normal_at(t_shape *s, t_tuple p);
 t_tuple			reflect(t_tuple in, t_tuple normal);
@@ -317,6 +329,7 @@ t_ray			ray_for_pixel(t_camera *c, float px, float py);
 //math_intersections.c
 t_intersection	*local_intersect_sphere(t_shape *s);
 t_intersection	*local_intersect_plane(t_shape *s);
+t_intersection	*local_intersect_cube(t_shape *s);
 t_intersection	*local_intersect(t_shape *s);
 t_intersection	*intersect(t_shape *s, t_ray r);
 t_intersection	intersection(float t, t_shape *s);
