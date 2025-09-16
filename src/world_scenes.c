@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 18:12:31 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/16 18:38:03 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/16 21:18:56 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,41 +47,53 @@ t_world	default_world_6(void)
 {
 	t_world	w;
 	t_shape	floor;
+	t_shape	big;
 	t_shape	middle;
 	t_shape	right;
 	t_shape	left;
-	t_shape	behind;
 	
 	floor = plane();
 	floor.invtrans = minvert(floor.transform, 4);
 	floor.m.color = color(200, 200, 200);
 	floor.m.diffuse = 0.7;
 	floor.m.ambient = 0.01;
-	floor.m.specular = 0.1;
-	floor.m.reflective = .1;
-	floor.m.pattern = checkers_pattern(color(0, 0, 0), floor.m.color);
+	floor.m.specular = 0.2;
+	floor.m.reflective = .2;
+	floor.m.pattern = ring_pattern(color(80, 80, 80), floor.m.color);
+
+	big = sphere();
+	big.transform = mmultfree(translation(.5, 1, 4), big.transform);
+	big.invtrans = minvert(big.transform, 4);
+	big.m.color = color(140, 130, 100);
+	big.m.diffuse = .6;
+	big.m.ambient = .2;
+	big.m.specular = 0.5;
+	big.m.pattern = stripe_pattern(color(80, 80, 80), big.m.color);
+	big.m.pattern.transform = mmultfree(scaling(0.4, 0.4, 0.6), big.m.pattern.transform);
+	big.m.pattern.invtrans = minvert(big.m.pattern.transform, 4);
 
 	left = sphere();
 	left.transform = mmultfree(scaling(0.33, 0.33, 0.33), left.transform);
-	left.transform = mmultfree(translation(-2, 0.33, 0), left.transform);
+	left.transform = mmultfree(translation(-2, 0.33, 2), left.transform);
 	left.invtrans = minvert(left.transform, 4);
 	left.m.color = color(255, 128, 128);
 	left.m.diffuse = 0.7;
 	left.m.specular = 0.5;
 
 	middle = sphere();
-	middle.transform = mmultfree(translation(-0.2, 1, 1), middle.transform);
+	middle.transform = mmultfree(translation(-0.2, 1, -2), middle.transform);
 	middle.invtrans = minvert(middle.transform, 4);
-	middle.m.color = color(0, 0, 0);
-	middle.m.diffuse = 0.1;
+	middle.m.color = color(10, 10, 10);
+	middle.m.diffuse = 1;
 	middle.m.specular = 0.2;
-	middle.m.reflective = 1;
-	middle.m.refractive_index = 1.05;
-	middle.m.transparency = 0.2;
+	middle.m.ambient = 0.1;
+	middle.m.reflective = 2;
+	middle.m.transparency = 0.9;
+	middle.m.refractive_index = 1.5;
 
 	right = sphere();
 	right.transform = mmultfree(scaling(0.5, 0.5, 0.5), right.transform);
-	right.transform = mmultfree(translation(1.5, 0.5, -1), right.transform);
+	right.transform = mmultfree(translation(4, 0.5, 2.5), right.transform);
 	right.invtrans = minvert(right.transform, 4);
 	right.m.color = color(140, 100, 255);
 	right.m.diffuse = 0.7;
@@ -90,15 +102,6 @@ t_world	default_world_6(void)
 	right.m.pattern.transform = mmultfree(scaling(0.1, 0.2, 0.2), right.m.pattern.transform);
 	right.m.pattern.invtrans = minvert(right.m.pattern.transform, 4);
 	
-	behind = sphere();
-	behind.transform = mmultfree(scaling(0.75, 0.75, 0.75), behind.transform);
-	behind.transform = mmultfree(translation(1, 0.75, 4), behind.transform);
-	behind.invtrans = minvert(behind.transform, 4);
-	behind.m.color = color(255, 200, 255);
-	behind.m.diffuse = 0.8;
-	behind.m.specular = 0.5;
-//	behind.m.pattern = ring_pattern(color(20, 80, 60), behind.m.color);
-//	behind.m.pattern.transform = mmultfree(scaling(0.1, 0.2, 0.2), behind.m.pattern.transform);
 	w.light = malloc(1 * sizeof(t_light));
 	if (!w.light)
 		exit (1);
@@ -106,10 +109,10 @@ t_world	default_world_6(void)
 
 	w.s = malloc(8 * sizeof(t_shape));
 	w.s[0] = floor;
-	w.s[1] = middle;
-	w.s[2] = right;
-	w.s[3] = left;
-	w.s[4] = behind;
+	w.s[1] = big;
+	w.s[2] = middle;
+	w.s[3] = right;
+	w.s[4] = left;
 	w.s[5].transform = NULL;
 	return (w);
 }

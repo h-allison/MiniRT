@@ -6,33 +6,20 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 13:30:13 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/16 18:03:36 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/16 20:30:29 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-t_rgb	shade_hit_refl_transp(t_comps *comps, t_rgb surface, t_rgb refl, t_rgb refr)
-{
-	float	reflectance;
-	t_rgb	total_reflect;
-	t_rgb	total_refract;
-	t_rgb	subtotal;
-
-	reflectance = schlick(comps);
-	total_reflect = cscale(refl, reflectance);
-	total_refract = cscale(refr, (1 - reflectance));
-	subtotal = cadd(total_reflect, total_refract);
-	return (cadd(surface, subtotal));
-}
 
 t_rgb	shade_hit(t_world *w, t_comps *comps, int remaining)
 {
 	t_largs	largs;
 	int		i;
 	t_rgb	surface;
-	t_rgb	reflected_col;
-	t_rgb	refracted_col;
+	t_rgb	reflected;
+	t_rgb	refracted;
+	float	reflectance;
 
 	surface = color(0, 0, 0);
 	i = 0;
@@ -50,15 +37,15 @@ t_rgb	shade_hit(t_world *w, t_comps *comps, int remaining)
 			break ;
 		i++;
 	}
-	reflected_col = reflected_color(w, comps, remaining);
-	refracted_col = refracted_color(w, comps, remaining);
+	reflected = reflected_color(w, comps, remaining);
+	refracted = refracted_color(w, comps, remaining);
 	if (comps->object->m.reflective > 0 && comps->object->m.transparency > 0)
-		return (shade_hit_refl_transp(comps, surface, reflected_col, refracted_col));
-	else
 	{
-		surface = cadd(surface, reflected_col);
-		return (cadd(surface, refracted_col));
+		reflectance = schlick(comps);
+		return (cadd(cadd(surface, cscale(reflected, reflectance)),
+			cscale(refracted, 1 - reflectance)));
 	}
+	return (cadd(cadd(surface, reflected), refracted));
 }
 
 t_rgb	color_at(t_world *w, t_ray *r, int remaining)

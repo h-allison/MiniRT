@@ -113,6 +113,7 @@ SRCS := \
 	$(PRG_DIR)/src/export_ppm.c \
 	$(PRG_DIR)/src/patterns.c \
 	$(PRG_DIR)/src/reflection.c \
+	$(PRG_DIR)/src/world_scenes.c \
 	$(PRG_DIR)/src/free.c \
 	$(LIBFT_DIR)/ft_lstadd_back.c\
 	$(LIBFT_DIR)/ft_lstadd_front.c\
