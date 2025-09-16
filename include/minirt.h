@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 19:12:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/16 19:43:04 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/17 00:50:53 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@
 # include <stdlib.h>
 # include <errno.h>
 
-# define WIN_WIDTH 1024
-# define WIN_HEIGHT 768
+# define WIN_WIDTH 1920
+# define WIN_HEIGHT 1080
 
-# define MAX_RECURSION 5
+# define MAX_RECURSION 10
 # define OFFSET	 0.001
 # define EPSILON 0.0001
 
@@ -309,7 +309,7 @@ float			**shearing(float *shear);
 //math_shading.c
 t_tuple			local_normal_at_sphere(t_shape *s, t_tuple local_point);
 t_tuple			local_normal_at_plane(t_shape *s, t_tuple local_point);
-//t_tuple			local_normal_at_cube(t_shape *s, t_tuple local_point);
+t_tuple			local_normal_at_cube(t_shape *s, t_tuple local_point);
 t_tuple			local_normal_at(t_shape *s, t_tuple local_point);
 t_tuple			normal_at(t_shape *s, t_tuple p);
 t_tuple			reflect(t_tuple in, t_tuple normal);
@@ -331,6 +331,7 @@ t_ray			ray_for_pixel(t_camera *c, float px, float py);
 t_intersection	*local_intersect_sphere(t_shape *s);
 t_intersection	*local_intersect_plane(t_shape *s);
 t_intersection	*local_intersect_cube(t_shape *s);
+float			maxf(float a, float b, float c);
 t_intersection	*local_intersect(t_shape *s);
 t_intersection	*intersect(t_shape *s, t_ray r);
 t_intersection	intersection(float t, t_shape *s);

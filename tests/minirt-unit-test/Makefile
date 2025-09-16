@@ -84,6 +84,8 @@ SRCS := \
 	$(SRC_DIR_REFRACT)/13_shadehit_reflective_and_transparent.c \
 	$(SRC_DIR_CUBES)/00_test_cubes_launcher.c \
 	$(SRC_DIR_CUBES)/01_test_cubes_intersect.c \
+	$(SRC_DIR_CUBES)/02_test_cubes_ray_misses.c \
+	$(SRC_DIR_CUBES)/03_test_cubes_normal_at.c \
 	$(PRG_DIR)/src/check_file.c \
 	$(PRG_DIR)/src/file_helpers.c \
 	$(PRG_DIR)/src/parsing.c \

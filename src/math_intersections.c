@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 17:55:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/16 19:24:09 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/16 23:24:45 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	swap(float *a, float *b)
 	*b = tmp;
 }
 
-static float	min(float a, float b, float c)
+static float	minf(float a, float b, float c)
 {
 	if (a < b && a < c)
 		return (a);
@@ -68,7 +68,7 @@ static float	min(float a, float b, float c)
 	return (c);
 }
 
-static float	max(float a, float b, float c)
+float	maxf(float a, float b, float c)
 {
 	if (a > b && a > c)
 		return (a);
@@ -111,8 +111,10 @@ t_intersection	*local_intersect_cube(t_shape *s)
 		s->saved_ray.origin.y, s->saved_ray.direction.y);
 	check_axis(&t.ztmin, &t.ztmax,
 		s->saved_ray.origin.z, s->saved_ray.direction.z);
-	tmin = max(t.xtmin, t.ytmin, t.ztmin);
-	tmax = min(t.xtmax, t.ytmax, t.ztmax);
+	tmin = maxf(t.xtmin, t.ytmin, t.ztmin);
+	tmax = minf(t.xtmax, t.ytmax, t.ztmax);
+	if (tmin > tmax)
+		return(intersections(intersection(0, NULL), intersection(0,NULL)));
 	return (intersections(intersection(tmin, s), intersection(tmax, s)));
 }
 

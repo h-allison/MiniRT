@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 18:12:31 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/16 21:18:56 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/17 00:55:41 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_world	default_world_6(void)
 	t_shape	middle;
 	t_shape	right;
 	t_shape	left;
+	t_shape cub;
 	
 	floor = plane();
 	floor.invtrans = minvert(floor.transform, 4);
@@ -76,16 +77,20 @@ t_world	default_world_6(void)
 	left.transform = mmultfree(scaling(0.33, 0.33, 0.33), left.transform);
 	left.transform = mmultfree(translation(-2, 0.33, 2), left.transform);
 	left.invtrans = minvert(left.transform, 4);
-	left.m.color = color(255, 128, 128);
-	left.m.diffuse = 0.7;
-	left.m.specular = 0.5;
+	left.m.color = color(128, 120, 70);
+	left.m.diffuse = 0.4;
+	left.m.specular = 0.1;
+	left.m.ambient = 0.1;
+	left.m.reflective = 0.7;
+	left.m.transparency = 0;
 
 	middle = sphere();
 	middle.transform = mmultfree(translation(-0.2, 1, -2), middle.transform);
 	middle.invtrans = minvert(middle.transform, 4);
-	middle.m.color = color(10, 10, 10);
+	middle.m.color = color(10, 20, 15);
 	middle.m.diffuse = 1;
-	middle.m.specular = 0.2;
+	middle.m.specular = 1;
+	middle.m.shininess = 300;
 	middle.m.ambient = 0.1;
 	middle.m.reflective = 2;
 	middle.m.transparency = 0.9;
@@ -102,6 +107,17 @@ t_world	default_world_6(void)
 	right.m.pattern.transform = mmultfree(scaling(0.1, 0.2, 0.2), right.m.pattern.transform);
 	right.m.pattern.invtrans = minvert(right.m.pattern.transform, 4);
 	
+	cub = cube();
+	cub.transform = mmultfree(rotation_y(30 * DEG2RAD), cub.transform);
+	cub.transform = mmultfree(scaling(0.2, 0.2, 0.2), cub.transform);
+	cub.transform = mmultfree(translation(-1.8, 0.2, -1), cub.transform);
+	cub.invtrans = minvert(cub.transform, 4);
+	cub.m.color = color(40, 70, 100);
+	cub.m.diffuse = .6;
+	cub.m.ambient = .3;
+	cub.m.specular = 0.6;
+	cub.m.reflective = 0.4;
+
 	w.light = malloc(1 * sizeof(t_light));
 	if (!w.light)
 		exit (1);
@@ -113,6 +129,7 @@ t_world	default_world_6(void)
 	w.s[2] = middle;
 	w.s[3] = right;
 	w.s[4] = left;
-	w.s[5].transform = NULL;
+	w.s[5] = cub;
+	w.s[6].transform = NULL;
 	return (w);
 }
