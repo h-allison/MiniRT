@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:49:07 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/16 13:51:53 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/16 15:10:49 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,12 @@ t_pattern	create_test_pattern(void)
 {
 	t_pattern	pat;
 
+	pat.a = color(255, 255, 255);
+	pat.b = color(0, 0, 0);
 	pat.transform = create_id_matrix();
 	pat.invtrans = minvert(pat.transform, 4);
 	pat.pattern_at = &pattern_at;
+	pat.status = true;
 	return(pat);
 }
 

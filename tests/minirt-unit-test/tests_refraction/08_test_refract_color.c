@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 23:02:50 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/16 13:41:28 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/16 15:42:31 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int test_refract_color(void)
 	xs = intersections(intersection(0.4899, &w.s[1]),
 			intersection(0.9899, &w.s[0]));
 	comps = prepare_computations(&xs[2], &r, xs);
+	xs[0].object = NULL;
 	col = refracted_color(&w, &comps, 5);
-	printf("   %f %f %f   ", col.r, col.g, col.b);
-	if (col.r != 0 || col.g != 0.99888 || col.b !=0.04725)
+	if (!fisequal(col.r, 0) || !fisequal(col.g, 0.997872) || !fisequal(col.b, 0.047472))
 		return (-1);
 	return (0);
 }
