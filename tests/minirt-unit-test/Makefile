@@ -17,6 +17,7 @@ SRC_DIR_CAMERA := tests_camera
 SRC_DIR_SHADOW := tests_shadow
 SRC_DIR_SHAPES := tests_shapes
 SRC_DIR_PLANES := tests_planes
+SRC_DIR_CUBES := tests_cubes
 SRC_DIR_PATTERNS := tests_patterns
 SRC_DIR_REFLECT := tests_reflection
 SRC_DIR_REFRACT := tests_refraction
@@ -81,6 +82,8 @@ SRCS := \
 	$(SRC_DIR_REFRACT)/11_schlick_perpendicular.c \
 	$(SRC_DIR_REFRACT)/12_schlick_n2_bigger_n1.c \
 	$(SRC_DIR_REFRACT)/13_shadehit_reflective_and_transparent.c \
+	$(SRC_DIR_CUBES)/00_test_cubes_launcher.c \
+	$(SRC_DIR_CUBES)/01_test_cubes_intersect.c \
 	$(PRG_DIR)/src/check_file.c \
 	$(PRG_DIR)/src/file_helpers.c \
 	$(PRG_DIR)/src/parsing.c \

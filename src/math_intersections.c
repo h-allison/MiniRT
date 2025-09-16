@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 17:55:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/16 19:06:02 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/16 19:24:09 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_intersection	*local_intersect_plane(t_shape *s)
 	return (xs);
 }
 
-static	swap(float *a, float *b)
+static void	swap(float *a, float *b)
 {
 	float	tmp;
 
@@ -59,7 +59,7 @@ static	swap(float *a, float *b)
 	*b = tmp;
 }
 
-static	min(float a, float b, float c)
+static float	min(float a, float b, float c)
 {
 	if (a < b && a < c)
 		return (a);
@@ -68,7 +68,7 @@ static	min(float a, float b, float c)
 	return (c);
 }
 
-static	max(float a, float b, float c)
+static float	max(float a, float b, float c)
 {
 	if (a > b && a > c)
 		return (a);
@@ -77,14 +77,14 @@ static	max(float a, float b, float c)
 	return (c);
 }
 
-static	check_axis(float *tmin, float *tmax, float origin, float direction);
+static void	check_axis(float *tmin, float *tmax, float origin, float direction)
 {
-	float	t_min_numerator;
-	float	t_max_numerator;
+	float	tmin_numerator;
+	float	tmax_numerator;
 
-	t_min_numerator = (-1 - origin);
-	t_max_numerator = (1 - origin);
-	if (absf(direction) >= EPSILON)
+	tmin_numerator = (-1 - origin);
+	tmax_numerator = (1 - origin);
+	if (fabs(direction) >= EPSILON)
 	{
 		*tmin = tmin_numerator / direction;
 		*tmax = tmax_numerator / direction;
@@ -101,7 +101,7 @@ static	check_axis(float *tmin, float *tmax, float origin, float direction);
 
 t_intersection	*local_intersect_cube(t_shape *s)
 {
-	t_minmax	t;
+	t_tminmax	t;
 	float		tmin;
 	float		tmax;
 
@@ -109,11 +109,11 @@ t_intersection	*local_intersect_cube(t_shape *s)
 		s->saved_ray.origin.x, s->saved_ray.direction.x);
 	check_axis(&t.ytmin, &t.ytmax,
 		s->saved_ray.origin.y, s->saved_ray.direction.y);
-	check_axis(&t.ztmin, &ztmax,
+	check_axis(&t.ztmin, &t.ztmax,
 		s->saved_ray.origin.z, s->saved_ray.direction.z);
 	tmin = max(t.xtmin, t.ytmin, t.ztmin);
 	tmax = min(t.xtmax, t.ytmax, t.ztmax);
-	return (intersections(intersection(tmin, s), intersection(tmax, s));
+	return (intersections(intersection(tmin, s), intersection(tmax, s)));
 }
 
 t_intersection	*local_intersect(t_shape *s)

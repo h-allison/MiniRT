@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 19:12:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/16 19:12:57 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/16 19:43:04 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft.h"
 # include <MLX42/MLX42.h>
 # include <math.h>
+# include <float.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <sys/stat.h>
@@ -185,15 +186,15 @@ typedef struct s_data
 	mlx_image_t	*img;
 }	t_data;
 
-typedef strunct s_tminmax
+typedef struct s_tminmax
 {
 	float	xtmin;
 	float	ytmin;
 	float	ztmin;
 	float	xtmax;
-	float	ytmin;
-	float	ztmin;
-}	t_tminmax
+	float	ytmax;
+	float	ztmax;
+}	t_tminmax;
 
 //check_file.c
 int				scenefile_check_chars(char *filename);
@@ -308,7 +309,7 @@ float			**shearing(float *shear);
 //math_shading.c
 t_tuple			local_normal_at_sphere(t_shape *s, t_tuple local_point);
 t_tuple			local_normal_at_plane(t_shape *s, t_tuple local_point);
-t_tuple			local_normal_at_cube(t_shape *s, t_tuple local_point);
+//t_tuple			local_normal_at_cube(t_shape *s, t_tuple local_point);
 t_tuple			local_normal_at(t_shape *s, t_tuple local_point);
 t_tuple			normal_at(t_shape *s, t_tuple p);
 t_tuple			reflect(t_tuple in, t_tuple normal);

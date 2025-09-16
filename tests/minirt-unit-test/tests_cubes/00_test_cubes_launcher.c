@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   01_test_cube_intersect.c                           :+:      :+:    :+:   */
+/*   00_test_cubes_launcher.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/16 17:38:56 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/16 17:50:33 by mmillhof         ###   ########.fr       */
+/*   Created: 2025/09/11 01:46:21 by mmillhof          #+#    #+#             */
+/*   Updated: 2025/09/16 19:35:13 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube_tests.h"
+#include "cubes_tests.h"
+#include "libunit.h"
 
-
-int test_cube_intersect(void)
+int	cubes_tests_launcher(void)
 {
-	t_shape			c;
-	t_ray			r;
-	t_intersection	xs;
+	t_unit_test	testlist[100];
+	int			ret;
 
-	c = cube();
-	r = ray(point(5, 0.5, 0), vector(-1, 0, 0));
-	xs = local_intersect(c, r);
-	printf("xs: %f, %f", xs[0].t, xs[1].t);
+	testlist[0].test = NULL;
+	load_test(testlist, "CUBE: Intersect", &test_cubes_intersect);
+	ret = launch_tests(testlist);
+	return (ret);
 }
