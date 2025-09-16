@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 01:46:21 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/16 00:34:21 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/16 12:53:11 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	refract_tests_launcher(void)
 {
-	t_unit_test	testlist[7];
+	t_unit_test	testlist[9];
 	int			ret;
 
 	testlist[0].test = NULL;
@@ -25,6 +25,8 @@ int	refract_tests_launcher(void)
 	load_test(testlist, "REFRACTION: Calculate under_point", &test_refract_under_point);
 	load_test(testlist, "REFRACTION: Refracted color opaque", &test_refract_under_point);
 	load_test(testlist, "REFRACTION: Max recursion", &test_refract_max_recursion);
+	load_test(testlist, "REFRACTION: Total internal reflection", &test_refract_total);
+	load_test(testlist, "REFRACTION: Refrecated color", &test_refract_color);
 	ret = launch_tests(testlist);
 	return (ret);
 }

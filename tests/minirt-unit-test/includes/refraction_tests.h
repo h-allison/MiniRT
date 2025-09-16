@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 17:16:24 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/16 00:33:32 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/16 12:53:27 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,7 @@ int	test_refract_find_n1_n2(void);
 int	test_refract_under_point(void);
 int test_refract_color_opaque(void);
 int test_refract_max_recursion(void);
+int test_refract_total(void);
+int test_refract_color(void);
 
 #endif
