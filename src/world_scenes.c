@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 18:12:31 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/17 14:47:17 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/17 17:34:54 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,17 +165,20 @@ t_world	default_world_cyl(void)
 	big.m.pattern.invtrans = minvert(big.m.pattern.transform, 4);
 
 	left = cylinder();
-	left.transform = mmultfree(scaling(0.33, 0.33, 0.33), left.transform);
-	left.transform = mmultfree(translation(-2, 0.33, 2), left.transform);
-	left.invtrans = minvert(left.transform, 4);
-	left.m.color = color(128, 120, 70);
-	left.m.diffuse = 0.4;
-	left.m.specular = 0.1;
-	left.m.ambient = 0.1;
-	left.m.reflective = 0.7;
-	left.m.transparency = 0;
 	left.minimum = 0;
-	left.maximum = 1;
+	left.maximum = 2;
+	left.closed = true;
+	left.transform = mmultfree(scaling(0.5, 0.5, 0.5), left.transform);
+	left.transform = mmultfree(translation(-2.5, .2, 2), left.transform);
+	left.invtrans = minvert(left.transform, 4);
+	left.m.color = color(20, 0, 10);
+	left.m.diffuse = 1;
+	left.m.specular = 1;
+	left.m.ambient = 0.1;
+	left.m.reflective = 2;
+	left.m.transparency = 0.9;
+	left.m.refractive_index = 1.5;
+
 	middle = sphere();
 	middle.transform = mmultfree(translation(-0.2, 1, -2), middle.transform);
 	middle.invtrans = minvert(middle.transform, 4);
@@ -189,14 +192,17 @@ t_world	default_world_cyl(void)
 	middle.m.refractive_index = 1.5;
 
 	right = cylinder();
-	right.transform = mmultfree(scaling(0.5, 0.5, 0.5), right.transform);
-	right.transform = mmultfree(translation(4, 0.5, 2.5), right.transform);
+	right.minimum = 0;
+	right.maximum = 7;
+	right.transform = mmultfree(scaling(.6, .6, .6), right.transform);
+	right.transform = mmultfree(translation(10, 0, 8), right.transform);
 	right.invtrans = minvert(right.transform, 4);
 	right.m.color = color(140, 100, 255);
 	right.m.diffuse = 0.7;
 	right.m.specular = 0.4;
-	right.m.pattern = ring_pattern(color(20, 80, 60), right.m.color);
-	right.m.pattern.transform = mmultfree(scaling(0.1, 0.2, 0.2), right.m.pattern.transform);
+	right.m.pattern = gradient_pattern(color(20, 80, 60), right.m.color);
+	right.m.pattern.transform = mmultfree(rotation_z(90 * DEG2RAD), right.m.pattern.transform);
+	right.m.pattern.transform = mmultfree(scaling(1, 7, 1), right.m.pattern.transform);
 	right.m.pattern.invtrans = minvert(right.m.pattern.transform, 4);
 	
 	cub = cube();
