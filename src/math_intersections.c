@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 17:55:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/16 23:24:45 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/17 10:22:27 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ static void	check_axis(float *tmin, float *tmax, float origin, float direction)
 	}
 	else
 	{
-		*tmin = tmin_numerator * DBL_MAX;
-		*tmax = tmax_numerator * DBL_MAX;
+		*tmin = tmin_numerator * FLT_MAX;
+		*tmax = tmax_numerator * FLT_MAX;
 	}
 	if (*tmin > *tmax)
 		swap(tmin, tmax);
