@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 19:13:39 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/17 11:50:21 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/17 14:01:02 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,8 @@ t_shape	cylinder(void)
 	s.local_normal_at = local_normal_at_cyl;
 	s.local_intersect = local_intersect_cyl;
 	s.m = material();
+	s.minimum = -FLT_MAX;
+	s.maximum = FLT_MAX;
 	return (s);
 }
 

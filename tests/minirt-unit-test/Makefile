@@ -88,6 +88,9 @@ SRCS := \
 	$(SRC_DIR_CUB_CYL)/03_test_cubes_normal_at.c \
 	$(SRC_DIR_CUB_CYL)/04_test_cyls_ray_misses.c \
 	$(SRC_DIR_CUB_CYL)/05_test_cyls_ray_strikes.c \
+	$(SRC_DIR_CUB_CYL)/06_test_cyls_local_normal.c \
+	$(SRC_DIR_CUB_CYL)/07_test_cyls_min_max.c \
+	$(SRC_DIR_CUB_CYL)/08_test_cyls_intersect_constrained.c \
 	$(PRG_DIR)/src/check_file.c \
 	$(PRG_DIR)/src/file_helpers.c \
 	$(PRG_DIR)/src/parsing.c \
@@ -161,7 +164,7 @@ test: all
 
 re: fclean all
 
-asan: CFLAGS  += -fsanitize=address -g
+asan: CFLAGS  += -fsanitize=address -fsanitize=undefined -g
 asan: LDLIBS += -fsanitize=address
 asan: fclean all
 

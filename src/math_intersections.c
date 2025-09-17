@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:35:10 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/17 11:35:12 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/17 14:41:12 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_intersection	*local_intersect_plane(t_shape *s)
 	return (xs);
 }
 
-static void	swap(float *a, float *b)
+void	swapf(float *a, float *b)
 {
 	float	tmp;
 
@@ -95,7 +95,7 @@ static void	check_axis(float *tmin, float *tmax, float origin, float direction)
 		*tmax = tmax_numerator * FLT_MAX;
 	}
 	if (*tmin > *tmax)
-		swap(tmin, tmax);
+		swapf(tmin, tmax);
 	return ;
 }
 
@@ -127,6 +127,8 @@ t_intersection	*local_intersect_cyl(t_shape *s)
 	float			disc;
 	float			t0;
 	float			t1;
+	float			y0;
+	float			y1;
 
 	a = s->saved_ray.direction.x * s->saved_ray.direction.x +
 		s->saved_ray.direction.z * s->saved_ray.direction.z;
@@ -145,7 +147,15 @@ t_intersection	*local_intersect_cyl(t_shape *s)
 		{
 			t0 = (-b - sqrtf(disc)) / (2 * a);
 			t1 = (-b + sqrtf(disc)) / (2 * a);
-			xs = intersections(intersection(t0, s), intersection(t1, s));
+			if (t0 > t1)
+				swapf(&t0, &t1);
+			xs = intersections(intersection(0, NULL), intersection(0, NULL));
+			y0 = s->saved_ray.origin.y + t0 * s->saved_ray.direction.y;
+			if (s->minimum < y0 && y0 < s->maximum)
+				xs = intersections(intersection(t0, s), intersection(t0, s));
+			y1 = s->saved_ray.origin.y + t1 * s->saved_ray.direction.y;
+			if (s->minimum < y1 && y1 < s->maximum)
+				xs = intersections(intersection(t1, s), intersection(t0, s));
 		}
 	}
 	return (xs);

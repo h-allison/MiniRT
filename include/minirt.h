@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/17 11:53:44 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/17 14:11:22 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ typedef struct s_shape
 	float			**invtrans;
 	t_material		m;
 	t_ray			saved_ray;
+	float			minimum;
+	float			maximum;
 }	t_shape;
 
 typedef struct s_containers
@@ -334,6 +336,7 @@ t_intersection	*local_intersect_sphere(t_shape *s);
 t_intersection	*local_intersect_plane(t_shape *s);
 t_intersection	*local_intersect_cube(t_shape *s);
 float			maxf(float a, float b, float c);
+void			swapf(float *a, float *b);
 t_intersection	*local_intersect_cyl(t_shape *s);
 t_intersection	*local_intersect(t_shape *s);
 t_intersection	*intersect(t_shape *s, t_ray r);
@@ -375,4 +378,5 @@ int				free_matrices_and_ret(t_shape *p, int ret);
 
 //world_scenes.c
 t_world			default_world_6(void);
+t_world			default_world_cyl(void);
 #endif

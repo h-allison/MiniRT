@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 01:46:21 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/17 11:10:45 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/17 13:49:29 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ int	cubes_tests_launcher(void)
 	load_test(testlist, "CUBE: Normal at", &test_cubes_normal_at);
 	load_test(testlist, "CYLINDER: Ray misses", &test_cyls_ray_misses);
 	load_test(testlist, "CYLINDER: Ray strikes", &test_cyls_ray_strikes);
+	load_test(testlist, "CYLINDER: local normal at", &test_cyls_local_normal);
+	load_test(testlist, "CYLINDER: Default min and max", &test_cyls_min_max);
+	load_test(testlist, "CYLINDER: Intersecting a constrained cylinder", &test_cyls_intersect_constrained);
 
 	ret = launch_tests(testlist);
 	return (ret);
