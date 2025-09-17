@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/30 17:55:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/17 10:22:27 by mmillhof         ###   ########.fr       */
+/*   Created: 2025/09/17 11:35:10 by mmillhof          #+#    #+#             */
+/*   Updated: 2025/09/17 11:35:12 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,39 @@ t_intersection	*local_intersect_cube(t_shape *s)
 	if (tmin > tmax)
 		return(intersections(intersection(0, NULL), intersection(0,NULL)));
 	return (intersections(intersection(tmin, s), intersection(tmax, s)));
+}
+
+t_intersection	*local_intersect_cyl(t_shape *s)
+{
+	t_intersection	*xs;
+	float			a;
+	float			b;
+	float			c;
+	float			disc;
+	float			t0;
+	float			t1;
+
+	a = s->saved_ray.direction.x * s->saved_ray.direction.x +
+		s->saved_ray.direction.z * s->saved_ray.direction.z;
+	if (a < EPSILON)
+		xs = intersections(intersection(0, NULL), intersection(0, NULL));
+	else
+	{
+		b = 2 * s->saved_ray.origin.x * s->saved_ray.direction.x +
+			2 * s->saved_ray.origin.z * s->saved_ray.direction.z;
+		c = s->saved_ray.origin.x * s->saved_ray.origin.x +
+			s->saved_ray.origin.z * s->saved_ray.origin.z - 1;
+		disc = b * b - 4 * a * c;
+		if (disc < 0)
+			xs = intersections(intersection(0, NULL), intersection(0, NULL));
+		else
+		{
+			t0 = (-b - sqrtf(disc)) / (2 * a);
+			t1 = (-b + sqrtf(disc)) / (2 * a);
+			xs = intersections(intersection(t0, s), intersection(t1, s));
+		}
+	}
+	return (xs);
 }
 
 t_intersection	*local_intersect(t_shape *s)

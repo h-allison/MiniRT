@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/16 19:12:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/17 01:31:35 by matthias         ###   ########.fr       */
+/*   Created: 2025/09/17 11:34:24 by mmillhof          #+#    #+#             */
+/*   Updated: 2025/09/17 11:34:27 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,6 +226,7 @@ t_shape			glass_sphere(void);
 t_shape			sphere(void);
 t_shape			plane(void);
 t_shape			cube(void);
+t_shape			cylinder(void);
 t_light			point_light(t_tuple position, t_rgb intensity);
 t_world			default_world(void);
 t_world			default_world_2(void);
@@ -332,6 +333,7 @@ t_intersection	*local_intersect_sphere(t_shape *s);
 t_intersection	*local_intersect_plane(t_shape *s);
 t_intersection	*local_intersect_cube(t_shape *s);
 float			maxf(float a, float b, float c);
+t_intersection	*local_intersect_cyl(t_shape *s);
 t_intersection	*local_intersect(t_shape *s);
 t_intersection	*intersect(t_shape *s, t_ray r);
 t_intersection	intersection(float t, t_shape *s);
