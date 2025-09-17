@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 19:12:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/17 10:58:28 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/17 11:51:59 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -311,6 +311,7 @@ float			**shearing(float *shear);
 t_tuple			local_normal_at_sphere(t_shape *s, t_tuple local_point);
 t_tuple			local_normal_at_plane(t_shape *s, t_tuple local_point);
 t_tuple			local_normal_at_cube(t_shape *s, t_tuple local_point);
+t_tuple			local_normal_at_cyl(t_shape *s, t_tuple local_point);
 t_tuple			local_normal_at(t_shape *s, t_tuple local_point);
 t_tuple			normal_at(t_shape *s, t_tuple p);
 t_tuple			reflect(t_tuple in, t_tuple normal);
