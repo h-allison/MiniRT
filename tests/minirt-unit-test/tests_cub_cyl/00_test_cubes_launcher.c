@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 01:46:21 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/17 16:50:57 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/17 21:42:26 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	cubes_tests_launcher(void)
 	load_test(testlist, "CYLINDER: Default min and max", &test_cyls_min_max);
 	load_test(testlist, "CYLINDER: Intersecting a constrained cylinder", &test_cyls_intersect_constrained);
 	load_test(testlist, "CYLINDER: Intersecting end caps", &test_cyls_intersecting_caps);
-
+	load_test(testlist, "CYLINDER: Normal on end caps", &test_cyls_normal_caps);
 	ret = launch_tests(testlist);
 	return (ret);
 }

@@ -92,6 +92,7 @@ SRCS := \
 	$(SRC_DIR_CUB_CYL)/07_test_cyls_min_max.c \
 	$(SRC_DIR_CUB_CYL)/08_test_cyls_intersect_constrained.c \
 	$(SRC_DIR_CUB_CYL)/09_test_cyls_intersecting_caps.c \
+	$(SRC_DIR_CUB_CYL)/10_test_cyls_normal_caps.c \
 	$(PRG_DIR)/src/check_file.c \
 	$(PRG_DIR)/src/file_helpers.c \
 	$(PRG_DIR)/src/parsing.c \
