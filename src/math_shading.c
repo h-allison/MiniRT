@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:25:23 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/16 23:34:44 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/17 11:51:37 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,19 @@ t_tuple	local_normal_at_plane(t_shape *s, t_tuple local_point)
 }
 
 t_tuple	local_normal_at_cube(t_shape *s, t_tuple local_point)
+{
+	float	maxc;
+
+	(void)s;
+	maxc = maxf(fabs(local_point.x), fabs(local_point.y), fabs(local_point.z));
+	if (maxc == fabs(local_point.x))
+		return (vector(local_point.x, 0, 0));
+	if (maxc == fabs(local_point.y))
+		return (vector(0, local_point.y, 0));
+	return (vector(0, 0, local_point.z));
+}
+
+t_tuple	local_normal_at_cyl(t_shape *s, t_tuple local_point)
 {
 	float	maxc;
 

@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 19:13:39 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/17 10:57:34 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/17 11:50:21 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ t_shape	cylinder(void)
 
 	s.transform = create_id_matrix();
 	s.invtrans = minvert(s.transform, 4);
-	s.local_normal_at = local_normal_at_cube;
+	s.local_normal_at = local_normal_at_cyl;
 	s.local_intersect = local_intersect_cyl;
 	s.m = material();
 	return (s);
