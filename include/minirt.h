@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/17 14:52:51 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/17 21:55:57 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,6 +230,7 @@ t_shape			sphere(void);
 t_shape			plane(void);
 t_shape			cube(void);
 t_shape			cylinder(void);
+t_shape			cone(void);
 t_light			point_light(t_tuple position, t_rgb intensity);
 t_world			default_world(void);
 t_world			default_world_2(void);
@@ -315,6 +316,7 @@ t_tuple			local_normal_at_sphere(t_shape *s, t_tuple local_point);
 t_tuple			local_normal_at_plane(t_shape *s, t_tuple local_point);
 t_tuple			local_normal_at_cube(t_shape *s, t_tuple local_point);
 t_tuple			local_normal_at_cyl(t_shape *s, t_tuple local_point);
+t_tuple			local_normal_at_cone(t_shape *s, t_tuple local_point);
 t_tuple			local_normal_at(t_shape *s, t_tuple local_point);
 t_tuple			normal_at(t_shape *s, t_tuple p);
 t_tuple			reflect(t_tuple in, t_tuple normal);
@@ -339,6 +341,7 @@ t_intersection	*local_intersect_cube(t_shape *s);
 float			maxf(float a, float b, float c);
 void			swapf(float *a, float *b);
 t_intersection	*local_intersect_cyl(t_shape *s);
+t_intersection	*local_intersect_cone(t_shape *s);
 t_intersection	*local_intersect(t_shape *s);
 t_intersection	*intersect(t_shape *s, t_ray r);
 t_intersection	intersection(float t, t_shape *s);

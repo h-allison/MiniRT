@@ -6,7 +6,7 @@
 /*   By: smargine <smargine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 18:57:05 by smargine          #+#    #+#             */
-/*   Updated: 2025/09/17 13:49:48 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/17 21:59:44 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "reflection_tests.h"
 #include "refraction_tests.h"
 #include "cub_cyl_tests.h"
+#include "cones_tests.h"
 
 void	print_banner(void)
 {
@@ -50,6 +51,7 @@ int	main(void)
 	err += reflect_tests_launcher();
 	err += refract_tests_launcher();
 	err += cubes_tests_launcher();
+	err += cones_tests_launcher();
 	if (!err)
 		write(1, GREEN "All tests passed!\n\n" RESET, 28);
 	return (0);

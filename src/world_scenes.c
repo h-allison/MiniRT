@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 18:12:31 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/17 17:34:54 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/18 00:09:53 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,7 +191,7 @@ t_world	default_world_cyl(void)
 	middle.m.transparency = 0.9;
 	middle.m.refractive_index = 1.5;
 
-	right = cylinder();
+	right = cone();
 	right.minimum = 0;
 	right.maximum = 7;
 	right.transform = mmultfree(scaling(.6, .6, .6), right.transform);
