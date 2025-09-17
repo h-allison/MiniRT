@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/17 14:11:22 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/17 14:52:51 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ typedef struct s_shape
 	t_ray			saved_ray;
 	float			minimum;
 	float			maximum;
+	bool			closed;
 }	t_shape;
 
 typedef struct s_containers

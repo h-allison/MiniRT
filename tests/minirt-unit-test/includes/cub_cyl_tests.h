@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:44:02 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/17 12:56:45 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/17 14:56:02 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ int test_cyls_ray_strikes(void);
 int test_cyls_local_normal(void);
 int test_cyls_min_max(void);
 int test_cyls_intersect_constrained(void);
+int test_cyls_intersecting_caps(void);
 
 #endif
