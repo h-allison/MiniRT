@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/18 14:52:53 by matthias         ###   ########.fr       */
+/*   Updated: 2025/09/18 18:15:03 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include <stdlib.h>
 # include <errno.h>
 
-# define WIN_WIDTH 1024
-# define WIN_HEIGHT 768
+# define WIN_WIDTH 1024 / 2
+# define WIN_HEIGHT 768 / 2
 
 # define MAX_RECURSION 5
 # define OFFSET	 0.001
@@ -187,6 +187,8 @@ typedef struct s_data
 	char		*filename;
 	mlx_t		*mlx;
 	mlx_image_t	*img;
+	t_camera	*cam;
+	bool		reset;
 }	t_data;
 
 typedef struct s_tminmax

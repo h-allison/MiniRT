@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 19:13:39 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/17 21:54:30 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/18 17:10:20 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ t_camera	camera(float hsize, float vsize, float field_of_view)
 	t_camera	c;
 	float		half_view;
 	float		aspect;
-
+	
 	c.hsize = hsize;
 	c.vsize = vsize;
 	c.field_of_view = field_of_view;

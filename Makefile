@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/09/16 18:12:58 by hallison         ###   ########.fr        #
+#    Updated: 2025/09/18 17:20:41 by mmillhof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -116,8 +116,8 @@ fclean: clean
 re: fclean all
 
 # ---- Debug/analysis profiles ----
-asan: CFLAGS  += -fsanitize=address -g
-asan: LDFLAGS += -fsanitize=address
+asan: CFLAGS  += -fsanitize=address -fsanitize=undefined -g
+asan: LDFLAGS += -fsanitize=address -fsanitize=undefined
 asan: fclean all
 
 gdb:  CFLAGS  += -g -O0
