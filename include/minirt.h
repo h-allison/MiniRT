@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/18 13:09:31 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/18 14:20:03 by matthias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define WIN_WIDTH 1024
 # define WIN_HEIGHT 768
 
-# define MAX_RECURSION 10
+# define MAX_RECURSION 5
 # define OFFSET	 0.001
 # define EPSILON 0.0001
 

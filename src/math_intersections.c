@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:35:10 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/18 13:59:15 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/18 14:13:36 by matthias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,8 @@ static bool	check_cap(t_ray *r, float t)
 void	intersect_caps(t_shape *cyl, t_intersection *xs)
 {
 	float	t;
-
+	
+	(void)xs;
 	if (!cyl->closed || fisequal(cyl->saved_ray.direction.y, 0))
 		return ;
 	t = (cyl->minimum - cyl->saved_ray.origin.y) / cyl->saved_ray.direction.y;
@@ -140,6 +141,7 @@ void	intersect_caps(t_shape *cyl, t_intersection *xs)
 	t = (cyl->maximum - cyl->saved_ray.origin.y) / cyl->saved_ray.direction.y;
 	if (check_cap(&cyl->saved_ray, t))
 		xs = intersections(intersection(t, cyl), intersection(t, cyl));
+	return ;
 }
 
 t_intersection	*local_intersect_cyl(t_shape *s)
@@ -195,6 +197,7 @@ void	intersect_caps_cone(t_shape *cyl, t_intersection *xs)
 {
 	float	t;
 
+	(void)xs;
 	if (!cyl->closed || fisequal(cyl->saved_ray.direction.y, 0))
 		return ;
 	t = (cyl->minimum - cyl->saved_ray.origin.y) / cyl->saved_ray.direction.y;
