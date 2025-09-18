@@ -6,11 +6,19 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 17:52:00 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/24 23:37:56 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/18 17:54:18 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+int		rt_error(char *msg, int ret)
+{
+	pt_putstr_fd("ERROR\n", 2);
+	pt_putstr_fd(msg, 2);
+	pt_putstr_fd("\n", 2);
+	return(ret);
+}
 
 void	rt_early_exit(int error)
 {

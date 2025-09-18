@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/18 14:20:03 by matthias         ###   ########.fr       */
+/*   Updated: 2025/09/18 16:21:58 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINIRT_H
 
 # include "libft.h"
+# include "minirt_p.h"
 # include <MLX42/MLX42.h>
 # include <math.h>
 # include <float.h>
@@ -24,8 +25,8 @@
 # include <stdlib.h>
 # include <errno.h>
 
-# define WIN_WIDTH 1024
-# define WIN_HEIGHT 768
+# define WIN_WIDTH 1024 / 2
+# define WIN_HEIGHT 768 / 2
 
 # define MAX_RECURSION 5
 # define OFFSET	 0.001
@@ -161,8 +162,12 @@ typedef struct s_comps
 
 typedef struct s_world
 {
+	t_camera		*cam;
 	t_shape			*s;
 	t_light			*light;
+	t_checklist		checklist;
+	float			ambient_ratio;
+	t_rgb			ambient_color;
 }	t_world;
 
 typedef struct s_largs
@@ -187,6 +192,7 @@ typedef struct s_data
 	char		*filename;
 	mlx_t		*mlx;
 	mlx_image_t	*img;
+	t_world		*world;
 }	t_data;
 
 typedef struct s_tminmax
@@ -208,6 +214,7 @@ int				check_rt_filename(char	*filename);
 
 //error_handling.c
 void			rt_early_exit(int error);
+int				rt_error(char *msg, int ret);
 
 //mlx_handling.c
 int				mlx_handling(t_data *data);
@@ -216,6 +223,8 @@ void			img_wipe(t_data *data, t_rgb color);
 
 //parsing.c
 int				parse_file(char *filename, t_data *data);
+char	**get_element_tokens(char const *s);
+int		parse_into_world(char **tokens, t_data *data);
 
 //rendering.c
 void			render(void *param);

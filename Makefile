@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/09/16 18:12:58 by hallison         ###   ########.fr        #
+#    Updated: 2025/09/18 15:35:03 by hallison         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,9 @@ NAME        := miniRT
 SRC         := src/main.c \
                src/check_file.c \
                src/file_helpers.c \
-               src/parsing.c \
+               src/parsing_1.c \
+               src/parsing_2.c \
+               src/parsing_3.c \
                src/error_handling.c \
                src/mlx_handling.c \
                src/rendering.c \
@@ -116,8 +118,8 @@ fclean: clean
 re: fclean all
 
 # ---- Debug/analysis profiles ----
-asan: CFLAGS  += -fsanitize=address -g
-asan: LDFLAGS += -fsanitize=address
+asan: CFLAGS  += -fsanitize=address -fsanitize=undefined -g
+asan: LDFLAGS += -fsanitize=address -fsanitize=undefined
 asan: fclean all
 
 gdb:  CFLAGS  += -g -O0
