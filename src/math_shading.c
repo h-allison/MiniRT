@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:25:23 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/18 11:54:52 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/18 13:46:43 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ t_tuple	local_normal_at_cone(t_shape *s, t_tuple local_point)
 	float	y;
 
 	dist = local_point.x * local_point.x + local_point.z * local_point.z;
-	if (dist < 1 && local_point.y >= s->maximum - EPSILON)
+	if (dist <= 1 && local_point.y >= s->maximum - EPSILON)
 		return (vector(0, 1, 0));
-	else if (dist < 1 && local_point.y <= s->minimum + EPSILON)
+	else if (dist <= 1 && local_point.y <= s->minimum + EPSILON)
 		return (vector(0, -1, 0));
 	y = sqrtf(dist);
 	y *= -(local_point.y > 0);

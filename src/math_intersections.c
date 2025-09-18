@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:35:10 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/18 13:00:34 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/18 13:59:15 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,14 +181,14 @@ t_intersection	*local_intersect_cyl(t_shape *s)
 	return (xs);
 }
 
-static bool	check_cap_cone(t_ray *r, float t)
+static bool	check_cap_cone(t_ray *r, float t, float y)
 {
 	float	x;
 	float	z;
 
 	x = (r->origin.x + t * r->direction.x);
 	z = (r->origin.z + t * r->direction.z);
-	return ((x * x + z * z) < fabs(r->direction.y) + EPSILON);
+	return ((x * x + z * z) < fabs(y));
 }
 
 void	intersect_caps_cone(t_shape *cyl, t_intersection *xs)
@@ -198,10 +198,10 @@ void	intersect_caps_cone(t_shape *cyl, t_intersection *xs)
 	if (!cyl->closed || fisequal(cyl->saved_ray.direction.y, 0))
 		return ;
 	t = (cyl->minimum - cyl->saved_ray.origin.y) / cyl->saved_ray.direction.y;
-	if (check_cap_cone(&cyl->saved_ray, t))
+	if (check_cap_cone(&cyl->saved_ray, t, cyl->minimum))
 		xs = intersections(intersection(t, cyl), intersection(t, cyl));
 	t = (cyl->maximum - cyl->saved_ray.origin.y) / cyl->saved_ray.direction.y;
-	if (check_cap_cone(&cyl->saved_ray, t))
+	if (check_cap_cone(&cyl->saved_ray, t, cyl->maximum))
 		xs = intersections(intersection(t, cyl), intersection(t, cyl));
 }
 
@@ -224,12 +224,12 @@ t_intersection	*local_intersect_cone(t_shape *s)
 		2 * s->saved_ray.origin.y * s->saved_ray.direction.y +
 		2 * s->saved_ray.origin.z * s->saved_ray.direction.z;
 	xs = intersections(intersection(0, NULL), intersection(0, NULL));
-	if (fisequal(a, 0) && fisequal(b, 0))
+	if (a == 0 && b == 0)
 		return (xs);
 	c = s->saved_ray.origin.x * s->saved_ray.origin.x -
 		s->saved_ray.origin.y * s->saved_ray.origin.y +
 		s->saved_ray.origin.z * s->saved_ray.origin.z;
-	if (fisequal(a, 0) && !fisequal(b, 0))
+	if (a == 0 && b != 0)
 	{
 		t0 = -c / (2 * b);
 		xs = intersections(intersection(t0, s), intersection(t0, s));
@@ -244,7 +244,7 @@ t_intersection	*local_intersect_cone(t_shape *s)
 		if (t0 > t1)
 			swapf(&t0, &t1);
 		y0 = s->saved_ray.origin.y + t0 * s->saved_ray.direction.y;
-		if ((s->minimum) < y0 && y0 < s->maximum)
+		if (s->minimum < y0 && y0 < s->maximum)
 			xs = intersections(intersection(t0, s), intersection(t0, s));
 		y1 = s->saved_ray.origin.y + t1 * s->saved_ray.direction.y;
 		if (s->minimum < y1 && y1 < s->maximum)
