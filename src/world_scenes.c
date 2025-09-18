@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 18:12:31 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/18 14:50:11 by matthias         ###   ########.fr       */
+/*   Updated: 2025/09/18 19:49:33 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,7 @@ t_world	default_world_cyl(void)
 	left.maximum = 2;
 	left.closed = true;
 	left.transform = mmultfree(scaling(0.5, 0.5, 0.5), left.transform);
-	left.transform = mmultfree(translation(-2.5, .2, 2), left.transform);
+	left.transform = mmultfree(translation(-2.5, 0.3, 2), left.transform);
 	left.invtrans = minvert(left.transform, 4);
 	left.m.color = color(20, 0, 10);
 	left.m.diffuse = 1;
@@ -212,14 +212,19 @@ t_world	default_world_cyl(void)
 	
 	cub = cube();
 	cub.transform = mmultfree(rotation_y(30 * DEG2RAD), cub.transform);
-	cub.transform = mmultfree(scaling(0.2, 0.2, 0.2), cub.transform);
-	cub.transform = mmultfree(translation(-1.8, 0.2, -1), cub.transform);
+	cub.transform = mmultfree(scaling(0.33, 0.33, 0.33), cub.transform);
+	cub.transform = mmultfree(translation(-1.8, 0.33, -1), cub.transform);
 	cub.invtrans = minvert(cub.transform, 4);
-	cub.m.color = color(40, 70, 100);
+	cub.m.color = color(0, 50, 100);
 	cub.m.diffuse = .6;
 	cub.m.ambient = .3;
 	cub.m.specular = 0.6;
 	cub.m.reflective = 0.4;
+	cub.m.pattern = gradient_pattern(color(70, 100, 0), cub.m.color);
+	cub.m.pattern.transform = mmultfree(scaling(2.01, 1, 1), cub.m.pattern.transform);
+	cub.m.pattern.transform = mmultfree(translation(-1, 0, 0), cub.m.pattern.transform);
+	cub.m.pattern.transform = mmultfree(rotation_z(90 * DEG2RAD), cub.m.pattern.transform);
+	cub.m.pattern.invtrans = minvert(cub.m.pattern.transform, 4);
 
 	w.light = malloc(1 * sizeof(t_light));
 	if (!w.light)

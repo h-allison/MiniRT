@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/18 18:15:03 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/18 18:59:00 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include <stdlib.h>
 # include <errno.h>
 
-# define WIN_WIDTH 1024 / 2
-# define WIN_HEIGHT 768 / 2
+# define WIN_WIDTH 1024
+# define WIN_HEIGHT 768
 
 # define MAX_RECURSION 5
 # define OFFSET	 0.001
@@ -115,7 +115,6 @@ typedef struct s_intersection t_intersection;
 
 typedef struct s_shape
 {
-	int				type;
 	t_tuple			(*local_normal_at)(t_shape *, t_tuple);
 	t_intersection	*(*local_intersect)(t_shape *);
 	float			**transform;

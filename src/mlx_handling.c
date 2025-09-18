@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 23:32:31 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/18 18:21:03 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/18 20:03:01 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,12 @@ void	ft_hook(void *param)
 			data->cam->transform = mmultfree(rotation_z(1 * DEG2RAD), data->cam->transform);
 			data->reset = true;
 			printf("Tilt RIGHT\n");
+		}
+		if (mlx_is_key_down(data->mlx, MLX_KEY_P))
+		{
+			printf("EXPORTING...\n");
+			canvas_export_ppm(data);
+			printf("done!\n");
 		}
 	}
 }
