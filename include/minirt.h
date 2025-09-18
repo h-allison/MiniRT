@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/17 21:55:57 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/18 13:02:08 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define WIN_HEIGHT 768
 
 # define MAX_RECURSION 10
-# define OFFSET	 0.001
+# define OFFSET	 0.0001
 # define EPSILON 0.0001
 
 # define DEG2RAD 0.017453292519943

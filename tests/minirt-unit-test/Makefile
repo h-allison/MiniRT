@@ -97,6 +97,7 @@ SRCS := \
 	$(SRC_DIR_CONES)/00_test_cones_launcher.c \
 	$(SRC_DIR_CONES)/01_test_cones_intersect.c \
 	$(SRC_DIR_CONES)/02_test_cones_intersect_parallel.c \
+	$(SRC_DIR_CONES)/03_test_cones_intersect_caps.c \
 	$(PRG_DIR)/src/check_file.c \
 	$(PRG_DIR)/src/file_helpers.c \
 	$(PRG_DIR)/src/parsing.c \

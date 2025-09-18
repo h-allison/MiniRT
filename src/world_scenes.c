@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 18:12:31 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/18 00:09:53 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/18 13:03:11 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,18 +192,21 @@ t_world	default_world_cyl(void)
 	middle.m.refractive_index = 1.5;
 
 	right = cone();
-	right.minimum = 0;
-	right.maximum = 7;
-	right.transform = mmultfree(scaling(.6, .6, .6), right.transform);
-	right.transform = mmultfree(translation(10, 0, 8), right.transform);
+	right.minimum = -1;
+	right.maximum = 1;
+	right.closed = true;
+	right.transform = mmultfree(rotation_z(90 * DEG2RAD), right.transform);
+	right.transform = mmultfree(scaling(1, 1, 1), right.transform);
+	right.transform = mmultfree(translation(6, 1, 3), right.transform);
 	right.invtrans = minvert(right.transform, 4);
 	right.m.color = color(140, 100, 255);
 	right.m.diffuse = 0.7;
 	right.m.specular = 0.4;
-	right.m.pattern = gradient_pattern(color(20, 80, 60), right.m.color);
-	right.m.pattern.transform = mmultfree(rotation_z(90 * DEG2RAD), right.m.pattern.transform);
-	right.m.pattern.transform = mmultfree(scaling(1, 7, 1), right.m.pattern.transform);
-	right.m.pattern.invtrans = minvert(right.m.pattern.transform, 4);
+	right.m.reflective = 0.7;
+//	right.m.pattern = gradient_pattern(color(20, 80, 60), right.m.color);
+//	right.m.pattern.transform = mmultfree(rotation_z(90 * DEG2RAD), right.m.pattern.transform);
+//	right.m.pattern.transform = mmultfree(scaling(1, 1, 1), right.m.pattern.transform);
+//	right.m.pattern.invtrans = minvert(right.m.pattern.transform, 4);
 	
 	cub = cube();
 	cub.transform = mmultfree(rotation_y(30 * DEG2RAD), cub.transform);

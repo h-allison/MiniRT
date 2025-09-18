@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:44:02 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/18 00:03:57 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/18 11:28:41 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@
 int cones_tests_launcher(void);
 int test_cones_intersect(void);
 int test_cones_intersect_parallel(void);
+int test_cones_intersect_caps(void);
 
 #endif

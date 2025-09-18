@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:35:10 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/17 23:53:02 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/18 13:00:34 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ t_intersection	*local_intersect_cube(t_shape *s)
 	return (intersections(intersection(tmin, s), intersection(tmax, s)));
 }
 
-bool	check_cap(t_ray *r, float t)
+static bool	check_cap(t_ray *r, float t)
 {
 	float	x;
 	float	z;
@@ -181,6 +181,30 @@ t_intersection	*local_intersect_cyl(t_shape *s)
 	return (xs);
 }
 
+static bool	check_cap_cone(t_ray *r, float t)
+{
+	float	x;
+	float	z;
+
+	x = (r->origin.x + t * r->direction.x);
+	z = (r->origin.z + t * r->direction.z);
+	return ((x * x + z * z) < fabs(r->direction.y) + EPSILON);
+}
+
+void	intersect_caps_cone(t_shape *cyl, t_intersection *xs)
+{
+	float	t;
+
+	if (!cyl->closed || fisequal(cyl->saved_ray.direction.y, 0))
+		return ;
+	t = (cyl->minimum - cyl->saved_ray.origin.y) / cyl->saved_ray.direction.y;
+	if (check_cap_cone(&cyl->saved_ray, t))
+		xs = intersections(intersection(t, cyl), intersection(t, cyl));
+	t = (cyl->maximum - cyl->saved_ray.origin.y) / cyl->saved_ray.direction.y;
+	if (check_cap_cone(&cyl->saved_ray, t))
+		xs = intersections(intersection(t, cyl), intersection(t, cyl));
+}
+
 t_intersection	*local_intersect_cone(t_shape *s)
 {
 	t_intersection	*xs;
@@ -226,7 +250,7 @@ t_intersection	*local_intersect_cone(t_shape *s)
 		if (s->minimum < y1 && y1 < s->maximum)
 			xs = intersections(intersection(t1, s), intersection(t1, s));
 	}
-	//	intersect_caps(s, xs);
+	intersect_caps_cone(s, xs);
 	return (xs);
 }
 
