@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 12:44:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/19 22:18:54 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/19 23:13:29 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,15 @@ t_tuple	world_to_object(t_shape *s, t_tuple point)
 	if (s->parent)
 		point = world_to_object(s->parent, point);
 	return (tmatrixmult(s->invtrans, point));
+}
+
+t_tuple	normal_to_world(t_shape *s, t_tuple norm)
+{
+	norm = tmmultfree(mtranspose(s->invtrans, 4), norm);
+	norm.w = 0;
+	norm = tnorm(norm);
+
+	if (s->parent)
+		norm = normal_to_world(s->parent, norm);
+	return (norm);
 }

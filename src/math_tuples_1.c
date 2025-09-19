@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 15:20:01 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/08/30 19:59:10 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/19 23:06:52 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,11 @@ bool	tisequal(t_tuple a, t_tuple b)
 
 t_tuple	tadd(t_tuple a, t_tuple b)
 {
-	t_tuple	result;
-
-	result.x = a.x + b.x;
-	result.y = a.y + b.y;
-	result.z = a.z + b.z;
-	result.w = a.w + b.w;
-	return (result);
+	a.x = a.x + b.x;
+	a.y = a.y + b.y;
+	a.z = a.z + b.z;
+	a.w = a.w + b.w;
+	return (a);
 }
 
 /* Subtract 2 Tuples */
@@ -55,13 +53,11 @@ t_tuple	tadd(t_tuple a, t_tuple b)
 
 t_tuple	tsub(t_tuple a, t_tuple b)
 {
-	t_tuple	result;
-
-	result.x = a.x - b.x;
-	result.y = a.y - b.y;
-	result.z = a.z - b.z;
-	result.w = a.w - b.w;
-	return (result);
+	a.x = a.x - b.x;
+	a.y = a.y - b.y;
+	a.z = a.z - b.z;
+	a.w = a.w - b.w;
+	return (a);
 }
 
 /* Negate Tuple */
@@ -70,11 +66,9 @@ t_tuple	tsub(t_tuple a, t_tuple b)
 
 t_tuple	tneg(t_tuple a)
 {
-	t_tuple	result;
-
-	result.x = -a.x;
-	result.y = -a.y;
-	result.z = -a.z;
-	result.w = -a.w;
-	return (result);
+	a.x = -a.x;
+	a.y = -a.y;
+	a.z = -a.z;
+	a.w = -a.w;
+	return (a);
 }

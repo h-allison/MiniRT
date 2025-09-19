@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/19 21:56:06 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/19 23:15:25 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -380,6 +380,7 @@ float			schlick(t_comps *comps);
 //groups.c
 void			add_child(t_shape *g, t_shape *s);
 t_tuple			world_to_object(t_shape *s, t_tuple p);
+t_tuple			normal_to_world(t_shape *s, t_tuple norm);
 
 //free.c
 int				free_matrices_and_ret(t_shape *p, int ret);

@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 15:20:01 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/08 23:35:45 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/19 23:07:22 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,11 @@
 
 t_tuple	tmult(t_tuple a, float scalar)
 {
-	t_tuple	result;
-
-	result.x = a.x * scalar;
-	result.y = a.y * scalar;
-	result.z = a.z * scalar;
-	result.w = a.w * scalar;
-	return (result);
+	a.x = a.x * scalar;
+	a.y = a.y * scalar;
+	a.z = a.z * scalar;
+	a.w = a.w * scalar;
+	return (a);
 }
 
 /* Tuple Divide */
@@ -32,13 +30,11 @@ t_tuple	tmult(t_tuple a, float scalar)
 
 t_tuple	tdiv(t_tuple a, float scalar)
 {
-	t_tuple	result;
-
-	result.x = a.x / scalar;
-	result.y = a.y / scalar;
-	result.z = a.z / scalar;
-	result.w = a.w / scalar;
-	return (result);
+	a.x = a.x / scalar;
+	a.y = a.y / scalar;
+	a.z = a.z / scalar;
+	a.w = a.w / scalar;
+	return (a);
 }
 /* Tuple Magnitude */
 // Magnitude = the length of a vector
@@ -59,12 +55,11 @@ float	tmag(t_tuple a)
 t_tuple	tnorm(t_tuple a)
 {
 	float	magnitude;
-	t_tuple	result;
 
 	magnitude = tmag(a);
-	result.x = a.x / magnitude;
-	result.y = a.y / magnitude;
-	result.z = a.z / magnitude;
-	result.w = a.w / magnitude;
-	return (result);
+	a.x = a.x / magnitude;
+	a.y = a.y / magnitude;
+	a.z = a.z / magnitude;
+	a.w = a.w / magnitude;
+	return (a);
 }

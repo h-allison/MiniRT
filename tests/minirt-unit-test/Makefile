@@ -107,6 +107,7 @@ SRCS := \
 	$(SRC_DIR_GROUPS)/05_test_groups_intersect.c \
 	$(SRC_DIR_GROUPS)/06_test_groups_intersect_transformed.c \
 	$(SRC_DIR_GROUPS)/07_test_groups_point_convert_space.c \
+	$(SRC_DIR_GROUPS)/08_test_groups_normal_convert_space.c \
 	$(PRG_DIR)/src/check_file.c \
 	$(PRG_DIR)/src/file_helpers.c \
 	$(PRG_DIR)/src/parsing.c \
