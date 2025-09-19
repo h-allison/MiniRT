@@ -102,6 +102,7 @@ SRCS := \
 	$(SRC_DIR_GROUPS)/00_test_groups_launcher.c \
 	$(SRC_DIR_GROUPS)/01_test_groups_basic.c \
 	$(SRC_DIR_GROUPS)/02_test_groups_has_parent.c \
+	$(SRC_DIR_GROUPS)/03_test_groups_add_child.c \
 	$(PRG_DIR)/src/check_file.c \
 	$(PRG_DIR)/src/file_helpers.c \
 	$(PRG_DIR)/src/parsing.c \
@@ -131,6 +132,7 @@ SRCS := \
 	$(PRG_DIR)/src/export_ppm.c \
 	$(PRG_DIR)/src/patterns.c \
 	$(PRG_DIR)/src/reflection.c \
+	$(PRG_DIR)/src/groups.c \
 	$(PRG_DIR)/src/world_scenes.c \
 	$(PRG_DIR)/src/free.c \
 	$(LIBFT_DIR)/ft_lstadd_back.c\

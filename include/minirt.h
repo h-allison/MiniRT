@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/19 12:29:37 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/19 13:21:00 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,11 +111,12 @@ typedef struct s_ray
 }	t_ray;
 
 typedef struct s_intersection t_intersection;
+typedef struct s_shape t_shape;
 
 typedef struct s_shape
 {
-	struct s_shape	*parent;
-	struct s_shape	*group;
+	t_shape			*parent;
+	t_shape			**group;
 	t_tuple			(*local_normal_at)(struct s_shape *, t_tuple);
 	t_intersection	*(*local_intersect)(struct s_shape *);
 	float			**transform;
@@ -374,6 +375,9 @@ void			set_pattern_transform(t_pattern *pat, float **t);
 t_rgb			reflected_color(t_world *w, t_comps *comps, int remaining);
 t_rgb			refracted_color(t_world *w, t_comps *comps, int remaining);
 float			schlick(t_comps *comps);
+
+//groups.c
+void			add_child(t_shape *g, t_shape *s);
 
 //free.c
 int				free_matrices_and_ret(t_shape *p, int ret);
