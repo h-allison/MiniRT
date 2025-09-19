@@ -14,9 +14,9 @@
 
 int		rt_error(char *msg, int ret)
 {
-	pt_putstr_fd("ERROR\n", 2);
-	pt_putstr_fd(msg, 2);
-	pt_putstr_fd("\n", 2);
+	ft_putstr_fd("ERROR\n", 2);
+	ft_putstr_fd(msg, 2);
+	ft_putstr_fd("\n", 2);
 	return(ret);
 }
 

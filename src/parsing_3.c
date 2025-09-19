@@ -12,62 +12,7 @@
 
 #include "minirt.h"
 
-// right now, world contains
-// t_shape *s;
-// t_light *light
-// Should also contains camera
-
-
-bool	c_is_positive_float(int c)
-{
-	if ((c >= '0' && c <= '9') || c == '.')
-		return (true)
-	else
-		return (false);
-}
-
-// checks that string is between 0.0 and 1.0
-// disallows additional decimals
-
-bool	one_decimal_postive_float(char *str)
-{
-	int	i;
-
-
-	if (ft_strlen(str) > 3)
-		return (false);
-	i = 0;
-	while (str[i])
-	{
-		if (!c_is_positive_float(str[i]))
-			return (false);
-		i++;
-	}
-	return (true);
-}
-
-bool	valid_rgb_values(char *str)
-{
-	if
-}
-
-// TODO: code libft atof (atoi for floats)
-
-int	parse_ambient_ratio(char *token, t_world *world)
-{
-	char	*ambient_str;
-	float	ambient_ratio;
-	
-	ambient_str = tokens[1];
-	if (!one_decimal_positive_float(ambient_str))
-		return(rt_error("Ambient ratio must be in range [0.0, 1.0]", -1));
-	ambient_ratio = atof(tokens[1]);
-	if (ambient_ratio < 0 || ambient_ratio > 1)
-		return(rt_error("Ambient ratio must be in range [0.0, 1.0]", -1));
-	world->ambient_ratio = ambient_ratio;
-	return (0);
-}
-
+/*
 int	rgb_input_format(char *tokens)
 {
 	return (0);
@@ -88,27 +33,47 @@ int	parse_ambient_rgb(char **tokens, t_world *world)
 		return(rt_error("Ambient color must be format [255,255,255]", -1));
 	}
 }
+*/
+
+int	parse_ambient_ratio(char *token, t_world *world)
+{
+	char	*ambient_str;
+	int		ret;
+
+	ret = 0;
+	ambient_str = token;
+	ret = rt_atof(ambient_str, &world->ambient_ratio);
+	if (ret != 0)
+		return(rt_error("A: ambient ratio: invalid input", -1));
+	if (world->ambient_ratio < 0 || world->ambient_ratio > 1)
+		return(rt_error("A: ambient ratio: must be in range [0.0, 1.0]", -1));
+	printf("Ambient ratio = %f\n", world->ambient_ratio);
+	return (0);
+}
 
 int	parse_ambient(char **tokens, t_world *world)
 {
 	if (!tokens[1])
-		return(rt_error("A: field 1: Ambient ratio required", -1));
-	if (parse_ambient_ratio != 0)
+		return(rt_error("A: ambient ratio: missing value", -1));
+	if (parse_ambient_ratio(tokens[1], world) != 0)
 		return (-1);
+	/*
 	if (!tokens[2])
 		return(rt_error("A: field 2: Ambient RGB required", -1));
 	if (parse_ambient_rgb != 0)
 		return (-1);
 	if (tokens[3])
 		return(rt_error("A : should contain only 2 fields", -1));
-	return(0);
+*/	return(0);
 }
 
 int	parse_singular_element(char **tokens, t_data *data)
 {
-	(void) data;
 	if (tokens[0][0] == 'A' && tokens[0][1] == '\0')
-	   printf("<parse into Ambient>\n");	
+	{	
+		if (parse_ambient(tokens, data->world) == -1)
+			return(-1);
+	}
 	else if (tokens[0][0] == 'C' && tokens[0][1] == '\0')
 	   printf("<parse into Camera>\n");	
 	else if (tokens[0][0] == 'L' && tokens[0][1] == '\0')

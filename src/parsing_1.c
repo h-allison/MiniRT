@@ -60,6 +60,7 @@ int	parse_lines(int fd, t_data *data)
 }
 */
 
+/*
 static void	debug_print_tokens(char **tokens)
 {
 	int	i;
@@ -71,6 +72,7 @@ static void	debug_print_tokens(char **tokens)
 		i++;
 	}
 }
+*/
 
 // TODO fancier exit
 //
@@ -91,10 +93,13 @@ int	parse_file(char *filename, t_data *data)
 		free(element);
 		if (tokens != NULL)
 		{
-			debug_print_tokens(tokens);
+		//	debug_print_tokens(tokens);
 			if (parse_into_world(tokens, data) == -1)
+			{
+				printf("error\n");
 				exit (1);
-			free (tokens);
+			}
+			free (tokens); // TODO
 		}
 		element = get_next_line(fd);
 	}
