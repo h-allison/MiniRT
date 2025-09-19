@@ -6,11 +6,36 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:35:10 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/18 14:13:36 by matthias         ###   ########.fr       */
+/*   Updated: 2025/09/19 19:46:54 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+//TODO TEST -> REMOVE
+
+t_intersection	*local_intersect(t_shape *s)
+{
+	t_tuple			sphere_to_ray;
+	float			a;
+	float			b;
+	float			discriminant;
+	t_intersection	*xs;
+
+	sphere_to_ray = tsub(s->saved_ray.origin, point(0, 0, 0));
+	a = dot(s->saved_ray.direction, s->saved_ray.direction);
+	b = 2 * dot(s->saved_ray.direction, sphere_to_ray);
+	discriminant = b * b - 4 * a * (dot(sphere_to_ray, sphere_to_ray) - 1);
+	if (discriminant < 0)
+		xs = intersections(intersection(0, NULL), intersection(0, NULL));
+	else
+		xs = intersections(intersection((-b - sqrtf(discriminant))
+					/ (2 * a), s), intersection((-b + sqrtf(discriminant))
+					/ (2 * a), s));
+	return (xs);
+}
+
+//TODO ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 /* Calculates intersections with one object */
 
@@ -131,7 +156,7 @@ static bool	check_cap(t_ray *r, float t)
 void	intersect_caps(t_shape *cyl, t_intersection *xs)
 {
 	float	t;
-	
+
 	(void)xs;
 	if (!cyl->closed || fisequal(cyl->saved_ray.direction.y, 0))
 		return ;
@@ -257,24 +282,52 @@ t_intersection	*local_intersect_cone(t_shape *s)
 	return (xs);
 }
 
-t_intersection	*local_intersect(t_shape *s)
+static void	swap_xs(t_intersection *a, t_intersection *b)
 {
-	t_tuple			sphere_to_ray;
-	float			a;
-	float			b;
-	float			discriminant;
+	float		tmp_t;
+	t_shape		*tmp_o;
+
+	tmp_t = a->t;
+	tmp_o = a->object;
+	a->t = b->t;
+	a->object = b->object;
+	b->t = tmp_t;
+	b->object = tmp_o;
+	return ;
+}	
+
+static void	sort_intersections(t_intersection *xs)
+{
+	int		i;
+
+	i = 0;
+	while(xs[i + 1].object)
+	{
+		if (xs[i].t > xs[i + 1].t)
+		{
+			swap_xs(&xs[i], &xs[i + 1]);
+			i = 0;
+		}
+		else
+			i++;
+	}
+	return ;
+}
+
+t_intersection	*local_intersect_group(t_shape *s)
+{
+	int				i;
 	t_intersection	*xs;
 
-	sphere_to_ray = tsub(s->saved_ray.origin, point(0, 0, 0));
-	a = dot(s->saved_ray.direction, s->saved_ray.direction);
-	b = 2 * dot(s->saved_ray.direction, sphere_to_ray);
-	discriminant = b * b - 4 * a * (dot(sphere_to_ray, sphere_to_ray) - 1);
-	if (discriminant < 0)
-		xs = intersections(intersection(0, NULL), intersection(0, NULL));
-	else
-		xs = intersections(intersection((-b - sqrtf(discriminant))
-					/ (2 * a), s), intersection((-b + sqrtf(discriminant))
-					/ (2 * a), s));
+	if (!s->group || !s->group[0])
+		return (intersections(intersection(0, NULL), intersection(0, NULL)));
+	i = 0;
+	while (s->group[i])
+	{
+		xs = intersect(s->group[i], s->saved_ray);
+		i++;
+	}
+	sort_intersections(xs);
 	return (xs);
 }
 
@@ -282,7 +335,7 @@ t_intersection	*intersect(t_shape *s, t_ray r)
 {
 	t_ray	local_r;
 
-	local_r = transform(r, s->invtrans);;
+	local_r = transform(r, s->invtrans);
 	s->saved_ray = local_r;
 	return (s->local_intersect(s));
 }
@@ -297,8 +350,6 @@ t_intersection	intersection(float t, t_shape *s)
 	i.object = s;
 	return (i);
 }
-
-//TODO FREE
 
 /* Append to a list of all intersections */
 

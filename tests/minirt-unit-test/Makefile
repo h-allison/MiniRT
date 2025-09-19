@@ -103,6 +103,9 @@ SRCS := \
 	$(SRC_DIR_GROUPS)/01_test_groups_basic.c \
 	$(SRC_DIR_GROUPS)/02_test_groups_has_parent.c \
 	$(SRC_DIR_GROUPS)/03_test_groups_add_child.c \
+	$(SRC_DIR_GROUPS)/04_test_groups_intersect_empty.c \
+	$(SRC_DIR_GROUPS)/05_test_groups_intersect.c \
+	$(SRC_DIR_GROUPS)/06_test_groups_intersect_transformed.c \
 	$(PRG_DIR)/src/check_file.c \
 	$(PRG_DIR)/src/file_helpers.c \
 	$(PRG_DIR)/src/parsing.c \

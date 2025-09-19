@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 18:12:31 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/19 12:00:26 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/19 19:12:21 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -527,9 +527,9 @@ t_world	default_world_cyl(void)
 	w.light = malloc(2 * sizeof(t_light));
 	if (!w.light)
 		exit (1);
-	w.light[0] = point_light(point(-7, 7, -6), color(128, 128, 123));
+	w.light[0] = point_light(point(-7, 7, -6), color(200, 200, 180));
 	w.light[0].last = false;
-	w.light[1] = point_light(point(-4, 8, 2), color(128, 70, 70));
+	w.light[1] = point_light(point(-4, 8, 2), color(180, 120, 120));
 
 	w.s = malloc(8 * sizeof(t_shape));
 	w.s[0] = floor;

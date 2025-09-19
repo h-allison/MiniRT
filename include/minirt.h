@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/19 13:21:00 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/19 17:39:08 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -341,6 +341,7 @@ float			maxf(float a, float b, float c);
 void			swapf(float *a, float *b);
 t_intersection	*local_intersect_cyl(t_shape *s);
 t_intersection	*local_intersect_cone(t_shape *s);
+t_intersection	*local_intersect_group(t_shape *s);
 t_intersection	*local_intersect(t_shape *s);
 t_intersection	*intersect(t_shape *s, t_ray r);
 t_intersection	intersection(float t, t_shape *s);

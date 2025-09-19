@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 19:13:39 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/19 13:01:41 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/19 19:41:29 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ t_shape	group(void)
 	g.transform = create_id_matrix();
 	g.invtrans = minvert(g.transform, 4);
 	g.local_normal_at = NULL;
-	g.local_intersect = NULL;
+	g.local_intersect = local_intersect_group;
 	g.group = NULL;
 	return (g);
 }
