@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 19:13:39 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/19 19:41:29 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/19 22:22:50 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ t_material	material(void)
 t_shape	group(void)
 {
 	t_shape	g;
-
+	
+	g.parent = NULL;
 	g.transform = create_id_matrix();
 	g.invtrans = minvert(g.transform, 4);
 	g.local_normal_at = NULL;

@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 12:44:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/19 13:19:59 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/19 22:18:54 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,11 @@ void	add_child(t_shape *g, t_shape *s)
 	g->group[i + 1] = NULL;
 	s->parent = g;
 	return ;
+}
+
+t_tuple	world_to_object(t_shape *s, t_tuple point)
+{
+	if (s->parent)
+		point = world_to_object(s->parent, point);
+	return (tmatrixmult(s->invtrans, point));
 }
