@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/18 18:59:00 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/19 12:29:37 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,13 +110,14 @@ typedef struct s_ray
 	t_tuple			direction;
 }	t_ray;
 
-typedef struct s_shape t_shape;
 typedef struct s_intersection t_intersection;
 
 typedef struct s_shape
 {
-	t_tuple			(*local_normal_at)(t_shape *, t_tuple);
-	t_intersection	*(*local_intersect)(t_shape *);
+	struct s_shape	*parent;
+	struct s_shape	*group;
+	t_tuple			(*local_normal_at)(struct s_shape *, t_tuple);
+	t_intersection	*(*local_intersect)(struct s_shape *);
 	float			**transform;
 	float			**invtrans;
 	t_material		m;
@@ -222,22 +223,18 @@ int				parse_file(char *filename, t_data *data);
 void			render(void *param);
 
 //create_objects.c
-t_pattern		pattern(void);
-t_material		material(void);
 t_shape			create_test_shape(void);
 t_pattern		create_test_pattern(void);
+t_pattern		pattern(void);
+t_material		material(void);
 t_shape			glass_sphere(void);
 t_shape			sphere(void);
 t_shape			plane(void);
 t_shape			cube(void);
 t_shape			cylinder(void);
 t_shape			cone(void);
+t_shape			group(void);
 t_light			point_light(t_tuple position, t_rgb intensity);
-t_world			default_world(void);
-t_world			default_world_2(void);
-t_world			default_world_3(void);
-t_world			default_world_4(void);
-t_world			default_world_5(void);
 t_camera		camera(float hsize, float vsize, float field_of_view);
 
 //create_tuples.c
@@ -382,6 +379,11 @@ float			schlick(t_comps *comps);
 int				free_matrices_and_ret(t_shape *p, int ret);
 
 //world_scenes.c
+t_world			default_world(void);
+t_world			default_world_2(void);
+t_world			default_world_3(void);
+t_world			default_world_4(void);
+t_world			default_world_5(void);
 t_world			default_world_6(void);
 t_world			default_world_cyl(void);
 #endif

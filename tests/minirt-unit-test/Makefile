@@ -19,6 +19,7 @@ SRC_DIR_SHAPES := tests_shapes
 SRC_DIR_PLANES := tests_planes
 SRC_DIR_CUB_CYL := tests_cub_cyl
 SRC_DIR_CONES := tests_cones
+SRC_DIR_GROUPS := tests_groups
 SRC_DIR_PATTERNS := tests_patterns
 SRC_DIR_REFLECT := tests_reflection
 SRC_DIR_REFRACT := tests_refraction
@@ -98,6 +99,9 @@ SRCS := \
 	$(SRC_DIR_CONES)/01_test_cones_intersect.c \
 	$(SRC_DIR_CONES)/02_test_cones_intersect_parallel.c \
 	$(SRC_DIR_CONES)/03_test_cones_intersect_caps.c \
+	$(SRC_DIR_GROUPS)/00_test_groups_launcher.c \
+	$(SRC_DIR_GROUPS)/01_test_groups_basic.c \
+	$(SRC_DIR_GROUPS)/02_test_groups_has_parent.c \
 	$(PRG_DIR)/src/check_file.c \
 	$(PRG_DIR)/src/file_helpers.c \
 	$(PRG_DIR)/src/parsing.c \
