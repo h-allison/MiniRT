@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:25:23 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/18 13:46:43 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/20 16:44:26 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,10 @@ t_tuple	normal_at(t_shape *s, t_tuple world_point)
 {
 	t_tuple	local_point;
 	t_tuple	local_normal;
-	t_tuple	world_normal;
-	float	**m;
 
-	local_point = tmatrixmult(s->invtrans, world_point);
+	local_point = world_to_object(s, world_point);
 	local_normal = s->local_normal_at(s, local_point);
-	m = mtranspose(s->invtrans, 4);
-	world_normal = tmmultfree(m, local_normal);
-	world_normal.w = 0;
-	return (tnorm(world_normal));
+	return (normal_to_world(s, local_normal));
 }
 
 t_tuple	reflect(t_tuple in, t_tuple normal)

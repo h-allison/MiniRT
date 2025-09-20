@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:44:02 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/19 23:14:36 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/20 16:32:28 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ int test_groups_intersect(void);
 int test_groups_intersect_transformed(void);
 int test_groups_point_convert_space(void);
 int test_groups_normal_convert_space(void);
+int test_groups_object_normal(void);
 
 #endif

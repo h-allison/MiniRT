@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/19 23:15:25 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/20 16:52:32 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -361,7 +361,7 @@ int				canvas_export_ppm(t_data *data);
 //patterns.c
 t_pattern		stripe_pattern(t_rgb a, t_rgb b);
 t_rgb			stripe_at(t_pattern *pat, t_tuple point);
-t_rgb			stripe_at_object(t_pattern *pat, t_shape *object, t_tuple point);
+t_rgb			stripe_at_object(t_pattern *pat, t_shape *object, t_tuple world_point);
 t_pattern		gradient_pattern(t_rgb a, t_rgb b);
 t_rgb			gradient_at(t_pattern *gradient, t_tuple point);
 t_pattern		ring_pattern(t_rgb a, t_rgb b);

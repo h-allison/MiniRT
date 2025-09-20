@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 00:07:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/13 18:23:53 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/20 16:53:47 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,12 @@ t_rgb	checkers_at(t_pattern *checkers, t_tuple point)
 	return (checkers->b);
 }
 
-t_rgb	stripe_at_object(t_pattern *pat, t_shape *object, t_tuple point)
+t_rgb	stripe_at_object(t_pattern *pat, t_shape *object, t_tuple world_point)
 {
 	t_tuple	object_point;
 	t_tuple pattern_point;
 
-	object_point = tmatrixmult(object->invtrans, point);
+	object_point = world_to_object(object, world_point);
 	pattern_point = tmatrixmult(pat->invtrans, object_point);
 	return (stripe_at(pat, pattern_point));
 }
