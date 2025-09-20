@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:25:23 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/20 16:44:26 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/20 19:08:14 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,14 @@ t_tuple	local_normal_at_cone(t_shape *s, t_tuple local_point)
 	y = sqrtf(dist);
 	y *= -(local_point.y > 0);
 	return (vector(local_point.x, y, local_point.z));
+}
+
+t_tuple	local_normal_at_group(t_shape *s, t_tuple local_point)
+{
+	(void)s;
+	(void)local_point;
+	ft_putstr_fd("local normal at group. this shouldn't happen!!", 2);
+	exit(0);
 }
 
 t_tuple	local_normal_at(t_shape *s, t_tuple local_point)

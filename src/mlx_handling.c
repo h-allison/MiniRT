@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 23:32:31 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/20 02:06:26 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/20 19:36:05 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ void	ft_hook(void *param)
 		}
 		if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
 		{
-			data->cam->transform = mmultfree(translation(-0.05, 0, 0), data->cam->transform);
+			data->cam->transform = mmultfree(translation(-0.1, 0, 0), data->cam->transform);
 			data->reset = true;
 		}
 		if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
 		{
-			data->cam->transform = mmultfree(translation(0.05, 0, 0), data->cam->transform);
+			data->cam->transform = mmultfree(translation(0.1, 0, 0), data->cam->transform);
 			data->reset = true;
 		}
 		if (mlx_is_key_down(data->mlx, MLX_KEY_R))

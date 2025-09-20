@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 19:13:39 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/19 22:22:50 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/20 19:16:27 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ t_shape	glass_sphere(void)
 	t_shape	s;
 
 	s.parent = NULL;
+	s.group = NULL;
 	s.transform = create_id_matrix();
 	s.invtrans = minvert(s.transform, 4);
 	s.local_normal_at = local_normal_at_sphere;
@@ -90,11 +91,12 @@ t_shape	group(void)
 	t_shape	g;
 	
 	g.parent = NULL;
+	g.group = NULL;
 	g.transform = create_id_matrix();
 	g.invtrans = minvert(g.transform, 4);
-	g.local_normal_at = NULL;
+	g.local_normal_at = local_normal_at_group;
 	g.local_intersect = local_intersect_group;
-	g.group = NULL;
+	g.m = material();
 	return (g);
 }
 
@@ -103,6 +105,7 @@ t_shape	sphere(void)
 	t_shape	s;
 
 	s.parent = NULL;
+	s.group = NULL;
 	s.transform = create_id_matrix();
 	s.invtrans = minvert(s.transform, 4);
 	s.local_normal_at = local_normal_at_sphere;
@@ -116,6 +119,7 @@ t_shape	plane(void)
 	t_shape	s;
 
 	s.parent = NULL;
+	s.group = NULL;
 	s.transform = create_id_matrix();
 	s.invtrans = minvert(s.transform, 4);
 	s.local_normal_at = local_normal_at_plane;
@@ -129,6 +133,7 @@ t_shape	cube(void)
 	t_shape	s;
 
 	s.parent = NULL;
+	s.group = NULL;
 	s.transform = create_id_matrix();
 	s.invtrans = minvert(s.transform, 4);
 	s.local_normal_at = local_normal_at_cube;
@@ -142,6 +147,7 @@ t_shape	cylinder(void)
 	t_shape	s;
 
 	s.parent = NULL;
+	s.group = NULL;
 	s.transform = create_id_matrix();
 	s.invtrans = minvert(s.transform, 4);
 	s.local_normal_at = local_normal_at_cyl;
@@ -158,6 +164,7 @@ t_shape	cone(void)
 	t_shape	s;
 
 	s.parent = NULL;
+	s.group = NULL;
 	s.transform = create_id_matrix();
 	s.invtrans = minvert(s.transform, 4);
 	s.local_normal_at = local_normal_at_cone;
@@ -167,6 +174,64 @@ t_shape	cone(void)
 	s.maximum = FLT_MAX;
 	s.closed = false;
 	return (s);
+}
+
+static t_shape	hexagon_corner(void)
+{
+	t_shape	corner;
+
+	corner = sphere();
+	set_transform(&corner, mmultfree(translation(0, 0, 1),
+				scaling(0.25, 0.25, 0.25)));
+	return (corner);
+}
+
+static t_shape	hexagon_edge(void)
+{
+	t_shape	edge;
+	float	**t;
+	
+	edge = cylinder();
+	edge.minimum = 0;
+	edge.maximum = 1;
+	t = scaling(0.25, 1, 0.25);
+	t = mmultfree(rotation_z(-M_PI / 2), t);
+	t = mmultfree(rotation_y(-M_PI / 6), t);
+ 	t = mmultfree(translation(0, 0 ,-1), t);
+	set_transform(&edge, t);
+	return (edge);
+}
+
+static t_shape	hexagon_side(void)
+{
+	t_shape	side;
+	t_shape corner;
+	t_shape edge;
+
+	corner = hexagon_corner();
+	edge = hexagon_edge();
+	side = group();
+	add_child(&side, &corner);
+	add_child(&side, &edge);
+	return (side);
+}
+
+t_shape	hexagon(void)
+{
+	t_shape	hex;
+	t_shape side[6];
+	int		n;
+	
+	n = 0;
+	hex = group();
+	while (n < 6)
+	{
+		side[n] = hexagon_side();
+		side[n].transform = mmultfree(rotation_y(n * M_PI / 3), side[n].transform);
+		add_child(&hex, &(side[n]));
+		n++;
+	}
+	return (hex);
 }
 
 t_light	point_light(t_tuple position, t_rgb intensity)

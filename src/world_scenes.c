@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 18:12:31 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/19 19:12:21 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/20 19:35:01 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -531,7 +531,7 @@ t_world	default_world_cyl(void)
 	w.light[0].last = false;
 	w.light[1] = point_light(point(-4, 8, 2), color(180, 120, 120));
 
-	w.s = malloc(8 * sizeof(t_shape));
+	w.s = malloc(9 * sizeof(t_shape));
 	w.s[0] = floor;
 	w.s[1] = big;
 	w.s[2] = middle;
@@ -539,5 +539,28 @@ t_world	default_world_cyl(void)
 	w.s[4] = left;
 	w.s[5] = cub;
 	w.s[6].transform = NULL;
+	return (w);
+}
+
+t_world	default_world_group_test(void)
+{
+	t_world	w;
+//	t_shape	floor;
+	t_shape	hex;
+	
+//	floor = plane();
+//	floor.m.pattern = checkers_pattern(color(0, 0, 0), floor.m.color);
+
+	hex =cube();
+
+	w.light = malloc(1 * sizeof(t_light));
+	if (!w.light)
+		exit (1);
+	w.light[0] = point_light(point(-7, 7, -6), color(255, 255, 255));
+
+	w.s = malloc(2 * sizeof(t_shape));
+//	w.s[0] = floor;
+	w.s[0] = hex;
+	w.s[1].transform = NULL;
 	return (w);
 }

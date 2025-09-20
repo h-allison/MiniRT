@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 00:07:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/20 16:53:47 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/20 18:54:15 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ t_rgb	pattern_at_shape(t_pattern *pat, t_shape *shape, t_tuple point)
 	t_tuple	shape_point;
 	t_tuple pattern_point;
 
-	shape_point = tmatrixmult(shape->invtrans, point);
+	shape_point = world_to_object(shape, point);
 	pattern_point = tmatrixmult(pat->invtrans, shape_point);
 	return (pat->pattern_at(pat, pattern_point));
 }

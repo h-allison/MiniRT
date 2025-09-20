@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 12:44:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/19 23:28:01 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/20 19:04:28 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	add_child(t_shape *g, t_shape *s)
 	{
 		while (g->group[i])
 			i++;
-		temp = malloc((i + 1) * sizeof(t_shape *));
+		temp = malloc((i + 2) * sizeof(t_shape *));
 		i = 0;
 		while (g->group[i])
 		{

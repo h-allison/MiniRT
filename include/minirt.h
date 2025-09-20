@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/20 16:52:32 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/20 19:30:05 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,6 +234,7 @@ t_shape			plane(void);
 t_shape			cube(void);
 t_shape			cylinder(void);
 t_shape			cone(void);
+t_shape			hexagon(void);
 t_shape			group(void);
 t_light			point_light(t_tuple position, t_rgb intensity);
 t_camera		camera(float hsize, float vsize, float field_of_view);
@@ -316,6 +317,7 @@ t_tuple			local_normal_at_plane(t_shape *s, t_tuple local_point);
 t_tuple			local_normal_at_cube(t_shape *s, t_tuple local_point);
 t_tuple			local_normal_at_cyl(t_shape *s, t_tuple local_point);
 t_tuple			local_normal_at_cone(t_shape *s, t_tuple local_point);
+t_tuple			local_normal_at_group(t_shape *s, t_tuple local_point);
 t_tuple			local_normal_at(t_shape *s, t_tuple local_point);
 t_tuple			normal_at(t_shape *s, t_tuple p);
 t_tuple			reflect(t_tuple in, t_tuple normal);
@@ -393,4 +395,5 @@ t_world			default_world_4(void);
 t_world			default_world_5(void);
 t_world			default_world_6(void);
 t_world			default_world_cyl(void);
+t_world			default_world_group_test(void);
 #endif
