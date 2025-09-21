@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 18:12:31 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/21 11:10:57 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 12:11:19 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -472,7 +472,7 @@ t_world	default_world_cyl(void)
 	left.m.specular = 1;
 	left.m.ambient = 0.1;
 	left.m.reflective = 2;
-	left.m.transparency = 0.9;
+	left.m.transparency = 1;
 	left.m.refractive_index = 1.5;
 
 	middle = sphere();
