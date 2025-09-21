@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 18:12:31 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/21 18:44:08 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 21:53:13 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -459,7 +459,7 @@ t_world	default_world_cyl(void)
 	big.m.ambient = .2;
 	big.m.specular = 0.5;
 	big.m.pattern = texture_map(uv_checkers(20, 10, color(80, 80, 80),
-				big.m.color), planar_map);
+				big.m.color), spherical_map);
 
 	left = cylinder();
 	left.minimum = 0;
@@ -516,9 +516,9 @@ t_world	default_world_cyl(void)
 	cub.m.diffuse = .9;
 	cub.m.ambient = .6;
 	cub.m.specular = 0.6;
-	cub.m.reflective = 0.4;
-	cub.m.pattern = gradient_pattern(color(70, 100, 0), cub.m.color);
-	cub.m.pattern.transform = mmultfree(scaling(2.01, 1, 1), cub.m.pattern.transform);
+	cub.m.reflective = 0.1;
+	cub.m.pattern = texture_map(uv_checkers(4, 4, color(70, 100, 0), cub.m.color), cube_map);
+	cub.m.pattern.transform = mmultfree(scaling(1, 1, 1), cub.m.pattern.transform);
 	cub.m.pattern.transform = mmultfree(translation(-1, 0, 0), cub.m.pattern.transform);
 	cub.m.pattern.transform = mmultfree(rotation_z(90 * DEG2RAD), cub.m.pattern.transform);
 	cub.m.pattern.invtrans = minvert(cub.m.pattern.transform, 4);

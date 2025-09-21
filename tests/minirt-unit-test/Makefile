@@ -65,6 +65,8 @@ SRCS := \
 	$(SRC_DIR_PATTERNS)/11_test_pattern_uv_checkers.c \
 	$(SRC_DIR_PATTERNS)/12_test_pattern_spherical_map.c \
 	$(SRC_DIR_PATTERNS)/13_test_pattern_align_check.c \
+	$(SRC_DIR_PATTERNS)/14_test_pattern_identify_cube_face.c \
+	$(SRC_DIR_PATTERNS)/15_test_pattern_colors_mapped_cube.c \
 	$(SRC_DIR_REFLECT)/00_test_reflect_launcher.c \
 	$(SRC_DIR_REFLECT)/01_test_reflective.c \
 	$(SRC_DIR_REFLECT)/02_test_reflect_comps.c \
@@ -142,6 +144,7 @@ SRCS := \
 	$(PRG_DIR)/src/patterns.c \
 	$(PRG_DIR)/src/reflection.c \
 	$(PRG_DIR)/src/groups.c \
+	$(PRG_DIR)/src/uv_mapping.c \
 	$(PRG_DIR)/src/world_scenes.c \
 	$(PRG_DIR)/src/free.c \
 	$(LIBFT_DIR)/ft_lstadd_back.c\

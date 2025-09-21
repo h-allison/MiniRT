@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/21 17:36:46 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 21:48:57 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -390,10 +390,12 @@ t_tuple			no_map(t_tuple p);
 t_tuple			spherical_map(t_tuple p);
 t_tuple			planar_map(t_tuple p);
 t_tuple			cylindrical_map(t_tuple p);
+t_tuple			cube_map(t_tuple point);
 t_pattern		texture_map(t_pattern uv_pattern, t_tuple (*map)(t_tuple));
 t_rgb			pattern_at(t_pattern *pat, t_tuple point);
 t_rgb			pattern_at_shape(t_pattern *pat, t_shape *shape, t_tuple point);
 void			set_pattern_transform(t_pattern *pat, float **t);
+char			*face_from_point(t_tuple point);
 
 //reflection.c
 t_rgb			reflected_color(t_world *w, t_comps *comps, int remaining);
@@ -404,6 +406,14 @@ float			schlick(t_comps *comps);
 void			add_child(t_shape *g, t_shape *s);
 t_tuple			world_to_object(t_shape *s, t_tuple p);
 t_tuple			normal_to_world(t_shape *s, t_tuple norm);
+
+//uv_mapping.c
+t_tuple			cube_uv_front(t_tuple point);
+t_tuple			cube_uv_back(t_tuple point);
+t_tuple			cube_uv_left(t_tuple point);
+t_tuple			cube_uv_right(t_tuple point);
+t_tuple			cube_uv_up(t_tuple point);
+t_tuple			cube_uv_down(t_tuple point);
 
 //free.c
 int				free_matrices_and_ret(t_shape *p, int ret);

@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 17:16:24 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/21 14:30:44 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 22:33:04 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@ int test_pattern_set_transform(void);
 int test_pattern_uv_checkers(void);
 int test_pattern_spherical_map(void);
 int test_pattern_align_check(void);
+int test_pattern_identify_cube_face(void);
+int	test_pattern_colors_mapped_cube(void);
 
 #endif

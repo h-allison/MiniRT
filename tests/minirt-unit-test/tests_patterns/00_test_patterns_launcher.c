@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 01:46:21 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/21 14:30:16 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 22:33:51 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	patterns_tests_launcher(void)
 	load_test(testlist, "PATTERNS: UV checkers", &test_pattern_uv_checkers);
 	load_test(testlist, "PATTERNS: Spherical map", &test_pattern_spherical_map);
 	load_test(testlist, "PATTERNS: UV align check", &test_pattern_align_check);
+	load_test(testlist, "PATTERNS: Identify cube face", &test_pattern_identify_cube_face);
+	load_test(testlist, "PATTERNS: Test cube colormapping", &test_pattern_colors_mapped_cube);
 	ret = launch_tests(testlist);
 	return (ret);
 }

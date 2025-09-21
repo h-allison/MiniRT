@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 00:07:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/21 18:33:22 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 21:48:33 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,41 +155,6 @@ t_pattern texture_map(t_pattern uv_pattern, t_tuple (*map)(t_tuple))
 	return (pattern);
 }
 
-t_pattern	uv_align_check(t_rgb main, t_rgb ul, t_rgb ur, t_rgb bl, t_rgb br)
-{
-	t_pattern align_check;
-
-	align_check.main = main;
-	align_check.ul = ul;
-	align_check.ur = ur;
-	align_check.bl = bl;
-	align_check.br = br;
-	align_check.transform = create_id_matrix();
-	align_check.invtrans = minvert(align_check.transform, 4);
-	align_check.pattern_at = uv_align_check_at;
-	align_check.status = true;
-	return (align_check);
-}
-
-t_rgb	uv_align_check_at(t_pattern *align_check, t_tuple point)
-{
-	if (point.y > 0.8)
-	{
-		if (point.x < 0.2)
-			return (align_check->ul);
-		if (point.x > 0.8)
-			return (align_check->ur);
-	}
-	else if(point.y < 0.2)
-	{
-		if (point.x < 0.2)
-			return (align_check->bl);
-		if (point.x > 0.8)
-			return (align_check->br);
-	}
-	return (align_check->main);
-}
-
 t_tuple	no_map(t_tuple p)
 {
 	t_tuple	uv;
@@ -238,6 +203,31 @@ t_tuple	planar_map(t_tuple p)
 	return (uv);
 }
 
+t_tuple cube_map(t_tuple point)
+{
+	float	abs_x;
+	float	abs_y;
+	float	abs_z;
+	float	coord;
+
+	abs_x = fabs(point.x);
+	abs_y = fabs(point.y);
+	abs_z = fabs(point.z);
+	coord = maxf(abs_x, abs_y, abs_z);
+
+	if (coord == point.x)
+		return (cube_uv_right(point));
+	else if (coord == -point.x)
+		return (cube_uv_left(point));
+	else if (coord == point.y)
+		return (cube_uv_up(point));
+	else if (coord == -point.y)
+		return (cube_uv_down(point));
+	else if (coord == point.z)
+		return (cube_uv_front(point));
+	return (cube_uv_back(point));
+}
+
 t_rgb	pattern_at(t_pattern *pat, t_tuple point)
 {
 	t_rgb	col;
@@ -277,4 +267,68 @@ void	set_pattern_transform(t_pattern *pat, float **t)
 	}
 	free_matrix(t, 4);
 	pat->invtrans = minvert(pat->transform, 4);
+}
+
+/* PART OF TEST PATTERN 13 */
+
+t_pattern	uv_align_check(t_rgb main, t_rgb ul, t_rgb ur, t_rgb bl, t_rgb br)
+{
+	t_pattern align_check;
+
+	align_check.main = main;
+	align_check.ul = ul;
+	align_check.ur = ur;
+	align_check.bl = bl;
+	align_check.br = br;
+	align_check.transform = create_id_matrix();
+	align_check.invtrans = minvert(align_check.transform, 4);
+	align_check.pattern_at = uv_align_check_at;
+	align_check.status = true;
+	return (align_check);
+}
+
+t_rgb	uv_align_check_at(t_pattern *align_check, t_tuple point)
+{
+	if (point.y > 0.8)
+	{
+		if (point.x < 0.2)
+			return (align_check->ul);
+		if (point.x > 0.8)
+			return (align_check->ur);
+	}
+	else if(point.y < 0.2)
+	{
+		if (point.x < 0.2)
+			return (align_check->bl);
+		if (point.x > 0.8)
+			return (align_check->br);
+	}
+	return (align_check->main);
+}
+
+/* PART OF TEST PATTERNS 14 */
+
+char	*face_from_point(t_tuple point)
+{
+	float	abs_x;
+	float	abs_y;
+	float	abs_z;
+	float	coord;
+
+	abs_x = fabs(point.x);
+	abs_y = fabs(point.y);
+	abs_z = fabs(point.z);
+	coord = maxf(abs_x, abs_y, abs_z);
+
+	if (coord == point.x)
+		return ("right");
+	if (coord == -point.x)
+		return ("left");
+	if (coord == point.y)
+		return ("up");
+	if (coord == -point.y)
+		return ("down");
+	if (coord == point.z)
+		return ("front");
+	return ("back");
 }
