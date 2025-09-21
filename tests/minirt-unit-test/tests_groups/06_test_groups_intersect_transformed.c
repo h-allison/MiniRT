@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:38:56 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/19 19:41:47 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 03:48:56 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ int test_groups_intersect_transformed(void)
 		i++;
 	if (i != 2)
 		return (-1);
+	free_shape(&g);
 	return (0);
 }

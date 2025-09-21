@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:38:56 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/20 16:32:49 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 03:50:14 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ int test_groups_object_normal(void)
 	n = normal_at(&s, point(1.7321 ,1.1547, -5.5774));
 	if (!fisequal(n.x, 0.2857) || !fisequal(n.y, 0.4286) || !fisequal(n.z, -0.8571))
 		return (-1);
+	free_shape(&g1);
 	return (0);
 }

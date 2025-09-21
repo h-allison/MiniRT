@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:35:10 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/20 19:09:56 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 08:39:14 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ t_intersection	*local_intersect_cube(t_shape *s)
 			s->saved_ray.origin.z, s->saved_ray.direction.z);
 	tmin = maxf(t.xtmin, t.ytmin, t.ztmin);
 	tmax = minf(t.xtmax, t.ytmax, t.ztmax);
-	if (tmin > tmax)
+	if (tmin > tmax || tmax < 0)
 		return(intersections(intersection(0, NULL), intersection(0,NULL)));
 	return (intersections(intersection(tmin, s), intersection(tmax, s)));
 }

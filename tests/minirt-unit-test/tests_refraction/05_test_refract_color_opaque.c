@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 23:02:50 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/16 00:24:25 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 04:34:10 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ int test_refract_color_opaque(void)
 	col = refracted_color(&w, &comps, 5);
 	if (col.r != 0 || col.g != 0 || col.b !=0)
 		return (-1);
+	free_world(&w);
 	return (0);
 }

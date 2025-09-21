@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 12:12:11 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/17 14:36:19 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/21 04:08:13 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ int test_cyls_intersect_constrained(void)
     if (!xs || !xs[0].object || !xs[1].object)
         return (-1);
     xs[0].object = NULL;
+	free_shape(&c);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:38:56 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/17 10:52:51 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 04:09:30 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ int test_cubes_normal_at(void)
 	n = local_normal_at_cube(&c, point(-1, -1, -1));
 	if (n.x != -1 || n.y != 0 || n.z != 0)
 		return (-1);
+	free_shape(&c);
 	return (0);
 }

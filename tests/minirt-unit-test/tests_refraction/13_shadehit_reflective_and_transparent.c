@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:06:34 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/16 18:01:28 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/21 04:38:20 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ int test_shadehit_reflective_and_transparent(void)
 		return (-1);
 	if (!fisequal(col.b, 0.692405))
 		return (-1);
+	free_world(&w);
 	return (0);
 }

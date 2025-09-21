@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 12:44:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/20 19:04:28 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 09:13:06 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	add_child(t_shape *g, t_shape *s)
 		g->group = temp;
 	}
 	g->group[i] = s;
-	g->group[i + 1] = NULL;
 	s->parent = g;
+	g->group[i + 1] = NULL;
 	return ;
 }
 

@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 21:24:15 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/17 21:41:32 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 04:08:42 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ int test_cyls_normal_caps(void)
 	n = local_normal_at_cyl(&cyl, point(0, 2, 0.5));
 	if (n.x != 0 ||  n.y != 1 || n.z != 0)
 		return(-1);
+	free_shape(&cyl);
 	return (0);
 }

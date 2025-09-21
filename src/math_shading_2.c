@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 13:30:13 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/16 20:30:29 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 07:23:39 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_rgb	shade_hit(t_world *w, t_comps *comps, int remaining)
 	{
 		reflectance = schlick(comps);
 		return (cadd(cadd(surface, cscale(reflected, reflectance)),
-			cscale(refracted, 1 - reflectance)));
+				cscale(refracted, 1 - reflectance)));
 	}
 	return (cadd(cadd(surface, reflected), refracted));
 }
@@ -71,10 +71,10 @@ bool	is_shadowed(t_world *world, int i, t_tuple point)
 {
 	t_tuple			v;
 	float			distance;
-	t_tuple 		direction;
+	t_tuple			direction;
 	t_ray			r;
 	t_intersection	*xs;
-	t_intersection *ht;
+	t_intersection	*ht;
 
 	v = tsub(world->light[i].position, point);
 	distance = tmag(v);

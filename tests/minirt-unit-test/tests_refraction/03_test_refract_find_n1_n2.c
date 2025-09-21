@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 23:02:50 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/15 23:55:02 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 04:30:35 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,8 @@ int test_refract_find_n1_n2(void)
 	comps = prepare_computations(&xs[5], &r, xs);
 	if (!fisequal(comps.n1, 1.5) || !fisequal(comps.n2, 1))
 		return (-1);
+	free_shape(&sa);
+	free_shape(&sb);
+	free_shape(&sc);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 19:21:19 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/16 20:46:19 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 07:50:57 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ float	schlick(t_comps *comps)
 	}
 	r0 = (comps->n1 - comps->n2) / (comps->n1 + comps->n2);
 	r0 = r0 * r0;
-	return(r0 + (1 - r0) * powf((1 - cos), 5));
+	return (r0 + (1 - r0) * powf((1 - cos), 5));
 }
 
 t_rgb	reflected_color(t_world *w, t_comps *comps, int remaining)
@@ -68,5 +68,5 @@ t_rgb	refracted_color(t_world *w, t_comps *comps, int remaining)
 	refract_ray = ray(comps->under_point, direction);
 	col = cscale(color_at(w, &refract_ray, remaining - 1),
 			comps->object->m.transparency);
-	return(col);
+	return (col);
 }

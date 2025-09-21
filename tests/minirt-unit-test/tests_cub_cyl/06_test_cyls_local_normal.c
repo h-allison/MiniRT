@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 12:12:11 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/17 21:29:23 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 04:06:40 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ int test_cyls_local_normal(void)
 	n = local_normal_at_cyl(&cyl, point(-1, 1, 0));
 	if (n.x != -1 ||  n.y != 0 || n.z != 0)
 		return(-1);
+	free_shape(&cyl);
 	return (0);
 }

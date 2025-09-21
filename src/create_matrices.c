@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 13:20:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/03 14:17:42 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/21 07:16:54 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ float	**alloc_matrix(int size)
 		if (!m[i])
 		{
 			free_matrix(m, size);
-			exit (1); // TODO
+			exit (1);
 		}
 		i++;
 	}

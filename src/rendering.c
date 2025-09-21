@@ -6,15 +6,11 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:54:44 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/20 19:39:46 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 08:06:10 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-#define CHUNK_SIZE             4
-#define PIXELATE_START_STRIDE 16
-#define AA_SPP                 4
 
 static int	render_chunk(t_world *world, t_data *data)
 {
@@ -111,7 +107,6 @@ static int	render_chunk(t_world *world, t_data *data)
 		}
 		done = 1;
 		printf("Render complete\n");
-		fflush(stdout);
 		return (1);
 	}
 	if (stride == initial_stride)
@@ -179,7 +174,6 @@ static int	render_chunk(t_world *world, t_data *data)
 void	render(void *param)
 {
 	static int		render_status;
-	//	int				i;
 	static t_world	world;
 	static t_camera	cam;
 	static t_data	*data;

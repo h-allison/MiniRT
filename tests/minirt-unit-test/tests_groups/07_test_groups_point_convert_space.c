@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:38:56 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/19 22:27:25 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 03:54:50 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ int test_groups_point_convert_space(void)
 	p = world_to_object(&s, point(-2, 0, -10));
 	if (!fisequal(p.x, 0) || !fisequal(p.y, 0) || !fisequal(p.z, -1))
 		return (-1);
+	free_shape(&g1);
 	return (0);
 }

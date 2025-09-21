@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:38:56 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/19 23:15:52 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 03:49:55 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ int test_groups_normal_convert_space(void)
 	n = normal_to_world(&s, vector(sqrtf(3)/3, sqrtf(3)/3, sqrtf(3)/3));
 	if (!fisequal(n.x, 0.2857) || !fisequal(n.y, 0.4286) || !fisequal(n.z, -0.8571))
 		return (-1);
+	free_shape(&g1);
 	return (0);
 }

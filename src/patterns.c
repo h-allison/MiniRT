@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 00:07:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/20 18:54:15 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 07:49:56 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_rgb	gradient_at(t_pattern *gradient, t_tuple point)
 
 	distance = csub(gradient->b, gradient->a);
 	fraction = point.x - floorf(point.x);
-	return cadd(gradient->a, cscale(distance, fraction));
+	return (cadd(gradient->a, cscale(distance, fraction)));
 }
 
 t_pattern	ring_pattern(t_rgb a, t_rgb b)
@@ -101,9 +101,9 @@ t_rgb	checkers_at(t_pattern *checkers, t_tuple point)
 t_rgb	stripe_at_object(t_pattern *pat, t_shape *object, t_tuple world_point)
 {
 	t_tuple	object_point;
-	t_tuple pattern_point;
+	t_tuple	pattern_point;
 
-	object_point = world_to_object(object, world_point);
+	object_point = tmatrixmult(object->invtrans, world_point);
 	pattern_point = tmatrixmult(pat->invtrans, object_point);
 	return (stripe_at(pat, pattern_point));
 }
@@ -118,12 +118,13 @@ t_rgb	pattern_at(t_pattern *pat, t_tuple point)
 	col.b = point.z;
 	return (col);
 }
-t_rgb	pattern_at_shape(t_pattern *pat, t_shape *shape, t_tuple point)
+
+t_rgb	pattern_at_shape(t_pattern *pat, t_shape *shape, t_tuple world_point)
 {
 	t_tuple	shape_point;
-	t_tuple pattern_point;
+	t_tuple	pattern_point;
 
-	shape_point = world_to_object(shape, point);
+	shape_point = world_to_object(shape, world_point);
 	pattern_point = tmatrixmult(pat->invtrans, shape_point);
 	return (pat->pattern_at(pat, pattern_point));
 }

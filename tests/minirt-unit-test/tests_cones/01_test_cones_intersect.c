@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:38:56 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/18 14:02:21 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 04:01:18 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ int test_cones_intersect(void)
 	if (!fisequal(xs[0].t, 4.55006) || !fisequal(xs[1].t, 49.44994))
 		return (-1);
 	xs[0].object = NULL;
+	free_shape(&c);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:38:56 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/17 10:52:59 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 04:09:14 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ int test_cubes_ray_misses(void)
 	if (xs[0].t != 0 && !xs[0].object)
 		return (-1);
 	xs[0].object = NULL;
+	free_shape(&c);
 	return (0);
 }

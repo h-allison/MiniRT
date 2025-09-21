@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 23:02:50 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/14 19:29:07 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 04:29:50 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,7 @@ int test_refract_glass_sphere(void)
 	}
 	if (s.m.transparency != 1.0 || s.m.refractive_index != 1.5)
 		return (-1);
+	free_matrix(idm, 4);
+	free_shape(&s);
 	return (0);
 }

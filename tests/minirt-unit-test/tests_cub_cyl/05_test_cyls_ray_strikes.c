@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:38:56 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/17 14:42:22 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/21 04:26:11 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int test_cyls_ray_strikes(void)
 	xs = local_intersect_cyl(&c);
 	if (!fisequal(xs[0].t, 5) || !fisequal(xs[1].t, 5))
 		return (-1);
-	return (0);
 	xs[0].object = NULL;
 	c.saved_ray = ray(point(0, 0, -5), tnorm(vector(0, 0, 1)));
 	xs = local_intersect_cyl(&c);
@@ -34,5 +33,6 @@ int test_cyls_ray_strikes(void)
 	if (!fisequal(xs[0].t, 6.80798) || !fisequal(xs[1].t, 7.08872))
 		return (-1);
 	xs[0].object = NULL;
+	free_shape(&c);
 	return (0);
 }

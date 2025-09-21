@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/20 19:30:05 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 07:59:28 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,16 @@
 # include <stdlib.h>
 # include <errno.h>
 
-# define WIN_WIDTH 1024
-# define WIN_HEIGHT 768
+# define WIN_WIDTH 800
+# define WIN_HEIGHT 600
 
-# define MAX_RECURSION 5
+# define MAX_RECURSION 4
 # define OFFSET	 0.001
 # define EPSILON 0.0001
+
+# define CHUNK_SIZE             2
+# define PIXELATE_START_STRIDE  16
+# define AA_SPP                 4
 
 # define DEG2RAD 0.017453292519943
 # define RAD2DEG 57.295779513082
@@ -386,6 +390,8 @@ t_tuple			normal_to_world(t_shape *s, t_tuple norm);
 
 //free.c
 int				free_matrices_and_ret(t_shape *p, int ret);
+void			free_shape(t_shape *s);
+void			free_world(t_world *w);
 
 //world_scenes.c
 t_world			default_world(void);

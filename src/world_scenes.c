@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 18:12:31 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/20 19:35:01 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 08:56:05 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ t_world	default_world(void)
 	s1.m.specular = 0.2;
 	s2 = sphere();
 	set_transform(&s2, scaling(0.5, 0.5, 0.5));
-	s2.invtrans = minvert(s2.transform, 4);
 	w.s = malloc(5 * sizeof(t_shape));
 	w.s[0] = s1;
 	w.s[1] = s2;
@@ -441,6 +440,7 @@ t_world	default_world_cyl(void)
 	t_shape	right;
 	t_shape	left;
 	t_shape cub;
+	t_shape	hex;
 	
 	floor = plane();
 	floor.invtrans = minvert(floor.transform, 4);
@@ -514,15 +514,20 @@ t_world	default_world_cyl(void)
 	cub.transform = mmultfree(translation(-1.8, 0.33, -1), cub.transform);
 	cub.invtrans = minvert(cub.transform, 4);
 	cub.m.color = color(0, 50, 100);
-	cub.m.diffuse = .6;
-	cub.m.ambient = .3;
+	cub.m.diffuse = .9;
+	cub.m.ambient = .6;
 	cub.m.specular = 0.6;
-	cub.m.reflective = 0.4;
+	cub.m.reflective = 0;
 	cub.m.pattern = gradient_pattern(color(70, 100, 0), cub.m.color);
 	cub.m.pattern.transform = mmultfree(scaling(2.01, 1, 1), cub.m.pattern.transform);
 	cub.m.pattern.transform = mmultfree(translation(-1, 0, 0), cub.m.pattern.transform);
 	cub.m.pattern.transform = mmultfree(rotation_z(90 * DEG2RAD), cub.m.pattern.transform);
 	cub.m.pattern.invtrans = minvert(cub.m.pattern.transform, 4);
+	
+	hex = hexagon();
+	hex.transform = mmultfree(scaling(1, 1, 1), hex.transform);
+	hex.transform = mmultfree(translation(3.5, .2, 0), hex.transform);
+	hex.invtrans = minvert(hex.transform, 4);
 
 	w.light = malloc(2 * sizeof(t_light));
 	if (!w.light)
@@ -538,29 +543,47 @@ t_world	default_world_cyl(void)
 	w.s[3] = right;
 	w.s[4] = left;
 	w.s[5] = cub;
-	w.s[6].transform = NULL;
+	w.s[6] = hex;
+	w.s[7].transform = NULL;
 	return (w);
 }
 
 t_world	default_world_group_test(void)
 {
 	t_world	w;
-//	t_shape	floor;
-	t_shape	hex;
+	t_shape	floor;
+	t_shape	*hex;
+	t_light	light;
 	
-//	floor = plane();
-//	floor.m.pattern = checkers_pattern(color(0, 0, 0), floor.m.color);
+	floor = plane();
+	floor.m.color = color(200, 200, 200);
+	floor.m.diffuse = 0.4;
+	floor.m.ambient = 0;
+	floor.m.specular = 0.2;
+	floor.m.reflective = .2;
+	free_matrix(floor.m.pattern.transform, 4);
+	free_matrix(floor.m.pattern.invtrans, 4);
+	floor.m.pattern = checkers_pattern(color(0, 0, 0), floor.m.color);
+	
+	hex = malloc(sizeof(*hex));
+	*hex = hexagon();
+	set_transform(hex, translation(0, 1, 0));
+	hex->m.color = color(0, 50, 100);
+	hex->m.diffuse = 0.3;
+	hex->m.ambient = 0.2;
+	hex->m.specular = 0.6;
+	hex->m.reflective = 0.4;
 
-	hex =cube();
-
-	w.light = malloc(1 * sizeof(t_light));
+	light = point_light(point(-7, 7, -6), color(255, 255, 255));
+	w.s = malloc(4 * sizeof(t_shape));
+	if (!w.s)
+		exit (1);
+	w.s[0] = floor;
+	w.s[1] = *hex;
+	w.s[2].transform = NULL;
+	w.light = malloc(sizeof(t_light));
 	if (!w.light)
 		exit (1);
-	w.light[0] = point_light(point(-7, 7, -6), color(255, 255, 255));
-
-	w.s = malloc(2 * sizeof(t_shape));
-//	w.s[0] = floor;
-	w.s[0] = hex;
-	w.s[1].transform = NULL;
+	w.light[0] = light;
 	return (w);
 }

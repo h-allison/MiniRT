@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 16:39:00 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/16 17:04:22 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/21 04:37:50 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ int test_refract_schlick_perpendicular(void)
 	reflectance = schlick(&comps);
 	if (!fisequal(reflectance, 0.04))
 		return (-1);
+	free_shape(&s);
 	return (0);
 }

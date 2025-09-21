@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:25:23 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/20 19:08:14 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 07:24:48 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,9 @@ t_tuple	local_normal_at_cube(t_shape *s, t_tuple local_point)
 
 t_tuple	local_normal_at_cyl(t_shape *s, t_tuple local_point)
 {
-	(void)s;
-
 	float	dist;
 
+	(void)s;
 	dist = local_point.x * local_point.x + local_point.z * local_point.z;
 	if (dist < 1 && local_point.y >= s->maximum - EPSILON)
 		return (vector(0, 1, 0));
@@ -57,11 +56,10 @@ t_tuple	local_normal_at_cyl(t_shape *s, t_tuple local_point)
 
 t_tuple	local_normal_at_cone(t_shape *s, t_tuple local_point)
 {
-	(void)s;
-
 	float	dist;
 	float	y;
 
+	(void)s;
 	dist = local_point.x * local_point.x + local_point.z * local_point.z;
 	if (dist <= 1 && local_point.y >= s->maximum - EPSILON)
 		return (vector(0, 1, 0));
@@ -119,7 +117,8 @@ t_rgb	lighting(t_largs *largs)
 	t_rgb	ret;
 
 	if (largs->material.pattern.status)
-		col = pattern_at_shape(&largs->material.pattern, largs->shape, largs->point);
+		col = pattern_at_shape(&largs->material.pattern,
+				largs->shape, largs->point);
 	else
 		col = largs->material.color;
 	effective_color = cmult(col, largs->light.intensity);

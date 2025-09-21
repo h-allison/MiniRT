@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 12:53:28 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/17 14:01:11 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/21 04:06:24 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ int test_cyls_min_max(void)
 	cyl = cylinder();
 	if (!fisequal(cyl.minimum, -FLT_MAX) || !fisequal(cyl.maximum, FLT_MAX))
 		return(-1);
+	free_shape(&cyl);
 	return (0);
 }

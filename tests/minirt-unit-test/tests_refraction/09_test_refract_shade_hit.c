@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 16:08:03 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/16 16:18:42 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/21 04:37:00 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ int test_refract_shade_hit(void)
 	col = shade_hit(&w, &comps, 5);
 	if (!fisequal(col.r, 0.93642) || !fisequal(col.g, 0.68642) || !fisequal(col.b, 0.68642))
 		return (-1);
+	free_world(&w);
 	return (0);
 }

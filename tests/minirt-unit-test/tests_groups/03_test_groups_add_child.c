@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:38:56 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/19 13:18:20 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 03:49:07 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ int test_groups_add_child(void)
 	add_child(&g, &s);
 	if (!g.group || g.group[0] != &s || g.group[1] || s.parent != &g)
 		return (-1);
+	free_shape(&g);
 	return (0);
 }

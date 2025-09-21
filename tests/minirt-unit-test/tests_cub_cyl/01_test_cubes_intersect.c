@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:38:56 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/17 10:54:25 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 04:09:00 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ int test_cubes_intersect(void)
 	if (xs[0].t != -1 || xs[1].t != 1)
 		return (-1);
 	xs[0].object = NULL;
+	free_shape(&c);
 	return (0);
 }
