@@ -12,37 +12,34 @@
 
 #include "minirt.h"
 
-/*
-int	rgb_input_format(char *tokens)
+int	parse_ambient_rgb(char *token, t_world *world)
 {
-	return (0);
-}
-
-int	parse_ambient_rgb(char **tokens, t_world *world)
-{
-	int		i;
-	char	r[4];
-	char	g[4];
-	char	b[4];
-	char	rgb[4];
-
-	i = 0;
-	if (!valid_rgb_values(rgb, str))
-	{
-		free(rgb_str);
-		return(rt_error("Ambient color must be format [255,255,255]", -1));
-	}
-}
-*/
-
-int	parse_ambient_ratio(char *token, t_world *world)
-{
-	char	*ambient_str;
 	int		ret;
 
 	ret = 0;
-	ambient_str = token;
-	ret = rt_atof(ambient_str, &world->ambient_ratio);
+	world->ambient_rgb.r = 0;
+	world->ambient_rgb.g = 0;
+	world->ambient_rgb.b = 0;
+	ret = rt_atorgb(token, &world->ambient_rgb);
+	if (ret != 0)
+		return(rt_error("A: ambient color: invalid input", -1));
+	if (world->ambient_rgb.r < 0 || world->ambient_rgb.r > 255)
+		return(rt_error("A: ambient color: rgb not in range 0-255", -1));
+	if (world->ambient_rgb.g < 0 || world->ambient_rgb.g > 255)
+		return(rt_error("A: ambient color: rgb not in range 0-255", -1));
+	if (world->ambient_rgb.b < 0 || world->ambient_rgb.b > 255)
+		return(rt_error("A: ambient color: rgb not in range 0-255", -1));
+	printf("Ambient color = %f, %f, %f\n", world->ambient_rgb.r, world->ambient_rgb.g, world->ambient_rgb.b);
+	return (0);
+}
+
+int	parse_ambient_ratio(char *token, t_world *world)
+{
+	int		ret;
+
+	ret = 0;
+	world->ambient_ratio = 0;
+	ret = rt_atof(token, &world->ambient_ratio);
 	if (ret != 0)
 		return(rt_error("A: ambient ratio: invalid input", -1));
 	if (world->ambient_ratio < 0 || world->ambient_ratio > 1)
@@ -57,14 +54,44 @@ int	parse_ambient(char **tokens, t_world *world)
 		return(rt_error("A: ambient ratio: missing value", -1));
 	if (parse_ambient_ratio(tokens[1], world) != 0)
 		return (-1);
-	/*
 	if (!tokens[2])
-		return(rt_error("A: field 2: Ambient RGB required", -1));
-	if (parse_ambient_rgb != 0)
+		return(rt_error("A: ambient color: missing values", -1));
+	if (parse_ambient_rgb(tokens[2], world) != 0)
 		return (-1);
 	if (tokens[3])
-		return(rt_error("A : should contain only 2 fields", -1));
-*/	return(0);
+		return(rt_error("A: too many arguments", -1));
+	return(0);
+}
+
+int	parse_camera_coords(char *token, t_camera *cam)
+{
+	t_tuple	coords;
+	
+	coords = point(0, 0, 0);
+	if (rt_atof_tuple(token, &coords) != 0)
+		return(rt_error("C: camera viewpoint: invalid input", -1));
+	// place coordinates in camera
+	printf("Camera coordinates = %f, %f, %f\n", coords.x, coords.y, coords.z);
+	(void) cam;
+	return (0);
+}
+
+int	parse_camera(char **tokens, t_world *world)
+{
+//	float	field_of_view;
+//	t_tuple	orientation;
+
+	if (!tokens[1])
+		return(rt_error("C: camera coordinates: missing values", -1));
+	if (parse_camera_coords(tokens[1], world->cam) != 0)
+		return (-1);
+//	if (!tokens[2])
+//		return(rt_error("A: ambient color: missing values", -1));
+//	if (parse_ambient_rgb(tokens[2], world) != 0)
+//		return (-1);
+//	if (tokens[3])
+//		return(rt_error("A: too many arguments", -1));
+	return(0);
 }
 
 int	parse_singular_element(char **tokens, t_data *data)
@@ -75,7 +102,10 @@ int	parse_singular_element(char **tokens, t_data *data)
 			return(-1);
 	}
 	else if (tokens[0][0] == 'C' && tokens[0][1] == '\0')
-	   printf("<parse into Camera>\n");	
+	{	
+		if (parse_camera(tokens, data->world) == -1)
+			return(-1);
+	}
 	else if (tokens[0][0] == 'L' && tokens[0][1] == '\0')
 	   printf("<parse into Light>\n");	
 	return(0);	
@@ -105,8 +135,7 @@ int	parse_into_world(char **tokens, t_data *data)
 		first_line = 1;
 	}
 	if (tokens[0][0] >= 'A' && tokens[0][0] <= 'Z')
-		parse_singular_element(tokens, data);
-	
+		return (parse_singular_element(tokens, data));
 	// when ambient is encountered, save to apply to all objects at the end
 	/*
 	(void) tokens;

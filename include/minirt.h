@@ -167,7 +167,7 @@ typedef struct s_world
 	t_light			*light;
 	t_checklist		checklist;
 	float			ambient_ratio;
-	t_rgb			ambient_color;
+	t_rgb			ambient_rgb;
 }	t_world;
 
 typedef struct s_largs
@@ -226,6 +226,8 @@ int				parse_file(char *filename, t_data *data);
 char	**get_element_tokens(char const *s);
 int		parse_into_world(char **tokens, t_data *data);
 int		rt_atof(const char *str, float *f);
+int		rt_atorgb(const char *str, t_rgb *rgb);
+int		rt_atof_tuple(const char *str, t_tuple *t);
 
 //rendering.c
 void			render(void *param);

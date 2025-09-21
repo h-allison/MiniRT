@@ -19,7 +19,9 @@ SRC         := src/main.c \
                src/parsing_1.c \
                src/parsing_2.c \
                src/parsing_3.c \
-               src/parsing_utils.c \
+               src/parsing_atof.c \
+               src/parsing_atorgb.c \
+               src/parsing_atof_tuple.c \
                src/error_handling.c \
                src/mlx_handling.c \
                src/rendering.c \
