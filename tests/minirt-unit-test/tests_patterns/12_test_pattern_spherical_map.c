@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   12_test_pattern_spherical_map.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/09 17:03:46 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/21 10:53:07 by mmillhof         ###   ########.fr       */
+/*   Created: 2025/09/21 14:15:25 by mmillhof          #+#    #+#             */
+/*   Updated: 2025/09/21 14:15:27 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

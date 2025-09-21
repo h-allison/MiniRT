@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   09_test_pattern.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/09 17:03:46 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/12 20:52:16 by mmillhof         ###   ########.fr       */
+/*   Created: 2025/09/21 14:16:28 by mmillhof          #+#    #+#             */
+/*   Updated: 2025/09/21 14:16:29 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

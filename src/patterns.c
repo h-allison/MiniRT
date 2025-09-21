@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 00:07:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/21 12:08:36 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 18:33:22 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,16 @@ t_rgb	stripe_at(t_pattern *pat, t_tuple point)
 	if (fmod(floorf(point.x), 2) == 0)
 		return (pat->a);
 	return (pat->b);
+}
+
+t_rgb	stripe_at_object(t_pattern *pat, t_shape *object, t_tuple world_point)
+{
+	t_tuple	object_point;
+	t_tuple	pattern_point;
+
+	object_point = tmatrixmult(object->invtrans, world_point);
+	pattern_point = tmatrixmult(pat->invtrans, object_point);
+	return (stripe_at(pat, pattern_point));
 }
 
 t_pattern	gradient_pattern(t_rgb a, t_rgb b)
@@ -95,6 +105,100 @@ t_rgb	checkers_at(t_pattern *checkers, t_tuple point)
 	return (checkers->b);
 }
 
+t_pattern	uv_checkers(float width, float height, t_rgb a, t_rgb b)
+{
+	t_pattern	checkers;
+
+	checkers.a = a;
+	checkers.b = b;
+	checkers.width = width;
+	checkers.height = height;
+	checkers.transform = create_id_matrix();
+	checkers.invtrans = minvert(checkers.transform, 4);
+	checkers.pattern_at = uv_checkers_at;
+	checkers.status = true;
+	return (checkers);
+}
+
+t_rgb	uv_checkers_at(t_pattern *checkers, t_tuple point)
+{
+	float	u2;
+	float	v2;
+	t_tuple	uv;
+	
+	uv = checkers->map(point);
+	u2 = floorf(uv.x * checkers->width);
+	v2 = floorf(uv.y * checkers->height);
+	if (fmod(u2 + v2,  2) == 0)
+		return (checkers->a);
+	return (checkers->b);
+}
+
+t_pattern texture_map(t_pattern uv_pattern, t_tuple (*map)(t_tuple))
+{
+	t_pattern	pattern;
+
+	pattern.a = uv_pattern.a;
+	pattern.b = uv_pattern.b;
+	pattern.main = uv_pattern.main;
+	pattern.ul = uv_pattern.ul;
+	pattern.ur = uv_pattern.ur;
+	pattern.bl = uv_pattern.bl;
+	pattern.br = uv_pattern.br;
+	pattern.width = uv_pattern.width;
+	pattern.height = uv_pattern.height;
+	pattern.transform = create_id_matrix();
+	pattern.invtrans = minvert(pattern.transform, 4);
+	pattern.pattern_at = uv_pattern.pattern_at;
+	pattern.map = map;
+	pattern.status = true;
+	return (pattern);
+}
+
+t_pattern	uv_align_check(t_rgb main, t_rgb ul, t_rgb ur, t_rgb bl, t_rgb br)
+{
+	t_pattern align_check;
+
+	align_check.main = main;
+	align_check.ul = ul;
+	align_check.ur = ur;
+	align_check.bl = bl;
+	align_check.br = br;
+	align_check.transform = create_id_matrix();
+	align_check.invtrans = minvert(align_check.transform, 4);
+	align_check.pattern_at = uv_align_check_at;
+	align_check.status = true;
+	return (align_check);
+}
+
+t_rgb	uv_align_check_at(t_pattern *align_check, t_tuple point)
+{
+	if (point.y > 0.8)
+	{
+		if (point.x < 0.2)
+			return (align_check->ul);
+		if (point.x > 0.8)
+			return (align_check->ur);
+	}
+	else if(point.y < 0.2)
+	{
+		if (point.x < 0.2)
+			return (align_check->bl);
+		if (point.x > 0.8)
+			return (align_check->br);
+	}
+	return (align_check->main);
+}
+
+t_tuple	no_map(t_tuple p)
+{
+	t_tuple	uv;
+
+	uv.x = p.x;
+	uv.y = p.y;
+	return (uv);
+}
+
 t_tuple	spherical_map(t_tuple p)
 {
 	float	theta;
@@ -132,104 +236,6 @@ t_tuple	planar_map(t_tuple p)
 	uv.x = fmod(p.x, 1);
 	uv.y = fmod(p.z, 1);
 	return (uv);
-}
-
-t_pattern	uv_checkers_pattern(float width, float height, t_rgb a, t_rgb b)
-{
-	t_pattern	checkers;
-
-	checkers.a = a;
-	checkers.b = b;
-	checkers.width = width;
-	checkers.height = height;
-	checkers.transform = create_id_matrix();
-	checkers.invtrans = minvert(checkers.transform, 4);
-	checkers.pattern_at = uv_checkers_at;
-	checkers.status = true;
-	return (checkers);
-}
-
-t_rgb	uv_checkers_at(t_pattern *checkers, t_tuple point)
-{
-	float	u2;
-	float	v2;
-	t_tuple	uv;
-	
-	uv = spherical_map(point);
-	u2 = floorf(uv.x * checkers->width);
-	v2 = floorf(uv.y * checkers->height);
-	if (fmod(u2 + v2,  2) == 0)
-		return (checkers->a);
-	return (checkers->b);
-}
-
-t_pattern	uv_planar_pattern(float width, float height, t_rgb a, t_rgb b)
-{
-	t_pattern	planar;
-
-	planar.a = a;
-	planar.b = b;
-	planar.width = width;
-	planar.height = height;
-	planar.transform = create_id_matrix();
-	planar.invtrans = minvert(planar.transform, 4);
-	planar.pattern_at = uv_planar_at;
-	planar.status = true;
-	return (planar);
-}
-
-t_rgb	uv_planar_at(t_pattern *planar, t_tuple point)
-{
-	float	u2;
-	float	v2;
-	t_tuple	uv;
-	
-	uv = planar_map(point);
-	u2 = floorf(uv.x * planar->width);
-	v2 = floorf(uv.y * planar->height);
-	if ((int)(u2 + v2) % 2 == 0)
-		return (planar->a);
-	return (planar->b);
-}
-
-
-t_pattern	uv_cylindrical_pattern(float width, float height, t_rgb a, t_rgb b)
-{
-	t_pattern	cylindrical;
-
-	cylindrical.a = a;
-	cylindrical.b = b;
-	cylindrical.width = width;
-	cylindrical.height = height;
-	cylindrical.transform = create_id_matrix();
-	cylindrical.invtrans = minvert(cylindrical.transform, 4);
-	cylindrical.pattern_at = uv_cylindrical_at;
-	cylindrical.status = true;
-	return (cylindrical);
-}
-
-t_rgb	uv_cylindrical_at(t_pattern *cylindrical, t_tuple point)
-{
-	float	u2;
-	float	v2;
-	t_tuple	uv;
-	
-	uv = cylindrical_map(point);
-	u2 = floorf(uv.x * cylindrical->width);
-	v2 = floorf(uv.y * cylindrical->height);
-	if ((int)(u2 + v2) % 2 == 0)
-		return (cylindrical->a);
-	return (cylindrical->b);
-}
-
-t_rgb	stripe_at_object(t_pattern *pat, t_shape *object, t_tuple world_point)
-{
-	t_tuple	object_point;
-	t_tuple	pattern_point;
-
-	object_point = tmatrixmult(object->invtrans, world_point);
-	pattern_point = tmatrixmult(pat->invtrans, object_point);
-	return (stripe_at(pat, pattern_point));
 }
 
 t_rgb	pattern_at(t_pattern *pat, t_tuple point)

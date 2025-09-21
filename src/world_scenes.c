@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 18:12:31 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/21 12:11:19 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 18:44:08 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -458,7 +458,8 @@ t_world	default_world_cyl(void)
 	big.m.diffuse = .6;
 	big.m.ambient = .2;
 	big.m.specular = 0.5;
-	big.m.pattern = uv_checkers_pattern(20, 10, color(80, 80, 80), big.m.color);
+	big.m.pattern = texture_map(uv_checkers(20, 10, color(80, 80, 80),
+				big.m.color), planar_map);
 
 	left = cylinder();
 	left.minimum = 0;

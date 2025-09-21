@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   11_test_pattern_uv_checkers.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/09 17:03:46 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/21 10:20:35 by mmillhof         ###   ########.fr       */
+/*   Created: 2025/09/21 14:16:01 by mmillhof          #+#    #+#             */
+/*   Updated: 2025/09/21 17:38:31 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int test_pattern_uv_checkers(void)
 
 	black = color(0 ,0 ,0);
 	white = color(255, 255, 255);
-	checkers = uv_checkers_pattern(2, 2, black, white);
+	checkers = texture_map(uv_checkers(2, 2, black, white), no_map);
 	uv.x = 0;
 	uv.y = 0;
 	col = uv_checkers_at(&checkers, uv);
