@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 17:16:24 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/12 21:01:13 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 10:23:46 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ int test_pattern_pat_transform(void);
 int test_pattern_all_transform(void);
 int	test_pattern_gen_basic(void);
 int test_pattern_set_transform(void);
+int test_pattern_uv_checkers(void);
+int test_pattern_spherical_map(void);
 
 #endif

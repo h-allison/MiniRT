@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 01:46:21 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/12 21:24:14 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 10:24:22 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	patterns_tests_launcher(void)
 	load_test(testlist, "PATTERNS: Patterns with all transform", &test_pattern_all_transform);
 	load_test(testlist, "PATTERNS: Basic test generalized function", &test_pattern_gen_basic);
 	load_test(testlist, "PATTERNS: Set transform", &test_pattern_set_transform);
+	load_test(testlist, "PATTERNS: UV checkers", &test_pattern_uv_checkers);
+	load_test(testlist, "PATTERNS: Spherical map", &test_pattern_spherical_map);
 	ret = launch_tests(testlist);
 	return (ret);
 }

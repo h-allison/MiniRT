@@ -62,6 +62,8 @@ SRCS := \
 	$(SRC_DIR_PATTERNS)/08_test_pattern_all_transform.c \
 	$(SRC_DIR_PATTERNS)/09_test_pattern.c \
 	$(SRC_DIR_PATTERNS)/10_test_pattern_set_transform.c \
+	$(SRC_DIR_PATTERNS)/11_test_pattern_uv_checkers.c \
+	$(SRC_DIR_PATTERNS)/12_test_pattern_spherical_map.c \
 	$(SRC_DIR_REFLECT)/00_test_reflect_launcher.c \
 	$(SRC_DIR_REFLECT)/01_test_reflective.c \
 	$(SRC_DIR_REFLECT)/02_test_reflect_comps.c \

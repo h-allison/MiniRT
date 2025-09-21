@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 18:12:31 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/21 08:56:05 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 11:10:57 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -458,9 +458,7 @@ t_world	default_world_cyl(void)
 	big.m.diffuse = .6;
 	big.m.ambient = .2;
 	big.m.specular = 0.5;
-	big.m.pattern = stripe_pattern(color(80, 80, 80), big.m.color);
-	big.m.pattern.transform = mmultfree(scaling(0.4, 0.4, 0.6), big.m.pattern.transform);
-	big.m.pattern.invtrans = minvert(big.m.pattern.transform, 4);
+	big.m.pattern = uv_checkers_pattern(20, 10, color(80, 80, 80), big.m.color);
 
 	left = cylinder();
 	left.minimum = 0;
@@ -517,7 +515,7 @@ t_world	default_world_cyl(void)
 	cub.m.diffuse = .9;
 	cub.m.ambient = .6;
 	cub.m.specular = 0.6;
-	cub.m.reflective = 0;
+	cub.m.reflective = 0.4;
 	cub.m.pattern = gradient_pattern(color(70, 100, 0), cub.m.color);
 	cub.m.pattern.transform = mmultfree(scaling(2.01, 1, 1), cub.m.pattern.transform);
 	cub.m.pattern.transform = mmultfree(translation(-1, 0, 0), cub.m.pattern.transform);

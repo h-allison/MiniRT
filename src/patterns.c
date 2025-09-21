@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 00:07:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/21 07:49:56 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 11:01:06 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,52 @@ t_pattern	checkers_pattern(t_rgb a, t_rgb b)
 t_rgb	checkers_at(t_pattern *checkers, t_tuple point)
 {
 	if ((int)(floorf(point.x) + floorf(point.y) + floorf(point.z)) % 2 == 0)
+		return (checkers->a);
+	return (checkers->b);
+}
+
+t_tuple	spherical_map(t_tuple p)
+{
+	float	theta;
+	float	radius;
+	float	phi;
+	float	raw_u;
+	t_tuple uv;
+
+	theta = atan2f(p.x, p.z);
+	radius = tmag(vector(p.x, p.y, p.z));
+	phi = acosf(p.y / radius);
+	raw_u = theta / (2 * M_PI);
+	uv.x = 1 - (raw_u + 0.5);
+	uv.y = 1 - phi / M_PI;
+	return (uv);
+}
+
+t_pattern	uv_checkers_pattern(float width, float height, t_rgb a, t_rgb b)
+{
+	t_pattern	checkers;
+
+	checkers.a = a;
+	checkers.b = b;
+	checkers.width = width;
+	checkers.height = height;
+	checkers.transform = create_id_matrix();
+	checkers.invtrans = minvert(checkers.transform, 4);
+	checkers.pattern_at = uv_checkers_at;
+	checkers.status = true;
+	return (checkers);
+}
+
+t_rgb	uv_checkers_at(t_pattern *checkers, t_tuple point)
+{
+	float	u2;
+	float	v2;
+	t_tuple	uv;
+	
+	uv = spherical_map(point);
+	u2 = floorf(uv.x * checkers->width);
+	v2 = floorf(uv.y * checkers->height);
+	if ((int)(u2 + v2) % 2 == 0)
 		return (checkers->a);
 	return (checkers->b);
 }

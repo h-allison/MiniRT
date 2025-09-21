@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/21 07:59:28 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/21 11:00:39 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ typedef struct s_pattern
 {
 	t_rgb			a;
 	t_rgb			b;
+	float			width;
+	float			height;
 	float			**transform;
 	float			**invtrans;
 	t_rgb			(*pattern_at)(t_pattern *, t_tuple);
@@ -374,6 +376,9 @@ t_pattern		ring_pattern(t_rgb a, t_rgb b);
 t_rgb			ring_at(t_pattern *ring, t_tuple point);
 t_pattern		checkers_pattern(t_rgb a, t_rgb b);
 t_rgb			checkers_at(t_pattern *checkers, t_tuple point);
+t_tuple			spherical_map(t_tuple p);
+t_pattern		uv_checkers_pattern(float width, float height, t_rgb a, t_rgb b);
+t_rgb			uv_checkers_at(t_pattern *checkers, t_tuple point);
 t_rgb			pattern_at(t_pattern *pat, t_tuple point);
 t_rgb			pattern_at_shape(t_pattern *pat, t_shape *shape, t_tuple point);
 void			set_pattern_transform(t_pattern *pat, float **t);
