@@ -63,34 +63,76 @@ int	parse_ambient(char **tokens, t_world *world)
 	return(0);
 }
 
-int	parse_camera_coords(char *token, t_camera *cam)
+int	parse_camera_coords(char *token, t_tuple *coords)
 {
-	t_tuple	coords;
-	
-	coords = point(0, 0, 0);
 	if (rt_atof_tuple(token, &coords) != 0)
 		return(rt_error("C: camera viewpoint: invalid input", -1));
-	// place coordinates in camera
-	printf("Camera coordinates = %f, %f, %f\n", coords.x, coords.y, coords.z);
-	(void) cam;
 	return (0);
 }
 
+int	parse_camera_orient(char *token, t_tuple *coords)
+{
+	if (rt_atof_tuple(token, &coords) != 0)
+		return(rt_error("C: camera orientation: invalid input", -1));
+	return (0);
+}
+
+int	btwn_negative_and_positive_1(t_tuple t)
+{
+	if (t.x < -1 || t.x > 1)
+		return (-1);
+	if (t.y < -1 || t.y > 1)
+		return (-1);
+	if (t.z < -1 || t.z > 1)
+		return (-1);
+	return (0);
+}
+
+// TODO malloc exit
+
+int	place_camera(t_tuple c_coords, t_tuple c_orient, float fov)
+{
+	t_camera	cam;
+	t_tuple		to;
+	float		**v_transform;
+
+	cam = malloc(sizeof(t_camera);
+	if (!cam)
+		exit (1);
+	cam = camera(WIN_WIDTH, WIN_HEIGHT, fov);
+	to = tadd(c_coords, c_orient);
+	up = ray(0, 1, 0); 
+	v_transform = view_transform(c_coords, to, up);
+	// TODO next: can't use set_transform here
+	// but can create a new function or duplicate its
+	// behavior for both camera transform and invtrans
+}	
+
 int	parse_camera(char **tokens, t_world *world)
 {
-//	float	field_of_view;
-//	t_tuple	orientation;
+	t_tuple	c_coords;
+	t_tuple	c_orient;
+	float	field_of_view;
 
+	camera_cords = point(0, 0, 0);
+	camera_orient = ray(0, 0, 0);
 	if (!tokens[1])
 		return(rt_error("C: camera coordinates: missing values", -1));
-	if (parse_camera_coords(tokens[1], world->cam) != 0)
+	if (parse_camera_coords(tokens[1], &c_cords) != 0)
 		return (-1);
-//	if (!tokens[2])
-//		return(rt_error("A: ambient color: missing values", -1));
-//	if (parse_ambient_rgb(tokens[2], world) != 0)
-//		return (-1);
-//	if (tokens[3])
-//		return(rt_error("A: too many arguments", -1));
+	if (!tokens[2])
+		return(rt_error("C: camera orientation: missing values", -1));
+	if (parse_camera_orient(tokens[2], &c_orient) != 0)
+		return (-1);
+	if (!(btwn_negative_and_positive_1(c_orient)
+		return(rt_error("A: camera orientation: must be in range [-1.0, 1.0]", -1));
+	if (!tokens[3])
+		return(rt_error("C: field of view: missing value", -1));
+	if (parse_camera_fov(tokens[3], &field_of_view) != 0)
+		return (-1);
+	if (tokens[4])
+		return(rt_error("C: too many arguments", -1));
+	world->cam = place_camera(c_coords, c_orient, field_of_view);
 	return(0);
 }
 
@@ -120,12 +162,8 @@ void	init_checklist(t_checklist *checklist)
 
 int	parse_into_world(char **tokens, t_data *data)
 {
-//	t_preworld		preworld;
 	static	int		first_line;
 	
-	(void) tokens;
-	(void) data;
-
 	if (first_line == 0)
 	{
 		data->world = malloc(sizeof(t_world));
