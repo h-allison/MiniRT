@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 11:18:54 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/18 16:04:18 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/22 20:37:46 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,44 +21,6 @@
 	// on parsing error, print ERROR and exit
 // if ACL found twice, abort / exit
 
-/*
-int	analyze_line(char *line, t_data *data)
-{
-	(void) data;
-	ft_putstr_fd(line, 1);
-//	while (*line)
-//	{
-//		if ((ft_isalpha(*line))
-				// check identifier
-//	/
-	// Is there an empty struct? 
-	return (0);
-}
-
-int	parse_lines(int fd, t_data *data)
-{
-	char	*line;
-	int		i;
-
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		i = 0;
-		while (line[i] == ' ' || line[i] == '\t')
-			i++;
-		if (line[i] == '\n' || line[i] == '*' || !line[i])
-		{
-			free(line);
-			continue ;
-		}
-		analyze_line(line + i, data);
-		free (line);
-	}
-	return (0);
-}
-*/
 
 /*
 static void	debug_print_tokens(char **tokens)
@@ -75,17 +37,54 @@ static void	debug_print_tokens(char **tokens)
 */
 
 // TODO fancier exit
-//
-int	parse_file(char *filename, t_data *data)
+
+bool	is_space(char c)
+{
+	if (c == ' ' || c == '\t' || c == '\n' || c == '\0')
+		return (true)
+	return (false);
+}
+
+int	fill_checklist_count(t_data *data)
+{	
+	int	fd;
+	char	*ln;
+
+	fd = open_file(data->filename);
+	ln = get_next_line(fd);
+	while (line != NULL)
+	{
+		if (ln[0] == 'p' && ln[1] == 'l' && is_space(ln[2]))
+			count_plane++;
+		else if (ln[0] == 'sp' && ln[1] == 'l' && is_space(ln[2]))
+			
+		free (line);
+		line = get_next_line(fd);
+	}
+	close(fd);
+}
+
+void	init_checklist(t_checklist *checklist)
+{
+	checklist->a_parsed = false;
+	checklist->c_parsed = false;
+	checklist->l_parsed = false;
+	count_light = 0;
+	count_sphere = 0;
+	count_cyl = 0;
+	count_cube = 0;
+	count_plane = 0;
+}
+
+int	parse_file_2(t_data *data)
 {
 	int		fd;
 	char	*element;
 	char	**tokens;
 
-	check_rt_filename(filename);
-	data->filename = filename;
-	scenefile_check_chars(data->filename);
 	fd = open_file(data->filename);
+	if (fd < 0)
+		exit (1);
 	element = get_next_line(fd);
 	while (element != NULL)
 	{
@@ -104,5 +103,18 @@ int	parse_file(char *filename, t_data *data)
 		element = get_next_line(fd);
 	}
 	close(fd);
+}
+
+int	parse_file(char *filename, t_data *data)
+{
+	check_rt_filename(filename);
+	data->filename = filename;
+	scenefile_check_chars(data->filename);
+	data->world = malloc(sizeof(t_world));
+	if (!data->world)
+		exit (1);
+	init_checklist(&data->world->checklist);
+	fill_checklist_count(data);
+	parse_file_2(data);
 	return (0);
 }

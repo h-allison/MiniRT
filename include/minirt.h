@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/18 16:21:58 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/22 17:38:54 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,11 +223,13 @@ void			img_wipe(t_data *data, t_rgb color);
 
 //parsing.c
 int				parse_file(char *filename, t_data *data);
-char	**get_element_tokens(char const *s);
-int		parse_into_world(char **tokens, t_data *data);
-int		rt_atof(const char *str, float *f);
-int		rt_atorgb(const char *str, t_rgb *rgb);
-int		rt_atof_tuple(const char *str, t_tuple *t);
+char			**get_element_tokens(char const *s);
+int				parse_into_world(char **tokens, t_data *data);
+int				parse_ambient(char **tokens, t_world *world);
+int				parse_camera(char **tokens, t_world *world);
+int				rt_atof(const char *str, float *f);
+int				rt_atorgb(const char *str, t_rgb *rgb);
+int				rt_atof_tuple(const char *str, t_tuple *t);
 
 //rendering.c
 void			render(void *param);
