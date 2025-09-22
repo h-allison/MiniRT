@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:38:56 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/21 03:48:41 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/22 15:51:33 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int test_groups_intersect(void)
 	t_shape			s1;
 	t_shape			s2;
 	t_shape			s3;
+	t_ray			r;
 	t_intersection	*xs;
 
 	g = group();
@@ -31,8 +32,8 @@ int test_groups_intersect(void)
 	add_child(&g, &s1);
 	add_child(&g, &s2);
 	add_child(&g, &s3);
-	g.saved_ray = ray(point(0, 0, -5), vector(0, 0, 1));
-	xs = local_intersect_group(&g);
+	r = ray(point(0, 0, -5), vector(0, 0, 1));
+	xs = local_intersect_group(&g, r);
 	i = 0;
 	prev_t = FLT_MIN;
 	while (xs[i].object)

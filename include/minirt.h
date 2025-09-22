@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/22 14:08:14 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/22 16:01:18 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define OFFSET	 0.001
 # define EPSILON 0.0001
 
-# define CHUNK_SIZE             2
+# define CHUNK_SIZE             4
 # define PIXELATE_START_STRIDE  16
 # define AA_SPP                 4
 
@@ -364,6 +364,8 @@ t_intersection	*intersections(t_intersection i1, t_intersection i2);
 t_intersection	*hit(t_intersection *xs);
 
 //math_intersections_2.c
+void			swap_xs(t_intersection *a, t_intersection *b);
+void			sort_intersections(t_intersection *xs);
 t_intersection	*intersect_world(t_world *w, t_ray *r);
 t_comps			prepare_computations(t_intersection *i, t_ray *r, t_intersection *xs);
 

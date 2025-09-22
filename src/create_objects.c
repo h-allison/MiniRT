@@ -6,13 +6,13 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 19:13:39 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/21 08:12:20 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/22 16:28:42 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-// TODO REMOVE TEST FUNCTIONS 
+/* TEST FUNCTIONS, PROTOTYPES */
 
 t_shape	create_test_shape(void)
 {
@@ -57,7 +57,43 @@ t_shape	glass_sphere(void)
 	return (s);
 }
 
-//TODO ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/* CREATE BASICS */
+
+t_camera	camera(float hsize, float vsize, float field_of_view)
+{
+	t_camera	c;
+	float		half_view;
+	float		aspect;
+
+	c.hsize = hsize;
+	c.vsize = vsize;
+	c.field_of_view = field_of_view;
+	c.transform = create_id_matrix();
+	half_view = tanf(field_of_view / 2);
+	aspect = hsize / vsize;
+	if (aspect >= 1)
+	{
+		c.half_width = half_view;
+		c.half_height = half_view / aspect;
+	}
+	if (aspect < 1)
+	{
+		c.half_width = half_view * aspect;
+		c.half_height = half_view;
+	}
+	c.pixel_size = (c.half_width * 2) / c.hsize;
+	return (c);
+}
+
+t_light	point_light(t_tuple position, t_rgb intensity)
+{
+	t_light	light;
+
+	light.position = position;
+	light.intensity = intensity;
+	light.last = true;
+	return (light);
+}
 
 t_pattern	pattern(void)
 {
@@ -100,6 +136,8 @@ t_shape	group(void)
 	g.m = material();
 	return (g);
 }
+
+/* CREATE VARIOUS SHAPES */
 
 t_shape	sphere(void)
 {
@@ -176,6 +214,8 @@ t_shape	cone(void)
 	s.closed = false;
 	return (s);
 }
+
+/* GROUPED OBJECTS */
 
 static t_shape	hexagon_corner(void)
 {
@@ -255,40 +295,4 @@ t_shape	hexagon(void)
 		n++;
 	}
 	return (*hex);
-}
-
-t_light	point_light(t_tuple position, t_rgb intensity)
-{
-	t_light	light;
-
-	light.position = position;
-	light.intensity = intensity;
-	light.last = true;
-	return (light);
-}
-
-t_camera	camera(float hsize, float vsize, float field_of_view)
-{
-	t_camera	c;
-	float		half_view;
-	float		aspect;
-
-	c.hsize = hsize;
-	c.vsize = vsize;
-	c.field_of_view = field_of_view;
-	c.transform = create_id_matrix();
-	half_view = tanf(field_of_view / 2);
-	aspect = hsize / vsize;
-	if (aspect >= 1)
-	{
-		c.half_width = half_view;
-		c.half_height = half_view / aspect;
-	}
-	if (aspect < 1)
-	{
-		c.half_width = half_view * aspect;
-		c.half_height = half_view;
-	}
-	c.pixel_size = (c.half_width * 2) / c.hsize;
-	return (c);
 }

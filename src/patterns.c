@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 00:07:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/22 14:15:21 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/22 15:17:03 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,7 @@ t_rgb	texture_at(t_pattern *texture_map, t_tuple point)
 	t_tuple	uv;
 	
 	uv = texture_map->map(point);
-	return (texture_map->uv_pattern_at(texture_map,uv));
+	return (texture_map->uv_pattern_at(texture_map, uv));
 }
 
 /* UV MAPS */
@@ -209,7 +209,7 @@ t_tuple	spherical_map(t_tuple p)
 	float	radius;
 	float	phi;
 	float	raw_u;
-	t_tuple uv;
+	t_tuple	 uv;
 
 	theta = atan2f(p.x, p.z);
 	radius = tmag(vector(p.x, p.y, p.z));
@@ -220,11 +220,11 @@ t_tuple	spherical_map(t_tuple p)
 	return (uv);
 }
 
-t_tuple cylindrical_map(t_tuple p)
+t_tuple	cylindrical_map(t_tuple p)
 {
 	float	theta;
 	float	raw_u;
-	t_tuple uv;
+	t_tuple	 uv;
 
 	theta = atan2f(p.x, p.z);
 	raw_u = theta / (2 * M_PI);
@@ -242,7 +242,7 @@ t_tuple	planar_map(t_tuple p)
 	return (uv);
 }
 
-t_tuple cube_map(t_tuple point)
+t_tuple	cube_map(t_tuple point)
 {
 	float	abs_x;
 	float	abs_y;
@@ -264,7 +264,7 @@ t_tuple cube_map(t_tuple point)
 		return (cube_uv_down(point));
 	else if (coord == point.z)
 		return (cube_uv_front(point));
-	return (cube_uv_back(point));
+return (cube_uv_back(point));
 }
 
 void	set_pattern_transform(t_pattern *pat, float **t)

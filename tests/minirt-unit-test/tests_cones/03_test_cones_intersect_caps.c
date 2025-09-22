@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:38:56 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/21 04:03:08 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/22 15:55:46 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int test_cones_intersect_caps(void)
 {
 	t_shape			c;
+	t_ray			r;
 	t_intersection	*xs;
 	int				i;
 
@@ -23,14 +24,14 @@ int test_cones_intersect_caps(void)
 	c.maximum = 0.5;
 	c.closed = true;
 	
-	c.saved_ray = ray(point(0, 0, -5), tnorm(vector(0, 1, 0)));
-	xs = local_intersect_cone(&c);
+	r = ray(point(0, 0, -5), tnorm(vector(0, 1, 0)));
+	xs = local_intersect_cone(&c, r);
 	if (xs[0].t || xs[0].object)
 		return (-1);
 	xs[0].object = NULL;
 
-	c.saved_ray = ray(point(0, 0, -0.25), tnorm(vector(0, 1, 1)));
-	xs = local_intersect_cone(&c);
+	r = ray(point(0, 0, -0.25), tnorm(vector(0, 1, 1)));
+	xs = local_intersect_cone(&c, r);
 	i = 0;
 	while (xs[i].object)
 		i++;
@@ -38,8 +39,8 @@ int test_cones_intersect_caps(void)
 		return (-1);
 	xs[0].object = NULL;
 
-	c.saved_ray = ray(point(0, 0, -0.25), tnorm(vector(0, 1, 0)));
-	xs = local_intersect_cone(&c);
+	r = ray(point(0, 0, -0.25), tnorm(vector(0, 1, 0)));
+	xs = local_intersect_cone(&c, r);
 	i = 0;
 	while (xs[i].object)
 		i++;

@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:35:10 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/22 13:04:16 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/22 16:01:34 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,6 +300,7 @@ t_intersection	*local_intersect_group(t_shape *s, t_ray r)
 		xs = intersect(s->group[i], r);
 		i++;
 	}
+	sort_intersections(xs);
 	return (xs);
 }
 

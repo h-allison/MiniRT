@@ -6,13 +6,13 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 14:56:16 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/22 13:17:23 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/22 16:02:59 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static void	swap_xs(t_intersection *a, t_intersection *b)
+void	swap_xs(t_intersection *a, t_intersection *b)
 {
 	float		tmp_t;
 	t_shape		*tmp_o;
@@ -26,7 +26,7 @@ static void	swap_xs(t_intersection *a, t_intersection *b)
 	return ;
 }	
 
-static void	sort_intersections(t_intersection *xs)
+void	sort_intersections(t_intersection *xs)
 {
 	int		i;
 
@@ -55,7 +55,6 @@ t_intersection	*intersect_world(t_world *w, t_ray *r)
 		xs = intersect(&w->s[i], *r);
 		i++;
 	}
-	sort_intersections(xs);
 	return (xs);
 }
 
