@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 00:07:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/22 11:39:52 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/22 14:15:21 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,21 +151,17 @@ t_pattern	uv_checkers(float width, float height, t_rgb a, t_rgb b)
 	return (checkers);
 }
 
-t_rgb	uv_checkers_at(t_pattern *checkers, t_tuple point)
+t_rgb	uv_checkers_at(t_pattern *checkers, t_tuple uv)
 {
 	float	u2;
 	float	v2;
-	t_tuple	uv;
 	
-	uv = checkers->map(point);
 	u2 = floorf(uv.x * checkers->width);
 	v2 = floorf(uv.y * checkers->height);
 	if (fmod(u2 + v2,  2) == 0)
 		return (checkers->a);
 	return (checkers->b);
 }
-
-/* UV MAPS */
 
 t_pattern texture_map(t_pattern uv_pattern, t_tuple (*map)(t_tuple))
 {
@@ -182,11 +178,22 @@ t_pattern texture_map(t_pattern uv_pattern, t_tuple (*map)(t_tuple))
 	pattern.height = uv_pattern.height;
 	pattern.transform = create_id_matrix();
 	pattern.invtrans = minvert(pattern.transform, 4);
-	pattern.pattern_at = uv_pattern.pattern_at;
+	pattern.pattern_at = texture_at;
+	pattern.uv_pattern_at = uv_pattern.pattern_at;
 	pattern.map = map;
 	pattern.status = true;
 	return (pattern);
 }
+
+t_rgb	texture_at(t_pattern *texture_map, t_tuple point)
+{
+	t_tuple	uv;
+	
+	uv = texture_map->map(point);
+	return (texture_map->uv_pattern_at(texture_map,uv));
+}
+
+/* UV MAPS */
 
 t_tuple	no_map(t_tuple p)
 {

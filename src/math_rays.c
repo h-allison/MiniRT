@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 17:55:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/12 21:25:53 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/22 12:00:58 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ t_tuple	position(t_ray ray, float t)
 	position = tadd(ray.origin, tmult(ray.direction, t));
 	return (position);
 }
-
-// TODO malloc free and exit
 
 t_ray	transform(t_ray r, float **m)
 {

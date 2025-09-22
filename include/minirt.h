@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/21 21:48:57 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/22 14:08:14 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct s_pattern
 	float			**transform;
 	float			**invtrans;
 	t_rgb			(*pattern_at)(t_pattern *, t_tuple);
+	t_rgb			(*uv_pattern_at)(t_pattern *, t_tuple);
 	t_tuple			(*map)(t_tuple);
 	bool			status;
 }	t_pattern;
@@ -130,7 +131,7 @@ typedef struct s_shape
 	t_shape			*parent;
 	t_shape			**group;
 	t_tuple			(*local_normal_at)(struct s_shape *, t_tuple);
-	t_intersection	*(*local_intersect)(struct s_shape *);
+	t_intersection	*(*local_intersect)(struct s_shape *, t_ray);
 	float			**transform;
 	float			**invtrans;
 	t_material		m;
@@ -348,15 +349,15 @@ void			set_transform(t_shape *s, float **t);
 t_ray			ray_for_pixel(t_camera *c, float px, float py);
 
 //math_intersections.c
-t_intersection	*local_intersect_sphere(t_shape *s);
-t_intersection	*local_intersect_plane(t_shape *s);
-t_intersection	*local_intersect_cube(t_shape *s);
+t_intersection	*local_intersect_sphere(t_shape *s, t_ray r);
+t_intersection	*local_intersect_plane(t_shape *s, t_ray r);
+t_intersection	*local_intersect_cube(t_shape *s, t_ray r);
 float			maxf(float a, float b, float c);
 void			swapf(float *a, float *b);
-t_intersection	*local_intersect_cyl(t_shape *s);
-t_intersection	*local_intersect_cone(t_shape *s);
-t_intersection	*local_intersect_group(t_shape *s);
-t_intersection	*local_intersect(t_shape *s);
+t_intersection	*local_intersect_cyl(t_shape *s, t_ray r);
+t_intersection	*local_intersect_cone(t_shape *s, t_ray r);
+t_intersection	*local_intersect_group(t_shape *s, t_ray r);
+t_intersection	*local_intersect(t_shape *s, t_ray r);
 t_intersection	*intersect(t_shape *s, t_ray r);
 t_intersection	intersection(float t, t_shape *s);
 t_intersection	*intersections(t_intersection i1, t_intersection i2);
@@ -376,12 +377,16 @@ int				canvas_export_ppm(t_data *data);
 t_pattern		stripe_pattern(t_rgb a, t_rgb b);
 t_rgb			stripe_at(t_pattern *pat, t_tuple point);
 t_rgb			stripe_at_object(t_pattern *pat, t_shape *object, t_tuple world_point);
+t_rgb			pattern_at(t_pattern *pat, t_tuple point);
+t_rgb			pattern_at_shape(t_pattern *pat, t_shape *shape, t_tuple point);
 t_pattern		gradient_pattern(t_rgb a, t_rgb b);
 t_rgb			gradient_at(t_pattern *gradient, t_tuple point);
 t_pattern		ring_pattern(t_rgb a, t_rgb b);
 t_rgb			ring_at(t_pattern *ring, t_tuple point);
 t_pattern		checkers_pattern(t_rgb a, t_rgb b);
 t_rgb			checkers_at(t_pattern *checkers, t_tuple point);
+t_pattern		texture_map(t_pattern uv_pattern, t_tuple (*map)(t_tuple));
+t_rgb			texture_at(t_pattern *texture_map, t_tuple point);
 t_pattern		uv_checkers(float width, float height, t_rgb a, t_rgb b);
 t_rgb			uv_checkers_at(t_pattern *checkers, t_tuple point);
 t_pattern 		uv_align_check(t_rgb main, t_rgb ul, t_rgb ur, t_rgb bl, t_rgb br);
@@ -391,9 +396,6 @@ t_tuple			spherical_map(t_tuple p);
 t_tuple			planar_map(t_tuple p);
 t_tuple			cylindrical_map(t_tuple p);
 t_tuple			cube_map(t_tuple point);
-t_pattern		texture_map(t_pattern uv_pattern, t_tuple (*map)(t_tuple));
-t_rgb			pattern_at(t_pattern *pat, t_tuple point);
-t_rgb			pattern_at_shape(t_pattern *pat, t_shape *shape, t_tuple point);
 void			set_pattern_transform(t_pattern *pat, float **t);
 char			*face_from_point(t_tuple point);
 

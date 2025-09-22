@@ -6,11 +6,43 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 14:56:16 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/15 23:34:48 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/22 13:17:23 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+static void	swap_xs(t_intersection *a, t_intersection *b)
+{
+	float		tmp_t;
+	t_shape		*tmp_o;
+
+	tmp_t = a->t;
+	tmp_o = a->object;
+	a->t = b->t;
+	a->object = b->object;
+	b->t = tmp_t;
+	b->object = tmp_o;
+	return ;
+}	
+
+static void	sort_intersections(t_intersection *xs)
+{
+	int		i;
+
+	i = 0;
+	while(xs[i + 1].object)
+	{
+		if (xs[i].t > xs[i + 1].t)
+		{
+			swap_xs(&xs[i], &xs[i + 1]);
+			i = 0;
+		}
+		else
+			i++;
+	}
+	return ;
+}
 
 t_intersection	*intersect_world(t_world *w, t_ray *r)
 {
@@ -23,6 +55,7 @@ t_intersection	*intersect_world(t_world *w, t_ray *r)
 		xs = intersect(&w->s[i], *r);
 		i++;
 	}
+	sort_intersections(xs);
 	return (xs);
 }
 
