@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/09/21 21:50:09 by mmillhof         ###   ########.fr        #
+#    Updated: 2025/09/22 20:38:30 by mmillhof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,7 +103,7 @@ $(MLX42_A):
 
 # Build target
 $(NAME): $(OBJ) $(LIBFT) $(MLX42_A)
-	$(CC) $(OBJ) $(LDFLAGS) $(LDLIBS) -O3 -o $@
+	$(CC) $(OBJ) $(LDFLAGS) $(LDLIBS) -o $@
 
 clean:
 	$(MAKE) -C $(LIBFT_PATH) clean

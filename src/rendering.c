@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:54:44 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/21 08:06:10 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/22 20:10:57 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,7 @@ void	render(void *param)
 	if (render_status == 0)
 	{
 		data = (t_data *)param;
-		world = default_world_cyl();
+		world = default_world_group_test();
 		cam = camera(WIN_WIDTH, WIN_HEIGHT, M_PI / 3);
 		cam.transform = view_transform(point(-2, 2, -6),
 				point(0, 1, 0), vector(0, 1, 0));

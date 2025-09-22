@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 12:44:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/22 16:18:19 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/22 20:51:06 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	add_child(t_shape *g, t_shape *s)
 
 	i = 0;
 	if (!g->group)
-		g->group = malloc(2 * sizeof(t_shape *));
+		g->group = ft_calloc(2, sizeof(t_shape *));
 	else
 	{
 		while (g->group[i])
 			i++;
-		temp = malloc((i + 2) * sizeof(t_shape *));
+		temp = ft_calloc((i + 2), sizeof(t_shape *));
 		i = 0;
 		while (g->group[i])
 		{
@@ -36,7 +36,6 @@ void	add_child(t_shape *g, t_shape *s)
 	}
 	g->group[i] = s;
 	s->parent = g;
-	g->group[i + 1] = NULL;
 	return ;
 }
 
@@ -50,6 +49,7 @@ t_tuple	world_to_object(t_shape *s, t_tuple p)
 t_tuple	normal_to_world(t_shape *s, t_tuple norm)
 {
 	norm = tmmultfree(mtranspose(s->invtrans, 4), norm);
+	printf("%f\n", s->invtrans[0][0]);
 	norm.w = 0;
 	norm = tnorm(norm);
 	if (s->parent)

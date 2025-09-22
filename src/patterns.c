@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 00:07:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/22 15:17:03 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/22 16:49:51 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -305,20 +305,20 @@ t_pattern	uv_align_check(t_rgb main, t_rgb ul, t_rgb ur, t_rgb bl, t_rgb br)
 	return (align_check);
 }
 
-t_rgb	uv_align_check_at(t_pattern *align_check, t_tuple point)
+t_rgb	uv_align_check_at(t_pattern *align_check, t_tuple uv)
 {
-	if (point.y > 0.8)
+	if (uv.y > 0.8)
 	{
-		if (point.x < 0.2)
+		if (uv.x < 0.2)
 			return (align_check->ul);
-		if (point.x > 0.8)
+		if (uv.x > 0.8)
 			return (align_check->ur);
 	}
-	else if(point.y < 0.2)
+	else if(uv.y < 0.2)
 	{
-		if (point.x < 0.2)
+		if (uv.x < 0.2)
 			return (align_check->bl);
-		if (point.x > 0.8)
+		if (uv.x > 0.8)
 			return (align_check->br);
 	}
 	return (align_check->main);

@@ -6,11 +6,24 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:25:23 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/21 07:24:48 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/22 18:38:43 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+/* OLD FUNCTION PROTOTYPE */
+
+t_tuple	local_normal_at(t_shape *s, t_tuple local_point)
+{
+	t_tuple	local_normal;
+
+	(void)s;
+	local_normal = tsub(local_point, point(0, 0, 0));
+	return (local_normal);
+}
+
+/* ABSTRACT FUNCTIONS */
 
 t_tuple	local_normal_at_sphere(t_shape *s, t_tuple local_point)
 {
@@ -76,15 +89,6 @@ t_tuple	local_normal_at_group(t_shape *s, t_tuple local_point)
 	(void)local_point;
 	ft_putstr_fd("local normal at group. this shouldn't happen!!", 2);
 	exit(0);
-}
-
-t_tuple	local_normal_at(t_shape *s, t_tuple local_point)
-{
-	t_tuple	local_normal;
-
-	(void)s;
-	local_normal = tsub(local_point, point(0, 0, 0));
-	return (local_normal);
 }
 
 t_tuple	normal_at(t_shape *s, t_tuple world_point)

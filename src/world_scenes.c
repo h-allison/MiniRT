@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 18:12:31 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/22 00:10:08 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/22 20:04:30 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -519,7 +519,7 @@ t_world	default_world_cyl(void)
 	cub.m.reflective = 0.1;
 	cub.m.pattern = texture_map(uv_checkers(4, 4, color(70, 100, 0), cub.m.color), cube_map);
 	cub.m.pattern.transform = mmultfree(scaling(1, 1, 1), cub.m.pattern.transform);
-	cub.m.pattern.transform = mmultfree(translation(-1, 0, 0), cub.m.pattern.transform);
+	cub.m.pattern.transform = mmultfree(translation(0, 0, 0), cub.m.pattern.transform);
 	cub.m.pattern.transform = mmultfree(rotation_z(90 * DEG2RAD), cub.m.pattern.transform);
 	cub.m.pattern.invtrans = minvert(cub.m.pattern.transform, 4);
 	
@@ -550,10 +550,10 @@ t_world	default_world_cyl(void)
 t_world	default_world_group_test(void)
 {
 	t_world	w;
-	t_shape	floor;
+//	t_shape	floor;
 	t_shape	*hex;
 	t_light	light;
-	
+/*	
 	floor = plane();
 	floor.m.color = color(200, 200, 200);
 	floor.m.diffuse = 0.4;
@@ -563,23 +563,23 @@ t_world	default_world_group_test(void)
 	free_matrix(floor.m.pattern.transform, 4);
 	free_matrix(floor.m.pattern.invtrans, 4);
 	floor.m.pattern = checkers_pattern(color(0, 0, 0), floor.m.color);
-	
+*/	
 	hex = malloc(sizeof(*hex));
 	*hex = hexagon();
 	set_transform(hex, translation(0, 1, 0));
 	hex->m.color = color(0, 50, 100);
 	hex->m.diffuse = 0.3;
 	hex->m.ambient = 0.2;
-	hex->m.specular = 0.6;
-	hex->m.reflective = 0.4;
+	hex->m.specular = 0;
+	hex->m.reflective = 0;
 
 	light = point_light(point(-7, 7, -6), color(255, 255, 255));
 	w.s = malloc(4 * sizeof(t_shape));
 	if (!w.s)
 		exit (1);
-	w.s[0] = floor;
-	w.s[1] = *hex;
-	w.s[2].transform = NULL;
+//	w.s[0] = floor;
+	w.s[0] = *hex;
+	w.s[1].transform = NULL;
 	w.light = malloc(sizeof(t_light));
 	if (!w.light)
 		exit (1);
