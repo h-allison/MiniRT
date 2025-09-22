@@ -6,11 +6,13 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 00:07:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/21 21:48:33 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/22 11:39:52 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+/* OLD FUNCTIONS */
 
 t_pattern	stripe_pattern(t_rgb a, t_rgb b)
 {
@@ -41,6 +43,33 @@ t_rgb	stripe_at_object(t_pattern *pat, t_shape *object, t_tuple world_point)
 	pattern_point = tmatrixmult(pat->invtrans, object_point);
 	return (stripe_at(pat, pattern_point));
 }
+
+/* TEST FUNCTION */
+
+t_rgb	pattern_at(t_pattern *pat, t_tuple point)
+{
+	t_rgb	col;
+
+	(void) pat;
+	col.r = point.x;
+	col.g = point.y;
+	col.b = point.z;
+	return (col);
+}
+
+/* ABSTRACT FUNCTION */
+
+t_rgb	pattern_at_shape(t_pattern *pat, t_shape *shape, t_tuple world_point)
+{
+	t_tuple	shape_point;
+	t_tuple	pattern_point;
+
+	shape_point = world_to_object(shape, world_point);
+	pattern_point = tmatrixmult(pat->invtrans, shape_point);
+	return (pat->pattern_at(pat, pattern_point));
+}
+
+/* CONCRETE PATTERNS */
 
 t_pattern	gradient_pattern(t_rgb a, t_rgb b)
 {
@@ -105,6 +134,8 @@ t_rgb	checkers_at(t_pattern *checkers, t_tuple point)
 	return (checkers->b);
 }
 
+/* UV FUNCTIONS */
+
 t_pattern	uv_checkers(float width, float height, t_rgb a, t_rgb b)
 {
 	t_pattern	checkers;
@@ -134,6 +165,8 @@ t_rgb	uv_checkers_at(t_pattern *checkers, t_tuple point)
 	return (checkers->b);
 }
 
+/* UV MAPS */
+
 t_pattern texture_map(t_pattern uv_pattern, t_tuple (*map)(t_tuple))
 {
 	t_pattern	pattern;
@@ -158,7 +191,6 @@ t_pattern texture_map(t_pattern uv_pattern, t_tuple (*map)(t_tuple))
 t_tuple	no_map(t_tuple p)
 {
 	t_tuple	uv;
-
 	uv.x = p.x;
 	uv.y = p.y;
 	return (uv);
@@ -226,27 +258,6 @@ t_tuple cube_map(t_tuple point)
 	else if (coord == point.z)
 		return (cube_uv_front(point));
 	return (cube_uv_back(point));
-}
-
-t_rgb	pattern_at(t_pattern *pat, t_tuple point)
-{
-	t_rgb	col;
-
-	(void) pat;
-	col.r = point.x;
-	col.g = point.y;
-	col.b = point.z;
-	return (col);
-}
-
-t_rgb	pattern_at_shape(t_pattern *pat, t_shape *shape, t_tuple world_point)
-{
-	t_tuple	shape_point;
-	t_tuple	pattern_point;
-
-	shape_point = world_to_object(shape, world_point);
-	pattern_point = tmatrixmult(pat->invtrans, shape_point);
-	return (pat->pattern_at(pat, pattern_point));
 }
 
 void	set_pattern_transform(t_pattern *pat, float **t)
