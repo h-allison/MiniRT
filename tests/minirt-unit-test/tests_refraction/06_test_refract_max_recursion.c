@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 23:02:50 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/21 04:36:38 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/23 03:53:04 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int test_refract_max_recursion(void)
 	t_rgb			col;
 
 	w = default_world();
-	w.s[0].m.transparency = 1.0;
-	w.s[0].m.refractive_index = 1.5;
+	w.s[0]->m->transparency = 1.0;
+	w.s[0]->m->refractive_index = 1.5;
 	r = ray(point(0, 0, -5), vector(0, 0, 1));
-	xs = intersections(intersection(4, &w.s[0]),
-			intersection(6, &w.s[0]));
+	xs = intersections(intersection(4, w.s[0]),
+			intersection(6, w.s[0]));
 	comps = prepare_computations(&xs[0], &r, xs);
 	col = refracted_color(&w, &comps, 0);
 	if (col.r != 0 || col.g != 0 || col.b !=0)

@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 14:56:16 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/22 16:02:59 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/23 01:30:39 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ t_intersection	*intersect_world(t_world *w, t_ray *r)
 {
 	int				i;
 	t_intersection	*xs;
-
+	
 	i = 0;
-	while (w->s[i].transform)
+	while (w->s[i])
 	{
-		xs = intersect(&w->s[i], *r);
+		xs = intersect(w->s[i], *r);
 		i++;
 	}
 	return (xs);
@@ -115,7 +115,7 @@ void	prepare_n(t_comps *comps, t_intersection *ht, t_intersection *xs)
 			else
 			{
 				object = (t_shape *)ft_lstlast(containers)->content;
-				comps->n1 = object->m.refractive_index;
+				comps->n1 = object->m->refractive_index;
 			}
 		}
 		lst_findobject(containers, xs[i].object);
@@ -126,7 +126,7 @@ void	prepare_n(t_comps *comps, t_intersection *ht, t_intersection *xs)
 			else
 			{
 				object = (t_shape *)ft_lstlast(containers)->content;
-				comps->n2 = object->m.refractive_index;
+				comps->n2 = object->m->refractive_index;
 			}
 		}
 		i++;

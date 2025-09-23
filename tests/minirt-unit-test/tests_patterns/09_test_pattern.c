@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 14:16:28 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/21 14:16:29 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/23 02:40:02 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int test_pattern_gen_basic(void)
 {
-	t_pattern	pat;
+	t_pattern	*pat;
 	int			x;
 	int			y;
 	float		**idm;
@@ -27,10 +27,10 @@ int test_pattern_gen_basic(void)
 		x = 0;
 		while (x < 4)
 		{
-			if (!fisequal(pat.transform[y][x], idm[y][x]))
+			if (!fisequal(pat->transform[y][x], idm[y][x]))
 			{
 				free_matrix(idm, 4);
-				free_matrix(pat.transform, 4);
+				free_matrix(pat->transform, 4);
 				return (-1);
 			}
 			x++;
@@ -38,6 +38,6 @@ int test_pattern_gen_basic(void)
 		y++;
 	}
 	free_matrix(idm, 4);
-	free_matrix(pat.transform, 4);
+	free_matrix(pat->transform, 4);
 	return (0);
 }

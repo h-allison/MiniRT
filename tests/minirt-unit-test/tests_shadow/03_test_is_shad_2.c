@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   03_test_is_shad_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smargine <smargine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/06 18:52:32 by smargine          #+#    #+#             */
-/*   Updated: 2025/09/12 13:20:06 by hallison         ###   ########.fr       */
+/*   Created: 2025/09/23 02:49:50 by mmillhof          #+#    #+#             */
+/*   Updated: 2025/09/23 02:49:52 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int test_is_shad_2(void)
 	w = default_world();
 	shadowed = is_shadowed(&w, 0, point(10, -10, 10));
 	free(w.light);
-	free_matrices_and_ret(&w.s[0], 0);
-	free_matrices_and_ret(&w.s[1], 0);
+	free_matrices_and_ret(w.s[0], 0);
+	free_matrices_and_ret(w.s[1], 0);
 	free(w.s);
 	if (shadowed)
 	{

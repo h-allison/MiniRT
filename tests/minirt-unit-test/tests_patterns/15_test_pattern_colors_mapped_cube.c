@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 14:15:50 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/21 23:35:31 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/23 02:43:52 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ int	test_pattern_colors_mapped_cube(void)
 	t_rgb	blue;
 	t_rgb	purple;
 	t_rgb	white;
-	t_pattern	left;
-	t_pattern	front;
-	t_pattern	right;
-	t_pattern	back;
-	t_pattern	up;
-	t_pattern	down;
+	t_pattern	*left;
+	t_pattern	*front;
+	t_pattern	*right;
+	t_pattern	*back;
+	t_pattern	*up;
+	t_pattern	*down;
 	t_tuple		p;
 
 	red = color(255, 0, 0);
@@ -58,99 +58,94 @@ int	test_pattern_colors_mapped_cube(void)
 	down = uv_align_check(purple, brown, green, blue, white);
 
 	p = cube_map(point(-1, 0, 0));
-	if (!cisequal(uv_align_check_at(&left, p), yellow))
+	if (!cisequal(uv_align_check_at(left, p), yellow))
 		return (-1);
 	p = cube_map(point(-1, 0.9, -0.9));
-	if (!cisequal(uv_align_check_at(&left, p), cyan))
+	if (!cisequal(uv_align_check_at(left, p), cyan))
 		return (-1);
 	p = cube_map(point(-1, 0.9, 0.9));
-	if (!cisequal(uv_align_check_at(&left, p), red))
+	if (!cisequal(uv_align_check_at(left, p), red))
 		return (-1);
 	p = cube_map(point(-1, -0.9, -0.9));
-	if (!cisequal(uv_align_check_at(&left, p), blue))
+	if (!cisequal(uv_align_check_at(left, p), blue))
 		return (-1);
 	p = cube_map(point(-1, -0.9, 0.9));
-	if (!cisequal(uv_align_check_at(&left, p), brown))
+	if (!cisequal(uv_align_check_at(left, p), brown))
 		return (-1);
 	p = cube_map(point(0, 0, 1));
-	if (!cisequal(uv_align_check_at(&front, p), cyan))
+	if (!cisequal(uv_align_check_at(front, p), cyan))
 		return (-1);
 	p = cube_map(point(-0.9, 0.9, 1));
-	if (!cisequal(uv_align_check_at(&front, p), red))
+	if (!cisequal(uv_align_check_at(front, p), red))
 		return (-1);
 	p = cube_map(point(0.9, 0.9, 1));
-	if (!cisequal(uv_align_check_at(&front, p), yellow))
+	if (!cisequal(uv_align_check_at(front, p), yellow))
 		return (-1);
 	p = cube_map(point(-0.9, -0.9, 1));
-	if (!cisequal(uv_align_check_at(&front, p), brown))
+	if (!cisequal(uv_align_check_at(front, p), brown))
 		return (-1);
 	p = cube_map(point(0.9, -0.9, 1));
-	if (!cisequal(uv_align_check_at(&front, p), green))
+	if (!cisequal(uv_align_check_at(front, p), green))
 		return (-1);
 	p = cube_map(point(1, 0, 0));
-	if (!cisequal(uv_align_check_at(&right, p), red))
+	if (!cisequal(uv_align_check_at(right, p), red))
 		return (-1);
 	p = cube_map(point(1, 0.9, 0.9));
-	if (!cisequal(uv_align_check_at(&right, p), yellow))
+	if (!cisequal(uv_align_check_at(right, p), yellow))
 		return (-1);
 	p = cube_map(point(1, 0.9, -0.9));
-	if (!cisequal(uv_align_check_at(&right, p), purple))
+	if (!cisequal(uv_align_check_at(right, p), purple))
 		return (-1);
 	p = cube_map(point(1, -0.9, 0.9));
-	if (!cisequal(uv_align_check_at(&right, p), green))
+	if (!cisequal(uv_align_check_at(right, p), green))
 		return (-1);
 	p = cube_map(point(1, -0.9, -0.9));
-	if (!cisequal(uv_align_check_at(&right, p), white))
+	if (!cisequal(uv_align_check_at(right, p), white))
 		return (-1);
 	p = cube_map(point(0, 0, -1));
-	if (!cisequal(uv_align_check_at(&back, p), green))
+	if (!cisequal(uv_align_check_at(back, p), green))
 		return (-1);
 	p = cube_map(point(0.9, 0.9, -1));
-	if (!cisequal(uv_align_check_at(&back, p), purple))
+	if (!cisequal(uv_align_check_at(back, p), purple))
 		return (-1);
 	p = cube_map(point(-0.9, 0.9, -1));
-	if (!cisequal(uv_align_check_at(&back, p), cyan))
+	if (!cisequal(uv_align_check_at(back, p), cyan))
 		return (-1);
 	p = cube_map(point(0.9, -0.9, -1));
-	if (!cisequal(uv_align_check_at(&back, p), white))
+	if (!cisequal(uv_align_check_at(back, p), white))
 		return (-1);
 	p = cube_map(point(-0.9, -0.9, -1));
-	if (!cisequal(uv_align_check_at(&back, p), blue))
+	if (!cisequal(uv_align_check_at(back, p), blue))
 		return (-1);
 	p = cube_map(point(0, 1, 0));
-	if (!cisequal(uv_align_check_at(&up, p), brown))
+	if (!cisequal(uv_align_check_at(up, p), brown))
 		return (-1);
 	p = cube_map(point(-0.9, 1, -0.9));
-	if (!cisequal(uv_align_check_at(&up, p), cyan))
+	if (!cisequal(uv_align_check_at(up, p), cyan))
 		return (-1);
 	p = cube_map(point(0.9, 1, -0.9));
-	if (!cisequal(uv_align_check_at(&up, p), purple))
+	if (!cisequal(uv_align_check_at(up, p), purple))
 		return (-1);
 	p = cube_map(point(-0.9, 1, 0.9));
-	if (!cisequal(uv_align_check_at(&up, p), red))
+	if (!cisequal(uv_align_check_at(up, p), red))
 		return (-1);
 	p = cube_map(point(0.9, 1, 0.9));
-	if (!cisequal(uv_align_check_at(&up, p), yellow))
+	if (!cisequal(uv_align_check_at(up, p), yellow))
 		return (-1);
 	p = cube_map(point(0, -1, 0));
-	if (!cisequal(uv_align_check_at(&down, p), purple))
+	if (!cisequal(uv_align_check_at(down, p), purple))
 		return (-1);
 	p = cube_map(point(-0.9, -1, 0.9));
-	if (!cisequal(uv_align_check_at(&down, p), brown))
+	if (!cisequal(uv_align_check_at(down, p), brown))
 		return (-1);
 	p = cube_map(point(0.9, -1, 0.9));
-	if (!cisequal(uv_align_check_at(&down, p), green))
+	if (!cisequal(uv_align_check_at(down, p), green))
 		return (-1);
 	p = cube_map(point(-0.9, -1, -0.9));
-	if (!cisequal(uv_align_check_at(&down, p), blue))
+	if (!cisequal(uv_align_check_at(down, p), blue))
 		return (-1);
 	p = cube_map(point(0.9, -1, -0.9));
-	if (!cisequal(uv_align_check_at(&down, p), white))
+	if (!cisequal(uv_align_check_at(down, p), white))
 		return (-1);
 	return (0);
 }   
-
-
-
-
-

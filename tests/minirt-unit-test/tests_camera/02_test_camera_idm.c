@@ -6,7 +6,7 @@
 /*   By: smargine <smargine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 18:52:32 by smargine          #+#    #+#             */
-/*   Updated: 2025/09/08 14:47:59 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/23 02:00:47 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int test_camera_idm(void)
 {
-	t_camera	c;
+	t_camera	*c;
 	float		**idm;
 	int			y;
 	int			x;
@@ -28,10 +28,10 @@ int test_camera_idm(void)
 		x = 0;
 		while (x < 4)
 		{
-			if (c.transform[y][x] != idm[y][x])
+			if (c->transform[y][x] != idm[y][x])
 			{
 				free_matrix(idm, 4);
-				free_matrix(c.transform, 4);
+				free_matrix(c->transform, 4);
 				return (-1);
 			}
 			x++;
@@ -39,6 +39,6 @@ int test_camera_idm(void)
 		y++;
 	}
 	free_matrix(idm, 4);
-	free_matrix(c.transform, 4);
+	free_matrix(c->transform, 4);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   06_test_over_point.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smargine <smargine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/06 18:52:32 by smargine          #+#    #+#             */
-/*   Updated: 2025/09/15 15:26:11 by hallison         ###   ########.fr       */
+/*   Created: 2025/09/23 02:51:08 by mmillhof          #+#    #+#             */
+/*   Updated: 2025/09/23 02:51:10 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,18 @@
 int test_over_point(void)
 {
 	t_ray			r;
-	t_shape			s;
+	t_shape			*s;
 	t_comps			c;
 	t_intersection	i;
 
 	r = ray(point(0, 0, -5), vector(0, 0, 1));
 	s = sphere();
-	set_transform(&s, translation(0, 0, 1));
-	i = intersection(5, &s);
+	set_transform(s, translation(0, 0, 1));
+	i = intersection(5, s);
 	c = prepare_computations(&i, &r, NULL);
 	if (c.over_point.z < -EPSILON/2 && c.point.z > c.over_point.z)
 	{
-		return (free_matrices_and_ret(&s, 0));
+		return (free_matrices_and_ret(s, 0));
 	}
-	return (free_matrices_and_ret(&s, -1));
+	return (free_matrices_and_ret(s, -1));
 }

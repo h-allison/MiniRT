@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:25:23 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/22 18:38:43 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/23 00:42:10 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,14 +120,14 @@ t_rgb	lighting(t_largs *largs)
 	float	factor;
 	t_rgb	ret;
 
-	if (largs->material.pattern.status)
-		col = pattern_at_shape(&largs->material.pattern,
+	if (largs->material->pattern->status)
+		col = pattern_at_shape(largs->material->pattern,
 				largs->shape, largs->point);
 	else
-		col = largs->material.color;
-	effective_color = cmult(col, largs->light.intensity);
-	lightv = tnorm(tsub(largs->light.position, largs->point));
-	ambient = cscale(effective_color, largs->material.ambient);
+		col = largs->material->color;
+	effective_color = cmult(col, largs->light->intensity);
+	lightv = tnorm(tsub(largs->light->position, largs->point));
+	ambient = cscale(effective_color, largs->material->ambient);
 	if (largs->in_shadow)
 		return (ambient);
 	light_dot_normal = dot(lightv, largs->normalv);
@@ -138,7 +138,7 @@ t_rgb	lighting(t_largs *largs)
 	}
 	else
 	{
-		diffuse = cscale(cscale(effective_color, largs->material.diffuse),
+		diffuse = cscale(cscale(effective_color, largs->material->diffuse),
 				light_dot_normal);
 		reflectv = reflect(tneg(lightv), largs->normalv);
 		reflect_dot_eye = dot(reflectv, largs->eyev);
@@ -146,9 +146,9 @@ t_rgb	lighting(t_largs *largs)
 			specular = color(0, 0, 0);
 		else
 		{
-			factor = powf(reflect_dot_eye, largs->material.shininess);
-			specular = cscale(cscale(largs->light.intensity,
-						largs->material.specular), factor);
+			factor = powf(reflect_dot_eye, largs->material->shininess);
+			specular = cscale(cscale(largs->light->intensity,
+						largs->material->specular), factor);
 		}
 	}
 	ret = cadd(cadd(ambient, diffuse), specular);

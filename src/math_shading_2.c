@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 13:30:13 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/22 17:03:54 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/23 01:28:51 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ t_rgb	shade_hit(t_world *w, t_comps *comps, int remaining)
 		largs.normalv = comps->normalv;
 		largs.in_shadow = is_shadowed(w, i, comps->over_point);
 		surface = cadd(surface, lighting(&largs));
-		if (w->light[i].last)
+		if (w->light[i]->last)
 			break ;
 		i++;
 	}
 	reflected = reflected_color(w, comps, remaining);
 	refracted = refracted_color(w, comps, remaining);
-	if (comps->object->m.reflective > 0 && comps->object->m.transparency > 0)
+	if (comps->object->m->reflective > 0 && comps->object->m->transparency > 0)
 	{
 		reflectance = schlick(comps);
 		return (cadd(cadd(surface, cscale(reflected, reflectance)),
@@ -76,7 +76,7 @@ bool	is_shadowed(t_world *world, int i, t_tuple point)
 	t_intersection	*xs;
 	t_intersection	*ht;
 
-	v = tsub(world->light[i].position, point);
+	v = tsub(world->light[i]->position, point);
 	distance = tmag(v);
 	direction = tnorm(v);
 	r = ray(point, direction);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_test_shadow_launcher.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smargine <smargine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/07 14:38:10 by smargine          #+#    #+#             */
-/*   Updated: 2025/09/12 13:23:21 by hallison         ###   ########.fr       */
+/*   Created: 2025/09/23 02:50:05 by mmillhof          #+#    #+#             */
+/*   Updated: 2025/09/23 02:50:07 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

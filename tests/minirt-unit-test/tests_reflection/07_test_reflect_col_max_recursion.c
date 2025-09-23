@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 23:01:53 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/15 15:29:27 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/23 03:49:07 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int test_reflect_col_max_recursion(void)
 {
 	t_world			w;
-	t_shape			s;
+	t_shape			*s;
 	t_ray			r;
 	t_intersection	i;
 	t_comps			c;
@@ -23,13 +23,13 @@ int test_reflect_col_max_recursion(void)
 
 	w = default_world();
 	s = plane();
-	s.m.reflective = 0.5;
-	set_transform(&s, translation(0, -1, 0));
-	s.invtrans = minvert(s.transform, 4);
+	s->m->reflective = 0.5;
+	set_transform(s, translation(0, -1, 0));
+	s->invtrans = minvert(s->transform, 4);
 	w.s[2] = s;
-	w.s[3].transform = NULL;
+	w.s[3] = NULL;
 	r = ray(point(0, 0, -3), vector(0, -sqrtf(2)/2, sqrtf(2)/2));
-	i = intersection(sqrtf(2), &s);
+	i = intersection(sqrtf(2), s);
 	c = prepare_computations(&i, &r, NULL);
 	col = reflected_color(&w, &c, 0);
 	if (!fisequal(col.r, 0) || !fisequal(col.g, 0)

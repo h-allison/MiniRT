@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 12:44:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/22 20:51:06 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/23 01:36:39 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ t_tuple	world_to_object(t_shape *s, t_tuple p)
 t_tuple	normal_to_world(t_shape *s, t_tuple norm)
 {
 	norm = tmmultfree(mtranspose(s->invtrans, 4), norm);
-	printf("%f\n", s->invtrans[0][0]);
 	norm.w = 0;
 	norm = tnorm(norm);
 	if (s->parent)

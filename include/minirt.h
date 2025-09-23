@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/22 16:01:18 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/23 04:03:56 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,23 +84,10 @@ typedef struct s_pattern
 	bool			status;
 }	t_pattern;
 
-typedef struct s_lcalc
-{
-	t_rgb	effective_color;
-	t_rgb	ambient;
-	t_rgb	diffuse;
-	t_rgb	specular;
-	t_tuple	lightv;
-	t_tuple	reflectv;
-	float	light_dot_normal;
-	float	reflect_dot_eye;
-	float	factor;
-}	t_lcalc;
-
 typedef struct s_material
 {
 	t_rgb			color;
-	t_pattern		pattern;
+	t_pattern		*pattern;
 	float			ambient;	
 	float			diffuse;
 	float			specular;
@@ -134,7 +121,7 @@ typedef struct s_shape
 	t_intersection	*(*local_intersect)(struct s_shape *, t_ray);
 	float			**transform;
 	float			**invtrans;
-	t_material		m;
+	t_material		*m;
 	t_ray			saved_ray;
 	float			minimum;
 	float			maximum;
@@ -175,16 +162,16 @@ typedef struct s_comps
 
 typedef struct s_world
 {
-	t_shape			*s;
-	t_light			*light;
+	t_shape			**s;
+	t_light			**light;
 }	t_world;
 
 typedef struct s_largs
 {
 	t_shape			*shape;
-	t_material		material;
+	t_material		*material;
 	t_tuple			point;
-	t_light			light;
+	t_light			*light;
 	t_tuple			eyev;
 	t_tuple			normalv;
 	bool			in_shadow;
@@ -237,20 +224,20 @@ int				parse_file(char *filename, t_data *data);
 void			render(void *param);
 
 //create_objects.c
-t_shape			create_test_shape(void);
-t_pattern		create_test_pattern(void);
-t_pattern		pattern(void);
-t_material		material(void);
-t_shape			glass_sphere(void);
-t_shape			sphere(void);
-t_shape			plane(void);
-t_shape			cube(void);
-t_shape			cylinder(void);
-t_shape			cone(void);
-t_shape			hexagon(void);
-t_shape			group(void);
-t_light			point_light(t_tuple position, t_rgb intensity);
-t_camera		camera(float hsize, float vsize, float field_of_view);
+t_shape			*create_test_shape(void);
+t_pattern		*create_test_pattern(void);
+t_pattern		*pattern(void);
+t_material		*material(void);
+t_shape			*glass_sphere(void);
+t_shape			*sphere(void);
+t_shape			*plane(void);
+t_shape			*cube(void);
+t_shape			*cylinder(void);
+t_shape			*cone(void);
+t_shape			*hexagon(void);
+t_shape			*group(void);
+t_light			*point_light(t_tuple position, t_rgb intensity);
+t_camera		*camera(float hsize, float vsize, float field_of_view);
 
 //create_tuples.c
 t_tuple			point(float x, float y, float z);
@@ -376,22 +363,22 @@ float			**view_transform(t_tuple from, t_tuple to, t_tuple up);
 int				canvas_export_ppm(t_data *data);
 
 //patterns.c
-t_pattern		stripe_pattern(t_rgb a, t_rgb b);
+t_pattern		*stripe_pattern(t_rgb a, t_rgb b);
 t_rgb			stripe_at(t_pattern *pat, t_tuple point);
 t_rgb			stripe_at_object(t_pattern *pat, t_shape *object, t_tuple world_point);
 t_rgb			pattern_at(t_pattern *pat, t_tuple point);
 t_rgb			pattern_at_shape(t_pattern *pat, t_shape *shape, t_tuple point);
-t_pattern		gradient_pattern(t_rgb a, t_rgb b);
+t_pattern		*gradient_pattern(t_rgb a, t_rgb b);
 t_rgb			gradient_at(t_pattern *gradient, t_tuple point);
-t_pattern		ring_pattern(t_rgb a, t_rgb b);
+t_pattern		*ring_pattern(t_rgb a, t_rgb b);
 t_rgb			ring_at(t_pattern *ring, t_tuple point);
-t_pattern		checkers_pattern(t_rgb a, t_rgb b);
+t_pattern		*checkers_pattern(t_rgb a, t_rgb b);
 t_rgb			checkers_at(t_pattern *checkers, t_tuple point);
-t_pattern		texture_map(t_pattern uv_pattern, t_tuple (*map)(t_tuple));
+t_pattern		*texture_map(t_pattern *uv_pattern, t_tuple (*map)(t_tuple));
 t_rgb			texture_at(t_pattern *texture_map, t_tuple point);
-t_pattern		uv_checkers(float width, float height, t_rgb a, t_rgb b);
+t_pattern		*uv_checkers(float width, float height, t_rgb a, t_rgb b);
 t_rgb			uv_checkers_at(t_pattern *checkers, t_tuple point);
-t_pattern 		uv_align_check(t_rgb main, t_rgb ul, t_rgb ur, t_rgb bl, t_rgb br);
+t_pattern 		*uv_align_check(t_rgb main, t_rgb ul, t_rgb ur, t_rgb bl, t_rgb br);
 t_rgb			uv_align_check_at(t_pattern *align_check, t_tuple point);
 t_tuple			no_map(t_tuple p);
 t_tuple			spherical_map(t_tuple p);

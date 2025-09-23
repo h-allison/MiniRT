@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 00:07:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/22 16:49:51 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/22 23:02:33 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,17 @@
 
 /* OLD FUNCTIONS */
 
-t_pattern	stripe_pattern(t_rgb a, t_rgb b)
+t_pattern	*stripe_pattern(t_rgb a, t_rgb b)
 {
-	t_pattern	pat;
+	t_pattern	*pat;
 
-	pat.a = a;
-	pat.b = b;
-	pat.transform = create_id_matrix();
-	pat.invtrans = minvert(pat.transform, 4);
-	pat.pattern_at = stripe_at;
-	pat.status = true;
+	pat = malloc(sizeof(t_pattern));
+	pat->a = a;
+	pat->b = b;
+	pat->transform = create_id_matrix();
+	pat->invtrans = minvert(pat->transform, 4);
+	pat->pattern_at = stripe_at;
+	pat->status = true;
 	return (pat);
 }
 
@@ -71,16 +72,17 @@ t_rgb	pattern_at_shape(t_pattern *pat, t_shape *shape, t_tuple world_point)
 
 /* CONCRETE PATTERNS */
 
-t_pattern	gradient_pattern(t_rgb a, t_rgb b)
+t_pattern	*gradient_pattern(t_rgb a, t_rgb b)
 {
-	t_pattern	gradient;
+	t_pattern	*gradient;
 
-	gradient.a = a;
-	gradient.b = b;
-	gradient.transform = create_id_matrix();
-	gradient.invtrans = minvert(gradient.transform, 4);
-	gradient.pattern_at = gradient_at;
-	gradient.status = true;
+	gradient = malloc(sizeof(t_pattern));
+	gradient->a = a;
+	gradient->b = b;
+	gradient->transform = create_id_matrix();
+	gradient->invtrans = minvert(gradient->transform, 4);
+	gradient->pattern_at = gradient_at;
+	gradient->status = true;
 	return (gradient);
 }
 
@@ -94,16 +96,17 @@ t_rgb	gradient_at(t_pattern *gradient, t_tuple point)
 	return (cadd(gradient->a, cscale(distance, fraction)));
 }
 
-t_pattern	ring_pattern(t_rgb a, t_rgb b)
+t_pattern	*ring_pattern(t_rgb a, t_rgb b)
 {
-	t_pattern	ring;
+	t_pattern	*ring;
 
-	ring.a = a;
-	ring.b = b;
-	ring.transform = create_id_matrix();
-	ring.invtrans = minvert(ring.transform, 4);
-	ring.pattern_at = ring_at;
-	ring.status = true;
+	ring = malloc(sizeof(t_pattern));
+	ring->a = a;
+	ring->b = b;
+	ring->transform = create_id_matrix();
+	ring->invtrans = minvert(ring->transform, 4);
+	ring->pattern_at = ring_at;
+	ring->status = true;
 	return (ring);
 }
 
@@ -114,16 +117,17 @@ t_rgb	ring_at(t_pattern *ring, t_tuple point)
 	return (ring->b);
 }
 
-t_pattern	checkers_pattern(t_rgb a, t_rgb b)
+t_pattern	*checkers_pattern(t_rgb a, t_rgb b)
 {
-	t_pattern	checkers;
+	t_pattern	*checkers;
 
-	checkers.a = a;
-	checkers.b = b;
-	checkers.transform = create_id_matrix();
-	checkers.invtrans = minvert(checkers.transform, 4);
-	checkers.pattern_at = checkers_at;
-	checkers.status = true;
+	checkers = malloc(sizeof(t_pattern));
+	checkers->a = a;
+	checkers->b = b;
+	checkers->transform = create_id_matrix();
+	checkers->invtrans = minvert(checkers->transform, 4);
+	checkers->pattern_at = checkers_at;
+	checkers->status = true;
 	return (checkers);
 }
 
@@ -136,18 +140,19 @@ t_rgb	checkers_at(t_pattern *checkers, t_tuple point)
 
 /* UV FUNCTIONS */
 
-t_pattern	uv_checkers(float width, float height, t_rgb a, t_rgb b)
+t_pattern	*uv_checkers(float width, float height, t_rgb a, t_rgb b)
 {
-	t_pattern	checkers;
+	t_pattern	*checkers;
 
-	checkers.a = a;
-	checkers.b = b;
-	checkers.width = width;
-	checkers.height = height;
-	checkers.transform = create_id_matrix();
-	checkers.invtrans = minvert(checkers.transform, 4);
-	checkers.pattern_at = uv_checkers_at;
-	checkers.status = true;
+	checkers = malloc(sizeof(t_pattern));
+	checkers->a = a;
+	checkers->b = b;
+	checkers->width = width;
+	checkers->height = height;
+	checkers->transform = create_id_matrix();
+	checkers->invtrans = minvert(checkers->transform, 4);
+	checkers->pattern_at = uv_checkers_at;
+	checkers->status = true;
 	return (checkers);
 }
 
@@ -163,25 +168,26 @@ t_rgb	uv_checkers_at(t_pattern *checkers, t_tuple uv)
 	return (checkers->b);
 }
 
-t_pattern texture_map(t_pattern uv_pattern, t_tuple (*map)(t_tuple))
+t_pattern	*texture_map(t_pattern *uv_pattern, t_tuple (*map)(t_tuple))
 {
-	t_pattern	pattern;
+	t_pattern	*pattern;
 
-	pattern.a = uv_pattern.a;
-	pattern.b = uv_pattern.b;
-	pattern.main = uv_pattern.main;
-	pattern.ul = uv_pattern.ul;
-	pattern.ur = uv_pattern.ur;
-	pattern.bl = uv_pattern.bl;
-	pattern.br = uv_pattern.br;
-	pattern.width = uv_pattern.width;
-	pattern.height = uv_pattern.height;
-	pattern.transform = create_id_matrix();
-	pattern.invtrans = minvert(pattern.transform, 4);
-	pattern.pattern_at = texture_at;
-	pattern.uv_pattern_at = uv_pattern.pattern_at;
-	pattern.map = map;
-	pattern.status = true;
+	pattern = malloc(sizeof(t_pattern));
+	pattern->a = uv_pattern->a;
+	pattern->b = uv_pattern->b;
+	pattern->main = uv_pattern->main;
+	pattern->ul = uv_pattern->ul;
+	pattern->ur = uv_pattern->ur;
+	pattern->bl = uv_pattern->bl;
+	pattern->br = uv_pattern->br;
+	pattern->width = uv_pattern->width;
+	pattern->height = uv_pattern->height;
+	pattern->transform = create_id_matrix();
+	pattern->invtrans = minvert(pattern->transform, 4);
+	pattern->pattern_at = texture_at;
+	pattern->uv_pattern_at = uv_pattern->pattern_at;
+	pattern->map = map;
+	pattern->status = true;
 	return (pattern);
 }
 
@@ -289,19 +295,20 @@ void	set_pattern_transform(t_pattern *pat, float **t)
 
 /* PART OF TEST PATTERN 13 */
 
-t_pattern	uv_align_check(t_rgb main, t_rgb ul, t_rgb ur, t_rgb bl, t_rgb br)
+t_pattern	*uv_align_check(t_rgb main, t_rgb ul, t_rgb ur, t_rgb bl, t_rgb br)
 {
-	t_pattern align_check;
+	t_pattern	*align_check;
 
-	align_check.main = main;
-	align_check.ul = ul;
-	align_check.ur = ur;
-	align_check.bl = bl;
-	align_check.br = br;
-	align_check.transform = create_id_matrix();
-	align_check.invtrans = minvert(align_check.transform, 4);
-	align_check.pattern_at = uv_align_check_at;
-	align_check.status = true;
+	align_check = malloc(sizeof(t_pattern));
+	align_check->main = main;
+	align_check->ul = ul;
+	align_check->ur = ur;
+	align_check->bl = bl;
+	align_check->br = br;
+	align_check->transform = create_id_matrix();
+	align_check->invtrans = minvert(align_check->transform, 4);
+	align_check->pattern_at = uv_align_check_at;
+	align_check->status = true;
 	return (align_check);
 }
 

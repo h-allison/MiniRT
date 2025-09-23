@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:38:56 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/22 15:51:33 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/23 03:40:47 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,24 @@ int test_groups_intersect(void)
 {
 	int				i;
 	float			prev_t;
-	t_shape			g;
-	t_shape			s1;
-	t_shape			s2;
-	t_shape			s3;
+	t_shape			*g;
+	t_shape			*s1;
+	t_shape			*s2;
+	t_shape			*s3;
 	t_ray			r;
 	t_intersection	*xs;
 
 	g = group();
 	s1 = sphere();
 	s2 = sphere();
-	set_transform(&s2, translation(0, 0, -3));
+	set_transform(s2, translation(0, 0, -3));
 	s3 = sphere();
-	set_transform(&s3, translation(5, 0, 0));
-	add_child(&g, &s1);
-	add_child(&g, &s2);
-	add_child(&g, &s3);
+	set_transform(s3, translation(5, 0, 0));
+	add_child(g, s1);
+	add_child(g, s2);
+	add_child(g, s3);
 	r = ray(point(0, 0, -5), vector(0, 0, 1));
-	xs = local_intersect_group(&g, r);
+	xs = local_intersect_group(g, r);
 	i = 0;
 	prev_t = FLT_MIN;
 	while (xs[i].object)
@@ -43,12 +43,12 @@ int test_groups_intersect(void)
 		prev_t = xs[i].t;
 		i++;
 	}
-	if (xs[0].object != &s2 || xs[1].object != &s2)
+	if (xs[0].object != s2 || xs[1].object != s2)
 		return (-1);
-	if (xs[2].object != &s1 || xs[3].object != &s1)
+	if (xs[2].object != s1 || xs[3].object != s1)
 		return (-1);
 	if (i != 4)
 		return (-1);
-	free_shape(&g);
+	free_shape(g);
 	return (0);
 }

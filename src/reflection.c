@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 19:21:19 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/21 07:50:57 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/22 23:03:47 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ t_rgb	reflected_color(t_world *w, t_comps *comps, int remaining)
 	t_ray	reflect_ray;
 	t_rgb	col;
 
-	if (comps->object->m.reflective == 0 || remaining <= 0)
+	if (comps->object->m->reflective == 0 || remaining <= 0)
 		return (color(0, 0, 0));
 	reflect_ray = ray(comps->over_point, comps->reflectv);
 	col = color_at(w, &reflect_ray, remaining - 1);
-	return (cscale(col, comps->object->m.reflective)); 
+	return (cscale(col, comps->object->m->reflective)); 
 }
 
 t_rgb	refracted_color(t_world *w, t_comps *comps, int remaining)
@@ -55,7 +55,7 @@ t_rgb	refracted_color(t_world *w, t_comps *comps, int remaining)
 	t_ray	refract_ray;
 	t_rgb	col;
 
-	if (comps->object->m.transparency == 0 || remaining <= 0)
+	if (comps->object->m->transparency == 0 || remaining <= 0)
 		return (color(0, 0, 0));
 	n_ratio = comps->n1 / comps->n2;
 	cos_i = dot(comps->eyev, comps->normalv);
@@ -67,6 +67,6 @@ t_rgb	refracted_color(t_world *w, t_comps *comps, int remaining)
 			tmult(comps->eyev, n_ratio));
 	refract_ray = ray(comps->under_point, direction);
 	col = cscale(color_at(w, &refract_ray, remaining - 1),
-			comps->object->m.transparency);
+			comps->object->m->transparency);
 	return (col);
 }

@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:54:44 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/22 20:10:57 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/23 01:37:09 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,6 @@ static int	render_chunk(t_world *world, t_data *data)
 			{
 				r = ray_for_pixel(data->cam, (float)x, (float)y_tile);
 				col = color_at(world, &r, MAX_RECURSION);
-
 				{
 					uint32_t hex = color_to_hex(col);
 					yy = y_tile;
@@ -175,18 +174,18 @@ void	render(void *param)
 {
 	static int		render_status;
 	static t_world	world;
-	static t_camera	cam;
+	static t_camera	*cam;
 	static t_data	*data;
 
 	if (render_status == 0)
 	{
 		data = (t_data *)param;
-		world = default_world_group_test();
+		world = default_world_cyl();
 		cam = camera(WIN_WIDTH, WIN_HEIGHT, M_PI / 3);
-		cam.transform = view_transform(point(-2, 2, -6),
+		cam->transform = view_transform(point(-2, 2, -6),
 				point(0, 1, 0), vector(0, 1, 0));
 		data->reset = true;
-		data->cam = &cam;
+		data->cam = cam;
 		render_status = 1;
 	}
 	if (render_status == 1)
