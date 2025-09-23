@@ -13,7 +13,7 @@
 #include "minirt.h"
 
 
-int	calculate_channel(const char *str, float *channel, char c, int *i);
+static int	calculate_channel(const char *str, float *channel, char c, int *i);
 
 // rt_atorgb(): string to t_rgb function specific to miniRT
 // RGB must be in the format [255,255,255]
@@ -42,7 +42,7 @@ int	rt_atorgb(const char *str, t_rgb *rgb)
 // Returns -1 if missing comma after r, g,
 // Returns -1 if b contains extraneous comma
 
-int	calculate_channel(const char *str, float *channel, char c, int *i)
+static int	calculate_channel(const char *str, float *channel, char c, int *i)
 {
 	if (str[*i] == '\0')
 		return(-1);
@@ -65,5 +65,20 @@ int	calculate_channel(const char *str, float *channel, char c, int *i)
 			return (-1);
 	}
 	return (0);
+}
+
+// valid_rgb_range(): utility function to check rgb value validity
+// For more organized error handling, this function is not part of rt_atorgb()
+// but should be used in the calling function to check return
+
+bool	valid_rgb_range(t_rgb col)
+{
+	if (col.r < 0 || col.r > 255)
+		return (false);
+	if (col.g < 0 || col.g > 255)
+		return (false);
+	if (col.b < 0 || col.b > 255)
+		return (false);
+	return (true);
 }
 

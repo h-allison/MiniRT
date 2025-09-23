@@ -46,7 +46,7 @@ t_camera	*place_camera(t_tuple c_coords, t_tuple c_orient, float fov)
 	t_camera	*cam;
 	t_tuple		to;
 	t_tuple		up;
-	float		**v_transform;
+//	float		**v_transform;
 
 	cam = malloc(sizeof(t_camera));
 	if (!cam)
@@ -54,7 +54,7 @@ t_camera	*place_camera(t_tuple c_coords, t_tuple c_orient, float fov)
 	*cam = camera(WIN_WIDTH, WIN_HEIGHT, fov);
 	to = tadd(c_coords, c_orient);
 	up = vector(0, 1, 0); 
-	v_transform = view_transform(c_coords, to, up);
+//	v_transform = view_transform(c_coords, to, up);
 	free(cam->transform);
 	cam->transform = view_transform(c_coords, to, up);
 	return (cam);

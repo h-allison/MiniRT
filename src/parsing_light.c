@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_camera.c                                   :+:      :+:    :+:   */
+/*   parsing_light.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,90 +12,112 @@
 
 #include "minirt.h"
 
-bool	btwn_negative_and_positive_1(t_tuple t)
+int	parse_light_rgb(char *token, t_rgb *rgb)
 {
-	if (t.x < -1 || t.x > 1)
-		return (false);
-	if (t.y < -1 || t.y > 1)
-		return (false);
-	if (t.z < -1 || t.z > 1)
-		return (false);
-	return (true);
-}
-
-int	parse_camera_coords(char *token, t_tuple *coords)
-{
-	if (rt_atof_tuple(token, coords) != 0)
-		return(rt_error("C: camera viewpoint: invalid input", -1));
-	printf("Camera coords = %f, %f, %f, %f\n", coords->x, coords->y, coords->z, coords->w);
+	if (rt_atorgb(token, rgb) != 0)
+		return(rt_error("L: light color: invalid input", -1));
+	printf("light color = %f, %f, %f\n", rgb->r, rgb->g, rgb->b);
 	return (0);
 }
 
-int	parse_camera_orient(char *token, t_tuple *orient)
+int	parse_light_position(char *token, t_tuple *position)
 {
-	if (rt_atof_tuple(token, orient) != 0)
-		return(rt_error("C: camera orientation: invalid input", -1));
-	printf("Camera orient = %f, %f, %f, %f\n", orient->x, orient->y, orient->z, orient->w);
+	if (rt_atof_tuple(token, position) != 0)
+		return(rt_error("L: light position: invalid input", -1));
+	printf("Light position = %f, %f, %f, %f\n", position->x, position->y, position->z, position->w);
 	return (0);
 }
 
-// TODO malloc exit
-
-t_camera	*place_camera(t_tuple c_coords, t_tuple c_orient, float fov)
+int	parse_light_intensity(char *token, float *intensity)
 {
-	t_camera	*cam;
-	t_tuple		to;
-	t_tuple		up;
-	float		**v_transform;
-
-	cam = malloc(sizeof(t_camera));
-	if (!cam)
-		exit (1);
-	*cam = camera(WIN_WIDTH, WIN_HEIGHT, fov);
-	to = tadd(c_coords, c_orient);
-	up = vector(0, 1, 0); 
-	v_transform = view_transform(c_coords, to, up);
-	free(cam->transform);
-	cam->transform = view_transform(c_coords, to, up);
-	return (cam);
-}	
-
-int	parse_camera_fov(char *token, float *fov)
-{
-	if (rt_atof(token, fov) != 0)
-		return(rt_error("C: field of view: invalid input", -1));
-	if (*fov < 0 || *fov > 180)
-		return(rt_error("C: field of view: must be in range [0, 180]", -1));
-	printf("Camera fov = %f\n", *fov);
+	if (rt_atof(token, intensity) != 0)
+		return(rt_error("L: intensity: invalid input", -1));
+	if (*intensity < 0 || *intensity > 1)
+		return(rt_error("L: intensity: must be in range [0.0, 1.0]", -1));
+	printf("intensity = %f\n", *intensity);
 	return (0);
 }
 
-int	parse_camera(char **tokens, t_world *world)
+void	alloc_lights(t_world *world)
 {
-	t_tuple	c_coords;
-	t_tuple	c_orient;
-	float	field_of_view;
+	world->light = malloc(world->checklist.count_light * sizeof(t_light));
+	if (!world->light)
+		exit(1);	
+}
 
-	c_coords = point(0, 0, 0);
-	c_orient = vector(0, 0, 0);
-	field_of_view = 0;
+int	parse_light_bonus(char **tokens, t_world *world, int i)
+{
+	if (tokens[3])
+	{
+		world->light[i].rgb = color(0, 0, 0);
+		if (parse_light_rgb(tokens[3], &world->light[i].rgb) != 0)
+			return (rt_error("L: light color: invalid input", -1));
+		if (!(valid_rgb_range(world->light[i].rgb))
+			return (rt_error("L: light color: rgb not in range 0-255", -1));
+		if (tokens[4])
+			return(rt_error("L: Too many arguments.", -1));
+	}	
+	if (i = count_light - 1)
+		world->light[i].last = true;
+	else
+		world->light[i].last = false;
+	return (0);
+}
+
+int	parse_light_2(char **tokens, t_world *world, int i)
+{
+	if (tokens[3])
+		return(rt_error("L: Too many arguments. Enable bonus to support color", -1));
+	world->light[i].last = true;
+	return (0);
+}
+
+int	parse_light_1(char **tokens, t_world *world, int i)
+{
 	if (!tokens[1])
-		return(rt_error("C: camera coordinates: missing values", -1));
-	if (parse_camera_coords(tokens[1], &c_coords) != 0)
+		return(rt_error("L: light position: missing values", -1));
+	world->light[i]->position = point(0, 0, 0);
+	if (parse_light_position(tokens[1], &world->light[i]->position) != 0)
 		return (-1);
 	if (!tokens[2])
-		return(rt_error("C: camera orientation: missing values", -1));
-	if (parse_camera_orient(tokens[2], &c_orient) != 0)
+		return(rt_error("L: light intensity: missing values", -1));
+	world->light[i]->intensity = 0;
+	if (parse_light_intensity(tokens[2], &world->light[i].intensity) != 0)
 		return (-1);
-	if (!(btwn_negative_and_positive_1(c_orient)))
-		return(rt_error("A: camera orientation: must be in range [-1.0, 1.0]", -1));
-	if (!tokens[3])
-		return(rt_error("C: field of view: missing value", -1));
-	if (parse_camera_fov(tokens[3], &field_of_view) != 0)
-		return (-1);
-	if (tokens[4])
-		return(rt_error("C: too many arguments", -1));
-	world->cam = place_camera(c_coords, c_orient, field_of_view);
+	if (world->light[i].intensity < 0 || world->light[i].intensity > 1)
+		return(rt_error("L: light intensity: must be in range [0.0, 1.0]", -1));
+	return (0);
+}
+
+int	parse_light(char **tokens, t_world *world)
+{
+	static	int	i;
+	int			j;
+	void (*funcs[3])(void) = {
+		parse_light_position,
+		parse_light_intensity,
+		parse_light_rgb,
+		parse_light_end };
+
+	if (i == 0)
+		alloc_lights(world);
+	while (i < count_light)
+	{
+
+		if (parse_light_1(tokens, world, i) != 0)
+			return (-1);	
+		if (BONUS == true)
+		{
+			if (parse_light_bonus(tokens, world, i) != 0)
+				return (-1);
+		}
+		else
+		{
+			if (parse_light_2(token, world, i) != 0)
+				return (-1);
+		}
+		i++
+	}
 	return(0);
 }
 

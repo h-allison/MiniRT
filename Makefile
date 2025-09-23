@@ -21,6 +21,7 @@ SRC         := src/main.c \
                src/parsing_world.c \
                src/parsing_ambient.c \
                src/parsing_camera.c \
+               src/parsing_light.c \
                src/parsing_atof.c \
                src/parsing_atorgb.c \
                src/parsing_atof_tuple.c \

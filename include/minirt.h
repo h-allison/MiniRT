@@ -102,6 +102,7 @@ typedef struct s_light
 {
 	t_rgb			intensity;
 	t_tuple			position;
+	t_rgb			color;
 	bool			last;
 }	t_light;
 
@@ -227,6 +228,7 @@ char			**get_element_tokens(char const *s);
 int				parse_into_world(char **tokens, t_data *data);
 int				parse_ambient(char **tokens, t_world *world);
 int				parse_camera(char **tokens, t_world *world);
+int				parse_light(char **tokens, t_world *world);
 int				rt_atof(const char *str, float *f);
 int				rt_atorgb(const char *str, t_rgb *rgb);
 int				rt_atof_tuple(const char *str, t_tuple *t);

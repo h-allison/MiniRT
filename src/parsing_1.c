@@ -41,7 +41,7 @@ static void	debug_print_tokens(char **tokens)
 bool	is_space(char c)
 {
 	if (c == ' ' || c == '\t' || c == '\n' || c == '\0')
-		return (true)
+		return (true);
 	return (false);
 }
 
@@ -52,16 +52,29 @@ int	fill_checklist_count(t_data *data)
 
 	fd = open_file(data->filename);
 	ln = get_next_line(fd);
-	while (line != NULL)
+	while (ln != NULL)
 	{
 		if (ln[0] == 'p' && ln[1] == 'l' && is_space(ln[2]))
-			count_plane++;
-		else if (ln[0] == 'sp' && ln[1] == 'l' && is_space(ln[2]))
-			
-		free (line);
-		line = get_next_line(fd);
+			data->world->checklist.count_plane++;
+		else if (ln[0] == 's' && ln[1] == 'p' && is_space(ln[2]))
+			data->world->checklist.count_sphere++;
+		else if (ln[0] == 'c' && ln[1] == 'y' && is_space(ln[2]))
+			data->world->checklist.count_cyl++;
+		else if (ln[0] == 'c' && ln[1] == 'b' && is_space(ln[2]))
+			data->world->checklist.count_cube++;
+		else if (ln[0] == 'c' && ln[1] == 'n' && is_space(ln[2]))
+			data->world->checklist.count_cube++;
+		else if (ln[0] == 'L' && is_space(ln[1]))
+		{
+			data->world->checklist.count_light++;
+			if (!BONUS && data->world->checklist.count_light > 1)
+				return (rt_error("Bonus must be enabled to support multiple lights", -1));
+		}
+		free (ln);
+		ln = get_next_line(fd);
 	}
 	close(fd);
+	return (0);
 }
 
 void	init_checklist(t_checklist *checklist)
@@ -69,11 +82,24 @@ void	init_checklist(t_checklist *checklist)
 	checklist->a_parsed = false;
 	checklist->c_parsed = false;
 	checklist->l_parsed = false;
-	count_light = 0;
-	count_sphere = 0;
-	count_cyl = 0;
-	count_cube = 0;
-	count_plane = 0;
+	checklist->count_light = 0;
+	checklist->count_sphere = 0;
+	checklist->count_cyl = 0;
+	checklist->count_cube = 0;
+	checklist->count_plane = 0;
+}
+
+void	free_tokens(char **tokens)
+{
+	int	i;
+
+	i = 0;
+	while (tokens[i])
+	{
+		free(tokens[i]);
+		i++;
+	}
+	free (tokens);
 }
 
 int	parse_file_2(t_data *data)
@@ -103,6 +129,7 @@ int	parse_file_2(t_data *data)
 		element = get_next_line(fd);
 	}
 	close(fd);
+	return (0);
 }
 
 int	parse_file(char *filename, t_data *data)
@@ -114,7 +141,11 @@ int	parse_file(char *filename, t_data *data)
 	if (!data->world)
 		exit (1);
 	init_checklist(&data->world->checklist);
-	fill_checklist_count(data);
+	if (fill_checklist_count(data) != 0)
+	{
+		free(data->world);
+		exit (1);
+	}
 	parse_file_2(data);
 	return (0);
 }

@@ -85,6 +85,7 @@ typedef struct	s_checklist
 	int		count_cyl;
 	int		count_cube;
 	int		count_plane;
+	int		count_cone;
 //	t_light	**light;
 //	t_shape	**shape;
 }	t_checklist;
