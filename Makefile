@@ -16,7 +16,16 @@ NAME        := miniRT
 SRC         := src/main.c \
                src/check_file.c \
                src/file_helpers.c \
-               src/parsing.c \
+               src/parsing_1.c \
+               src/parsing_2.c \
+               src/parsing_world.c \
+               src/parsing_ambient.c \
+               src/parsing_camera.c \
+               src/parsing_light.c \
+               src/parsing_bonus.c \
+               src/parsing_atof.c \
+               src/parsing_atorgb.c \
+               src/parsing_atof_tuple.c \
                src/error_handling.c \
                src/mlx_handling.c \
                src/rendering.c \

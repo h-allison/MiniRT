@@ -7,6 +7,7 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
 /*   Updated: 2025/09/23 04:03:56 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/23 13:06:46 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +15,7 @@
 # define MINIRT_H
 
 # include "libft.h"
+# include "minirt_p.h"
 # include <MLX42/MLX42.h>
 # include <math.h>
 # include <float.h>
@@ -164,6 +166,12 @@ typedef struct s_world
 {
 	t_shape			**s;
 	t_light			**light;
+	t_camera		*cam;
+	t_shape			*s;
+	t_light			*light;
+	t_checklist		checklist;
+	float			ambient_ratio;
+	t_rgb			ambient_rgb;
 }	t_world;
 
 typedef struct s_largs
@@ -188,8 +196,8 @@ typedef struct s_data
 	char		*filename;
 	mlx_t		*mlx;
 	mlx_image_t	*img;
-	t_camera	*cam;
 	bool		reset;
+	t_world		*world;
 }	t_data;
 
 typedef struct s_tminmax
@@ -211,6 +219,7 @@ int				check_rt_filename(char	*filename);
 
 //error_handling.c
 void			rt_early_exit(int error);
+int				rt_error(char *msg, int ret);
 
 //mlx_handling.c
 int				mlx_handling(t_data *data);
@@ -219,6 +228,16 @@ void			img_wipe(t_data *data, t_rgb color);
 
 //parsing.c
 int				parse_file(char *filename, t_data *data);
+char			**get_element_tokens(char const *s);
+int				parse_into_world(char **tokens, t_data *data);
+int				parse_ambient(char **tokens, t_world *world);
+int				parse_camera(char **tokens, t_world *world);
+int				parse_light(char **tokens, t_world *world);
+int				parse_light_bonus(char **tokens, t_light *light);
+int				rt_atof(const char *str, float *f);
+int				rt_atorgb(const char *str, t_rgb *rgb);
+int				rt_atof_tuple(const char *str, t_tuple *t);
+bool			valid_rgb_range(t_rgb col);
 
 //rendering.c
 void			render(void *param);
