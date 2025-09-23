@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 19:13:39 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/23 00:57:28 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/23 14:19:45 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,10 +235,11 @@ static t_shape	*hexagon_corner(void)
 	t_shape	*corner;
 
 	corner = sphere();
-	corner->m->color = color(0, 50, 100);
+	corner->m->color = color(0, 0, 0);
 	corner->m->diffuse = 0.8;
 	corner->m->ambient = 0.7;
 	corner->m->specular = 0.2;
+	corner->m->reflective = 1;
 	set_transform(corner, mmultfree(translation(0, 0, 1),
 			scaling(0.25, 0.25, 0.25)));
 	return (corner);
@@ -252,11 +253,11 @@ static t_shape	*hexagon_edge(void)
 	edge = cylinder();
 	edge->minimum = 0;
 	edge->maximum = 1;
-	edge->m->color = color(0, 50, 100);
+	edge->m->color = color(0, 0, 0);
 	edge->m->diffuse = 0.8;
 	edge->m->ambient = 0.7;
 	edge->m->specular = 0.2;
-	edge->m->pattern = stripe_pattern(color(180, 80, 0), edge->m->color);
+	edge->m->reflective = 1;
 	t = scaling(0.25, 1, 0.25);
 	t = mmultfree(rotation_z(-(M_PI / 2)), t);
 	t = mmultfree(rotation_y(-(M_PI / 6)), t);
