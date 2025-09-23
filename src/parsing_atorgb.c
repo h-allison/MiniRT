@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_atrgb.c                                    :+:      :+:    :+:   */
+/*   parsing_atorgb.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 11:19:08 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/18 17:54:06 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/23 12:25:02 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ static int	calculate_channel(const char *str, float *channel, char c, int *i)
 // valid_rgb_range(): utility function to check rgb value validity
 // For more organized error handling, this function is not part of rt_atorgb()
 // but should be used in the calling function to check return
+// Important to remember: t_rgb is ultimately meant for values 0-1, not 0-255
 
 bool	valid_rgb_range(t_rgb col)
 {

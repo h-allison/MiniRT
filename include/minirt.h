@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/22 17:38:54 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/23 13:06:46 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ typedef struct s_light
 {
 	t_rgb			intensity;
 	t_tuple			position;
-	t_rgb			color;
 	bool			last;
 }	t_light;
 
@@ -229,9 +228,11 @@ int				parse_into_world(char **tokens, t_data *data);
 int				parse_ambient(char **tokens, t_world *world);
 int				parse_camera(char **tokens, t_world *world);
 int				parse_light(char **tokens, t_world *world);
+int				parse_light_bonus(char **tokens, t_light *light);
 int				rt_atof(const char *str, float *f);
 int				rt_atorgb(const char *str, t_rgb *rgb);
 int				rt_atof_tuple(const char *str, t_tuple *t);
+bool			valid_rgb_range(t_rgb col);
 
 //rendering.c
 void			render(void *param);

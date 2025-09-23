@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 11:19:13 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/18 17:54:21 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/23 13:27:50 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "minirt.h"
 # include <stdbool.h>
 
-#define	BONUS false
+#define	BONUS true
 
 typedef enum e_element
 {
@@ -86,8 +86,7 @@ typedef struct	s_checklist
 	int		count_cube;
 	int		count_plane;
 	int		count_cone;
-//	t_light	**light;
-//	t_shape	**shape;
+	int		count_shape;
 }	t_checklist;
 
 #endif

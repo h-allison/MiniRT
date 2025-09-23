@@ -6,118 +6,92 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:51:51 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/22 16:30:52 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/23 13:06:16 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	parse_light_rgb(char *token, t_rgb *rgb)
+int	parse_light_brightness(char *token, t_light *light)
 {
-	if (rt_atorgb(token, rgb) != 0)
-		return(rt_error("L: light color: invalid input", -1));
-	printf("light color = %f, %f, %f\n", rgb->r, rgb->g, rgb->b);
+	float	brightness;
+
+	brightness = 0;
+	if (rt_atof(token, &brightness) != 0)
+		return (rt_error("L: brightness: invalid input", -1));
+	if (brightness < 0 || brightness > 1)
+		return (rt_error("L: brightness: must be in range [0.0, 1.0]", -1));
+	printf("Light brightness = %f\n", brightness);
+	light->intensity.r = brightness;
+	light->intensity.g = brightness;
+	light->intensity.b = brightness;
+	printf("Light brightnes t_rgb = %f, %f, %f\n\n", light->intensity.r,
+		light->intensity.g, light->intensity.b);
 	return (0);
 }
 
-int	parse_light_position(char *token, t_tuple *position)
+int	parse_light_position(char *token, t_light *light)
 {
-	if (rt_atof_tuple(token, position) != 0)
-		return(rt_error("L: light position: invalid input", -1));
-	printf("Light position = %f, %f, %f, %f\n", position->x, position->y, position->z, position->w);
+	if (rt_atof_tuple(token, &light->position) != 0)
+		return (rt_error("L: light position: invalid input", -1));
+	printf("Light position = %f, %f, %f, %f\n", light->position.x,
+		light->position.y, light->position.z, light->position.w);
 	return (0);
 }
 
-int	parse_light_intensity(char *token, float *intensity)
+static void	alloc_init_lights(t_world *world)
 {
-	if (rt_atof(token, intensity) != 0)
-		return(rt_error("L: intensity: invalid input", -1));
-	if (*intensity < 0 || *intensity > 1)
-		return(rt_error("L: intensity: must be in range [0.0, 1.0]", -1));
-	printf("intensity = %f\n", *intensity);
-	return (0);
-}
+	int	i;
 
-void	alloc_lights(t_world *world)
-{
 	world->light = malloc(world->checklist.count_light * sizeof(t_light));
 	if (!world->light)
-		exit(1);	
-}
-
-int	parse_light_bonus(char **tokens, t_world *world, int i)
-{
-	if (tokens[3])
+		exit(1);
+	i = 0;
+	while (i < world->checklist.count_light)
 	{
-		world->light[i].rgb = color(0, 0, 0);
-		if (parse_light_rgb(tokens[3], &world->light[i].rgb) != 0)
-			return (rt_error("L: light color: invalid input", -1));
-		if (!(valid_rgb_range(world->light[i].rgb))
-			return (rt_error("L: light color: rgb not in range 0-255", -1));
-		if (tokens[4])
-			return(rt_error("L: Too many arguments.", -1));
-	}	
-	if (i = count_light - 1)
-		world->light[i].last = true;
-	else
+		world->light[i].position = point(0, 0, 0);
 		world->light[i].last = false;
-	return (0);
-}
-
-int	parse_light_2(char **tokens, t_world *world, int i)
-{
-	if (tokens[3])
-		return(rt_error("L: Too many arguments. Enable bonus to support color", -1));
+		i++;
+	}
 	world->light[i].last = true;
-	return (0);
 }
 
-int	parse_light_1(char **tokens, t_world *world, int i)
+static int	mandatory_tokens_found(char **tokens)
 {
 	if (!tokens[1])
-		return(rt_error("L: light position: missing values", -1));
-	world->light[i]->position = point(0, 0, 0);
-	if (parse_light_position(tokens[1], &world->light[i]->position) != 0)
-		return (-1);
+		return (rt_error("L: light position: missing values", -1));
 	if (!tokens[2])
-		return(rt_error("L: light intensity: missing values", -1));
-	world->light[i]->intensity = 0;
-	if (parse_light_intensity(tokens[2], &world->light[i].intensity) != 0)
-		return (-1);
-	if (world->light[i].intensity < 0 || world->light[i].intensity > 1)
-		return(rt_error("L: light intensity: must be in range [0.0, 1.0]", -1));
+		return (rt_error("L: light brightness: missing values", -1));
+	if (BONUS == false && tokens[3])
+		return (rt_error("L: Extraneous args. Bonus not enabled", -1));
 	return (0);
 }
 
 int	parse_light(char **tokens, t_world *world)
 {
-	static	int	i;
-	int			j;
-	void (*funcs[3])(void) = {
-		parse_light_position,
-		parse_light_intensity,
-		parse_light_rgb,
-		parse_light_end };
+	static int	li;
+	int			i;
+	int			(*func[4])(char *tokens, t_light *light);
 
-	if (i == 0)
-		alloc_lights(world);
-	while (i < count_light)
+	func[0] = parse_light_position;
+	func[1] = parse_light_brightness;
+	func[3] = NULL;
+	if (li == 0)
+		alloc_init_lights(world);
+	if (mandatory_tokens_found(tokens) != 0)
+		return (-1);
+	i = 0;
+	while (func[i])
 	{
-
-		if (parse_light_1(tokens, world, i) != 0)
-			return (-1);	
-		if (BONUS == true)
-		{
-			if (parse_light_bonus(tokens, world, i) != 0)
-				return (-1);
-		}
-		else
-		{
-			if (parse_light_2(token, world, i) != 0)
-				return (-1);
-		}
-		i++
+		if (func[i](tokens[i + 1], &world->light[li]) != 0)
+			return (-1);
+		i++;
 	}
-	return(0);
+	if (BONUS == true && tokens[3])
+	{
+		if (parse_light_bonus(tokens, &world->light[li]) != 0)
+			return (-1);
+	}
+	li++;
+	return (0);
 }
-

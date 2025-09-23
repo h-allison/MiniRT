@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 11:18:54 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/22 20:37:46 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/23 15:10:50 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,20 @@ int	parse_file_2(t_data *data)
 	return (0);
 }
 
+void	alloc_shape_array(t_world *world)
+{
+	t_checklist	lst;
+	int			count_shape;
+
+	lst = world->checklist;
+	count_shape = lst.count_sphere + lst.count_cyl +
+		lst.count_cube + lst.count_plane + lst.count_cone;
+	world->s = malloc((count_shape + 1) * sizeof(t_shape));
+	if (!world->s)
+		exit(1);
+	world->checklist.count_shape = count_shape;
+}
+
 int	parse_file(char *filename, t_data *data)
 {
 	check_rt_filename(filename);
@@ -146,6 +160,7 @@ int	parse_file(char *filename, t_data *data)
 		free(data->world);
 		exit (1);
 	}
+	alloc_shape_array(data->world);
 	parse_file_2(data);
 	return (0);
 }

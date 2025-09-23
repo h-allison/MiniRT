@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:55:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/22 20:59:22 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/23 15:12:39 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,16 @@ int	parse_singular_element(char **tokens, t_world *world)
 	else
 		return (rt_error("File contains unknown capital letter identifier", -1));
 	return (0);	
+}
+
+int	parse_shape(char **tokens, t_world *world)
+{
+	static	int	s_i;
+	
+	(void)tokens;
+	(void)world;
+	(void)s_i;
+	return(0);;
 }
 
 

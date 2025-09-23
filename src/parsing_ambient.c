@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:48:50 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/22 16:10:41 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/23 12:28:39 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,19 @@
 int	parse_ambient_rgb(char *token, t_world *world)
 {
 	int		ret;
+	t_rgb	temp_255;
 
 	ret = 0;
-	world->ambient_rgb.r = 0;
-	world->ambient_rgb.g = 0;
-	world->ambient_rgb.b = 0;
-	ret = rt_atorgb(token, &world->ambient_rgb);
-	if (ret != 0)
+	temp_255.r = 0;
+	temp_255.g = 0;
+	temp_255.b = 0;
+	if (rt_atorgb(token, &temp_255) != 0)
 		return(rt_error("A: ambient color: invalid input", -1));
-	if (world->ambient_rgb.r < 0 || world->ambient_rgb.r > 255)
+	if (!valid_rgb_range(temp_255))
 		return(rt_error("A: ambient color: rgb not in range 0-255", -1));
-	if (world->ambient_rgb.g < 0 || world->ambient_rgb.g > 255)
-		return(rt_error("A: ambient color: rgb not in range 0-255", -1));
-	if (world->ambient_rgb.b < 0 || world->ambient_rgb.b > 255)
-		return(rt_error("A: ambient color: rgb not in range 0-255", -1));
-	printf("Ambient color = %f, %f, %f\n", world->ambient_rgb.r, world->ambient_rgb.g, world->ambient_rgb.b);
+	printf("Ambient color rgb = %f, %f, %f\n", temp_255.r, temp_255.g, temp_255.b);
+	world->ambient_rgb = color(temp_255.r, temp_255.g, temp_255.b);
+	printf("Ambient color t_rgb = %f, %f, %f\n", world->ambient_rgb.r, world->ambient_rgb.g, world->ambient_rgb.b);
 	return (0);
 }
 
