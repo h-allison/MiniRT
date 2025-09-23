@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:51:51 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/23 13:34:01 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/23 18:35:54 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	alloc_init_planes(t_world *world)
 {
 	int	i;
 
-	world->lights = malloc(world->checklist.count_light * sizeof(t_light));
+	world->lights = malloc(world->checklist.count_plane * sizeof(t_plane **));
 	if (!world->light)
 		exit(1);
 	i = 0;

@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/09/23 15:49:25 by hallison         ###   ########.fr        #
+#    Updated: 2025/09/23 18:03:27 by hallison         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRC         := src/main.c \
                src/check_file.c \
                src/file_helpers.c \
                src/parsing_1.c \
-               src/parsing_2.c \
+               src/parsing_tokens.c \
                src/parsing_world.c \
                src/parsing_ambient.c \
                src/parsing_camera.c \
@@ -94,7 +94,8 @@ all: $(NAME)
 
 # Compile C -> .o into build/
 $(OBJDIR)/%.o: src/%.c | $(OBJDIR)
-	$(CC) $(CFLAGS) $(CPPFLAGS) -O3 -c $< -o $@
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+#	$(CC) $(CFLAGS) $(CPPFLAGS) -O3 -c $< -o $@
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)

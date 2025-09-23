@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:51:51 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/23 15:46:57 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/23 18:32:39 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,17 @@ static void	alloc_init_lights(t_world *world)
 {
 	int	i;
 
-	world->light = malloc(world->checklist.count_light * sizeof(t_light));
+	world->light = (t_light **)malloc((world->checklist->count_light + 1) * sizeof(t_light *));
 	if (!world->light)
 		exit(1);
 	i = 0;
-	while (i < world->checklist.count_light)
+	while (i < world->checklist->count_light)
 	{
-		world->light[i]->position = point(0, 0, 0);
+		world->light[i] = point_light(point(0, 0, 0), color(0, 0, 0));
 		world->light[i]->last = false;
 		i++;
 	}
+	world->light[i] = point_light(point(0, 0, 0), color(0, 0, 0));
 	world->light[i]->last = true;
 }
 

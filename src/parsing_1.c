@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 11:18:54 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/23 15:56:21 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/23 18:43:32 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,23 @@ bool	is_space(char c)
 	return (false);
 }
 
+void	init_checklist(t_world *world)
+{
+	world->checklist = malloc (sizeof(t_checklist));
+	if (!world->checklist)
+		exit(1);
+	world->checklist->a_parsed = false;
+	world->checklist->c_parsed = false;
+	world->checklist->l_parsed = false;
+	world->checklist->count_light = 0;
+	world->checklist->count_sphere = 0;
+	world->checklist->count_cyl = 0;
+	world->checklist->count_cube = 0;
+	world->checklist->count_plane = 0;
+	world->checklist->count_cone = 0;
+	world->checklist->count_shape = 0;
+}
+
 int	fill_checklist_count(t_data *data)
 {	
 	int	fd;
@@ -55,20 +72,23 @@ int	fill_checklist_count(t_data *data)
 	while (ln != NULL)
 	{
 		if (ln[0] == 'p' && ln[1] == 'l' && is_space(ln[2]))
-			data->world->checklist.count_plane++;
+			data->world->checklist->count_plane++;
 		else if (ln[0] == 's' && ln[1] == 'p' && is_space(ln[2]))
-			data->world->checklist.count_sphere++;
+			data->world->checklist->count_sphere++;
 		else if (ln[0] == 'c' && ln[1] == 'y' && is_space(ln[2]))
-			data->world->checklist.count_cyl++;
+			data->world->checklist->count_cyl++;
 		else if (ln[0] == 'c' && ln[1] == 'b' && is_space(ln[2]))
-			data->world->checklist.count_cube++;
+			data->world->checklist->count_cube++;
 		else if (ln[0] == 'c' && ln[1] == 'n' && is_space(ln[2]))
-			data->world->checklist.count_cube++;
+			data->world->checklist->count_cone++;
 		else if (ln[0] == 'L' && is_space(ln[1]))
 		{
-			data->world->checklist.count_light++;
-			if (!BONUS && data->world->checklist.count_light > 1)
+			data->world->checklist->count_light++;
+			if (!BONUS && data->world->checklist->count_light > 1)
+			{
+				close(fd);
 				return (rt_error("Bonus must be enabled to support multiple lights", -1));
+			}
 		}
 		free (ln);
 		ln = get_next_line(fd);
@@ -77,17 +97,6 @@ int	fill_checklist_count(t_data *data)
 	return (0);
 }
 
-void	init_checklist(t_checklist *checklist)
-{
-	checklist->a_parsed = false;
-	checklist->c_parsed = false;
-	checklist->l_parsed = false;
-	checklist->count_light = 0;
-	checklist->count_sphere = 0;
-	checklist->count_cyl = 0;
-	checklist->count_cube = 0;
-	checklist->count_plane = 0;
-}
 
 void	free_tokens(char **tokens)
 {
@@ -102,7 +111,7 @@ void	free_tokens(char **tokens)
 	free (tokens);
 }
 
-int	parse_file_2(t_data *data)
+int	start_parsing_routine(t_data *data)
 {
 	int		fd;
 	char	*element;
@@ -118,13 +127,12 @@ int	parse_file_2(t_data *data)
 		free(element);
 		if (tokens != NULL)
 		{
-		//	debug_print_tokens(tokens);
 			if (parse_into_world(tokens, data) == -1)
 			{
 				printf("error\n");
 				exit (1);
 			}
-			free (tokens); // TODO
+			free_tokens(tokens);
 		}
 		element = get_next_line(fd);
 	}
@@ -134,34 +142,34 @@ int	parse_file_2(t_data *data)
 
 void	alloc_shape_array(t_world *world)
 {
-	t_checklist	lst;
+	t_checklist	*lst;
 	int			count_shape;
 
 	lst = world->checklist;
-	count_shape = lst.count_sphere + lst.count_cyl +
-		lst.count_cube + lst.count_plane + lst.count_cone;
-	world->s = malloc((count_shape + 1) * sizeof(t_shape));
+	count_shape = lst->count_sphere + lst->count_cyl +
+		lst->count_cube + lst->count_plane + lst->count_cone;
+	world->s = (t_shape **)calloc(sizeof(t_shape *), count_shape + 1);
 	if (!world->s)
 		exit(1);
-	world->checklist.count_shape = count_shape;
+	world->checklist->count_shape = count_shape;
 }
 
 int	parse_file(char *filename, t_data *data)
 {
-	check_rt_filename(filename);
+//	printf("parse_file\n");
+//	check_rt_filename(filename);
 	data->filename = filename;
-	scenefile_check_chars(data->filename);
+//	scenefile_check_chars(data->filename);
 	data->world = malloc(sizeof(t_world));
 	if (!data->world)
 		exit (1);
-/*	init_checklist(&data->world->checklist);
+	init_checklist(data->world);
 	if (fill_checklist_count(data) != 0)
 	{
 		free(data->world);
 		exit (1);
 	}
 	alloc_shape_array(data->world);
-	parse_file_2(data);
-*/
-return (0);
+	start_parsing_routine(data);
+	return (0);
 }
