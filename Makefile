@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/09/22 20:38:30 by mmillhof         ###   ########.fr        #
+#    Updated: 2025/09/23 15:49:25 by hallison         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRC         := src/main.c \
                src/parsing_ambient.c \
                src/parsing_camera.c \
                src/parsing_light.c \
-               src/parsing_bonus.c \
+               src/parsing_light_bonus.c \
                src/parsing_atof.c \
                src/parsing_atorgb.c \
                src/parsing_atof_tuple.c \

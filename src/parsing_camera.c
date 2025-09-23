@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:51:51 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/22 16:30:52 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/23 15:52:02 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,12 @@ t_camera	*place_camera(t_tuple c_coords, t_tuple c_orient, float fov)
 	t_camera	*cam;
 	t_tuple		to;
 	t_tuple		up;
-//	float		**v_transform;
 
-	cam = malloc(sizeof(t_camera));
+	cam = camera(WIN_WIDTH, WIN_HEIGHT, fov);
 	if (!cam)
 		exit (1);
-	*cam = camera(WIN_WIDTH, WIN_HEIGHT, fov);
 	to = tadd(c_coords, c_orient);
 	up = vector(0, 1, 0); 
-//	v_transform = view_transform(c_coords, to, up);
 	free(cam->transform);
 	cam->transform = view_transform(c_coords, to, up);
 	return (cam);
@@ -70,7 +67,7 @@ int	parse_camera_fov(char *token, float *fov)
 	return (0);
 }
 
-int	parse_camera(char **tokens, t_world *world)
+int	parse_camera(char **tokens, t_data *data)
 {
 	t_tuple	c_coords;
 	t_tuple	c_orient;
@@ -95,7 +92,7 @@ int	parse_camera(char **tokens, t_world *world)
 		return (-1);
 	if (tokens[4])
 		return(rt_error("C: too many arguments", -1));
-	world->cam = place_camera(c_coords, c_orient, field_of_view);
+	data->cam = place_camera(c_coords, c_orient, field_of_view);
 	return(0);
 }
 

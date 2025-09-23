@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 11:18:54 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/23 15:10:50 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/23 15:56:21 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ int	parse_file(char *filename, t_data *data)
 	data->world = malloc(sizeof(t_world));
 	if (!data->world)
 		exit (1);
-	init_checklist(&data->world->checklist);
+/*	init_checklist(&data->world->checklist);
 	if (fill_checklist_count(data) != 0)
 	{
 		free(data->world);
@@ -162,5 +162,6 @@ int	parse_file(char *filename, t_data *data)
 	}
 	alloc_shape_array(data->world);
 	parse_file_2(data);
-	return (0);
+*/
+return (0);
 }

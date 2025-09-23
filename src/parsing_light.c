@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:51:51 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/23 13:06:16 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/23 15:46:57 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ static void	alloc_init_lights(t_world *world)
 	i = 0;
 	while (i < world->checklist.count_light)
 	{
-		world->light[i].position = point(0, 0, 0);
-		world->light[i].last = false;
+		world->light[i]->position = point(0, 0, 0);
+		world->light[i]->last = false;
 		i++;
 	}
-	world->light[i].last = true;
+	world->light[i]->last = true;
 }
 
 static int	mandatory_tokens_found(char **tokens)
@@ -83,13 +83,13 @@ int	parse_light(char **tokens, t_world *world)
 	i = 0;
 	while (func[i])
 	{
-		if (func[i](tokens[i + 1], &world->light[li]) != 0)
+		if (func[i](tokens[i + 1], world->light[li]) != 0)
 			return (-1);
 		i++;
 	}
 	if (BONUS == true && tokens[3])
 	{
-		if (parse_light_bonus(tokens, &world->light[li]) != 0)
+		if (parse_light_bonus(tokens, world->light[li]) != 0)
 			return (-1);
 	}
 	li++;

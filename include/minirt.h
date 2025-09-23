@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/23 04:03:56 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/23 15:52:42 by hallison         ###   ########.fr       */
 /*   Updated: 2025/09/23 13:06:46 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -166,9 +166,6 @@ typedef struct s_world
 {
 	t_shape			**s;
 	t_light			**light;
-	t_camera		*cam;
-	t_shape			*s;
-	t_light			*light;
 	t_checklist		checklist;
 	float			ambient_ratio;
 	t_rgb			ambient_rgb;
@@ -198,6 +195,7 @@ typedef struct s_data
 	mlx_image_t	*img;
 	bool		reset;
 	t_world		*world;
+	t_camera	*cam;
 }	t_data;
 
 typedef struct s_tminmax
@@ -231,7 +229,7 @@ int				parse_file(char *filename, t_data *data);
 char			**get_element_tokens(char const *s);
 int				parse_into_world(char **tokens, t_data *data);
 int				parse_ambient(char **tokens, t_world *world);
-int				parse_camera(char **tokens, t_world *world);
+int				parse_camera(char **tokens, t_data *data);
 int				parse_light(char **tokens, t_world *world);
 int				parse_light_bonus(char **tokens, t_light *light);
 int				rt_atof(const char *str, float *f);
