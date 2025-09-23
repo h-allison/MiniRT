@@ -14,10 +14,8 @@
 
 int	parse_ambient_rgb(char *token, t_world *world)
 {
-	int		ret;
 	t_rgb	temp_255;
 
-	ret = 0;
 	temp_255.r = 0;
 	temp_255.g = 0;
 	temp_255.b = 0;

@@ -76,7 +76,7 @@ int	parse_light(char **tokens, t_world *world)
 
 	func[0] = parse_light_position;
 	func[1] = parse_light_brightness;
-	func[3] = NULL;
+	func[2] = NULL;
 	if (li == 0)
 		alloc_init_lights(world);
 	if (mandatory_tokens_found(tokens) != 0)

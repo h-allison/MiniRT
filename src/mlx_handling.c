@@ -36,8 +36,8 @@ int	mlx_handling(t_data *data)
 
 void	ft_hook(void *param)
 {
-	static bool	init;
-	t_data		*data;
+	static bool			init;
+	static t_data		*data;
 
 	if (!init)
 	{

@@ -166,7 +166,7 @@ typedef struct s_world
 {
 	t_shape			**s;
 	t_light			**light;
-	t_checklist		checklist;
+	t_checklist		*checklist;
 	float			ambient_ratio;
 	t_rgb			ambient_rgb;
 }	t_world;
