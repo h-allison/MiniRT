@@ -6,22 +6,11 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:51:51 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/23 15:52:02 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/24 12:34:44 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-bool	btwn_negative_and_positive_1(t_tuple t)
-{
-	if (t.x < -1 || t.x > 1)
-		return (false);
-	if (t.y < -1 || t.y > 1)
-		return (false);
-	if (t.z < -1 || t.z > 1)
-		return (false);
-	return (true);
-}
 
 int	parse_camera_coords(char *token, t_tuple *coords)
 {

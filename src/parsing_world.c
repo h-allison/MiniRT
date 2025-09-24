@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:55:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/23 18:13:53 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/24 14:13:18 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,18 @@ int	parse_singular_element(char **tokens, t_world *world, t_data *data)
 	return (0);	
 }
 
-int	rt_strcmp(char *s1, char *s2)
+int	rt_strcmp(char *token, char *s2)
 {
 	int	i;
 
 	i = 0;
-	while (s1 && s2 && s1[i] == s2[i])
+	while (token[i] != '\0'  && s2[i] != '\0')
+	{
+		if (token[0] != s2[0])
+			return (-1);
 		i++;
-	if (s1 || s2)
+	}
+	if (token[i] != '\0' || s2[i] != '\0')
 		return (-1);
 	return (0);
 }
@@ -50,9 +54,9 @@ int	parse_shape(char **tokens, t_world *world)
 	int		ret;
 	
 	ret = 0;
-	if (rt_strcmp(tokens[0], "pl"))
+	if (rt_strcmp(tokens[0], "pl") == 0)
 		ret = parse_plane(tokens, world, &s_i);
-	else if (rt_strcmp(tokens[0], "sp"))
+	else if (rt_strcmp(tokens[0], "sp") == 0)
 		ret = parse_sphere(tokens, world, &s_i);
 /*
 	else if (rt_strcmp(tokens[0], "cy"))
@@ -63,7 +67,8 @@ int	parse_shape(char **tokens, t_world *world)
 		ret = parse_cone(tokens, world, &s_i);
 */
 	else
-		return(rt_error("parse_shape: unknown shape", -1));
+		ret = 0;
+		//return(rt_error("parse_shape: unknown shape", -1));
 	return (ret);	
 }
 

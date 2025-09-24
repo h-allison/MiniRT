@@ -6,102 +6,94 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:51:51 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/23 18:35:54 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/24 14:10:48 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-/*
-int	parse_light_brightness(char *token, t_light *light)
+int	parse_plane_color(char *token, t_shape *s)
 {
-	float	brightness;
+	t_rgb	col_255;
 
-	brightness = 0;
-	if (rt_atof(token, &brightness) != 0)
-		return (rt_error("L: brightness: invalid input", -1));
-	if (brightness < 0 || brightness > 1)
-		return (rt_error("L: brightness: must be in range [0.0, 1.0]", -1));
-	printf("Light brightness = %f\n", brightness);
-	light->intensity.r = brightness;
-	light->intensity.g = brightness;
-	light->intensity.b = brightness;
-	printf("Light brightnes t_rgb = %f, %f, %f\n\n", light->intensity.r,
-		light->intensity.g, light->intensity.b);
+	col_255 = color(0, 0, 0);
+	if (rt_atorgb(token, &col_255) != 0)
+		return (rt_error("pl: plane color: invalid input", -1));
+//	printf("Plane color rgb = %f, %f, %f\n", col_255.r, col_255.g, col_255.b);
+	if (!valid_rgb_range(col_255))
+		return (rt_error("pl: rgb values must be in range [0,255]", -1));
+	s->m->color = color(col_255.r, col_255.g, col_255.b);
+//	printf("Plane color t_rgb = %f, %f, %f\n", s->m->color.r, s->m->color.g, s->m->color.b);
 	return (0);
 }
 
-int	parse_light_position(char *token, t_light *light)
+int	parse_plane_orientation(char *token, t_shape *s)
 {
-	if (rt_atof_tuple(token, &light->position) != 0)
-		return (rt_error("L: light position: invalid input", -1));
-	printf("Light position = %f, %f, %f, %f\n", light->position.x,
-		light->position.y, light->position.z, light->position.w);
+	t_tuple	v;
+	
+	v = vector(0, 0, 0);
+	if (rt_atof_tuple(token, &v) != 0)
+		return (rt_error("pl: plane orient: invalid input", -1));
+//	printf("Plane orientation = %f, %f, %f, %f\n", v.x,
+//		v.y, v.z, v.w);
+	if (!btwn_negative_and_positive_1(v))
+		return (rt_error("pl: plane orientation: must be in range [-1.0, 1.0]", -1));
+//	set_transform(s, translation(s, v));
+	// TODO set rotation - should it be v.x / 180 passed to rotation_x() etc?
+	(void) s;
 	return (0);
 }
 
-static void	alloc_init_planes(t_world *world)
+int	parse_plane_position(char *token, t_shape *s)
 {
-	int	i;
-
-	world->lights = malloc(world->checklist.count_plane * sizeof(t_plane **));
-	if (!world->light)
-		exit(1);
-	i = 0;
-	while (i < world->checklist.count_light)
-	{
-		world->light[i].position = point(0, 0, 0);
-		world->light[i].last = false;
-		i++;
-	}
-	world->light[i].last = true;
+	t_tuple	coords;
+	coords = point(0, 0, 0);
+	if (rt_atof_tuple(token, &coords) != 0)
+		return (rt_error("pl: plane position: invalid input", -1));
+//	printf("\nPlane position = %f, %f, %f, %f\n", coords.x,
+//		coords.y, coords.z, coords.w);
+	set_transform(s, translation(coords.x, coords.y, coords.z));
+	return (0);
 }
 
 static int	mandatory_tokens_found(char **tokens)
 {
 	if (!tokens[1])
-		return (rt_error("L: light position: missing values", -1));
+		return (rt_error("pl: plane coordinates: missing values", -1));
 	if (!tokens[2])
-		return (rt_error("L: light brightness: missing values", -1));
-	if (BONUS == false && tokens[3])
-		return (rt_error("L: Extraneous args. Bonus not enabled", -1));
+		return (rt_error("pl: plane orientation: missing values", -1));
+	if (!tokens[3])
+		return (rt_error("pl: plane color: missing values", -1));
+	if (tokens[4])
+		return (rt_error("pl: Extraneous args", -1));
 	return (0);
 }
 
-*/
-
+// TODO remove pl_i and pl_i check later
 int	parse_plane(char **tokens, t_world *world, int *s_i)
 {
-	(void) tokens;
-	(void) world;
-	(void) s_i;
-//	printf("<parse_plane>\n");
-	/*
 	static int	pl_i;
 	int			i;
-	int			(*func[4])(char *tokens, t_light *light);
-
-	func[0] = parse_plane_coords;
-	func[1] = parse_plane_transform;
-	func[1] = parse_plane_color;
+	int			(*func[4])(char *tokens, t_shape *shape);
+	func[0] = parse_plane_position;
+	func[1] = parse_plane_orientation;
+	func[2] = parse_plane_color;
 	func[3] = NULL;
-	if (pl_i == 0)
-		alloc_init_planes(world);
 	if (mandatory_tokens_found(tokens) != 0)
 		return (-1);
 	i = 0;
+	world->s[*s_i] = plane();
+	if (!world->s[*s_i])
+		exit(1);
 	while (func[i])
 	{
-		if (func[i](tokens[i + 1], &world->light[li]) != 0)
+		if (func[i](tokens[i + 1], world->s[*s_i]) != 0)
 			return (-1);
 		i++;
 	}
-	if (BONUS == true && tokens[3])
-	{
-		if (parse_light_bonus(tokens, &world->light[li]) != 0)
-			return (-1);
-	}
-	li++;
-	*/
+	(*s_i)++;
+	pl_i++;
+	if (pl_i > (world->checklist->count_plane))
+		return (rt_error("parse_plane: more planes encountered than counted", -1));
 	return (0);
 }

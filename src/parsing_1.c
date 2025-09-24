@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 11:18:54 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/23 18:43:32 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/24 13:04:55 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,6 @@
 
 
 /*
-static void	debug_print_tokens(char **tokens)
-{
-	int	i;
-
-	i = 0;
-	while (tokens[i] != NULL)
-	{
-		printf("\t[%i] %s \n", i, tokens[i]);
-		i++;
-	}
-}
 */
 
 // TODO fancier exit

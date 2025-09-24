@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/23 15:52:42 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/24 13:04:16 by hallison         ###   ########.fr       */
 /*   Updated: 2025/09/23 13:06:46 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -238,6 +238,8 @@ int				rt_atof(const char *str, float *f);
 int				rt_atorgb(const char *str, t_rgb *rgb);
 int				rt_atof_tuple(const char *str, t_tuple *t);
 bool			valid_rgb_range(t_rgb col);
+bool			btwn_negative_and_positive_1(t_tuple t);
+void			debug_print_tokens(char **tokens);
 
 //rendering.c
 void			render(void *param);
