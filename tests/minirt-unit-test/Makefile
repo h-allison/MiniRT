@@ -21,6 +21,7 @@ SRC_DIR_CUB_CYL := tests_cub_cyl
 SRC_DIR_CONES := tests_cones
 SRC_DIR_GROUPS := tests_groups
 SRC_DIR_PATTERNS := tests_patterns
+SRC_DIR_TEXTURES := tests_textures
 SRC_DIR_REFLECT := tests_reflection
 SRC_DIR_REFRACT := tests_refraction
 
@@ -67,6 +68,13 @@ SRCS := \
 	$(SRC_DIR_PATTERNS)/13_test_pattern_align_check.c \
 	$(SRC_DIR_PATTERNS)/14_test_pattern_identify_cube_face.c \
 	$(SRC_DIR_PATTERNS)/15_test_pattern_colors_mapped_cube.c \
+	$(SRC_DIR_TEXTURES)/00_test_textures_launcher.c \
+	$(SRC_DIR_TEXTURES)/01_test_textures_wrong_header.c \
+	$(SRC_DIR_TEXTURES)/02_test_textures_size.c \
+	$(SRC_DIR_TEXTURES)/03_test_textures_read_pixel.c \
+	$(SRC_DIR_TEXTURES)/04_test_textures_comments.c \
+	$(SRC_DIR_TEXTURES)/05_test_textures_rgb_span.c \
+	$(SRC_DIR_TEXTURES)/06_test_textures_rgb_scaling.c \
 	$(SRC_DIR_REFLECT)/00_test_reflect_launcher.c \
 	$(SRC_DIR_REFLECT)/01_test_reflective.c \
 	$(SRC_DIR_REFLECT)/02_test_reflect_comps.c \
@@ -145,6 +153,7 @@ SRCS := \
 	$(PRG_DIR)/src/reflection.c \
 	$(PRG_DIR)/src/groups.c \
 	$(PRG_DIR)/src/uv_mapping.c \
+	$(PRG_DIR)/src/textures.c \
 	$(PRG_DIR)/src/world_scenes.c \
 	$(PRG_DIR)/src/free.c \
 	$(LIBFT_DIR)/ft_lstadd_back.c\

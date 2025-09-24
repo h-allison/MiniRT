@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/23 04:03:56 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/24 01:59:12 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,14 @@ typedef struct s_rgb
 
 typedef struct s_pattern t_pattern;
 
+typedef struct	s_canvas
+{
+	float			width;
+	float			height;
+	float			scaling;
+	t_rgb			**img;
+}	t_canvas;
+
 typedef struct s_pattern
 {
 	t_rgb			a;
@@ -81,6 +89,7 @@ typedef struct s_pattern
 	t_rgb			(*pattern_at)(t_pattern *, t_tuple);
 	t_rgb			(*uv_pattern_at)(t_pattern *, t_tuple);
 	t_tuple			(*map)(t_tuple);
+	t_canvas		*canvas;
 	bool			status;
 }	t_pattern;
 
@@ -243,6 +252,7 @@ t_camera		*camera(float hsize, float vsize, float field_of_view);
 t_tuple			point(float x, float y, float z);
 t_tuple			vector(float x, float y, float z);
 t_rgb			color(float r, float g, float b);
+t_rgb			color_scale(float r, float g, float b, float scaling);
 
 //create_matrices.c
 void			free_matrix(float **m, int size);
@@ -374,10 +384,12 @@ t_pattern		*ring_pattern(t_rgb a, t_rgb b);
 t_rgb			ring_at(t_pattern *ring, t_tuple point);
 t_pattern		*checkers_pattern(t_rgb a, t_rgb b);
 t_rgb			checkers_at(t_pattern *checkers, t_tuple point);
-t_pattern		*texture_map(t_pattern *uv_pattern, t_tuple (*map)(t_tuple));
-t_rgb			texture_at(t_pattern *texture_map, t_tuple point);
 t_pattern		*uv_checkers(float width, float height, t_rgb a, t_rgb b);
 t_rgb			uv_checkers_at(t_pattern *checkers, t_tuple point);
+t_pattern		*texture_map(t_pattern *uv_pattern, t_tuple (*map)(t_tuple));
+t_rgb			texture_at(t_pattern *texture_map, t_tuple point);
+t_pattern		*uv_image(t_canvas *canvas);
+t_rgb			uv_image_at(t_pattern *uv_image, t_tuple uv);
 t_pattern 		*uv_align_check(t_rgb main, t_rgb ul, t_rgb ur, t_rgb bl, t_rgb br);
 t_rgb			uv_align_check_at(t_pattern *align_check, t_tuple point);
 t_tuple			no_map(t_tuple p);
@@ -405,6 +417,10 @@ t_tuple			cube_uv_left(t_tuple point);
 t_tuple			cube_uv_right(t_tuple point);
 t_tuple			cube_uv_up(t_tuple point);
 t_tuple			cube_uv_down(t_tuple point);
+
+//textures.c
+t_canvas		*canvas_from_ppm(char *filename);
+t_rgb			pixel_at(t_canvas *canvas, int x, int y);
 
 //free.c
 int				free_matrices_and_ret(t_shape *p, int ret);

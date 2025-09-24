@@ -6,7 +6,7 @@
 /*   By: smargine <smargine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 18:57:05 by smargine          #+#    #+#             */
-/*   Updated: 2025/09/21 07:11:06 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/23 15:07:18 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include "cub_cyl_tests.h"
 #include "cones_tests.h"
 #include "groups_tests.h"
+#include "textures_tests.h"
 
 void	print_banner(void)
 {
@@ -54,6 +55,7 @@ int	main(void)
 	err += cubes_tests_launcher();
 	err += cones_tests_launcher();
 	err += groups_tests_launcher();
+	err += textures_tests_launcher();
 	if (!err)
 		write(1, GREEN "All tests passed!\n\n" RESET, 28);
 	return (0);

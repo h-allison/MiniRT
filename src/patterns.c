@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 00:07:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/22 23:02:33 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/24 02:00:13 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,30 @@ t_rgb	texture_at(t_pattern *texture_map, t_tuple point)
 	return (texture_map->uv_pattern_at(texture_map, uv));
 }
 
+t_pattern	*uv_image(t_canvas *canvas)
+{
+	t_pattern	*uv_image;
+
+	uv_image = malloc(sizeof(t_pattern));
+	uv_image->canvas = canvas;
+	uv_image->transform = create_id_matrix();
+	uv_image->invtrans = minvert(uv_image->transform, 4);
+	uv_image->pattern_at = uv_image_at;
+	uv_image->status = true;
+	return (uv_image);
+}
+
+t_rgb	uv_image_at(t_pattern *uv_image, t_tuple uv)
+{
+	float	x;
+	float	y;
+
+	uv.x = 1 - uv.x;
+	x = uv.x * (uv_image->canvas->width - 1);
+	y = uv.y * (uv_image->canvas->height -1);
+	return pixel_at(uv_image->canvas, round(x), round(y));
+}
+
 /* UV MAPS */
 
 t_tuple	no_map(t_tuple p)
@@ -272,6 +296,8 @@ t_tuple	cube_map(t_tuple point)
 		return (cube_uv_front(point));
 return (cube_uv_back(point));
 }
+
+/* PATTERN HELPER */
 
 void	set_pattern_transform(t_pattern *pat, float **t)
 {

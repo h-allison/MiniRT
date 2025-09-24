@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/09/22 20:38:30 by mmillhof         ###   ########.fr        #
+#    Updated: 2025/09/23 15:22:05 by mmillhof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRC         := src/main.c \
 			   src/reflection.c \
 			   src/groups.c \
 			   src/uv_mapping.c \
+			   src/textures.c \
 			   src/free.c \
 			   src/world_scenes.c
 
