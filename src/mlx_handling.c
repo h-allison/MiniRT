@@ -27,7 +27,7 @@ int	mlx_handling(t_data *data)
 	if (!data->img || (mlx_image_to_window(data->mlx, data->img, 0, 0) < 0))
 		ft_error(); // TODO
 	img_wipe(data, color(0x00, 0x00, 0x00));
-	mlx_loop_hook(data->mlx, render, data);
+	mlx_loop_hook(data->mlx, render_with_parsing, data);
 	mlx_loop_hook(data->mlx, ft_hook, data);
 	mlx_loop(data->mlx);
 	mlx_terminate(data->mlx);
@@ -36,8 +36,8 @@ int	mlx_handling(t_data *data)
 
 void	ft_hook(void *param)
 {
-	static bool	init;
-	t_data		*data;
+	static bool			init;
+	static t_data		*data;
 
 	if (!init)
 	{

@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/09/23 15:22:05 by mmillhof         ###   ########.fr        #
+#    Updated: 2025/09/24 17:27:05 by mmillhof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,20 @@ NAME        := miniRT
 SRC         := src/main.c \
                src/check_file.c \
                src/file_helpers.c \
-               src/parsing.c \
+               src/parsing_1.c \
+               src/parsing_tokens.c \
+               src/parsing_world.c \
+               src/parsing_ambient.c \
+               src/parsing_camera.c \
+               src/parsing_light.c \
+               src/parsing_light_bonus.c \
+               src/parsing_plane.c \
+               src/parsing_sphere.c \
+               src/parsing_cyl.c \
+               src/parsing_atof.c \
+               src/parsing_atorgb.c \
+               src/parsing_atof_tuple.c \
+               src/parsing_utils.c \
                src/error_handling.c \
                src/mlx_handling.c \
                src/rendering.c \
@@ -86,6 +99,7 @@ all: $(NAME)
 
 # Compile C -> .o into build/
 $(OBJDIR)/%.o: src/%.c | $(OBJDIR)
+#	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 	$(CC) $(CFLAGS) $(CPPFLAGS) -O3 -c $< -o $@
 
 $(OBJDIR):

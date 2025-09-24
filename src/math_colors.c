@@ -66,7 +66,7 @@ t_rgb	cmult(t_rgb c1, t_rgb c2)
 
 int	color_to_hex(t_rgb rgb)
 {
-	int	hex_color;
+	uint32_t	hex_color;
 
 	if (rgb.r > 1)
 		rgb.r = 1;
