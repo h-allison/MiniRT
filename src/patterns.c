@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 00:07:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/24 02:00:13 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/24 17:05:45 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,7 @@ t_pattern	*texture_map(t_pattern *uv_pattern, t_tuple (*map)(t_tuple))
 	pattern->pattern_at = texture_at;
 	pattern->uv_pattern_at = uv_pattern->pattern_at;
 	pattern->map = map;
+	pattern->canvas = uv_pattern->canvas;
 	pattern->status = true;
 	return (pattern);
 }
@@ -203,7 +204,7 @@ t_pattern	*uv_image(t_canvas *canvas)
 {
 	t_pattern	*uv_image;
 
-	uv_image = malloc(sizeof(t_pattern));
+	uv_image = malloc(sizeof(*uv_image));
 	uv_image->canvas = canvas;
 	uv_image->transform = create_id_matrix();
 	uv_image->invtrans = minvert(uv_image->transform, 4);
@@ -217,10 +218,10 @@ t_rgb	uv_image_at(t_pattern *uv_image, t_tuple uv)
 	float	x;
 	float	y;
 
-	uv.x = 1 - uv.x;
+	uv.y = 1 - uv.y;
 	x = uv.x * (uv_image->canvas->width - 1);
 	y = uv.y * (uv_image->canvas->height -1);
-	return pixel_at(uv_image->canvas, round(x), round(y));
+	return (pixel_at(uv_image->canvas, (int)round(x), (int)round(y)));
 }
 
 /* UV MAPS */

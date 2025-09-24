@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:50:50 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/24 01:06:38 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/24 16:57:17 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ t_canvas	*canvas_from_ppm(char *filename)
 	fd = canvas_open_file(filename);
 	if (fd < 0)
 		return (NULL);
-	canvas = ft_calloc(1, sizeof(*canvas));
+	canvas = ft_calloc(1, sizeof(t_canvas));
 	if (!canvas)
 		exit (-1);
 	if (canvas_read_next_digit(fd, &canvas->width))
