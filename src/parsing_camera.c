@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:51:51 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/24 12:34:44 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/24 15:58:44 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,18 @@ int	parse_camera_orient(char *token, t_tuple *orient)
 t_camera	*place_camera(t_tuple c_coords, t_tuple c_orient, float fov)
 {
 	t_camera	*cam;
-	t_tuple		to;
+//	t_tuple		to;
 	t_tuple		up;
 
-	cam = camera(WIN_WIDTH, WIN_HEIGHT, fov);
+	cam = camera(WIN_WIDTH, WIN_HEIGHT, DEG2RAD * fov);
 	if (!cam)
 		exit (1);
-	to = tadd(c_coords, c_orient);
+	(void) c_coords;
+	(void) c_orient;
+//	to = tadd(c_coords, c_orient);
 	up = vector(0, 1, 0); 
 	free(cam->transform);
-	cam->transform = view_transform(c_coords, to, up);
+	cam->transform = view_transform(c_coords, c_orient, up);
 	return (cam);
 }	
 

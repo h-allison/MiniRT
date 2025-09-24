@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/24 13:04:16 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/24 15:14:10 by hallison         ###   ########.fr       */
 /*   Updated: 2025/09/23 13:06:46 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -234,6 +234,8 @@ int				parse_light(char **tokens, t_world *world);
 int				parse_light_bonus(char **tokens, t_light *light);
 int				parse_plane(char **tokens, t_world *worldi, int *s_i);
 int				parse_sphere(char **tokens, t_world *world, int *s_i);
+int				parse_cyl(char **tokens, t_world *world, int *s_i);
+void			distribute_ambient(t_world *world);
 int				rt_atof(const char *str, float *f);
 int				rt_atorgb(const char *str, t_rgb *rgb);
 int				rt_atof_tuple(const char *str, t_tuple *t);
@@ -243,6 +245,7 @@ void			debug_print_tokens(char **tokens);
 
 //rendering.c
 void			render(void *param);
+void			render_with_parsing(void *param);
 
 //create_objects.c
 t_shape			*create_test_shape(void);

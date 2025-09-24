@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:54:44 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/23 01:37:09 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/24 14:48:55 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,11 @@ static int	render_chunk(t_world *world, t_data *data)
 	}
 
 	return (1);
+}
+
+void	render_with_parsing(void *param)
+{
+	render_chunk(((t_data *)param)->world, param);
 }
 
 void	render(void *param)

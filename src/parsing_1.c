@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 11:18:54 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/24 13:04:55 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/24 15:06:42 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,7 @@ int	start_parsing_routine(t_data *data)
 		}
 		element = get_next_line(fd);
 	}
+	distribute_ambient(data->world);
 	close(fd);
 	return (0);
 }
