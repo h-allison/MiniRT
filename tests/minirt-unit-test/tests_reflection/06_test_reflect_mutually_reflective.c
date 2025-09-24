@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 23:01:53 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/23 02:55:03 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/24 10:24:00 by matthias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ int test_reflect_mutually_reflective(void)
 	w.s[2] = NULL;
 	r = ray(point(0, 0, 0), vector(0, 1, 0));
 	col = color_at(&w, &r, 10);
+	(void)col;
 	return (0);
 }

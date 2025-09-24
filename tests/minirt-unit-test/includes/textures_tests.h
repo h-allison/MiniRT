@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 17:16:24 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/24 01:21:20 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/24 03:30:37 by matthias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ int	test_textures_read_pixel(void);
 int	test_textures_comments(void);
 int	test_textures_rgb_span(void);
 int	test_textures_rgb_scaling(void);
+int	test_textures_2D_checkers(void);
 
 #endif

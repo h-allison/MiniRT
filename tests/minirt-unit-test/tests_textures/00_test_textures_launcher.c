@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 01:46:21 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/24 01:18:46 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/24 03:26:10 by matthias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	textures_tests_launcher(void)
 	load_test(testlist, "TEXTURES: Comments...", &test_textures_comments);
 	load_test(testlist, "TEXTURES: RGB-triple spans lines", &test_textures_rgb_span);
 	load_test(testlist, "TEXTURES: RGB scaling", &test_textures_rgb_scaling);
+	load_test(testlist, "TEXTURES: 2D checkers", &test_textures_2D_checkers);
 	ret = launch_tests(testlist);
 	return (ret);
 }
