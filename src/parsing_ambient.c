@@ -23,9 +23,9 @@ int	parse_ambient_rgb(char *token, t_world *world)
 		return(rt_error("A: ambient color: invalid input", -1));
 	if (!valid_rgb_range(temp_255))
 		return(rt_error("A: ambient color: rgb not in range 0-255", -1));
-	printf("Ambient color rgb = %f, %f, %f\n", temp_255.r, temp_255.g, temp_255.b);
+//	printf("Ambient color rgb = %f, %f, %f\n", temp_255.r, temp_255.g, temp_255.b);
 	world->ambient_rgb = color(temp_255.r, temp_255.g, temp_255.b);
-	printf("Ambient color t_rgb = %f, %f, %f\n", world->ambient_rgb.r, world->ambient_rgb.g, world->ambient_rgb.b);
+//	printf("Ambient color t_rgb = %f, %f, %f\n", world->ambient_rgb.r, world->ambient_rgb.g, world->ambient_rgb.b);
 	return (0);
 }
 
@@ -36,7 +36,7 @@ int	parse_ambient_ratio(char *token, t_world *world)
 		return(rt_error("A: ambient ratio: invalid input", -1));
 	if (world->ambient_ratio < 0 || world->ambient_ratio > 1)
 		return(rt_error("A: ambient ratio: must be in range [0.0, 1.0]", -1));
-	printf("Ambient ratio = %f\n", world->ambient_ratio);
+//	printf("Ambient ratio = %f\n", world->ambient_ratio);
 	return (0);
 }
 

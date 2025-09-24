@@ -232,6 +232,8 @@ int				parse_ambient(char **tokens, t_world *world);
 int				parse_camera(char **tokens, t_data *data);
 int				parse_light(char **tokens, t_world *world);
 int				parse_light_bonus(char **tokens, t_light *light);
+int				parse_plane(char **tokens, t_world *worldi, int *s_i);
+int				parse_sphere(char **tokens, t_world *world, int *s_i);
 int				rt_atof(const char *str, float *f);
 int				rt_atorgb(const char *str, t_rgb *rgb);
 int				rt_atof_tuple(const char *str, t_tuple *t);

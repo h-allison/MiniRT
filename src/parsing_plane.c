@@ -39,7 +39,6 @@ int	parse_light_position(char *token, t_light *light)
 		light->position.y, light->position.z, light->position.w);
 	return (0);
 }
-*/
 
 static void	alloc_init_planes(t_world *world)
 {
@@ -69,8 +68,15 @@ static int	mandatory_tokens_found(char **tokens)
 	return (0);
 }
 
-int	parse_plane(char **tokens, t_world *world, int s_i)
+*/
+
+int	parse_plane(char **tokens, t_world *world, int *s_i)
 {
+	(void) tokens;
+	(void) world;
+	(void) s_i;
+//	printf("<parse_plane>\n");
+	/*
 	static int	pl_i;
 	int			i;
 	int			(*func[4])(char *tokens, t_light *light);
@@ -96,5 +102,6 @@ int	parse_plane(char **tokens, t_world *world, int s_i)
 			return (-1);
 	}
 	li++;
+	*/
 	return (0);
 }

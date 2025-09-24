@@ -27,7 +27,7 @@ int	parse_camera_coords(char *token, t_tuple *coords)
 {
 	if (rt_atof_tuple(token, coords) != 0)
 		return(rt_error("C: camera viewpoint: invalid input", -1));
-	printf("Camera coords = %f, %f, %f, %f\n", coords->x, coords->y, coords->z, coords->w);
+//	printf("Camera coords = %f, %f, %f, %f\n", coords->x, coords->y, coords->z, coords->w);
 	return (0);
 }
 
@@ -35,7 +35,7 @@ int	parse_camera_orient(char *token, t_tuple *orient)
 {
 	if (rt_atof_tuple(token, orient) != 0)
 		return(rt_error("C: camera orientation: invalid input", -1));
-	printf("Camera orient = %f, %f, %f, %f\n", orient->x, orient->y, orient->z, orient->w);
+//	printf("Camera orient = %f, %f, %f, %f\n", orient->x, orient->y, orient->z, orient->w);
 	return (0);
 }
 
@@ -63,7 +63,7 @@ int	parse_camera_fov(char *token, float *fov)
 		return(rt_error("C: field of view: invalid input", -1));
 	if (*fov < 0 || *fov > 180)
 		return(rt_error("C: field of view: must be in range [0, 180]", -1));
-	printf("Camera fov = %f\n", *fov);
+//	printf("Camera fov = %f\n", *fov);
 	return (0);
 }
 

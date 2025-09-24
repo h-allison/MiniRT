@@ -21,12 +21,12 @@ int	parse_light_brightness(char *token, t_light *light)
 		return (rt_error("L: brightness: invalid input", -1));
 	if (brightness < 0 || brightness > 1)
 		return (rt_error("L: brightness: must be in range [0.0, 1.0]", -1));
-	printf("Light brightness = %f\n", brightness);
+//	printf("Light brightness = %f\n", brightness);
 	light->intensity.r = brightness;
 	light->intensity.g = brightness;
 	light->intensity.b = brightness;
-	printf("Light brightnes t_rgb = %f, %f, %f\n\n", light->intensity.r,
-		light->intensity.g, light->intensity.b);
+//	printf("Light brightnes t_rgb = %f, %f, %f\n\n", light->intensity.r,
+//		light->intensity.g, light->intensity.b);
 	return (0);
 }
 
@@ -34,8 +34,8 @@ int	parse_light_position(char *token, t_light *light)
 {
 	if (rt_atof_tuple(token, &light->position) != 0)
 		return (rt_error("L: light position: invalid input", -1));
-	printf("Light position = %f, %f, %f, %f\n", light->position.x,
-		light->position.y, light->position.z, light->position.w);
+//	printf("Light position = %f, %f, %f, %f\n", light->position.x,
+//		light->position.y, light->position.z, light->position.w);
 	return (0);
 }
 
