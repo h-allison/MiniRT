@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:51:51 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/24 14:10:48 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/24 16:47:31 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,25 @@ int	parse_plane_color(char *token, t_shape *s)
 int	parse_plane_orientation(char *token, t_shape *s)
 {
 	t_tuple	v;
-	
+	float	**orient;
+
 	v = vector(0, 0, 0);
 	if (rt_atof_tuple(token, &v) != 0)
 		return (rt_error("pl: plane orient: invalid input", -1));
-//	printf("Plane orientation = %f, %f, %f, %f\n", v.x,
-//		v.y, v.z, v.w);
+
+	printf("Plane orientation = %f, %f, %f, %f\n", v.x,
+		v.y, v.z, v.w);
+	
 	if (!btwn_negative_and_positive_1(v))
 		return (rt_error("pl: plane orientation: must be in range [-1.0, 1.0]", -1));
-//	set_transform(s, translation(s, v));
-	// TODO set rotation - should it be v.x / 180 passed to rotation_x() etc?
-	(void) s;
+	
+	v = tmult(v, 180);
+	orient = create_id_matrix();
+	orient = mmultfree(rotation_x(v.x * DEG2RAD), orient);
+	orient = mmultfree(rotation_y(v.y * DEG2RAD), orient);
+	orient = mmultfree(rotation_z(v.z * DEG2RAD), orient);
+
+	set_transform(s, orient);
 	return (0);
 }
 
@@ -48,11 +56,16 @@ int	parse_plane_position(char *token, t_shape *s)
 {
 	t_tuple	coords;
 	coords = point(0, 0, 0);
+	(void)coords;
+	(void)token;
+	(void)s;
+/*
 	if (rt_atof_tuple(token, &coords) != 0)
 		return (rt_error("pl: plane position: invalid input", -1));
 //	printf("\nPlane position = %f, %f, %f, %f\n", coords.x,
 //		coords.y, coords.z, coords.w);
 	set_transform(s, translation(coords.x, coords.y, coords.z));
+*/
 	return (0);
 }
 

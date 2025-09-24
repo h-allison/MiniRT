@@ -19,7 +19,7 @@ L -40,0,30 1 255,255,125
 * the light brightness ratio in the range [0.0,1.0]: 0.6
 * (unused in mandatory part) R, G, B colors in the range [0-255]: 10, 0, 255
 
-pl 0,0,0 0,1.0,0 255,0,255
+pl 0,0,0 0,0,0 255,0,255
 
 * identifier: pl
 * x, y, z coordinates of a point in the plane: 0.0,0.0,-10.0
