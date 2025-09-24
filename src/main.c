@@ -19,6 +19,7 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		rt_early_exit(ERROR_WRONG_ARGS);
 	(void) argv;
+	data.reset = true;
 	parse_file(argv[1], &data);
 	printf("Time to raytrace!\n");
 	mlx_handling(&data);
