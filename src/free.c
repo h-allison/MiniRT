@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 12:38:13 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/25 02:12:33 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/25 18:23:06 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,40 @@ int	free_matrices_and_ret(t_shape *p, int ret)
 
 void	free_largs(t_largs *l)
 {
+	free_shape(l->shape);
+	free_material(l->material);
 	free(l->light);
-	free(l->shape);
-	free(l->material);
 	free(l);
 	return ;
+}
+
+void	free_canvas(t_canvas *c)
+{
+	int	y;
+
+	if (!c)
+		return ;
+	y = 0;
+	while (y < c->height)
+		free(c->img[y++]);
+	free(c);
+}
+
+void	free_uv_pattern(t_pattern *p)
+{
+	if (!p)
+		return ;
+	free_matrix(p->transform, 4);
+	free_matrix(p->invtrans, 4);
+	free_canvas(p->canvas);
+	free(p);
 }
 
 void	free_pattern(t_pattern *p)
 {
 	free_matrix(p->transform, 4);
 	free_matrix(p->invtrans, 4);
+	free_uv_pattern(p->uv_pattern);
 	free(p);
 	return ;
 }
@@ -56,6 +79,8 @@ void	free_shape(t_shape *s)
 {
 	int	i;
 
+	if (!s)
+		return ;
 	if (s->group)
 	{
 		i = 0;

@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 01:45:38 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/25 02:09:34 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/25 16:33:45 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,19 @@ int test_pattern_lighting(void)
 	t_largs		*largs;
 	t_shape		*s;
 
-	largs = ft_calloc(1, sizeof(*largs));
+	largs = ft_calloc(1, sizeof(t_largs));
 	s = sphere();
 	largs->shape = s;
-	largs->eyev = vector(0, 0, -1);
-	largs->normalv = vector(0, 0, -1);
 	largs->light = point_light(point(0, 0, -10), color(255, 255, 255));
 	largs->material = material();
+	free_pattern(largs->material->pattern);
 	largs->material->pattern = stripe_pattern(color(255, 255, 255), color(0, 0, 0));
 	largs->material->ambient = 1;
 	largs->material->diffuse = 0;
 	largs->material->specular = 0;
 	largs->in_shadow = false;
+	largs->eyev = vector(0, 0, -1);
+	largs->normalv = vector(0, 0, -1);
 	largs->point = point(0.9, 0, 0);
 	c1 = lighting(largs);
 	largs->point = point(1.1, 0, 0);

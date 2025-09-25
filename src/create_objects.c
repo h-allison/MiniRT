@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 19:13:39 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/23 14:19:45 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/25 18:35:04 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ t_pattern	*create_test_pattern(void)
 	pat->transform = create_id_matrix();
 	pat->invtrans = minvert(pat->transform, 4);
 	pat->pattern_at = &pattern_at;
+	pat->uv_pattern = NULL;
+	pat->canvas = NULL;
 	pat->status = true;
 	return (pat);
 }
@@ -109,6 +111,8 @@ t_pattern	*pattern(void)
 	p->b = color(0, 0, 0);
 	p->transform = create_id_matrix();
 	p->invtrans = minvert(p->transform, 4);
+	p->uv_pattern = NULL;
+	p->canvas = NULL;
 	p->status = false;
 	return (p);
 }

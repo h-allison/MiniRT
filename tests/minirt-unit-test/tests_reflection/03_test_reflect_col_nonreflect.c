@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 23:02:20 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/23 02:46:34 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/25 18:44:39 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int test_reflect_col_nonreflect(void)
 	i = intersection(1, w.s[1]);
 	c = prepare_computations(&i, &r, NULL);
 	col = reflected_color(&w, &c, 10);
+	free_world(&w);
 	if (!fisequal(col.r, 0) || !fisequal(col.g, 0)
 			|| !fisequal(col.b, 0))
 		return (-1);

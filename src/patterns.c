@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 00:07:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/24 17:05:45 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/25 18:39:01 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ t_pattern	*stripe_pattern(t_rgb a, t_rgb b)
 	pat->transform = create_id_matrix();
 	pat->invtrans = minvert(pat->transform, 4);
 	pat->pattern_at = stripe_at;
+	pat->uv_pattern = NULL;
+	pat->canvas = NULL;
 	pat->status = true;
 	return (pat);
 }
@@ -152,6 +154,7 @@ t_pattern	*uv_checkers(float width, float height, t_rgb a, t_rgb b)
 	checkers->transform = create_id_matrix();
 	checkers->invtrans = minvert(checkers->transform, 4);
 	checkers->pattern_at = uv_checkers_at;
+	checkers->canvas = NULL;
 	checkers->status = true;
 	return (checkers);
 }
@@ -173,21 +176,11 @@ t_pattern	*texture_map(t_pattern *uv_pattern, t_tuple (*map)(t_tuple))
 	t_pattern	*pattern;
 
 	pattern = malloc(sizeof(t_pattern));
-	pattern->a = uv_pattern->a;
-	pattern->b = uv_pattern->b;
-	pattern->main = uv_pattern->main;
-	pattern->ul = uv_pattern->ul;
-	pattern->ur = uv_pattern->ur;
-	pattern->bl = uv_pattern->bl;
-	pattern->br = uv_pattern->br;
-	pattern->width = uv_pattern->width;
-	pattern->height = uv_pattern->height;
 	pattern->transform = create_id_matrix();
 	pattern->invtrans = minvert(pattern->transform, 4);
 	pattern->pattern_at = texture_at;
-	pattern->uv_pattern_at = uv_pattern->pattern_at;
+	pattern->uv_pattern = uv_pattern;
 	pattern->map = map;
-	pattern->canvas = uv_pattern->canvas;
 	pattern->status = true;
 	return (pattern);
 }
@@ -317,6 +310,7 @@ void	set_pattern_transform(t_pattern *pat, float **t)
 		i++;
 	}
 	free_matrix(t, 4);
+	free_matrix(pat->invtrans, 4);
 	pat->invtrans = minvert(pat->transform, 4);
 }
 
@@ -335,6 +329,8 @@ t_pattern	*uv_align_check(t_rgb main, t_rgb ul, t_rgb ur, t_rgb bl, t_rgb br)
 	align_check->transform = create_id_matrix();
 	align_check->invtrans = minvert(align_check->transform, 4);
 	align_check->pattern_at = uv_align_check_at;
+	align_check->uv_pattern = NULL;
+	align_check->canvas = NULL;
 	align_check->status = true;
 	return (align_check);
 }

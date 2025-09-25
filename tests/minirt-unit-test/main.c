@@ -6,7 +6,7 @@
 /*   By: smargine <smargine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 18:57:05 by smargine          #+#    #+#             */
-/*   Updated: 2025/09/25 01:53:18 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/25 18:41:29 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int	main(void)
 //	err += shadow_tests_launcher();
 //	err += shapes_tests_launcher();
 //	err += planes_tests_launcher();
-	err += patterns_tests_launcher();
-//	err += reflect_tests_launcher();
+//	err += patterns_tests_launcher();
+	err += reflect_tests_launcher();
 //	err += refract_tests_launcher();
 //	err += cubes_tests_launcher();
 //	err += cones_tests_launcher();

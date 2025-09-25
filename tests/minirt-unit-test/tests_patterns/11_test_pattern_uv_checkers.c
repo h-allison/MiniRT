@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 14:16:01 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/25 02:24:35 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/25 18:15:03 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,35 +25,35 @@ int test_pattern_uv_checkers(void)
 	checkers = texture_map(uv_checkers(2, 2, black, white), no_map);
 	uv.x = 0;
 	uv.y = 0;
-	col = uv_checkers_at(checkers, uv);
+	col = uv_checkers_at(checkers->uv_pattern, uv);
 	if (col.r != black.r
 		|| col.g != black.g
 		|| col.b != black.b)
 		return (free_pattern(checkers), -1);
 	uv.x = 0.5;
 	uv.y = 0;
-	col = uv_checkers_at(checkers, uv);
+	col = uv_checkers_at(checkers->uv_pattern, uv);
 	if (col.r != white.r
 		|| col.g != white.g
 		|| col.b != white.b)
 		return (free_pattern(checkers), -1);
 	uv.x = 0;
 	uv.y = 0.5;
-	col = uv_checkers_at(checkers, uv);
+	col = uv_checkers_at(checkers->uv_pattern, uv);
 	if (col.r != white.r
 		|| col.g != white.g
 		|| col.b != white.b)
 		return (free_pattern(checkers), -1);
 	uv.x = 0.5;
 	uv.y = 0.5;
-	col = uv_checkers_at(checkers, uv);
+	col = uv_checkers_at(checkers->uv_pattern, uv);
 	if (col.r != black.r
 		|| col.g != black.g
 		|| col.b != black.b)
 		return (free_pattern(checkers), -1);
 	uv.x = 1.0;
 	uv.y = 1.0;
-	col = uv_checkers_at(checkers, uv);
+	col = uv_checkers_at(checkers->uv_pattern, uv);
 	if (col.r != black.r
 		|| col.g != black.g
 		|| col.b != black.b)
