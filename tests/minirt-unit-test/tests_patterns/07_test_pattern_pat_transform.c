@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 01:45:38 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/23 02:38:42 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/25 02:29:10 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int test_pattern_pat_transform(void)
 	pat = create_test_pattern();
 	set_pattern_transform(pat, scaling(2, 2, 2));
 	c = pattern_at_shape(pat, obj, point(2, 3, 4));
-	free_matrices_and_ret(obj, 0);
+	free_shape(obj);
+	free_pattern(pat);
 	if (c.r != 1 || c.g != 1.5 || c.b != 2)
 		return (-1);
 	return (0);

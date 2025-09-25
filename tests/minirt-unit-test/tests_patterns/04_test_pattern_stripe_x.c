@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 01:45:38 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/23 02:29:34 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/25 02:07:07 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,21 @@ int test_pattern_stripe_x(void)
 	pat = stripe_pattern(color(0, 0, 0), color(255, 255, 255));
 	col = stripe_at(pat, point(0, 0, 0));
 	if (col.r != 0 || col.g != 0 || col.b != 0)
-		return (-1);
+		return (free_pattern(pat), -1);
 	col = stripe_at(pat, point(0.9, 0, 0));
 	if (col.r != 0 || col.g != 0 || col.b != 0)
-		return (-1);
+		return (free_pattern(pat), -1);
 	col = stripe_at(pat, point(1, 0, 0));
 	if (col.r != 1 || col.g != 1 || col.b != 1)
-		return (-1);
+		return (free_pattern(pat), -1);
 	col = stripe_at(pat, point(-0.1, 0, 0));
 	if (col.r != 1 || col.g != 1 || col.b != 1)
-		return (-1);
+		return (free_pattern(pat), -1);
 	col = stripe_at(pat, point(-1, 0, 0));
 	if (col.r != 1 || col.g != 1 || col.b != 1)
-		return (-1);
+		return (free_pattern(pat), -1);
 	col = stripe_at(pat, point(-1.1, 0, 0));
 	if (col.r != 0 || col.g != 0 || col.b != 0)
-		return (-1);
-	return (0);
+		return (free_pattern(pat), -1);
+	return (free_pattern(pat), 0);
 }

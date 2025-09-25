@@ -6,7 +6,7 @@
 /*   By: smargine <smargine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 18:52:32 by smargine          #+#    #+#             */
-/*   Updated: 2025/09/23 02:03:35 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/25 00:07:48 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ int test_camera_rayforpixel_1(void)
 	if (err)
 	{
 		free_matrix(c->transform, 4);
+		free(c);
 		return (-1);
 	}
 	free_matrix(c->transform, 4);
+	free(c);
 	return (0);
 }

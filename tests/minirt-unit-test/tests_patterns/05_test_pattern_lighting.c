@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 01:45:38 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/23 04:22:50 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/25 02:09:34 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int test_pattern_lighting(void)
 	c1 = lighting(largs);
 	largs->point = point(1.1, 0, 0);
 	c2 = lighting(largs);
-	free_matrices_and_ret(largs->shape, 0);
+	free_largs(largs);
 	if (c1.r != 1 || c1.g != 1 || c1.b != 1)
 		return (-1);
 	if (c2.r != 0 || c2.g != 0 || c2.b != 0)

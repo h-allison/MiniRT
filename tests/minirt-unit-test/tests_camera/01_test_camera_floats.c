@@ -6,7 +6,7 @@
 /*   By: smargine <smargine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 18:52:32 by smargine          #+#    #+#             */
-/*   Updated: 2025/09/23 02:00:08 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/25 00:06:07 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ int test_camera_floats(void)
 			&& fisequal (c->field_of_view, (M_PI / 2)))
 	{
 		free_matrix(c->transform, 4);
+		free(c);
 		return (0);
 	}
 	free_matrix(c->transform, 4);
+	free(c);
 	return (-1);
 }

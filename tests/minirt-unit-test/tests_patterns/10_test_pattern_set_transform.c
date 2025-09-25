@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 14:16:12 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/23 02:40:46 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/25 02:20:03 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int test_pattern_set_transform(void)
 			if (!fisequal(pat->transform[y][x], m[y][x]))
 			{
 				free_matrix(m, 4);
-				free_matrix(pat->transform, 4);
+				free_pattern(pat);
 				return (-1);
 			}
 			x++;
@@ -39,6 +39,6 @@ int test_pattern_set_transform(void)
 		y++;
 	}
 	free_matrix(m, 4);
-	free_matrix(pat->transform, 4);
+	free_pattern(pat);
 	return (0);
 }

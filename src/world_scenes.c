@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 18:12:31 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/24 16:22:49 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/25 01:02:35 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_world	default_world(void)
 	s1->m->specular = 0.2;
 	s2 = sphere();
 	set_transform(s2, scaling(0.5, 0.5, 0.5));
-	w.s = ft_calloc(5, sizeof(t_shape *));
+	w.s = ft_calloc(3, sizeof(t_shape *));
 	w.s[0] = s1;
 	w.s[1] = s2;
 	w.light = ft_calloc(2, sizeof(t_light *));

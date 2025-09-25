@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 13:09:48 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/23 01:42:05 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/25 01:51:06 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,6 @@ bool	tuples_are_equal(t_tuple *t1, t_tuple t2)
 	return(true);
 }
 
-static int	free_matrices_and_return(t_shape *p, int ret)
-{
-	free_matrix(p->transform, 4);
-	free_matrix(p->invtrans, 4);
-	free_matrix(p->m->pattern->transform, 4);
-	return (ret);
-}
-
 int test_plane(void)
 {
 	t_shape		*p;
@@ -47,10 +39,10 @@ int test_plane(void)
 	n3 = normal_at(p, point(-5, 0, 150));
 
 	if (!tuples_are_equal(&n1, vector(0, 1, 0)))
-		return(free_matrices_and_return(p, -1));
+		return(free_shape(p), -1);
 	if (!tuples_are_equal(&n2, vector(0, 1, 0)))
-		return(free_matrices_and_return(p, -1));
+		return(free_shape(p), -1);
 	if (!tuples_are_equal(&n3, vector(0, 1, 0)))
-		return(free_matrices_and_return(p, -1));
-	return(free_matrices_and_return(p, 0));
+		return(free_shape(p), -1);
+	return(free_shape(p), 0);
 }
