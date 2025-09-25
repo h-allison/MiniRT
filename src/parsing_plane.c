@@ -19,11 +19,11 @@ int	parse_plane_color(char *token, t_shape *s)
 	col_255 = color(0, 0, 0);
 	if (rt_atorgb(token, &col_255) != 0)
 		return (rt_error("pl: plane color: invalid input", -1));
-//	printf("Plane color rgb = %f, %f, %f\n", col_255.r, col_255.g, col_255.b);
+	printf("Plane color rgb = %f, %f, %f\n", col_255.r, col_255.g, col_255.b);
 	if (!valid_rgb_range(col_255))
 		return (rt_error("pl: rgb values must be in range [0,255]", -1));
 	s->m->color = color(col_255.r, col_255.g, col_255.b);
-//	printf("Plane color t_rgb = %f, %f, %f\n", s->m->color.r, s->m->color.g, s->m->color.b);
+	printf("Plane color t_rgb = %f, %f, %f\n", s->m->color.r, s->m->color.g, s->m->color.b);
 	return (0);
 }
 
@@ -59,13 +59,11 @@ int	parse_plane_position(char *token, t_shape *s)
 	(void)coords;
 	(void)token;
 	(void)s;
-/*
 	if (rt_atof_tuple(token, &coords) != 0)
 		return (rt_error("pl: plane position: invalid input", -1));
-//	printf("\nPlane position = %f, %f, %f, %f\n", coords.x,
-//		coords.y, coords.z, coords.w);
+	printf("\nPlane position = %f, %f, %f, %f\n", coords.x,
+		coords.y, coords.z, coords.w);
 	set_transform(s, translation(coords.x, coords.y, coords.z));
-*/
 	return (0);
 }
 

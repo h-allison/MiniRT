@@ -99,8 +99,8 @@ all: $(NAME)
 
 # Compile C -> .o into build/
 $(OBJDIR)/%.o: src/%.c | $(OBJDIR)
-#	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
-	$(CC) $(CFLAGS) $(CPPFLAGS) -O3 -c $< -o $@
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+#	$(CC) $(CFLAGS) $(CPPFLAGS) -O3 -c $< -o $@
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
