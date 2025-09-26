@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/26 19:39:31 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/26 23:07:54 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,7 +275,7 @@ t_camera		*camera(float hsize, float vsize, float field_of_view);
 t_tuple			point(float x, float y, float z);
 t_tuple			vector(float x, float y, float z);
 t_rgb			color(float r, float g, float b);
-t_rgb			color_scale(float r, float g, float b, float scaling);
+t_rgb			colorsc(float r, float g, float b, float scaling);
 
 //create_matrices.c
 void			free_matrix(float **m, int size);

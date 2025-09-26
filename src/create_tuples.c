@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 20:37:34 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/23 21:18:14 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/26 23:07:14 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_rgb	color(float r, float g, float b)
 	return (rgb);
 }
 
-t_rgb	color_scale(float r, float g, float b, float scaling)
+t_rgb	colorsc(float r, float g, float b, float scaling)
 {
 	t_rgb	rgb;
 

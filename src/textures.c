@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:50:50 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/26 17:13:58 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/26 23:08:19 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,32 @@ static int	canvas_open_file(char *filename)
 	return (fd);
 }
 
+static int	read_next_buffer(char *buf, int fd, int init)
+{
+	static char	stash[1000001];
+	static int	i;
+	int			status;
+
+	if (init)
+	{
+		stash[0] = '\0';
+		i = 0;
+		return (0);
+	}
+	if (!stash[i])
+	{
+		status = read(fd, stash, 1000001);
+		if (status < 0)
+			return (-1);
+		if (status == 0)
+			return (0);
+		stash[status] = '\0';
+		i = 0;
+	}
+	*buf = stash[i++];
+	return (1);
+}
+
 static int	canvas_skip_comment(int fd)
 {
 	char	buf;
@@ -43,18 +69,18 @@ static int	canvas_skip_comment(int fd)
 
 	while (1)
 	{
-		status = read(fd, &buf, 1);
+		status = read_next_buffer(&buf, fd, 0);
 		if (status <= 0 || buf == '\n')
 			return (status);
 	}
 }
 
-static char	canvas_read_next_char(int fd)
+static char	canvas_read_next_digit(int fd)
 {
 	char	buf;
 	int		status;
 
-	status = read(fd, &buf, 1);
+	status = read_next_buffer(&buf, fd, 0);
 	if (status > 0 && buf == '#')
 	{
 		status = canvas_skip_comment(fd);
@@ -62,18 +88,18 @@ static char	canvas_read_next_char(int fd)
 	}
 	if (status < 0)
 	{
-		perror("texture: read");
+		perror("texture: read\n");
 		return ('*');
 	}
 	if (status == 0 || (!ft_isdigit(buf) && buf != ' ' && buf != '\n'))
 	{
-		ft_putstr_fd("texture: Invalid file", 2);
+		ft_putstr_fd("texture: Invalid file\n", 2);
 		return ('*');
 	}
 	return (buf);
 }
 
-static int	canvas_read_next_digit(int fd, float *n)
+static int	canvas_read_next_float(int fd, float *n)
 {
 	char	c;
 	char	buf[10];
@@ -82,7 +108,7 @@ static int	canvas_read_next_digit(int fd, float *n)
 	idx = 0;
 	while (1)
 	{
-		c = canvas_read_next_char(fd);
+		c = canvas_read_next_digit(fd);
 		if (c == '*')
 			return (-1);
 		else if (idx == 0 && (c == ' ' || c == '\n'))
@@ -115,12 +141,12 @@ static int	canvas_read_image(int fd, t_canvas *canvas)
 		{
 			while (i < ((x + 1) * 3 + y * canvas->width * 3))
 			{
-				if (canvas_read_next_digit(fd, &c[i++ % 3]))
+				if (canvas_read_next_float(fd, &c[i++ % 3]))
 					return (-1);
 				if (c[(i - 1) % 3] < 0 || c[(i - 1) % 3] > canvas->scaling)
-					return (ft_putstr_fd("texture: Invalid color", 2), -1);
+					return (ft_putstr_fd("texture: Invalid color\n", 2), -1);
 			}
-			canvas->img[y][x++] = color_scale(c[0], c[1], c[2], canvas->scaling);
+			canvas->img[y][x++] = colorsc(c[0], c[1], c[2], canvas->scaling);
 		}
 	}
 	return (0);
@@ -137,15 +163,18 @@ t_canvas	*canvas_from_ppm(char *filename)
 	canvas = ft_calloc(1, sizeof(t_canvas));
 	if (!canvas)
 		exit (-1);
-	if (canvas_read_next_digit(fd, &canvas->width))
+	if (canvas_read_next_float(fd, &canvas->width))
 		return (NULL);
-	if (canvas_read_next_digit(fd, &canvas->height))
+	if (canvas_read_next_float(fd, &canvas->height))
 		return (NULL);
-	if (canvas_read_next_digit(fd, &canvas->scaling))
+	if (canvas_read_next_float(fd, &canvas->scaling))
 		return (NULL);
 	if (canvas_read_image(fd, canvas))
 		return (NULL);
-	close (fd);
+	printf("parsed file: %s\nwidth: %f, height %f, scaling %f\n",
+		filename, canvas->width, canvas->height, canvas->scaling);
+	close(fd);
+	read_next_buffer(NULL, 0, 1);
 	return (canvas);
 }
 

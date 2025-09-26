@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 18:12:31 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/26 19:57:13 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/26 22:42:02 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -423,8 +423,8 @@ t_world	default_world_cyl(void)
 	sky->m->ambient = 1;
 	sky->m->diffuse = 0;
 	sky->m->specular = 0;
-	sky->m->pattern = texture_map(uv_image(canvas_from_ppm("samples/textures/sky_night.ppm")), spherical_map);
-
+	sky->m->pattern = texture_map(uv_image(canvas_from_ppm("samples/textures/sky.ppm")), spherical_map);
+	
 	big = sphere();
 	big->transform = mmultfree(translation(.5, 1, 4), big->transform);
 	big->invtrans = minvert(big->transform, 4);
@@ -465,10 +465,10 @@ t_world	default_world_cyl(void)
 	right->minimum = -1;
 	right->maximum = 1;
 	right->closed = true;
-	right->transform = mmultfree(rotation_z(90 * DEG2RAD), right->transform);
+	right->transform = mmultfree(scaling(1, 0.5, 1), right->transform);
+	right->transform = mmultfree(rotation_z(70 * DEG2RAD), right->transform);
 	right->transform = mmultfree(rotation_y(75 * DEG2RAD), right->transform);
-	right->transform = mmultfree(scaling(1, 1, 1), right->transform);
-	right->transform = mmultfree(translation(6, 1, 3), right->transform);
+	right->transform = mmultfree(translation(5, 2, 2), right->transform);
 	right->invtrans = minvert(right->transform, 4);
 	right->m->color = color(220, 220, 220);
 	right->m->ambient = 0.3;
@@ -500,7 +500,7 @@ t_world	default_world_cyl(void)
 	w.light = ft_calloc(3, sizeof(t_light *));
 	if (!w.light)
 		exit (1);
-	w.light[0] = point_light(point(-7, 7, -6), color(50, 50, 70));
+	w.light[0] = point_light(point(-5, 8, -7), color(255, 255, 200));
 
 	w.s = ft_calloc(9, sizeof(t_shape *));
 	w.s[0] = floor;
