@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/26 23:43:24 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/27 00:23:15 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -333,6 +333,7 @@ float			mdet(float **m, int size);
 float			**minvert(float **m, int size);
 float			**minvert_free(float **m, int size);
 bool			minvertable(float **m, int size);
+void			mcopy(float ***m, float ***m2, int size);
 
 //math_transform.c
 float			**translation(float x, float y, float z);
