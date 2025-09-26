@@ -57,3 +57,7 @@ dkms.conf
 #misc
 *.swp
 .DS_Store
+
+#textures
+sky.ppm
+sky_night.ppm

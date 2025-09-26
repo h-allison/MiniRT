@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 00:07:25 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/25 18:39:01 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/26 19:23:18 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ t_pattern	*gradient_pattern(t_rgb a, t_rgb b)
 	gradient->transform = create_id_matrix();
 	gradient->invtrans = minvert(gradient->transform, 4);
 	gradient->pattern_at = gradient_at;
+	gradient->uv_pattern = NULL;
+	gradient->canvas = NULL;
 	gradient->status = true;
 	return (gradient);
 }
@@ -108,6 +110,8 @@ t_pattern	*ring_pattern(t_rgb a, t_rgb b)
 	ring->transform = create_id_matrix();
 	ring->invtrans = minvert(ring->transform, 4);
 	ring->pattern_at = ring_at;
+	ring->uv_pattern = NULL;
+	ring->canvas = NULL;
 	ring->status = true;
 	return (ring);
 }
@@ -129,6 +133,8 @@ t_pattern	*checkers_pattern(t_rgb a, t_rgb b)
 	checkers->transform = create_id_matrix();
 	checkers->invtrans = minvert(checkers->transform, 4);
 	checkers->pattern_at = checkers_at;
+	checkers->uv_pattern = NULL;
+	checkers->canvas = NULL;
 	checkers->status = true;
 	return (checkers);
 }
@@ -154,6 +160,7 @@ t_pattern	*uv_checkers(float width, float height, t_rgb a, t_rgb b)
 	checkers->transform = create_id_matrix();
 	checkers->invtrans = minvert(checkers->transform, 4);
 	checkers->pattern_at = uv_checkers_at;
+	checkers->uv_pattern = NULL;
 	checkers->canvas = NULL;
 	checkers->status = true;
 	return (checkers);
@@ -181,6 +188,7 @@ t_pattern	*texture_map(t_pattern *uv_pattern, t_tuple (*map)(t_tuple))
 	pattern->pattern_at = texture_at;
 	pattern->uv_pattern = uv_pattern;
 	pattern->map = map;
+	pattern->canvas = NULL;
 	pattern->status = true;
 	return (pattern);
 }
@@ -190,7 +198,7 @@ t_rgb	texture_at(t_pattern *texture_map, t_tuple point)
 	t_tuple	uv;
 	
 	uv = texture_map->map(point);
-	return (texture_map->uv_pattern_at(texture_map, uv));
+	return (texture_map->uv_pattern->pattern_at(texture_map->uv_pattern, uv));
 }
 
 t_pattern	*uv_image(t_canvas *canvas)
@@ -202,6 +210,7 @@ t_pattern	*uv_image(t_canvas *canvas)
 	uv_image->transform = create_id_matrix();
 	uv_image->invtrans = minvert(uv_image->transform, 4);
 	uv_image->pattern_at = uv_image_at;
+	uv_image->uv_pattern = NULL;
 	uv_image->status = true;
 	return (uv_image);
 }

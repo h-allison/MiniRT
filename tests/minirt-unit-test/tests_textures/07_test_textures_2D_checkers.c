@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:38:56 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/24 16:16:47 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/26 17:38:21 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ int	test_textures_2D_checkers(void)
 			|| !cisequal(uv_image_at(pattern, (t_tuple){0.3, 0, 0, 0}), (t_rgb){0.2, 0.2, 0.2})
 			|| !cisequal(uv_image_at(pattern, (t_tuple){0.6, 0.3, 0, 0}), (t_rgb){0.1, 0.1, 0.1})
 			|| !cisequal(uv_image_at(pattern, (t_tuple){1, 1, 0, 0}), (t_rgb){0.9, 0.9, 0.9}))
-		return (-1);
-	return (0);
+		return (free_pattern(pattern), -1);
+	return (free_pattern(pattern), 0);
 }

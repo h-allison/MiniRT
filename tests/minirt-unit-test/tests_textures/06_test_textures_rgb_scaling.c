@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:38:56 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/24 01:27:53 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/26 17:28:20 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ int	test_textures_rgb_scaling(void)
 	canvas = canvas_from_ppm("tests_textures/06_test.ppm");
 	if (!canvas
 			|| !cisequal(pixel_at(canvas, 0, 1), (t_rgb){0.75, 0.5, 0.25}))
-		return (-1);
-	return (0);
+		return (free_canvas(canvas), -1);
+	return (free_canvas(canvas), 0);
 }

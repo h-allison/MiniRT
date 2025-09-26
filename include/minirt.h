@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/25 17:59:44 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/26 19:39:31 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ typedef struct s_pattern
 	float			**transform;
 	float			**invtrans;
 	t_rgb			(*pattern_at)(t_pattern *, t_tuple);
-	t_rgb			(*uv_pattern_at)(t_pattern *, t_tuple);
 	t_tuple			(*map)(t_tuple);
 	t_pattern		*uv_pattern;
 	t_canvas		*canvas;
@@ -452,6 +451,7 @@ void			free_world(t_world *w);
 void			free_shape(t_shape *s);
 void			free_material(t_material *m);
 void			free_pattern(t_pattern *p);	
+void			free_canvas(t_canvas *c);
 void			free_largs(t_largs *l);	
 
 //world_scenes.c

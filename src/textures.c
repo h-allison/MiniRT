@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:50:50 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/24 16:57:17 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/26 17:13:58 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,19 @@ static int	canvas_open_file(char *filename)
 	buf = ft_calloc(3, sizeof(char));
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
+	{
 		perror("texture: open");
+	}
 	else if (read(fd, buf, 3) < 0)
+	{
 		perror("texture: read");
+	}
 	else if (ft_strncmp(buf, "P3\n", 3))
 	{
 		ft_putstr_fd("texture: Wrong header!", 2);
 		fd = -1;
 	}
+	free(buf);
 	return (fd);
 }
 

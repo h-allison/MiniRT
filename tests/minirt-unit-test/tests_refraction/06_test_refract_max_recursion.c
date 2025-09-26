@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 23:02:50 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/23 03:53:04 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/26 16:39:40 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int test_refract_max_recursion(void)
 			intersection(6, w.s[0]));
 	comps = prepare_computations(&xs[0], &r, xs);
 	col = refracted_color(&w, &comps, 0);
+	free_world(&w);
 	if (col.r != 0 || col.g != 0 || col.b !=0)
 		return (-1);
-	free_world(&w);
 	return (0);
 }

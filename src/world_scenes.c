@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 18:12:31 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/25 18:49:50 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/26 19:57:13 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -399,6 +399,7 @@ t_world	default_world_cyl(void)
 {
 	t_world	w;
 	t_shape	*floor;
+	t_shape	*sky;
 	t_shape	*big;
 	t_shape	*middle;
 	t_shape	*right;
@@ -414,6 +415,15 @@ t_world	default_world_cyl(void)
 	floor->m->specular = 0.2;
 	floor->m->reflective = .2;
 	floor->m->pattern = ring_pattern(color(80, 80, 80), floor->m->color);
+	
+	sky = sphere();
+	sky->transform = mmultfree(scaling(20, 20, 20), sky->transform);
+	sky->invtrans = minvert(sky->transform, 4);
+	sky->m->color = color(0, 0, 0);
+	sky->m->ambient = 1;
+	sky->m->diffuse = 0;
+	sky->m->specular = 0;
+	sky->m->pattern = texture_map(uv_image(canvas_from_ppm("samples/textures/sky_night.ppm")), spherical_map);
 
 	big = sphere();
 	big->transform = mmultfree(translation(.5, 1, 4), big->transform);
@@ -481,11 +491,7 @@ t_world	default_world_cyl(void)
 	cub->m->specular = 0.6;
 	cub->m->reflective = 0.1;
 	cub->m->pattern = texture_map(uv_checkers(4, 4, color(70, 100, 0), cub->m->color), cube_map);
-	cub->m->pattern->transform = mmultfree(scaling(1, 1, 1), cub->m->pattern->transform);
-	cub->m->pattern->transform = mmultfree(translation(0, 0, 0), cub->m->pattern->transform);
-	cub->m->pattern->transform = mmultfree(rotation_z(90 * DEG2RAD), cub->m->pattern->transform);
-	cub->m->pattern->invtrans = minvert(cub->m->pattern->transform, 4);
-	
+
 	hex = hexagon();
 	hex->transform = mmultfree(scaling(1, 1, 1), hex->transform);
 	hex->transform = mmultfree(translation(3.5, .2, 0), hex->transform);
@@ -494,18 +500,17 @@ t_world	default_world_cyl(void)
 	w.light = ft_calloc(3, sizeof(t_light *));
 	if (!w.light)
 		exit (1);
-	w.light[0] = point_light(point(-7, 7, -6), color(200, 200, 180));
-	w.light[0]->last = false;
-	w.light[1] = point_light(point(-4, 8, 2), color(180, 120, 120));
+	w.light[0] = point_light(point(-7, 7, -6), color(50, 50, 70));
 
 	w.s = ft_calloc(9, sizeof(t_shape *));
 	w.s[0] = floor;
-	w.s[1] = big;
-	w.s[2] = middle;
-	w.s[3] = right;
-	w.s[4] = left;
-	w.s[5] = cub;
-	w.s[6] = hex;
+	w.s[1] = sky;
+	w.s[2] = big;
+	w.s[3] = middle;
+	w.s[4] = right;
+	w.s[5] = left;
+	w.s[6] = cub;
+	w.s[7] = hex;
 	return (w);
 }
 

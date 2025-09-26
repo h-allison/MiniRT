@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 23:02:50 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/23 03:00:17 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/26 16:39:10 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,8 @@ int test_refract_under_point(void)
 	it = intersection(5, s);
 	xs = intersections(it, it);
 	comps = prepare_computations(&it, &r, xs);
+	free_shape(s);
 	if (comps.under_point.z > OFFSET && comps.point.z < comps.under_point.z)
-	{
-		free_shape(s);
 		return (0);
-	}
 	return (-1);
 }

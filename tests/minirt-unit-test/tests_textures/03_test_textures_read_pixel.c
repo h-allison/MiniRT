@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:38:56 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/24 00:34:56 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/26 17:26:39 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ int	test_textures_read_pixel(void)
 			|| !cisequal(pixel_at(canvas, 1, 2), (t_rgb){0, 1, 1})
 			|| !cisequal(pixel_at(canvas, 2, 2), (t_rgb){1, 0, 1})
 			|| !cisequal(pixel_at(canvas, 3, 2), (t_rgb){0.498, 0.498, 0.498}))
-		return (-1);
-	return (0);
+		return (free_canvas(canvas), -1);
+	return (free_canvas(canvas), 0);
 }

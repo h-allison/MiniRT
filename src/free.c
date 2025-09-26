@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 12:38:13 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/25 18:23:06 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/26 17:44:36 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	free_canvas(t_canvas *c)
 	y = 0;
 	while (y < c->height)
 		free(c->img[y++]);
+	free(c->img);
 	free(c);
 }
 
@@ -55,15 +56,21 @@ void	free_uv_pattern(t_pattern *p)
 		return ;
 	free_matrix(p->transform, 4);
 	free_matrix(p->invtrans, 4);
-	free_canvas(p->canvas);
+	if (p->canvas)
+		free_canvas(p->canvas);
 	free(p);
+	return ;
 }
 
 void	free_pattern(t_pattern *p)
 {
+	if (!p)
+		return ;
 	free_matrix(p->transform, 4);
 	free_matrix(p->invtrans, 4);
-	free_uv_pattern(p->uv_pattern);
+	free_pattern(p->uv_pattern);
+	if (p->canvas)
+		free_canvas(p->canvas);
 	free(p);
 	return ;
 }

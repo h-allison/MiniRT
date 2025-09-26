@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 23:02:50 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/23 02:57:20 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/26 16:37:36 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ int test_refract_glass_sphere(void)
 		while (x <4)
 		{
 			if (s->transform[y][x] != idm[y][x])
-				return (-1);
+				return (free_shape(s), -1);
 			x ++;
 		}
 		y++;
 	}
-	if (s->m->transparency != 1.0 || s->m->refractive_index != 1.5)
-		return (-1);
 	free_matrix(idm, 4);
-	free_shape(s);
-	return (0);
+	if (s->m->transparency != 1.0 || s->m->refractive_index != 1.5)
+		return (free_shape(s), -1);
+	
+	return (free_shape(s), 0);
 }

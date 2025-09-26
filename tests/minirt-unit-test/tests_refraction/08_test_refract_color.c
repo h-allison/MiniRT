@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 23:02:50 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/23 03:09:46 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/26 16:44:24 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ int test_refract_color(void)
 
 	w = default_world();
 	w.s[0]->m->ambient = 1.0;
-	free_matrix(w.s[0]->m->pattern->transform, 4);
-	free_matrix(w.s[0]->m->pattern->invtrans, 4);
+	free_pattern(w.s[0]->m->pattern);
 	w.s[0]->m->pattern = create_test_pattern();
 	w.s[1]->m->transparency = 1.0;
 	w.s[1]->m->refractive_index = 1.5;
@@ -35,8 +34,8 @@ int test_refract_color(void)
 	comps = prepare_computations(&xs[2], &r, xs);
 	xs[0].object = NULL;
 	col = refracted_color(&w, &comps, 5);
+	free_world(&w);
 	if (!fisequal(col.r, 0) || !fisequal(col.g, 0.997872) || !fisequal(col.b, 0.047472))
 		return (-1);
-	free_world(&w);
 	return (0);
 }

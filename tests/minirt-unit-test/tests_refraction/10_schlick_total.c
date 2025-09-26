@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 16:26:50 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/23 03:14:49 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/26 16:40:23 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int test_refract_schlick_total(void)
 	comps = prepare_computations(&xs[1], &r, xs);
 	xs[0].object = NULL;
 	reflectance = schlick(&comps);
+	free_shape(s);
 	if (reflectance != 1)
 		return (-1);
-	free_shape(s);
 	return (0);
 }
