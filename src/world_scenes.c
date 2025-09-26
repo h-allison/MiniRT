@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 18:12:31 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/26 22:42:02 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/26 23:49:00 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -417,7 +417,7 @@ t_world	default_world_cyl(void)
 	floor->m->pattern = ring_pattern(color(80, 80, 80), floor->m->color);
 	
 	sky = sphere();
-	sky->transform = mmultfree(scaling(20, 20, 20), sky->transform);
+	sky->transform = mmultfree(scaling(100, 100, 100), sky->transform);
 	sky->invtrans = minvert(sky->transform, 4);
 	sky->m->color = color(0, 0, 0);
 	sky->m->ambient = 1;
@@ -439,7 +439,7 @@ t_world	default_world_cyl(void)
 	left->maximum = 2;
 	left->closed = true;
 	left->transform = mmultfree(scaling(0.5, 0.5, 0.5), left->transform);
-	left->transform = mmultfree(translation(-2.5, 0.3, 2), left->transform);
+	left->transform = mmultfree(translation(-2.5, 0, 2), left->transform);
 	left->invtrans = minvert(left->transform, 4);
 	left->m->color = color(20, 0, 10);
 	left->m->diffuse = 1;
@@ -483,7 +483,7 @@ t_world	default_world_cyl(void)
 	cub = cube();
 	cub->transform = mmultfree(rotation_y(30 * DEG2RAD), cub->transform);
 	cub->transform = mmultfree(scaling(0.33, 0.33, 0.33), cub->transform);
-	cub->transform = mmultfree(translation(-1.8, 0.33, -1), cub->transform);
+	cub->transform = mmultfree(translation(-2, 0.33, 0), cub->transform);
 	cub->invtrans = minvert(cub->transform, 4);
 	cub->m->color = color(0, 50, 100);
 	cub->m->diffuse = .9;
@@ -500,7 +500,7 @@ t_world	default_world_cyl(void)
 	w.light = ft_calloc(3, sizeof(t_light *));
 	if (!w.light)
 		exit (1);
-	w.light[0] = point_light(point(-5, 8, -7), color(255, 255, 200));
+	w.light[0] = point_light(point(-10,40, 70), color(255, 220, 200));
 
 	w.s = ft_calloc(9, sizeof(t_shape *));
 	w.s[0] = floor;

@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:50:50 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/26 23:08:19 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/26 23:54:31 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	canvas_open_file(char *filename)
 
 static int	read_next_buffer(char *buf, int fd, int init)
 {
-	static char	stash[1000001];
+	static char	stash[100001];
 	static int	i;
 	int			status;
 
@@ -50,12 +50,12 @@ static int	read_next_buffer(char *buf, int fd, int init)
 	}
 	if (!stash[i])
 	{
-		status = read(fd, stash, 1000001);
+		status = read(fd, stash, 100000);
 		if (status < 0)
 			return (-1);
 		if (status == 0)
 			return (0);
-		stash[status] = '\0';
+		stash[status + 1] = '\0';
 		i = 0;
 	}
 	*buf = stash[i++];
@@ -171,7 +171,7 @@ t_canvas	*canvas_from_ppm(char *filename)
 		return (NULL);
 	if (canvas_read_image(fd, canvas))
 		return (NULL);
-	printf("parsed file: %s\nwidth: %f, height %f, scaling %f\n",
+	printf("parsed texture: %s\nwidth: %f, height %f, scaling %f\n",
 		filename, canvas->width, canvas->height, canvas->scaling);
 	close(fd);
 	read_next_buffer(NULL, 0, 1);
