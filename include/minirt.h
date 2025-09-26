@@ -249,10 +249,13 @@ int				rt_atorgb(const char *str, t_rgb *rgb);
 int				rt_atof_tuple(const char *str, t_tuple *t);
 bool			valid_rgb_range(t_rgb col);
 bool			btwn_negative_and_positive_1(t_tuple t);
+int				check_v_normalized(t_tuple v, char *element);
 void			debug_print_tokens(char **tokens);
+void    		debug_print_matrix(float **m);
 
 //rendering.c
 void			render(void *param);
+int				rt_error_e(char *element, char *msg, int ret);
 void			render_with_parsing(void *param);
 
 //create_objects.c

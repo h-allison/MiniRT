@@ -27,3 +27,22 @@ void	print_vector(char *str, t_tuple a)
 		printf("w = %f", a.w);
 	}
 }
+
+void    debug_print_matrix(float **m)
+{
+    int     i;
+    int     j;
+
+    i = 0;
+    while (i < 4)
+    {
+        j = 0;
+        while (j < 4)
+        {
+            printf("%f ", m[i][j]);
+            j++;
+        }
+        printf("\n");
+        i++;
+    }
+}

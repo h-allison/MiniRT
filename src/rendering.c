@@ -185,13 +185,17 @@ void	render(void *param)
 	if (render_status == 0)
 	{
 		data = (t_data *)param;
-		world = default_world_cyl();
+		world = default_world();
 		cam = camera(WIN_WIDTH, WIN_HEIGHT, M_PI / 3);
 		cam->transform = view_transform(point(-2, 2, -6),
 				point(0, 1, 0), vector(0, 1, 0));
 		data->reset = true;
 		data->cam = cam;
 		render_status = 1;
+		printf("In original render():\n"); // TODO delete
+		printf("cam->transform:\n"); // TODO delete
+		debug_print_matrix(cam->transform); // TODO delete
+		printf("cam->fov: %f\n", data->cam->field_of_view); // TODO delete
 	}
 	if (render_status == 1)
 		render_status = render_chunk(&world, data);

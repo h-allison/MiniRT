@@ -20,6 +20,16 @@ int		rt_error(char *msg, int ret)
 	return(ret);
 }
 
+int		rt_error_e(char *element, char *msg, int ret)
+{
+	ft_putstr_fd("ERROR\n", 2);
+	ft_putstr_fd(element, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(msg, 2);
+	ft_putstr_fd("\n", 2);
+	return(ret);
+}
+
 void	rt_early_exit(int error)
 {
 	if (error == ERROR_WRONG_ARGS)

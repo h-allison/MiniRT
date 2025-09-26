@@ -60,7 +60,8 @@ SRC         := src/main.c \
 			   src/uv_mapping.c \
 			   src/textures.c \
 			   src/free.c \
-			   src/world_scenes.c
+			   src/world_scenes.c \
+			   src/debug_prints.c
 
 # ---- Paths ----
 LIBFT_PATH  := lib/libft
