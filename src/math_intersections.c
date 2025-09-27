@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:35:10 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/22 16:01:34 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/27 16:36:27 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,8 +270,10 @@ t_intersection	*local_intersect_cone(t_shape *s, t_ray r)
 	else
 	{
 		disc = b * b - 4 * a * c;
-		if (disc < 0)
+		if (disc < -EPSILON)
 			return (xs);
+		if (disc < EPSILON)
+			disc = 0;
 		t0 = (-b - sqrtf(disc)) / (2 * a);
 		t1 = (-b + sqrtf(disc)) / (2 * a);
 		if (t0 > t1)
