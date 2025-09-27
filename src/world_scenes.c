@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 18:12:31 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/27 21:45:32 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/27 22:14:48 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -543,27 +543,31 @@ t_world	default_world_tri_test(void)
 	sky->m->pattern = texture_map(uv_image(canvas_from_ppm("samples/textures/sky_night.ppm")), spherical_map);
 
 	tri1 = triangle(point(-1, 0, -1), point(1, 0, -1), point(0, 1, 0));
-	tri1->m->color = color(40, 30, 0);
-	tri1->m->reflective = 0.8;
+	tri1->m->color = color(100, 80, 0);
+	tri1->m->reflective = 0.1;
 	tri1->m->refractive_index = 1.52;
-	tri1->m->transparency = 1;
-	tri2 = triangle(point(-1, 0, -1), point(-1, 0, 1), point(0, 1, 0));
-	tri2->m->color = color(40, 30, 0);
-	tri2->m->reflective = 0.8;
-	tri2->m->transparency = 1;
+	tri1->m->transparency = .6;
+	tri1->m->ambient = 0.2;
+	tri2 = triangle(point(1, 0, -1), point(1, 0, 1), point(0, 1, 0));
+	tri2->m->color = color(100, 80, 0);
+	tri2->m->reflective = 0.1;
+	tri2->m->transparency = .6;
 	tri2->m->refractive_index = 1.52;
-	tri3 = triangle(point(-1, 0, 1), point(1, 0, 1), point(0, 1, 0));
-	tri3->m->color = color(40, 30, 0);
-	tri3->m->reflective = 0.8;
-	tri3->m->transparency = 1;
+	tri2->m->ambient = 0.2;
+	tri3 = triangle(point(1, 0, 1), point(-1, 0, 1), point(0, 1, 0));
+	tri3->m->color = color(100, 80, 0);
+	tri3->m->reflective = 0.1;
+	tri3->m->transparency = .6;
 	tri3->m->refractive_index = 1.52;
-	tri4 = triangle(point(1, 0, 1), point(1, 0, -1), point(0, 1, 0));
-	tri4->m->color = color(40, 30, 0);
-	tri1->m->reflective = 0.8;
-	tri4->m->transparency = 1;
+	tri3->m->ambient = 0.2;
+	tri4 = triangle(point(-1, 0, 1), point(-1, 0, -1), point(0, 1, 0));
+	tri4->m->color = color(100, 80, 0);
+	tri1->m->reflective = 0.1;
+	tri4->m->transparency = .6;
 	tri4->m->refractive_index = 1.52;
+	tri4->m->ambient = 0.2;
 
-	light = point_light(point(-7, 7, -6), color(180, 170, 160));
+	light = point_light(point(-7, 20, -6), color(180, 170, 160));
 	w.s = calloc(7, sizeof(*w.s));
 	if (!w.s)
 		exit (1);
