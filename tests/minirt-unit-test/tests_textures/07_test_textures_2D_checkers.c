@@ -6,11 +6,11 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:38:56 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/26 17:38:21 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/27 17:32:48 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cones_tests.h"
+#include "textures_tests.h"
 
 static bool	cisequal(t_rgb a, t_rgb b)
 {

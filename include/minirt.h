@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/27 00:23:15 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/27 17:43:58 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,16 @@ typedef struct s_rgb
 	float			g;
 	float			b;
 }	t_rgb;
+
+typedef struct s_tri
+{
+	t_tuple			p1;
+	t_tuple			p2;
+	t_tuple			p3;
+	t_tuple			e1;
+	t_tuple			e2;
+	t_tuple			normal;
+}	t_tri;
 
 typedef struct s_pattern t_pattern;
 
@@ -445,6 +455,9 @@ t_tuple			cube_uv_down(t_tuple point);
 //textures.c
 t_canvas		*canvas_from_ppm(char *filename);
 t_rgb			pixel_at(t_canvas *canvas, int x, int y);
+
+//triangles.c
+t_tri			*triangle(t_tuple p1, t_tuple p2, t_tuple p3);
 
 //free.c
 int				free_matrices_and_ret(t_shape *p, int ret);
