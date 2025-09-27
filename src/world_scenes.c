@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 18:12:31 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/26 23:49:00 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/27 21:45:32 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -514,37 +514,66 @@ t_world	default_world_cyl(void)
 	return (w);
 }
 
-t_world	default_world_group_test(void)
+t_world	default_world_tri_test(void)
 {
 	t_world	w;
-//	t_shape	*floor;
-	t_shape	*hex;
+	t_shape	*floor;
+	t_shape	*sky;
+	t_shape	*tri1;
+	t_shape	*tri2;
+	t_shape	*tri3;
+	t_shape	*tri4;
 	t_light	*light;
-/*	
+	
 	floor = plane();
 	floor->m->color = color(200, 200, 200);
-	floor->m.diffuse = 0.4;
-	floor->m.ambient = 0;
-	floor->m.specular = 0.2;
-	floor->m.reflective = .2;
-	free_matrix(floor->m.pattern.transform, 4);
-	free_matrix(floor->m.pattern.invtrans, 4);
-	floor->m.pattern = checkers_pattern(color(0, 0, 0), floor->m->color);
-*/
-	hex = hexagon();
-	set_transform(hex, translation(0, 1, 0));
-	hex->m->color = color(0, 50, 100);
-	hex->m->diffuse = 0.3;
-	hex->m->ambient = 0.2;
-	hex->m->specular = 0;
-	hex->m->reflective = 0;
+	floor->m->diffuse = 0.4;
+	floor->m->ambient = 0;
+	floor->m->specular = 0.2;
+	floor->m->reflective = 0;
+	floor->m->pattern = checkers_pattern(color(33, 33, 0), floor->m->color);
 
-	light = point_light(point(-7, 7, -6), color(255, 255, 255));
-	w.s = calloc(4, sizeof(*w.s));
+	sky = sphere();
+	sky->transform = mmultfree(scaling(100, 100, 100), sky->transform);
+	sky->invtrans = minvert(sky->transform, 4);
+	sky->m->color = color(0, 0, 0);
+	sky->m->ambient = 1;
+	sky->m->diffuse = 0;
+	sky->m->specular = 0;
+	sky->m->pattern = texture_map(uv_image(canvas_from_ppm("samples/textures/sky_night.ppm")), spherical_map);
+
+	tri1 = triangle(point(-1, 0, -1), point(1, 0, -1), point(0, 1, 0));
+	tri1->m->color = color(40, 30, 0);
+	tri1->m->reflective = 0.8;
+	tri1->m->refractive_index = 1.52;
+	tri1->m->transparency = 1;
+	tri2 = triangle(point(-1, 0, -1), point(-1, 0, 1), point(0, 1, 0));
+	tri2->m->color = color(40, 30, 0);
+	tri2->m->reflective = 0.8;
+	tri2->m->transparency = 1;
+	tri2->m->refractive_index = 1.52;
+	tri3 = triangle(point(-1, 0, 1), point(1, 0, 1), point(0, 1, 0));
+	tri3->m->color = color(40, 30, 0);
+	tri3->m->reflective = 0.8;
+	tri3->m->transparency = 1;
+	tri3->m->refractive_index = 1.52;
+	tri4 = triangle(point(1, 0, 1), point(1, 0, -1), point(0, 1, 0));
+	tri4->m->color = color(40, 30, 0);
+	tri1->m->reflective = 0.8;
+	tri4->m->transparency = 1;
+	tri4->m->refractive_index = 1.52;
+
+	light = point_light(point(-7, 7, -6), color(180, 170, 160));
+	w.s = calloc(7, sizeof(*w.s));
 	if (!w.s)
 		exit (1);
-//	w.s[0] = floor;
-	w.s[0] = hex;
+	w.s[0] = floor;
+	w.s[1] = sky;
+	w.s[2] = tri1;
+	w.s[3] = tri2;
+	w.s[4] = tri3;
+	w.s[5] = tri4;
+	w.s[6] = NULL;
 	w.light = ft_calloc(2, sizeof(t_light *));
 	if (!w.light)
 		exit (1);

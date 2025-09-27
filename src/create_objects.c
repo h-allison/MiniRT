@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 19:13:39 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/25 18:35:04 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/27 20:01:19 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_shape	*create_test_shape(void)
 	s = malloc(sizeof(t_shape));
 	s->parent = NULL;
 	s->group = NULL;
+	s->triangle = NULL;
 	s->transform = create_id_matrix();
 	s->invtrans = minvert(s->transform, 4);
 	s->local_normal_at = local_normal_at;
@@ -52,6 +53,7 @@ t_shape	*glass_sphere(void)
 	s = malloc(sizeof(t_shape));
 	s->parent = NULL;
 	s->group = NULL;
+	s->triangle = NULL;
 	s->transform = create_id_matrix();
 	s->invtrans = minvert(s->transform, 4);
 	s->local_normal_at = local_normal_at_sphere;
@@ -141,6 +143,7 @@ t_shape	*group(void)
 	g = malloc(sizeof(t_shape));
 	g->parent = NULL;
 	g->group = NULL;
+	g->triangle = NULL;
 	g->transform = create_id_matrix();
 	g->invtrans = minvert(g->transform, 4);
 	g->local_normal_at = local_normal_at_group;
@@ -158,6 +161,7 @@ t_shape	*sphere(void)
 	s = malloc(sizeof(t_shape));
 	s->parent = NULL;
 	s->group = NULL;
+	s->triangle = NULL;
 	s->transform = create_id_matrix();
 	s->invtrans = minvert(s->transform, 4);
 	s->local_normal_at = local_normal_at_sphere;
@@ -173,6 +177,7 @@ t_shape	*plane(void)
 	s = malloc(sizeof(t_shape));
 	s->parent = NULL;
 	s->group = NULL;
+	s->triangle = NULL;
 	s->transform = create_id_matrix();
 	s->invtrans = minvert(s->transform, 4);
 	s->local_normal_at = local_normal_at_plane;
@@ -188,6 +193,7 @@ t_shape	*cube(void)
 	s = malloc(sizeof(t_shape));
 	s->parent = NULL;
 	s->group = NULL;
+	s->triangle = NULL;
 	s->transform = create_id_matrix();
 	s->invtrans = minvert(s->transform, 4);
 	s->local_normal_at = local_normal_at_cube;
@@ -203,6 +209,7 @@ t_shape	*cylinder(void)
 	s = malloc(sizeof(t_shape));
 	s->parent = NULL;
 	s->group = NULL;
+	s->triangle = NULL;
 	s->transform = create_id_matrix();
 	s->invtrans = minvert(s->transform, 4);
 	s->local_normal_at = local_normal_at_cyl;
@@ -221,6 +228,7 @@ t_shape	*cone(void)
 	s = malloc(sizeof(t_shape));
 	s->parent = NULL;
 	s->group = NULL;
+	s->triangle = NULL;
 	s->transform = create_id_matrix();
 	s->invtrans = minvert(s->transform, 4);
 	s->local_normal_at = local_normal_at_cone;

@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/27 17:43:58 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/27 21:03:54 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ typedef struct s_shape
 	float			**transform;
 	float			**invtrans;
 	t_material		*m;
+	t_tri			*triangle;
 	t_ray			saved_ray;
 	float			minimum;
 	float			maximum;
@@ -457,7 +458,9 @@ t_canvas		*canvas_from_ppm(char *filename);
 t_rgb			pixel_at(t_canvas *canvas, int x, int y);
 
 //triangles.c
-t_tri			*triangle(t_tuple p1, t_tuple p2, t_tuple p3);
+t_shape			*triangle(t_tuple p1, t_tuple p2, t_tuple p3);
+t_tuple			local_normal_at_triangle(t_shape *s, t_tuple local_point);
+t_intersection	*local_intersect_triangle(t_shape *s, t_ray r);
 
 //free.c
 int				free_matrices_and_ret(t_shape *p, int ret);
@@ -476,5 +479,5 @@ t_world			default_world_4(void);
 t_world			default_world_5(void);
 t_world			default_world_6(void);
 t_world			default_world_cyl(void);
-t_world			default_world_group_test(void);
+t_world			default_world_tri_test(void);
 #endif

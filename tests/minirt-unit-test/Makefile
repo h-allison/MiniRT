@@ -116,6 +116,11 @@ SRCS := \
 	$(SRC_DIR_CONES)/03_test_cones_intersect_caps.c \
 	$(SRC_DIR_TRIANGLES)/00_test_triangles_launcher.c \
 	$(SRC_DIR_TRIANGLES)/01_test_triangles_create.c \
+	$(SRC_DIR_TRIANGLES)/02_test_triangles_normal_at.c \
+	$(SRC_DIR_TRIANGLES)/03_test_triangles_ray_parallel.c \
+	$(SRC_DIR_TRIANGLES)/04_test_triangles_ray_misses_p1-p3.c \
+	$(SRC_DIR_TRIANGLES)/05_test_triangles_ray_misses_p1-p2-p3.c \
+	$(SRC_DIR_TRIANGLES)/06_test_triangles_ray_strikes.c \
 	$(SRC_DIR_GROUPS)/00_test_groups_launcher.c \
 	$(SRC_DIR_GROUPS)/01_test_groups_basic.c \
 	$(SRC_DIR_GROUPS)/02_test_groups_has_parent.c \
