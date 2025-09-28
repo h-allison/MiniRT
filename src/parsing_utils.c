@@ -12,6 +12,37 @@
 
 #include "minirt.h"
 
+/*
+	angle_1 is the angle on a triangle from (0,0,0) to the x,y point in v
+	angle_1 is calculated using cos(theta) = adjacent / hypotenuse,
+	where adjacent is y and hypotenuse is the square root of (X^2 + Y^2)
+
+	angle_2 is the angle between the the (x,y,z) point and the hypotenuse
+	of the first triangle.
+
+	In "angle[1] = facos(hypot_0 / 1)", dividing by 1 is redundant, but
+	serves to illustrate that the hypotenuse of the second triangle will
+	always be 1, because it it measures the length of the unit vector.
+
+	During the angle_1 calculations, a check is needed to avoid 
+	dividing by zero. The hypotenuse will be 0 if (v.x == 0 && v.y == 0).
+	In that case, angle_1 = 90 degrees. This is because v is normalized,
+	and if x & y are both 0, then z must be 1 or -1. It is necessary to
+	rotate down from the y axis by 90 degrees to point to the z axis.
+*/
+
+void vector_to_radians(t_tuple v, float angle[2])
+{
+	float	hypot_0;
+
+	hypot_0 = sqrtf(v.y * v.y + v.x * v.x);
+	if (fisequal(hypot_0, 0))
+		angle[0] = M_PI_2;
+	else
+		angle[0] = acosf(v.y / hypot_0);
+	angle[1] = acosf(hypot_0 / 1);
+}
+
 bool	btwn_negative_and_positive_1(t_tuple t)
 {
 	if (t.x < -1 || t.x > 1)

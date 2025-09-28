@@ -27,15 +27,21 @@ int	parse_sphere_color(char *token, t_shape *s)
 	return (0);
 }
 
+// 27.09 Switched back to diameter from radius - This matches our previous default_world()
 int	parse_sphere_diameter(char *token, t_shape *s)
 {
 	float	diameter;
+//	float	radius;
 	
 	diameter = 0;
 	if (rt_atof(token, &diameter) != 0)
 		return (rt_error("sp: sphere diameter: invalid input", -1));
-//	printf("Sphere diameter = %f\n", diameter);
-	set_transform(s, scaling(diameter, diameter, diameter));
+//	radius = diameter / 2;
+//	printf("Sphere radius = %f\n", radius);
+//	s->transform = mmultfree(scaling(radius, radius, radius), s->transform);
+	s->transform = mmultfree(scaling(diameter, diameter, diameter), s->transform);
+	free_matrix(s->invtrans, 4);
+	s->invtrans = minvert(s->transform, 4);
 	return (0);
 }
 
@@ -47,7 +53,9 @@ int	parse_sphere_position(char *token, t_shape *s)
 		return (rt_error("sp: sphere position: invalid input", -1));
 //	printf("\nSphere position = %f, %f, %f, %f\n", coords.x,
 //		coords.y, coords.z, coords.w);
-	set_transform(s, translation(coords.x, coords.y, coords.z));
+	s->transform = mmultfree(translation(coords.x, coords.y, coords.z), s->transform);
+	free_matrix(s->invtrans, 4);
+	s->invtrans = minvert(s->transform, 4);
 	return (0);
 }
 
@@ -71,24 +79,17 @@ static int	mandatory_tokens_found(char **tokens)
 int	parse_sphere(char **tokens, t_world *world, int *s_i)
 {
 	static int	sp_i;
-	int			i;
-	int			(*func[4])(char *tokens, t_shape *shape);
-	func[0] = parse_sphere_position;
-	func[1] = parse_sphere_diameter;
-	func[2] = parse_sphere_color;
-	func[3] = NULL;
 	if (mandatory_tokens_found(tokens) != 0)
 		return (-1);
-	i = 0;
 	world->s[*s_i] = sphere();
 	if (!world->s[*s_i])
 		exit(1);
-	while (func[i])
-	{
-		if (func[i](tokens[i + 1], world->s[*s_i]) != 0)
-			return (-1);
-		i++;
-	}
+	if (parse_sphere_color(tokens[3], world->s[*s_i]) != 0)
+		return (-1);
+	if (parse_sphere_diameter(tokens[2], world->s[*s_i]) != 0)
+		return (-1);
+	if (parse_sphere_position(tokens[1], world->s[*s_i]) != 0)
+		return (-1);
 	(*s_i)++;
 	sp_i++;
 	if (sp_i > (world->checklist->count_sphere))

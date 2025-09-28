@@ -37,6 +37,36 @@ t_world	default_world(void)
 	return (w);
 }
 
+t_world	default_world_rotation(void)
+{
+	t_world	w;
+	t_shape	*s1;
+	t_shape	*s2;
+	t_light	*light;
+
+	light = point_light(point(-10, 10, -10), color(255, 255, 255));
+	s1 = sphere();
+	s1->m->color = color(255, 0, 0);
+//	s1->m->diffuse = 0.7;
+//*	s1->m->specular = 0.2;
+	s2 = sphere();
+	s2->m->color = color(0, 255, 0);
+	w.s = ft_calloc(5, sizeof(t_shape *));
+	w.s[0] = s1;
+	w.s[1] = s2;
+	w.light = ft_calloc(2, sizeof(t_light *));
+	if (!w.light)
+		exit (1);
+	w.light[0] = light;
+	s1->transform = mmultfree(rotation_x(90 * DEG2RAD), s1->transform);
+	free_matrix(s1->invtrans, 4);
+	s2->invtrans = minvert(s1->transform, 4);
+	s2->transform = mmultfree(rotation_x(90 * DEG2RAD), s2->transform);
+	free_matrix(s2->invtrans, 4);
+	s2->invtrans = minvert(s2->transform, 4);
+	return (w);
+}
+
 t_world	default_world_2(void)
 {
 	t_world	w;

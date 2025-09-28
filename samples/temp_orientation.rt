@@ -1,0 +1,106 @@
+
+*ORIGINAL SUBJECT INPUT
+*A 	0.2									255,255,255
+*C 	-50,0,20		0,0,1 		70
+*L	-40,50,0					0.7			255,255,255
+*pl 	0,0,0 			0,1,0					255,0,255
+*sp	0,0,20						20			255,0,0
+*cy	50,0,20.6 		0,0,1.0		14.2 21.42	10,0,255
+
+*******************************************************************************
+* This a temp file testing the use of object rotations
+*******************************************************************************
+A 	0.2									255,255,255
+*******************************************************************************
+* 	camera vector = normalized (point(0,1,0) - point(-2,2,-6))
+*					 = normalized(vector(2,-1,6))
+*				
+*														(M_PI/3) * RAD2DEG = 60
+ C 	-2,2,-6			 0,0,1				60
+*******************************************************************************
+* plane
+pl	0,0,0			1,0,0			200,200,200
+*pl	0,0,0			0.707107,0,0.707107			200,200,200
+*pl	0,0,0			0.707107,0,0.707107					255,255,200
+*******************************************************************************
+* spheres
+*sp	-0.5,1,0.5		1					26,150,200
+*sp	1.5,0.5,-0.5	0.5					128,255,26
+*sp	-1.5,0.33,-0.75	0.33				255,204,26
+*******************************************************************************
+L	-10,10,-10		1					255,255,255
+*******************************************************************************
+*******************************************************************************
+*
+*	t_world	default_world(void)
+*	{
+*	t_world	w;
+*	t_shape	*floor;
+*	t_shape	*middle;
+*	t_shape	*right;
+*	t_shape	*left;
+*
+*	floor = plane();
+*	floor->invtrans = minvert(floor->transform, 4);
+*	floor->m->color = color(255, 230, 230);
+*	floor->m->diffuse = .4;
+*	floor->m->ambient = 0;
+*	floor->m->specular = 0;
+*	floor->m->pattern = stripe_pattern(color(160, 130, 130), floor->m->color);
+*
+*	middle = sphere();
+*	middle->transform = mmultfree(translation(-0.5, 1, 0.5), middle->transform);
+*	middle->invtrans = minvert(middle->transform, 4);
+*	middle->m->color = color(26, 150, 200);
+*	middle->m->diffuse = 0.7;
+*	middle->m->specular = 0.3;
+*
+*	right = sphere();
+*	right->transform = mmultfree(scaling(0.5, 0.5, 0.5), right->transform);
+*	right->transform = mmultfree(translation(1.5, 0.5, -0.5), right->transform);
+*	right->invtrans = minvert(right->transform, 4);
+*	right->m->color = color(128, 255, 26);
+*	right->m->diffuse = 0.7;
+*	right->m->specular = 0.3;
+*
+*	left = sphere();
+*	left->transform = mmultfree(scaling(0.33, 0.33, 0.33), left->transform);
+*	left->transform = mmultfree(translation(-1.5, 0.33, -0.75), left->transform);
+*	left->invtrans = minvert(left->transform, 4);
+*	left->m->color = color(255, 204, 26);
+*	left->m->diffuse = 0.7;
+*	left->m->specular = 0.3;
+*
+*	w.light = ft_calloc(2, sizeof(t_light *));
+*	if (!w.light)
+*		exit (1);
+*	w.light[0] = point_light(point(-10, 10, -10), color(255, 255, 255));
+*
+*	w.s = ft_calloc(5, sizeof(t_shape *));
+*	w.s[0] = floor;
+*	w.s[1] = middle;
+*	w.s[2] = right;
+*	w.s[3] = left;
+*	}
+*
+*******************************************************************************
+* from rendering.c()
+* 
+*		cam = camera(WIN_WIDTH, WIN_HEIGHT, M_PI / 3);
+*		cam->transform = view_transform(point(-2, 2, -6),
+*				point(0, 1, 0), vector(0, 1, 0));
+*******************************************************************************
+* cam->transform from original default_world():
+* -0.937043 0.000000 0.312348 0.000000 
+* 0.048780 0.975610 0.146341 -0.975610 
+* -0.312348 0.156174 -0.937043 -6.559298 
+* 0.000000 0.000000 0.000000 1.000000
+* fov = 1.047198
+*******************************************************************************
+* cam->transform from this file, parsed:
+* -0.937043 0.000000 0.312348 0.000002 
+* 0.048781 0.975610 0.146342 -0.975609 
+* -0.312348 0.156174 -0.937043 -6.559299 
+* 0.000000 0.000000 0.000000 1.000000 
+* fov = 1.047198
+*******************************************************************************

@@ -41,6 +41,8 @@
 /*# define DEG2RAD  M_PI / 180.0
 # define RAD2DEG 180.0 / M_PI*/
 
+# define DEFAULT_UP vector(0, 1, 0)
+
 typedef enum e_error
 {
 	ERROR_WRONG_ARGS,
@@ -252,6 +254,7 @@ bool			btwn_negative_and_positive_1(t_tuple t);
 int				check_v_normalized(t_tuple v, char *element);
 void			debug_print_tokens(char **tokens);
 void    		debug_print_matrix(float **m);
+void			vector_to_radians(t_tuple v, float angle[2]);
 
 //rendering.c
 void			render(void *param);
@@ -462,4 +465,5 @@ t_world			default_world_5(void);
 t_world			default_world_6(void);
 t_world			default_world_cyl(void);
 t_world			default_world_group_test(void);
+t_world			default_world_rotation(void);
 #endif
