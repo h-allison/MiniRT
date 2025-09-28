@@ -32,14 +32,16 @@ int	parse_plane_orientation(char *token, t_shape *s)
 	t_tuple	v;
 	float	angle[2];
 
+	printf("Parsing plane orientation...\n");
 	v = vector(0, 0, 0);
 	if (rt_atof_tuple(token, &v) != 0)
 		return (rt_error("pl: plane orient: invalid input", -1));
 	if (check_v_normalized(v, "pl: plane orientation") != 0)
 		return (-1);
-	vector_to_radians(v, angle);
+	v = tnorm(v);
+	vector_to_rotation(v, angle);
 	s->transform = mmultfree(rotation_z(angle[0]), s->transform);
-	s->transform = mmultfree(rotation_x(angle[1]), s->transform);
+	s->transform = mmultfree(rotation_y(angle[1]), s->transform);
 	free_matrix(s->invtrans, 4);
 	s->invtrans = minvert(s->transform, 4);
 	return (0);
@@ -47,12 +49,13 @@ int	parse_plane_orientation(char *token, t_shape *s)
 
 int	parse_plane_position(char *token, t_shape *s)
 {
+	printf("Parsing plane position...\n");
 	t_tuple	coords;
 	coords = point(0, 0, 0);
 	if (rt_atof_tuple(token, &coords) != 0)
 		return (rt_error("pl: plane position: invalid input", -1));
-//	printf("\nPlane position = %f, %f, %f, %f\n", coords.x,
-//		coords.y, coords.z, coords.w);
+	printf("\nPlane position = %f, %f, %f, %f\n", coords.x,
+		coords.y, coords.z, coords.w);
 	s->transform = mmultfree(translation(coords.x, coords.y, coords.z), s->transform);
 	free_matrix(s->invtrans, 4);
 	s->invtrans = minvert(s->transform, 4);
@@ -83,6 +86,7 @@ int	parse_plane(char **tokens, t_world *world, int *s_i)
 		exit(1);
 	if (parse_plane_color(tokens[3], world->s[*s_i]) != 0)
 		return (-1);
+	world->s[*s_i]->m->pattern = checkers_pattern(color(80, 80, 100), world->s[*s_i]->m->color);
 	if (parse_plane_orientation(tokens[2], world->s[*s_i]) != 0)
 		return (-1);
 	if (parse_plane_position(tokens[1], world->s[*s_i]) != 0)

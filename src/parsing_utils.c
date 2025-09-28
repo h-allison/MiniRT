@@ -29,18 +29,49 @@
 	In that case, angle_1 = 90 degrees. This is because v is normalized,
 	and if x & y are both 0, then z must be 1 or -1. It is necessary to
 	rotate down from the y axis by 90 degrees to point to the z axis.
+
+	Additional check for hypot_0 > 1, which can happen due to float
+	imprecision. Needs bounding to 1 to avoid nan from acosf.
 */
 
-void vector_to_radians(t_tuple v, float angle[2])
+// BUG in this function = angles are always unsigned
+/*
+void vector_to_rotation(t_tuple v, float *angle)
 {
 	float	hypot_0;
 
+	angle[0] = atan2f(v.x, v.y);
 	hypot_0 = sqrtf(v.y * v.y + v.x * v.x);
+	if (hypot_0 > 1)
+		hypot_0 = 1;
 	if (fisequal(hypot_0, 0))
 		angle[0] = M_PI_2;
 	else
 		angle[0] = acosf(v.y / hypot_0);
 	angle[1] = acosf(hypot_0 / 1);
+	printf("hypot_0 = %f %i\n", hypot_0, hypot_0 > 1);
+	printf("angle[0] = %f, angle[1] = %f\n", angle[0], angle[1]);
+}
+*/
+
+void vector_to_rotation(t_tuple v, float *angle)
+{
+	float	hypot_0;
+
+	if (fisequal(v.x, 0))
+	{
+		angle[0] = -atan2f(v.z, v.y);
+		if (fisequal(v.z, 0))
+			angle[1] = 0;
+		else
+			angle[1] = -M_PI_2;
+	}
+	else
+	{
+		hypot_0 = sqrtf(v.y * v.y + v.x * v.x);
+		angle[0] = -atan2f(v.x, v.y);
+		angle[1] = -atan2f(v.z, hypot_0);
+	}
 }
 
 bool	btwn_negative_and_positive_1(t_tuple t)
@@ -56,21 +87,11 @@ bool	btwn_negative_and_positive_1(t_tuple t)
 
 int	check_v_normalized(t_tuple v, char *element)
 {
-	float	len;
-	t_tuple	n;
-
-//	if (!btwn_negative_and_positive_1(v))
-		//return (rt_error_e(element, "must be in range [-1.0, 1.0]", -1));
+	if (!btwn_negative_and_positive_1(v))
+		return (rt_error_e(element, "must be in range [-1.0, 1.0]", -1));
 	if (fisequal(v.x, 0) && fisequal(v.y, 0) && fisequal(v.z, 0))
 		return (rt_error_e(element, "cannot be zero", -1));
-	len = v.x * v.x + v.y * v.y + v.z * v.z;
-	if (!fisequal(len, 1))
-	{
-		n = tnorm(v);
-		rt_error_e(element, "must be normalized", -1);
-		printf("Hint: Your input normalized = %f, %f, %f\n", n.x, n.y, n.z);
-		return(-1);
-	}
+	v = tnorm(v);
 	return (0);
 }
 

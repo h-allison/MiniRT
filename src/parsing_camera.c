@@ -29,9 +29,6 @@ int	parse_camera_orient(char *token, t_tuple *orient)
 }
 
 // TODO malloc exit
-// 26.09 Changing "to back to from + orientation vector
-// because examples in the book suggest that "to" is a point
-// in space, not a normalized vector
 t_camera	*place_camera(t_tuple c_coords, t_tuple c_orient, float fov)
 {
 	t_camera	*cam;
@@ -44,7 +41,6 @@ t_camera	*place_camera(t_tuple c_coords, t_tuple c_orient, float fov)
 	to = tadd(c_coords, c_orient);
 	up = vector(0, 1, 0);
 	free(cam->transform);
-//	cam->transform = view_transform(c_coords, c_orient, up);
 	cam->transform = view_transform(c_coords, to, up);
 	return (cam);
 }	
@@ -78,6 +74,7 @@ int	parse_camera(char **tokens, t_data *data)
 		return (-1);
 	if (check_v_normalized(c_orient, "C: camera orientation") != 0)
 		return (-1);
+	c_orient = tnorm(c_orient);
 	if (!tokens[3])
 		return(rt_error("C: field of view: missing value", -1));
 	if (parse_camera_fov(tokens[3], &field_of_view) != 0)
@@ -86,10 +83,6 @@ int	parse_camera(char **tokens, t_data *data)
 	if (tokens[4])
 		return(rt_error("C: too many arguments", -1));
 	data->cam = place_camera(c_coords, c_orient, field_of_view);
-	printf("In parse_camera():\n"); // TODO delete
-	printf("cam->transform:\n"); // TODO delete
-	debug_print_matrix(data->cam->transform); // TODO delet
-	printf("fov: %f\n", data->cam->field_of_view); // TODO delete
 	return(0);
 }
 

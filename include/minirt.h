@@ -254,7 +254,7 @@ bool			btwn_negative_and_positive_1(t_tuple t);
 int				check_v_normalized(t_tuple v, char *element);
 void			debug_print_tokens(char **tokens);
 void    		debug_print_matrix(float **m);
-void			vector_to_radians(t_tuple v, float angle[2]);
+void			vector_to_rotation(t_tuple v, float *angle);
 
 //rendering.c
 void			render(void *param);

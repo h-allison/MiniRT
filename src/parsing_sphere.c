@@ -31,14 +31,11 @@ int	parse_sphere_color(char *token, t_shape *s)
 int	parse_sphere_diameter(char *token, t_shape *s)
 {
 	float	diameter;
-//	float	radius;
 	
 	diameter = 0;
 	if (rt_atof(token, &diameter) != 0)
 		return (rt_error("sp: sphere diameter: invalid input", -1));
-//	radius = diameter / 2;
 //	printf("Sphere radius = %f\n", radius);
-//	s->transform = mmultfree(scaling(radius, radius, radius), s->transform);
 	s->transform = mmultfree(scaling(diameter, diameter, diameter), s->transform);
 	free_matrix(s->invtrans, 4);
 	s->invtrans = minvert(s->transform, 4);

@@ -1,0 +1,117 @@
+
+*ORIGINAL SUBJECT INPUT
+*A 	0.2									255,255,255
+*C 	-50,0,20		0,0,1 		70
+*L	-40,50,0					0.7			255,255,255
+*pl 	0,0,0 			0,1,0					255,0,255
+*sp	0,0,20						20			255,0,0
+*cy	50,0,20.6 		0,0,1.0		14.2 21.42	10,0,255
+
+*******************************************************************************
+* This file replicates our default_world_4() scene
+* See commented-out code below for details
+*******************************************************************************
+A 	0.2									255,255,255
+*******************************************************************************
+* 	camera vector = normalized (point(0,1,0) - point(-2,2,-6))
+*					 = normalized(vector(2,-1,6))
+*				
+*														(M_PI/3) * RAD2DEG = 60
+ C 	-2,2,-6			 0.312348,-0.156174,0.937043				60
+*******************************************************************************
+* floor & wall
+pl	0,0,0			0,1,0					200,200,200
+pl	0,0,40			0,0,-1					80,0,0
+*******************************************************************************
+* spheres
+sp	-1.5,0.33,-0.75		0.33			255,128,128
+sp	-0.5,1,1.5			1				10,10,10
+sp	1.5,0.5,-0.5		0.5				140,100,255
+*******************************************************************************
+L	-7,7,-6				1				160,40,40
+L	7,7,-6				1				40,40,160
+L	-2,3,-6				1				40,160,40
+*******************************************************************************
+*******************************************************************************
+t_world	default_world_4(void)
+*{
+*	t_world	w;
+*	t_shape	*floor;
+*	t_shape	*wall_back;
+*	t_shape	*middle;
+*	t_shape	*right;
+*	t_shape	*left;
+*	
+*	floor = plane();
+*	floor->invtrans = minvert(floor->transform, 4);
+*	floor->m->color = color(200, 200, 200);
+*	floor->m->diffuse = 0.7;
+*	floor->m->ambient = 0.0;
+*	floor->m->specular = 0.1;
+*	floor->m->reflective = 0.1;
+*	floor->m->pattern = checkers_pattern(color(100, 80, 60), floor->m->color);
+*
+*	wall_back = plane();
+*	wall_back->transform = mmultfree(rotation_x(M_PI / 2), wall_back->transform);
+*	wall_back->transform = mmultfree(translation(0, 0, 40), wall_back->transform);
+*	wall_back->invtrans = minvert(wall_back->transform, 4);
+*	wall_back->m->color = color(80, 0, 0);
+*	wall_back->m->diffuse = 0.5;
+*	wall_back->m->ambient = 0;
+*	wall_back->m->specular = 0;
+*	wall_back->m->pattern = gradient_pattern(wall_back->m->color, color(0, 0, 180)) ; 
+*	wall_back->m->pattern->transform = mmultfree(scaling(18, 1, 1), wall_back->m->pattern->transform);
+*	wall_back->m->pattern->transform = mmultfree(rotation_y(90 * DEG2RAD), wall_back->m->pattern->transform);
+*	wall_back->m->pattern->invtrans = minvert(wall_back->m->pattern->transform, 4);
+*
+*	left = sphere();
+*	left->transform = mmultfree(scaling(0.33, 0.33, 0.33), left->transform);
+*	left->transform = mmultfree(translation(-1.5, 0.33, -0.75), left->transform);
+*	left->invtrans = minvert(left->transform, 4);
+*	left->m->color = color(255, 128, 128);
+*	left->m->diffuse = 0.7;
+*	left->m->specular = 0.5;
+*
+*	middle = sphere();
+*	middle->transform = mmultfree(translation(-0.5, 1, 1.5), middle->transform);
+*	middle->invtrans = minvert(middle->transform, 4);
+*	middle->m->color = color(10, 10, 10);
+*	middle->m->diffuse = 1;
+*	middle->m->specular = 0.1;
+*	middle->m->reflective = 1;
+*
+*	right = sphere();
+*	right->transform = mmultfree(scaling(0.5, 0.5, 0.5), right->transform);
+*	right->transform = mmultfree(translation(1.5, 0.5, -0.5), right->transform);
+*	right->invtrans = minvert(right->transform, 4);
+*	right->m->color = color(140, 100, 255);
+*	right->m->diffuse = 0.7;
+*	right->m->specular = 0.4;
+*	right->m->pattern = ring_pattern(color(20, 80, 60), right->m->color);
+*	right->m->pattern->transform = mmultfree(scaling(0.1, 0.2, 0.2), right->m->pattern->transform);
+*	right->m->pattern->invtrans = minvert(right->m->pattern->transform, 4);
+*
+*	w.light = ft_calloc(4, sizeof(t_light *));
+*	if (!w.light)
+*		exit (1);
+*	w.light[0] = point_light(point(-7, 7, -6), color(160, 40, 40));
+*	w.light[0]->last = false;
+*	w.light[1] = point_light(point(7, 7, -6), color(40, 40, 160));
+*	w.light[1]->last = false;
+*	w.light[2] = point_light(point(-2, 3, -6), color(40, 160, 40));
+*
+*	w.s = ft_calloc(6, sizeof(t_shape *));
+*	w.s[0] = floor;
+*	w.s[1] = wall_back;
+*	w.s[2] = middle;
+*	w.s[3] = right;
+*	w.s[4] = left;
+*	return (w);
+*}
+*******************************************************************************
+* from rendering.c()
+* 
+*		cam = camera(WIN_WIDTH, WIN_HEIGHT, M_PI / 3);
+*		cam->transform = view_transform(point(-2, 2, -6),
+*				point(0, 1, 0), vector(0, 1, 0));
+*******************************************************************************
