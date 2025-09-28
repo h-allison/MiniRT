@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/27 21:03:54 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/28 14:22:22 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,13 +219,19 @@ typedef struct s_data
 
 typedef struct s_tminmax
 {
-	float	xtmin;
-	float	ytmin;
-	float	ztmin;
-	float	xtmax;
-	float	ytmax;
-	float	ztmax;
+	float		xtmin;
+	float		ytmin;
+	float		ztmin;
+	float		xtmax;
+	float		ytmax;
+	float		ztmax;
 }	t_tminmax;
+
+typedef	struct	s_parser
+{
+	size_t		ignored;
+	t_tuple		*vertices;
+}	t_parser;
 
 //check_file.c
 int				scenefile_check_chars(char *filename);
@@ -461,6 +467,9 @@ t_rgb			pixel_at(t_canvas *canvas, int x, int y);
 t_shape			*triangle(t_tuple p1, t_tuple p2, t_tuple p3);
 t_tuple			local_normal_at_triangle(t_shape *s, t_tuple local_point);
 t_intersection	*local_intersect_triangle(t_shape *s, t_ray r);
+
+//obj_files/c
+t_parser		*parse_obj_file(char *filename);
 
 //free.c
 int				free_matrices_and_ret(t_shape *p, int ret);

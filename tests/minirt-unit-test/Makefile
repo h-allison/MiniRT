@@ -23,6 +23,7 @@ SRC_DIR_TRIANGLES := tests_triangles
 SRC_DIR_GROUPS := tests_groups
 SRC_DIR_PATTERNS := tests_patterns
 SRC_DIR_TEXTURES := tests_textures
+SRC_DIR_OBJ_FILES := tests_obj_files
 SRC_DIR_REFLECT := tests_reflection
 SRC_DIR_REFRACT := tests_refraction
 
@@ -77,6 +78,10 @@ SRCS := \
 	$(SRC_DIR_TEXTURES)/05_test_textures_rgb_span.c \
 	$(SRC_DIR_TEXTURES)/06_test_textures_rgb_scaling.c \
 	$(SRC_DIR_TEXTURES)/07_test_textures_2D_checkers.c \
+	$(SRC_DIR_OBJ_FILES)/00_test_obj_files_launcher.c \
+	$(SRC_DIR_OBJ_FILES)/01_test_obj_files_gibberish.c \
+	$(SRC_DIR_OBJ_FILES)/02_test_obj_files_vertices.c \
+	$(SRC_DIR_OBJ_FILES)/03_test_obj_files_faces.c \
 	$(SRC_DIR_REFLECT)/00_test_reflect_launcher.c \
 	$(SRC_DIR_REFLECT)/01_test_reflective.c \
 	$(SRC_DIR_REFLECT)/02_test_reflect_comps.c \
@@ -164,6 +169,7 @@ SRCS := \
 	$(PRG_DIR)/src/uv_mapping.c \
 	$(PRG_DIR)/src/textures.c \
 	$(PRG_DIR)/src/triangles.c \
+	$(PRG_DIR)/src/obj_parser.c \
 	$(PRG_DIR)/src/world_scenes.c \
 	$(PRG_DIR)/src/free.c \
 	$(LIBFT_DIR)/ft_lstadd_back.c\
