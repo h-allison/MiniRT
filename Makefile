@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/09/29 19:58:13 by mmillhof         ###   ########.fr        #
+#    Updated: 2025/09/29 20:27:03 by hallison         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,11 @@ SRC         := src/main.c \
                src/parsing_plane.c \
                src/parsing_sphere.c \
                src/parsing_cyl.c \
+               src/parsing_cyl_2.c \
                src/parsing_cube.c \
+               src/parsing_cube_2.c \
                src/parsing_cone.c \
+               src/parsing_cone_2.c \
                src/parsing_checklist.c \
                src/parsing_atof.c \
                src/parsing_atorgb.c \

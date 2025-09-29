@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:51:51 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/29 16:36:19 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/29 20:32:45 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,12 @@ int	parse_plane_orientation(char *token, t_shape *s)
 
 int	parse_plane_position(char *token, t_shape *s)
 {
-	t_tuple	coords;
-	coords = point(0, 0, 0);
-	if (rt_atof_tuple(token, &coords) != 0)
+	t_tuple	pos;
+
+	pos = point(0, 0, 0);
+	if (rt_atof_tuple(token, &pos) != 0)
 		return (rt_error("pl: plane position: invalid input", -1));
-	s->transform = mmultfree(translation(coords.x, coords.y, coords.z), s->transform);
+	s->transform = mmultfree(translation(pos.x, pos.y, pos.z), s->transform);
 	free_matrix(s->invtrans, 4);
 	s->invtrans = minvert(s->transform, 4);
 	return (0);
@@ -70,9 +71,11 @@ static int	mandatory_tokens_found(char **tokens)
 }
 
 // TODO remove pl_i and pl_i check later
+// TODO remove pattern
 int	parse_plane(char **tokens, t_world *world, int *s_i)
 {
 	static int	pl_i;
+
 	if (mandatory_tokens_found(tokens) != 0)
 		return (-1);
 	world->s[*s_i] = plane();
@@ -81,7 +84,8 @@ int	parse_plane(char **tokens, t_world *world, int *s_i)
 	if (parse_plane_color(tokens[3], world->s[*s_i]) != 0)
 		return (-1);
 	free_pattern(world->s[*s_i]->m->pattern);
-	world->s[*s_i]->m->pattern = checkers_pattern(color(80, 80, 100), world->s[*s_i]->m->color);
+	world->s[*s_i]->m->pattern = checkers_pattern(color(80, 80, 100),
+			world->s[*s_i]->m->color);
 	if (parse_plane_orientation(tokens[2], world->s[*s_i]) != 0)
 		return (-1);
 	if (parse_plane_position(tokens[1], world->s[*s_i]) != 0)
@@ -89,6 +93,6 @@ int	parse_plane(char **tokens, t_world *world, int *s_i)
 	(*s_i)++;
 	pl_i++;
 	if (pl_i > (world->checklist->count_plane))
-		return (rt_error("parse_plane: more planes encountered than counted", -1));
+		return (rt_error("parse_plane: more planes than counted", -1));
 	return (0);
 }

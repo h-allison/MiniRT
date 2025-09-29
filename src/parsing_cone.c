@@ -6,10 +6,9 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:27:53 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/29 19:08:17 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/29 20:09:10 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minirt.h"
 
@@ -26,26 +25,7 @@ int	parse_cone_color(char *token, t_shape *s)
 	return (0);
 }
 
-int	parse_cone_orientation(char *token, t_shape *s)
-{
-	t_tuple	v;
-	float	angle[2];
-	
-	v = vector(0, 0, 0);
-	if (rt_atof_tuple(token, &v) != 0)
-		return (rt_error("cn: cone orient: invalid input", -1));
-	v = tnorm(v);
-	if (check_v_normalized(v, "cn: cone orientation") != 0)
-		return (-1);
-	vector_to_rotation(v, angle);
-	s->transform = mmultfree(rotation_z(angle[0]), s->transform);
-	s->transform = mmultfree(rotation_y(angle[1]), s->transform);
-	free_matrix(s->invtrans, 4);
-	s->invtrans = minvert(s->transform, 4);
-	return (0);
-}
-
-int	parse_cone_diameter_and_height(char *d_token, char *h_token, t_shape *s)
+int	parse_cone_diam_and_height(char *d_token, char *h_token, t_shape *s)
 {
 	float	diameter;
 	float	height;
@@ -57,18 +37,6 @@ int	parse_cone_diameter_and_height(char *d_token, char *h_token, t_shape *s)
 	if (rt_atof(h_token, &height) != 0)
 		return (rt_error("cn: cone height: invalid input", -1));
 	s->transform = mmultfree(scaling(diameter, height, diameter), s->transform);
-	free_matrix(s->invtrans, 4);
-	s->invtrans = minvert(s->transform, 4);
-	return (0);
-}
-
-int	parse_cone_position(char *token, t_shape *s)
-{
-	t_tuple	coords;
-	coords = point(0, 0, 0);
-	if (rt_atof_tuple(token, &coords) != 0)
-		return (rt_error("cn: cone position: invalid input", -1));
-	s->transform = mmultfree(translation(coords.x, coords.y, coords.z), s->transform);
 	free_matrix(s->invtrans, 4);
 	s->invtrans = minvert(s->transform, 4);
 	return (0);
@@ -98,9 +66,9 @@ int	set_cone_min_max(char **tokens, t_shape *s)
 
 	if (tokens[6] && tokens[7])
 	{
-		if(rt_atof(tokens[6], &min) != 0)
+		if (rt_atof(tokens[6], &min) != 0)
 			return (rt_error("cn: cone minimum: invalid input", -1));
-		if(rt_atof(tokens[7], &max) != 0)
+		if (rt_atof(tokens[7], &max) != 0)
 			return (rt_error("cn: cone maximum: invalid input", -1));
 		s->minimum = min;
 		s->maximum = max;
@@ -110,13 +78,14 @@ int	set_cone_min_max(char **tokens, t_shape *s)
 		s->minimum = -0.5;
 		s->maximum = 0.5;
 	}
-	return(0);
+	return (0);
 }
 
 // TODO remove cone_i and cone_i check later
 int	parse_cone(char **tokens, t_world *world, int *s_i)
 {
 	static int	cone_i;
+
 	if (mandatory_tokens_found(tokens) != 0)
 		return (-1);
 	world->s[*s_i] = cone();
@@ -127,7 +96,7 @@ int	parse_cone(char **tokens, t_world *world, int *s_i)
 		return (-1);
 	if (parse_cone_color(tokens[5], world->s[*s_i]) != 0)
 		return (-1);
-	if (parse_cone_diameter_and_height(tokens[3], tokens[4], world->s[*s_i]) != 0)
+	if (parse_cone_diam_and_height(tokens[3], tokens[4], world->s[*s_i]) != 0)
 		return (-1);
 	if (parse_cone_orientation(tokens[2], world->s[*s_i]) != 0)
 		return (-1);
@@ -136,6 +105,6 @@ int	parse_cone(char **tokens, t_world *world, int *s_i)
 	(*s_i)++;
 	cone_i++;
 	if (cone_i > (world->checklist->count_cone))
-		return (rt_error("parse_cone: more cones encountered than counted", -1));
+		return (rt_error("parse_cone: more cones parsed than counted", -1));
 	return (0);
 }

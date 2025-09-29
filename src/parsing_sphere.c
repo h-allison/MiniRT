@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:51:51 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/29 18:48:48 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/29 20:34:57 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,13 @@ int	parse_sphere_color(char *token, t_shape *s)
 int	parse_sphere_diameter(char *token, t_shape *s)
 {
 	float	diameter;
-	
+	float	rad;
+
 	diameter = 0;
 	if (rt_atof(token, &diameter) != 0)
 		return (rt_error("sp: sphere diameter: invalid input", -1));
-	s->transform = mmultfree(scaling(diameter / 2, diameter / 2, diameter / 2), s->transform);
+	rad = diameter / 2;
+	s->transform = mmultfree(scaling(rad, rad, rad), s->transform);
 	free_matrix(s->invtrans, 4);
 	s->invtrans = minvert(s->transform, 4);
 	return (0);
@@ -40,11 +42,12 @@ int	parse_sphere_diameter(char *token, t_shape *s)
 
 int	parse_sphere_position(char *token, t_shape *s)
 {
-	t_tuple	coords;
-	coords = point(0, 0, 0);
-	if (rt_atof_tuple(token, &coords) != 0)
+	t_tuple	pos;
+
+	pos = point(0, 0, 0);
+	if (rt_atof_tuple(token, &pos) != 0)
 		return (rt_error("sp: sphere position: invalid input", -1));
-	s->transform = mmultfree(translation(coords.x, coords.y, coords.z), s->transform);
+	s->transform = mmultfree(translation(pos.x, pos.y, pos.z), s->transform);
 	free_matrix(s->invtrans, 4);
 	s->invtrans = minvert(s->transform, 4);
 	return (0);
@@ -70,6 +73,7 @@ static int	mandatory_tokens_found(char **tokens)
 int	parse_sphere(char **tokens, t_world *world, int *s_i)
 {
 	static int	sp_i;
+
 	if (mandatory_tokens_found(tokens) != 0)
 		return (-1);
 	world->s[*s_i] = sphere();
@@ -84,6 +88,6 @@ int	parse_sphere(char **tokens, t_world *world, int *s_i)
 	(*s_i)++;
 	sp_i++;
 	if (sp_i > (world->checklist->count_sphere))
-		return (rt_error("parse_sphere: more spheres encountered than counted", -1));
+		return (rt_error("parse_sphere: more spheres than counted", -1));
 	return (0);
 }

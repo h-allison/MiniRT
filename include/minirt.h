@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/29 19:57:30 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/29 20:26:28 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,8 +265,13 @@ int				parse_light_bonus(char **tokens, t_light *light);
 int				parse_plane(char **tokens, t_world *worldi, int *s_i);
 int				parse_sphere(char **tokens, t_world *world, int *s_i);
 int				parse_cyl(char **tokens, t_world *world, int *s_i);
+int				parse_cyl_position(char *token, t_shape *s);
 int				parse_cube(char **tokens, t_world *world, int *s_i);
+int				parse_cube_position(char *token, t_shape *s);
+int				parse_cube_orientation(char *token, t_shape *s);
 int				parse_cone(char **tokens, t_world *world, int *s_i);
+int				parse_cone_orientation(char *token, t_shape *s);
+int				parse_cone_position(char *token, t_shape *s);
 void			distribute_ambient(t_world *world);
 int				rt_atof(const char *str, float *f);
 int				rt_atorgb(const char *str, t_rgb *rgb);

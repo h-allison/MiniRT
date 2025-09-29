@@ -6,13 +6,13 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 12:32:13 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/29 17:21:33 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/29 20:35:39 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void vector_to_rotation(t_tuple v, float *angle)
+void	vector_to_rotation(t_tuple v, float *angle)
 {
 	float	hypot_0;
 

@@ -6,10 +6,9 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:27:53 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/29 18:01:19 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/29 20:19:00 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minirt.h"
 
@@ -20,66 +19,27 @@ int	parse_cube_color(char *token, t_shape *s)
 	col_255 = color(0, 0, 0);
 	if (rt_atorgb(token, &col_255) != 0)
 		return (rt_error("cb: cube color: invalid input", -1));
-//	printf("Sphere color rgb = %f, %f, %f\n", col_255.r, col_255.g, col_255.b);
 	if (!valid_rgb_range(col_255))
 		return (rt_error("cb: rgb values must be in range [0,255]", -1));
 	s->m->color = color(col_255.r, col_255.g, col_255.b);
-//	printf("Sphere color t_rgb = %f, %f, %f\n", s->m->color.r, s->m->color.g, s->m->color.b);
 	return (0);
 }
 
-int	parse_cube_orientation(char *token, t_shape *s)
+int	parse_cube_diam_and_height(char *d_token, char *h_token, t_shape *s)
 {
-	t_tuple	v;
-	float	angle[2];
-	
-	v = vector(0, 0, 0);
-	if (rt_atof_tuple(token, &v) != 0)
-		return (rt_error("cb: cube orient: invalid input", -1));
-	v = tnorm(v);
-//	printf("Cyl orientation = %f, %f, %f, %f\n", v.x,
-//		v.y, v.z, v.w);
-	if (check_v_normalized(v, "cb: cube orientation") != 0)
-		return (-1);
-	vector_to_rotation(v, angle);
-	//if (!fisequal(v.x, 0))
-	s->transform = mmultfree(rotation_z(angle[0]), s->transform);
-	s->transform = mmultfree(rotation_y(angle[1]), s->transform);
-	free_matrix(s->invtrans, 4);
-	s->invtrans = minvert(s->transform, 4);
-	return (0);
-}
+	float	diam;
+	float	ht;
+	float	rad;
 
-// TODO went back to using diameter for sphere
-// same here?
-int	parse_cube_diameter_and_height(char *d_token, char *h_token, t_shape *s)
-{
-	float	diameter;
-	float	height;
-
-	diameter = 0;
-	if (rt_atof(d_token, &diameter) != 0)
+	diam = 0;
+	if (rt_atof(d_token, &diam) != 0)
 		return (rt_error("cb: cube diameter: invalid input", -1));
-	printf("Cyl diameter = %f\n", diameter);
-	height = 0;
-	if (rt_atof(h_token, &height) != 0)
+	rad = diam / 2;
+	ht = 0;
+	if (rt_atof(h_token, &ht) != 0)
 		return (rt_error("cb: cube height: invalid input", -1));
-	printf("Cyl height = %f\n", height);
-	s->transform = mmultfree(scaling(diameter * 0.5, height * 0.5, diameter* 0.5), s->transform);
-	free_matrix(s->invtrans, 4);
-	s->invtrans = minvert(s->transform, 4);
-	return (0);
-}
-
-int	parse_cube_position(char *token, t_shape *s)
-{
-	t_tuple	coords;
-	coords = point(0, 0, 0);
-	if (rt_atof_tuple(token, &coords) != 0)
-		return (rt_error("cb: cube position: invalid input", -1));
-//	printf("\nCyl position = %f, %f, %f, %f\n", coords.x,
-//		coords.y, coords.z, coords.w);
-	s->transform = mmultfree(translation(coords.x, coords.y, coords.z), s->transform);
+	printf("Cyl height = %f\n", ht);
+	s->transform = mmultfree(scaling(rad, rad, rad), s->transform);
 	free_matrix(s->invtrans, 4);
 	s->invtrans = minvert(s->transform, 4);
 	return (0);
@@ -109,6 +69,7 @@ static int	mandatory_tokens_found(char **tokens)
 int	parse_cube(char **tokens, t_world *world, int *s_i)
 {
 	static int	cube_i;
+
 	if (mandatory_tokens_found(tokens) != 0)
 		return (-1);
 	world->s[*s_i] = cube();
@@ -116,7 +77,7 @@ int	parse_cube(char **tokens, t_world *world, int *s_i)
 		exit(1);
 	if (parse_cube_color(tokens[5], world->s[*s_i]) != 0)
 		return (-1);
-	if (parse_cube_diameter_and_height(tokens[3], tokens[4], world->s[*s_i]) != 0)
+	if (parse_cube_diam_and_height(tokens[3], tokens[4], world->s[*s_i]) != 0)
 		return (-1);
 	if (parse_cube_orientation(tokens[2], world->s[*s_i]) != 0)
 		return (-1);
@@ -125,6 +86,6 @@ int	parse_cube(char **tokens, t_world *world, int *s_i)
 	(*s_i)++;
 	cube_i++;
 	if (cube_i > (world->checklist->count_cube))
-		return (rt_error("parse_cube: more cubes encountered than counted", -1));
+		return (rt_error("parse_cube: more cubes than counted", -1));
 	return (0);
 }
