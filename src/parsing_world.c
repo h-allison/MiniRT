@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:55:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/29 14:02:49 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/29 18:56:32 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	distribute_ambient(t_world *world)
 	int	i;
 
 	i = 0;
-	while(world->s[i] != NULL)
+	while (world->s[i] != NULL)
 	{
 		world->s[i]->m->ambient = world->ambient_ratio;
 		i++;
@@ -41,7 +41,7 @@ int	parse_singular_element(char **tokens, t_world *world, t_data *data)
 		if (parse_light(tokens, world) == -1)
 			return (-1);
 	}
-	return (0);	
+	return (0);
 }
 
 int	rt_strcmp(char *token, char *s2)
@@ -49,7 +49,7 @@ int	rt_strcmp(char *token, char *s2)
 	int	i;
 
 	i = 0;
-	while (token[i] != '\0'  && s2[i] != '\0')
+	while (token[i] != '\0' && s2[i] != '\0')
 	{
 		if (token[i] != s2[i])
 			return (-1);
@@ -62,9 +62,9 @@ int	rt_strcmp(char *token, char *s2)
 
 int	parse_shape(char **tokens, t_world *world)
 {
-	int		ret;
+	int			ret;
 	static int	s_i;
-	
+
 	ret = 0;
 	if (rt_strcmp(tokens[0], "pl") == 0)
 		ret = parse_plane(tokens, world, &s_i);
@@ -74,14 +74,12 @@ int	parse_shape(char **tokens, t_world *world)
 		ret = parse_cyl(tokens, world, &s_i);
 	else if (rt_strcmp(tokens[0], "cb") == 0)
 		ret = parse_cube(tokens, world, &s_i);
-/*
 	else if (rt_strcmp(tokens[0], "cn") == 0)
 		ret = parse_cone(tokens, world, &s_i);
-*/
 	else
 	{
 		debug_print_tokens(tokens);
-		return(rt_error("parse_shape: unknown shape", -1));
+		return (rt_error("parse_shape: unknown shape", -1));
 	}
 	return (ret);
 }

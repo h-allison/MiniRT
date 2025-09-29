@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:27:53 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/29 13:22:23 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/29 18:49:14 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	parse_cyl_diameter_and_height(char *d_token, char *h_token, t_shape *s)
 	if (rt_atof(h_token, &height) != 0)
 		return (rt_error("cy: cyl height: invalid input", -1));
 //	printf("Cyl height = %f\n", height);
-	s->transform = mmultfree(scaling(diameter, height, diameter), s->transform);
+	s->transform = mmultfree(scaling(diameter / 2 , height, diameter / 2), s->transform);
 	free_matrix(s->invtrans, 4);
 	s->invtrans = minvert(s->transform, 4);
 	return (0);

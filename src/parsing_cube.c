@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:27:53 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/29 13:55:28 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/29 18:01:19 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ int	parse_cube_diameter_and_height(char *d_token, char *h_token, t_shape *s)
 	diameter = 0;
 	if (rt_atof(d_token, &diameter) != 0)
 		return (rt_error("cb: cube diameter: invalid input", -1));
-//	printf("Cyl diameter = %f\n", diameter);
+	printf("Cyl diameter = %f\n", diameter);
 	height = 0;
 	if (rt_atof(h_token, &height) != 0)
 		return (rt_error("cb: cube height: invalid input", -1));
-//	printf("Cyl height = %f\n", height);
-	s->transform = mmultfree(scaling(diameter, height, diameter), s->transform);
+	printf("Cyl height = %f\n", height);
+	s->transform = mmultfree(scaling(diameter * 0.5, height * 0.5, diameter* 0.5), s->transform);
 	free_matrix(s->invtrans, 4);
 	s->invtrans = minvert(s->transform, 4);
 	return (0);

@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/09/28 14:19:45 by mmillhof         ###   ########.fr        #
+#    Updated: 2025/09/29 17:52:09 by hallison         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,6 @@
 NAME        := miniRT
 
 SRC         := src/main.c \
-               src/check_file.c \
                src/file_helpers.c \
                src/parsing_1.c \
                src/parsing_tokens.c \
@@ -27,6 +26,8 @@ SRC         := src/main.c \
                src/parsing_sphere.c \
                src/parsing_cyl.c \
                src/parsing_cube.c \
+               src/parsing_cone.c \
+               src/parsing_checklist.c \
                src/parsing_atof.c \
                src/parsing_atorgb.c \
                src/parsing_atof_tuple.c \
