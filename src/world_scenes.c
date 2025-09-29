@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 18:12:31 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/24 16:22:49 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/27 22:14:48 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -429,6 +429,7 @@ t_world	default_world_cyl(void)
 {
 	t_world	w;
 	t_shape	*floor;
+	t_shape	*sky;
 	t_shape	*big;
 	t_shape	*middle;
 	t_shape	*right;
@@ -444,7 +445,16 @@ t_world	default_world_cyl(void)
 	floor->m->specular = 0.2;
 	floor->m->reflective = .2;
 	floor->m->pattern = ring_pattern(color(80, 80, 80), floor->m->color);
-
+	
+	sky = sphere();
+	sky->transform = mmultfree(scaling(100, 100, 100), sky->transform);
+	sky->invtrans = minvert(sky->transform, 4);
+	sky->m->color = color(0, 0, 0);
+	sky->m->ambient = 1;
+	sky->m->diffuse = 0;
+	sky->m->specular = 0;
+	sky->m->pattern = texture_map(uv_image(canvas_from_ppm("samples/textures/sky.ppm")), spherical_map);
+	
 	big = sphere();
 	big->transform = mmultfree(translation(.5, 1, 4), big->transform);
 	big->invtrans = minvert(big->transform, 4);
@@ -459,7 +469,7 @@ t_world	default_world_cyl(void)
 	left->maximum = 2;
 	left->closed = true;
 	left->transform = mmultfree(scaling(0.5, 0.5, 0.5), left->transform);
-	left->transform = mmultfree(translation(-2.5, 0.3, 2), left->transform);
+	left->transform = mmultfree(translation(-2.5, 0, 2), left->transform);
 	left->invtrans = minvert(left->transform, 4);
 	left->m->color = color(20, 0, 10);
 	left->m->diffuse = 1;
@@ -485,10 +495,10 @@ t_world	default_world_cyl(void)
 	right->minimum = -1;
 	right->maximum = 1;
 	right->closed = true;
-	right->transform = mmultfree(rotation_z(90 * DEG2RAD), right->transform);
+	right->transform = mmultfree(scaling(1, 0.5, 1), right->transform);
+	right->transform = mmultfree(rotation_z(70 * DEG2RAD), right->transform);
 	right->transform = mmultfree(rotation_y(75 * DEG2RAD), right->transform);
-	right->transform = mmultfree(scaling(1, 1, 1), right->transform);
-	right->transform = mmultfree(translation(6, 1, 3), right->transform);
+	right->transform = mmultfree(translation(5, 2, 2), right->transform);
 	right->invtrans = minvert(right->transform, 4);
 	right->m->color = color(220, 220, 220);
 	right->m->ambient = 0.3;
@@ -503,7 +513,7 @@ t_world	default_world_cyl(void)
 	cub = cube();
 	cub->transform = mmultfree(rotation_y(30 * DEG2RAD), cub->transform);
 	cub->transform = mmultfree(scaling(0.33, 0.33, 0.33), cub->transform);
-	cub->transform = mmultfree(translation(-1.8, 0.33, -1), cub->transform);
+	cub->transform = mmultfree(translation(-2, 0.33, 0), cub->transform);
 	cub->invtrans = minvert(cub->transform, 4);
 	cub->m->color = color(0, 50, 100);
 	cub->m->diffuse = .9;
@@ -511,11 +521,7 @@ t_world	default_world_cyl(void)
 	cub->m->specular = 0.6;
 	cub->m->reflective = 0.1;
 	cub->m->pattern = texture_map(uv_checkers(4, 4, color(70, 100, 0), cub->m->color), cube_map);
-	cub->m->pattern->transform = mmultfree(scaling(1, 1, 1), cub->m->pattern->transform);
-	cub->m->pattern->transform = mmultfree(translation(0, 0, 0), cub->m->pattern->transform);
-	cub->m->pattern->transform = mmultfree(rotation_z(90 * DEG2RAD), cub->m->pattern->transform);
-	cub->m->pattern->invtrans = minvert(cub->m->pattern->transform, 4);
-	
+
 	hex = hexagon();
 	hex->transform = mmultfree(scaling(1, 1, 1), hex->transform);
 	hex->transform = mmultfree(translation(3.5, .2, 0), hex->transform);
@@ -524,52 +530,84 @@ t_world	default_world_cyl(void)
 	w.light = ft_calloc(3, sizeof(t_light *));
 	if (!w.light)
 		exit (1);
-	w.light[0] = point_light(point(-7, 7, -6), color(200, 200, 180));
-	w.light[0]->last = false;
-	w.light[1] = point_light(point(-4, 8, 2), color(180, 120, 120));
+	w.light[0] = point_light(point(-10,40, 70), color(255, 220, 200));
 
 	w.s = ft_calloc(9, sizeof(t_shape *));
 	w.s[0] = floor;
-	w.s[1] = big;
-	w.s[2] = middle;
-	w.s[3] = right;
-	w.s[4] = left;
-	w.s[5] = cub;
-	w.s[6] = hex;
+	w.s[1] = sky;
+	w.s[2] = big;
+	w.s[3] = middle;
+	w.s[4] = right;
+	w.s[5] = left;
+	w.s[6] = cub;
+	w.s[7] = hex;
 	return (w);
 }
 
-t_world	default_world_group_test(void)
+t_world	default_world_tri_test(void)
 {
 	t_world	w;
-//	t_shape	*floor;
-	t_shape	*hex;
+	t_shape	*floor;
+	t_shape	*sky;
+	t_shape	*tri1;
+	t_shape	*tri2;
+	t_shape	*tri3;
+	t_shape	*tri4;
 	t_light	*light;
-/*	
+	
 	floor = plane();
 	floor->m->color = color(200, 200, 200);
-	floor->m.diffuse = 0.4;
-	floor->m.ambient = 0;
-	floor->m.specular = 0.2;
-	floor->m.reflective = .2;
-	free_matrix(floor->m.pattern.transform, 4);
-	free_matrix(floor->m.pattern.invtrans, 4);
-	floor->m.pattern = checkers_pattern(color(0, 0, 0), floor->m->color);
-*/
-	hex = hexagon();
-	set_transform(hex, translation(0, 1, 0));
-	hex->m->color = color(0, 50, 100);
-	hex->m->diffuse = 0.3;
-	hex->m->ambient = 0.2;
-	hex->m->specular = 0;
-	hex->m->reflective = 0;
+	floor->m->diffuse = 0.4;
+	floor->m->ambient = 0;
+	floor->m->specular = 0.2;
+	floor->m->reflective = 0;
+	floor->m->pattern = checkers_pattern(color(33, 33, 0), floor->m->color);
 
-	light = point_light(point(-7, 7, -6), color(255, 255, 255));
-	w.s = calloc(4, sizeof(*w.s));
+	sky = sphere();
+	sky->transform = mmultfree(scaling(100, 100, 100), sky->transform);
+	sky->invtrans = minvert(sky->transform, 4);
+	sky->m->color = color(0, 0, 0);
+	sky->m->ambient = 1;
+	sky->m->diffuse = 0;
+	sky->m->specular = 0;
+	sky->m->pattern = texture_map(uv_image(canvas_from_ppm("samples/textures/sky_night.ppm")), spherical_map);
+
+	tri1 = triangle(point(-1, 0, -1), point(1, 0, -1), point(0, 1, 0));
+	tri1->m->color = color(100, 80, 0);
+	tri1->m->reflective = 0.1;
+	tri1->m->refractive_index = 1.52;
+	tri1->m->transparency = .6;
+	tri1->m->ambient = 0.2;
+	tri2 = triangle(point(1, 0, -1), point(1, 0, 1), point(0, 1, 0));
+	tri2->m->color = color(100, 80, 0);
+	tri2->m->reflective = 0.1;
+	tri2->m->transparency = .6;
+	tri2->m->refractive_index = 1.52;
+	tri2->m->ambient = 0.2;
+	tri3 = triangle(point(1, 0, 1), point(-1, 0, 1), point(0, 1, 0));
+	tri3->m->color = color(100, 80, 0);
+	tri3->m->reflective = 0.1;
+	tri3->m->transparency = .6;
+	tri3->m->refractive_index = 1.52;
+	tri3->m->ambient = 0.2;
+	tri4 = triangle(point(-1, 0, 1), point(-1, 0, -1), point(0, 1, 0));
+	tri4->m->color = color(100, 80, 0);
+	tri1->m->reflective = 0.1;
+	tri4->m->transparency = .6;
+	tri4->m->refractive_index = 1.52;
+	tri4->m->ambient = 0.2;
+
+	light = point_light(point(-7, 20, -6), color(180, 170, 160));
+	w.s = calloc(7, sizeof(*w.s));
 	if (!w.s)
 		exit (1);
-//	w.s[0] = floor;
-	w.s[0] = hex;
+	w.s[0] = floor;
+	w.s[1] = sky;
+	w.s[2] = tri1;
+	w.s[3] = tri2;
+	w.s[4] = tri3;
+	w.s[5] = tri4;
+	w.s[6] = NULL;
 	w.light = ft_calloc(2, sizeof(t_light *));
 	if (!w.light)
 		exit (1);

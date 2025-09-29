@@ -6,24 +6,11 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 17:03:46 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/23 01:44:32 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/25 01:26:31 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shapes_tests.h"
-
-static int	free_matrices_and_return(t_shape *p, int ret)
-{
-	if (p->transform)
-		free_matrix(p->transform, 4);
-	if (p->invtrans)
-		free_matrix(p->invtrans, 4);
-	if (p->m->pattern->transform)
-		free_matrix(p->m->pattern->transform, 4);
-	if (p->m->pattern->invtrans)
-		free_matrix(p->m->pattern->invtrans, 4);
-	return (ret);
-}
 
 int test_shape_basic(void)
 {
@@ -43,12 +30,14 @@ int test_shape_basic(void)
 			if (!fisequal(s->transform[y][x], idm[y][x]))
 			{
 				free_matrix(idm, 4);
-				return(free_matrices_and_return(s, -1));
+				free_shape(s);
+				return(-1);
 			}
 			x++;
 		}
 		y++;
 	}
 	free_matrix(idm, 4);
-	return(free_matrices_and_return(s, 0));
+	free_shape(s);
+	return(0);
 }

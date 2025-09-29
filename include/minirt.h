@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/29 13:43:05 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/28 14:22:22 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include <stdlib.h>
 # include <errno.h>
 
-# define WIN_WIDTH 800
-# define WIN_HEIGHT 600
+# define WIN_WIDTH 1024
+# define WIN_HEIGHT 768
 
 # define MAX_RECURSION 4
 # define OFFSET	 0.001
@@ -66,6 +66,16 @@ typedef struct s_rgb
 	float			b;
 }	t_rgb;
 
+typedef struct s_tri
+{
+	t_tuple			p1;
+	t_tuple			p2;
+	t_tuple			p3;
+	t_tuple			e1;
+	t_tuple			e2;
+	t_tuple			normal;
+}	t_tri;
+
 typedef struct s_pattern t_pattern;
 
 typedef struct	s_canvas
@@ -90,8 +100,8 @@ typedef struct s_pattern
 	float			**transform;
 	float			**invtrans;
 	t_rgb			(*pattern_at)(t_pattern *, t_tuple);
-	t_rgb			(*uv_pattern_at)(t_pattern *, t_tuple);
 	t_tuple			(*map)(t_tuple);
+	t_pattern		*uv_pattern;
 	t_canvas		*canvas;
 	bool			status;
 }	t_pattern;
@@ -134,6 +144,7 @@ typedef struct s_shape
 	float			**transform;
 	float			**invtrans;
 	t_material		*m;
+	t_tri			*triangle;
 	t_ray			saved_ray;
 	float			minimum;
 	float			maximum;
@@ -210,13 +221,19 @@ typedef struct s_data
 
 typedef struct s_tminmax
 {
-	float	xtmin;
-	float	ytmin;
-	float	ztmin;
-	float	xtmax;
-	float	ytmax;
-	float	ztmax;
+	float		xtmin;
+	float		ytmin;
+	float		ztmin;
+	float		xtmax;
+	float		ytmax;
+	float		ztmax;
 }	t_tminmax;
+
+typedef	struct	s_parser
+{
+	size_t		ignored;
+	t_tuple		*vertices;
+}	t_parser;
 
 //check_file.c
 int				scenefile_check_chars(char *filename);
@@ -282,7 +299,7 @@ t_camera		*camera(float hsize, float vsize, float field_of_view);
 t_tuple			point(float x, float y, float z);
 t_tuple			vector(float x, float y, float z);
 t_rgb			color(float r, float g, float b);
-t_rgb			color_scale(float r, float g, float b, float scaling);
+t_rgb			colorsc(float r, float g, float b, float scaling);
 
 //create_matrices.c
 void			free_matrix(float **m, int size);
@@ -340,6 +357,7 @@ float			mdet(float **m, int size);
 float			**minvert(float **m, int size);
 float			**minvert_free(float **m, int size);
 bool			minvertable(float **m, int size);
+void			mcopy(float ***m, float ***m2, int size);
 
 //math_transform.c
 float			**translation(float x, float y, float z);
@@ -452,10 +470,22 @@ t_tuple			cube_uv_down(t_tuple point);
 t_canvas		*canvas_from_ppm(char *filename);
 t_rgb			pixel_at(t_canvas *canvas, int x, int y);
 
+//triangles.c
+t_shape			*triangle(t_tuple p1, t_tuple p2, t_tuple p3);
+t_tuple			local_normal_at_triangle(t_shape *s, t_tuple local_point);
+t_intersection	*local_intersect_triangle(t_shape *s, t_ray r);
+
+//obj_files/c
+t_parser		*parse_obj_file(char *filename);
+
 //free.c
 int				free_matrices_and_ret(t_shape *p, int ret);
-void			free_shape(t_shape *s);
 void			free_world(t_world *w);
+void			free_shape(t_shape *s);
+void			free_material(t_material *m);
+void			free_pattern(t_pattern *p);	
+void			free_canvas(t_canvas *c);
+void			free_largs(t_largs *l);	
 
 //world_scenes.c
 t_world			default_world(void);
@@ -467,4 +497,5 @@ t_world			default_world_6(void);
 t_world			default_world_cyl(void);
 t_world			default_world_group_test(void);
 t_world			default_world_rotation(void);
+t_world			default_world_tri_test(void);
 #endif

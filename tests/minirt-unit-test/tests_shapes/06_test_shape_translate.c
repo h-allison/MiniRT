@@ -6,24 +6,11 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 18:35:47 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/23 01:55:56 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/25 01:39:15 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shapes_tests.h"
-
-static int	free_matrices_and_return(t_shape *p, int ret)
-{
-	if (p->transform)
-		free_matrix(p->transform, 4);
-	if (p->invtrans)
-		free_matrix(p->invtrans, 4);
-	if (p->m->pattern->transform)
-		free_matrix(p->m->pattern->transform, 4);
-	if (p->m->pattern->invtrans)
-		free_matrix(p->m->pattern->invtrans, 4);
-	return (ret);
-}
 
 int test_shape_translate(void)
 {
@@ -35,11 +22,11 @@ int test_shape_translate(void)
 	set_transform(s, translation(5, 0, 0));
 	intersect(s, r);
 	if (fisequal(s->saved_ray.origin.x, -5)
-			&& fisequal(s->saved_ray.origin.y, 0)
-			&& fisequal(s->saved_ray.origin.z, -5))
-		if (fisequal(s->saved_ray.direction.x, 0)
-				&& fisequal(s->saved_ray.direction.y, 0)
-				&& fisequal(s->saved_ray.direction.z, 1))
-			return (free_matrices_and_return(s, 0));
-	return (free_matrices_and_return(s, -1));
+			||!fisequal(s->saved_ray.origin.y, 0)
+			|| !fisequal(s->saved_ray.origin.z, -5)
+			|| !fisequal(s->saved_ray.direction.x, 0)
+			|| !fisequal(s->saved_ray.direction.y, 0)
+			|| !fisequal(s->saved_ray.direction.z, 1))
+		return (free_shape(s), 0);
+	return (free_shape(s), -1);
 }

@@ -6,11 +6,11 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:38:56 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/23 17:32:25 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/27 17:31:41 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cones_tests.h"
+#include "textures_tests.h"
 
 int	test_textures_wrong_header(void)
 {

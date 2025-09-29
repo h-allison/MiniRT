@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:06:34 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/23 03:25:42 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/26 16:40:56 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ int test_shadehit_reflective_and_transparent(void)
 	
 	col = shade_hit(&w, &comps, 5);
 	xs[0].object = NULL;
+	free_world(&w);
 	if (!fisequal(col.r, 0.933891))
 		return (-1);
 	if (!fisequal(col.g, 0.696412))
 		return (-1);
 	if (!fisequal(col.b, 0.692405))
 		return (-1);
-	free_world(&w);
 	return (0);
 }

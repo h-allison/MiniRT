@@ -6,11 +6,19 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 23:02:50 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/23 02:58:50 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/26 16:36:02 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "refraction_tests.h"
+
+
+static void	free_shapes(t_shape *sa, t_shape *sb, t_shape *sc)
+{
+	free_shape(sa);
+	free_shape(sb);
+	free_shape(sc);
+}
 
 int test_refract_find_n1_n2(void)
 {
@@ -36,24 +44,21 @@ int test_refract_find_n1_n2(void)
 	xs = intersections(intersection(5.25, sc), intersection(6, sa));
 	comps = prepare_computations(&xs[0], &r, xs);
 	if (!fisequal(comps.n1, 1) || !fisequal(comps.n2, 1.5))
-		return (-1);
+		return (free_shapes(sa, sb, sc), -1);
 	comps = prepare_computations(&xs[1], &r, xs);
 	if (!fisequal(comps.n1, 1.5) || !fisequal(comps.n2, 2))
-		return (-1);
+		return (free_shapes(sa, sb, sc), -1);
 	comps = prepare_computations(&xs[2], &r, xs);
 	if (!fisequal(comps.n1, 2) || !fisequal(comps.n2, 2.5))
-		return (-1);
+		return (free_shapes(sa, sb, sc), -1);
 	comps = prepare_computations(&xs[3], &r, xs);
 	if (!fisequal(comps.n1, 2.5) || !fisequal(comps.n2, 2.5))
-		return (-1);
+		return (free_shapes(sa, sb, sc), -1);
 	comps = prepare_computations(&xs[4], &r, xs);
 	if (!fisequal(comps.n1, 2.5) || !fisequal(comps.n2, 1.5))
-		return (-1);
+		return (free_shapes(sa, sb, sc), -1);
 	comps = prepare_computations(&xs[5], &r, xs);
 	if (!fisequal(comps.n1, 1.5) || !fisequal(comps.n2, 1))
-		return (-1);
-	free_shape(sa);
-	free_shape(sb);
-	free_shape(sc);
-	return (0);
+		return (free_shapes(sa, sb, sc), -1);
+	return (free_shapes(sa, sb, sc), 0);
 }

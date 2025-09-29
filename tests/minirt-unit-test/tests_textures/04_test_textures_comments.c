@@ -6,11 +6,11 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:38:56 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/24 01:11:37 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/27 17:32:19 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cones_tests.h"
+#include "textures_tests.h"
 
 static bool	cisequal(t_rgb a, t_rgb b)
 {
@@ -31,6 +31,6 @@ int	test_textures_comments(void)
 	if (!canvas
 			|| !cisequal(pixel_at(canvas, 0, 0), (t_rgb){1, 1, 1})
 			|| !cisequal(pixel_at(canvas, 1, 0), (t_rgb){1, 0, 1}))
-		return (-1);
-	return (0);
+		return (free_canvas(canvas), -1);
+	return (free_canvas(canvas), 0);
 }

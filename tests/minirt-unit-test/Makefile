@@ -19,9 +19,11 @@ SRC_DIR_SHAPES := tests_shapes
 SRC_DIR_PLANES := tests_planes
 SRC_DIR_CUB_CYL := tests_cub_cyl
 SRC_DIR_CONES := tests_cones
+SRC_DIR_TRIANGLES := tests_triangles
 SRC_DIR_GROUPS := tests_groups
 SRC_DIR_PATTERNS := tests_patterns
 SRC_DIR_TEXTURES := tests_textures
+SRC_DIR_OBJ_FILES := tests_obj_files
 SRC_DIR_REFLECT := tests_reflection
 SRC_DIR_REFRACT := tests_refraction
 
@@ -76,6 +78,10 @@ SRCS := \
 	$(SRC_DIR_TEXTURES)/05_test_textures_rgb_span.c \
 	$(SRC_DIR_TEXTURES)/06_test_textures_rgb_scaling.c \
 	$(SRC_DIR_TEXTURES)/07_test_textures_2D_checkers.c \
+	$(SRC_DIR_OBJ_FILES)/00_test_obj_files_launcher.c \
+	$(SRC_DIR_OBJ_FILES)/01_test_obj_files_gibberish.c \
+	$(SRC_DIR_OBJ_FILES)/02_test_obj_files_vertices.c \
+	$(SRC_DIR_OBJ_FILES)/03_test_obj_files_faces.c \
 	$(SRC_DIR_REFLECT)/00_test_reflect_launcher.c \
 	$(SRC_DIR_REFLECT)/01_test_reflective.c \
 	$(SRC_DIR_REFLECT)/02_test_reflect_comps.c \
@@ -113,6 +119,13 @@ SRCS := \
 	$(SRC_DIR_CONES)/01_test_cones_intersect.c \
 	$(SRC_DIR_CONES)/02_test_cones_intersect_parallel.c \
 	$(SRC_DIR_CONES)/03_test_cones_intersect_caps.c \
+	$(SRC_DIR_TRIANGLES)/00_test_triangles_launcher.c \
+	$(SRC_DIR_TRIANGLES)/01_test_triangles_create.c \
+	$(SRC_DIR_TRIANGLES)/02_test_triangles_normal_at.c \
+	$(SRC_DIR_TRIANGLES)/03_test_triangles_ray_parallel.c \
+	$(SRC_DIR_TRIANGLES)/04_test_triangles_ray_misses_p1-p3.c \
+	$(SRC_DIR_TRIANGLES)/05_test_triangles_ray_misses_p1-p2-p3.c \
+	$(SRC_DIR_TRIANGLES)/06_test_triangles_ray_strikes.c \
 	$(SRC_DIR_GROUPS)/00_test_groups_launcher.c \
 	$(SRC_DIR_GROUPS)/01_test_groups_basic.c \
 	$(SRC_DIR_GROUPS)/02_test_groups_has_parent.c \
@@ -155,6 +168,8 @@ SRCS := \
 	$(PRG_DIR)/src/groups.c \
 	$(PRG_DIR)/src/uv_mapping.c \
 	$(PRG_DIR)/src/textures.c \
+	$(PRG_DIR)/src/triangles.c \
+	$(PRG_DIR)/src/obj_parser.c \
 	$(PRG_DIR)/src/world_scenes.c \
 	$(PRG_DIR)/src/free.c \
 	$(LIBFT_DIR)/ft_lstadd_back.c\
