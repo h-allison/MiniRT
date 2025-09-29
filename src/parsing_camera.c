@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:51:51 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/24 15:58:44 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/29 12:59:43 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,12 @@ t_camera	*place_camera(t_tuple c_coords, t_tuple c_orient, float fov)
 	if (!cam)
 		exit (1);
 	to = tadd(c_coords, c_orient);
-	up = vector(0, 1, 0);
+	
+	if (fisequal(c_orient.x, 0) && fisequal(c_orient.y, 1) && fisequal(c_orient.z, 0))
+		up = vector(0, .9, 0);
+	else 
+		up = vector(0, 1, 0);
+//	up = vector(0, 1, 0);
 	free(cam->transform);
 	cam->transform = view_transform(c_coords, to, up);
 	return (cam);
