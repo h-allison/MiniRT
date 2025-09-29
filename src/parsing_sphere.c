@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:51:51 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/24 14:15:09 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/29 18:48:48 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,12 @@ int	parse_sphere_color(char *token, t_shape *s)
 	col_255 = color(0, 0, 0);
 	if (rt_atorgb(token, &col_255) != 0)
 		return (rt_error("sp: sphere color: invalid input", -1));
-//	printf("Sphere color rgb = %f, %f, %f\n", col_255.r, col_255.g, col_255.b);
 	if (!valid_rgb_range(col_255))
 		return (rt_error("sp: rgb values must be in range [0,255]", -1));
 	s->m->color = color(col_255.r, col_255.g, col_255.b);
-//	printf("Sphere color t_rgb = %f, %f, %f\n", s->m->color.r, s->m->color.g, s->m->color.b);
 	return (0);
 }
 
-// 27.09 Switched back to diameter from radius - This matches our previous default_world()
 int	parse_sphere_diameter(char *token, t_shape *s)
 {
 	float	diameter;
@@ -35,8 +32,7 @@ int	parse_sphere_diameter(char *token, t_shape *s)
 	diameter = 0;
 	if (rt_atof(token, &diameter) != 0)
 		return (rt_error("sp: sphere diameter: invalid input", -1));
-//	printf("Sphere radius = %f\n", radius);
-	s->transform = mmultfree(scaling(diameter, diameter, diameter), s->transform);
+	s->transform = mmultfree(scaling(diameter / 2, diameter / 2, diameter / 2), s->transform);
 	free_matrix(s->invtrans, 4);
 	s->invtrans = minvert(s->transform, 4);
 	return (0);
@@ -48,8 +44,6 @@ int	parse_sphere_position(char *token, t_shape *s)
 	coords = point(0, 0, 0);
 	if (rt_atof_tuple(token, &coords) != 0)
 		return (rt_error("sp: sphere position: invalid input", -1));
-//	printf("\nSphere position = %f, %f, %f, %f\n", coords.x,
-//		coords.y, coords.z, coords.w);
 	s->transform = mmultfree(translation(coords.x, coords.y, coords.z), s->transform);
 	free_matrix(s->invtrans, 4);
 	s->invtrans = minvert(s->transform, 4);

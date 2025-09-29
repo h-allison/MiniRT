@@ -6,7 +6,13 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/09/29 19:30:38 by mmillhof         ###   ########.fr       */
+||||||| 1f14918
+/*   Updated: 2025/09/29 16:45:07 by hallison         ###   ########.fr       */
+=======
+/*   Updated: 2025/09/29 17:56:50 by hallison         ###   ########.fr       */
+>>>>>>> hilary_norminette
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +31,8 @@
 # include <stdlib.h>
 # include <errno.h>
 
-# define WIN_WIDTH 1024 / 6
-# define WIN_HEIGHT 768 / 6
+# define WIN_WIDTH 1024 / 2
+# define WIN_HEIGHT 768 / 2
 
 # define MAX_RECURSION 4
 # define OFFSET	 0.001
@@ -253,7 +259,10 @@ void			img_wipe(t_data *data, t_rgb color);
 
 //parsing.c
 int				parse_file(char *filename, t_data *data);
+bool			is_space(char c);
 char			**get_element_tokens(char const *s);
+int				fill_checklist_count(t_data *data);
+void			init_checklist(t_world *world);
 int				parse_into_world(char **tokens, t_data *data);
 int				parse_ambient(char **tokens, t_world *world);
 int				parse_camera(char **tokens, t_data *data);
@@ -263,6 +272,7 @@ int				parse_plane(char **tokens, t_world *worldi, int *s_i);
 int				parse_sphere(char **tokens, t_world *world, int *s_i);
 int				parse_cyl(char **tokens, t_world *world, int *s_i);
 int				parse_cube(char **tokens, t_world *world, int *s_i);
+int				parse_cone(char **tokens, t_world *world, int *s_i);
 void			distribute_ambient(t_world *world);
 int				rt_atof(const char *str, float *f);
 int				rt_atorgb(const char *str, t_rgb *rgb);
