@@ -6,11 +6,29 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 19:12:15 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/29 19:20:18 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/29 19:52:33 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+/* TEST PATTERN */
+
+t_pattern	*create_test_pattern(void)
+{
+	t_pattern	*pat;
+
+	pat = malloc(sizeof(t_pattern));
+	pat->a = color(255, 255, 255);
+	pat->b = color(0, 0, 0);
+	pat->transform = create_id_matrix();
+	pat->invtrans = minvert(pat->transform, 4);
+	pat->pattern_at = &pattern_at;
+	pat->uv_pattern = NULL;
+	pat->canvas = NULL;
+	pat->status = true;
+	return (pat);
+}
 
 /* OLD FUNCTIONS */
 

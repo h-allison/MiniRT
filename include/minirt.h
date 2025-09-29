@@ -6,13 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/09/29 19:30:38 by mmillhof         ###   ########.fr       */
-||||||| 1f14918
-/*   Updated: 2025/09/29 16:45:07 by hallison         ###   ########.fr       */
-=======
-/*   Updated: 2025/09/29 17:56:50 by hallison         ###   ########.fr       */
->>>>>>> hilary_norminette
+/*   Updated: 2025/09/29 19:57:30 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,12 +284,8 @@ int				rt_error_e(char *element, char *msg, int ret);
 void			render_with_parsing(void *param);
 
 //create_objects.c
-t_shape			*create_test_shape(void);
-t_pattern		*create_test_pattern(void);
 t_pattern		*pattern(void);
 t_material		*material(void);
-t_shape			*glass_sphere(void);
-t_shape			*hexagon(void);
 t_light			*point_light(t_tuple position, t_rgb intensity);
 t_camera		*camera(float hsize, float vsize, float field_of_view);
 
@@ -422,6 +412,13 @@ t_intersection	*local_intersect_sphere(t_shape *s, t_ray r);
 t_shape			*triangle(t_tuple p1, t_tuple p2, t_tuple p3);
 t_tuple			local_normal_at_triangle(t_shape *s, t_tuple local_point);
 t_intersection	*local_intersect_triangle(t_shape *s, t_ray r);
+
+//sh_hexagon.c
+t_shape			*hexagon(void);
+
+//sh_test_shapes.c
+t_shape			*create_test_shape(void);
+t_shape			*glass_sphere(void);
 //************************************************************************
 
 //math_rays.c
@@ -495,6 +492,7 @@ t_pattern 		*uv_align_check(t_rgb main, t_rgb ul, t_rgb ur, t_rgb bl, t_rgb br);
 t_rgb			uv_align_check_at(t_pattern *align_check, t_tuple point);
 
 //pat_tests.c
+t_pattern		*create_test_pattern(void);
 t_rgb			stripe_at_object(t_pattern *pat, t_shape *object, t_tuple world_point);
 t_rgb			pattern_at(t_pattern *pat, t_tuple point);
 char			*face_from_point(t_tuple point);
