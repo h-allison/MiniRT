@@ -187,6 +187,7 @@ static int	obj_read_file(int fd, t_parser *parser)
 		if (status < 0 || (status == 0 && parser->vertices[0].y == 0 )) 
 			return (-1);
 	}
+	(void)i;
 	return (0);
 }
 

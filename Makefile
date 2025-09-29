@@ -125,8 +125,7 @@ all: $(NAME)
 
 # Compile C -> .o into build/
 $(OBJDIR)/%.o: src/%.c | $(OBJDIR)
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
-#	$(CC) $(CFLAGS) $(CPPFLAGS) -O3 -c $< -o $@
+	$(CC) $(CFLAGS) $(CPPFLAGS) -O3 -c $< -o $@
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
@@ -139,8 +138,13 @@ $(LIBFT):
 mlx42: $(MLX42_A)
 
 $(MLX42_A):
+	@if [ ! -d "$(MLX42_PATH)" ]; then \
+		if [ ! -d "$(MLX42_PATH)"]; then \
+			git clone https://github.com/codam-coding-college/MLX42.git $(MLX42_PATH); \
+	fi; \
 	cmake -S $(MLX42_PATH) -B $(MLX42_PATH)/build -DMLX42_BUILD_EXAMPLES=OFF
 	$(MAKE) -C $(MLX42_PATH)/build
+	fi
 
 # Build target
 $(NAME): $(OBJ) $(LIBFT) $(MLX42_A)
@@ -154,14 +158,14 @@ clean:
 fclean: clean
 	$(MAKE) -C $(LIBFT_PATH) fclean
 	rm -f $(NAME)
-	rm -rf $(MLX42_PATH)/build
+#	rm -rf $(MLX42_PATH)/build
 
 re: fclean all
 
 # ---- Debug/analysis profiles ----
 asan: CFLAGS  += -fsanitize=address -fsanitize=undefined -g
-asan: LDFLAGS += -fsanitize=address -fsanitize=undefined
-asan: fclean all
+asan: LDFLAGS += -fsanitize=address -fsanitize=undefined -g
+asan: $(NAME)
 
 gdb:  CFLAGS  += -g -O0
 gdb:  fclean all
