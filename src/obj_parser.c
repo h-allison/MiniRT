@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 12:09:09 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/28 20:11:15 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/28 20:24:25 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,12 +152,12 @@ static int	obj_add_vertex(int fd, t_parser *parser)
 	return (status);
 }
 
-static int	obj_add_group(int fd, t_parser *parser)
+static int	obj_add_face(int fd, t_parser *parser)
 {
 	(void)fd;
 	(void)parser;
 
-	printf("\nADD GROUP");
+	printf("\nADD FACE");
 	return (1);
 }
 
@@ -183,7 +183,7 @@ static int	obj_read_file(int fd, t_parser *parser)
 		if (buf == 'v')
 			status = obj_add_vertex(fd, parser);
 		if (buf == 'f')
-			status = obj_add_group(fd, parser);	
+			status = obj_add_face(fd, parser);	
 		if (status < 0 || (status == 0 && parser->vertices[0].y == 0 )) 
 			return (-1);
 	}
