@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:55:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/24 15:15:32 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/29 14:02:49 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	rt_strcmp(char *token, char *s2)
 	i = 0;
 	while (token[i] != '\0'  && s2[i] != '\0')
 	{
-		if (token[0] != s2[0])
+		if (token[i] != s2[i])
 			return (-1);
 		i++;
 	}
@@ -72,14 +72,17 @@ int	parse_shape(char **tokens, t_world *world)
 		ret = parse_sphere(tokens, world, &s_i);
 	else if (rt_strcmp(tokens[0], "cy") == 0)
 		ret = parse_cyl(tokens, world, &s_i);
-/*
-	else if (rt_strcmp(tokens[0], "cb"))
+	else if (rt_strcmp(tokens[0], "cb") == 0)
 		ret = parse_cube(tokens, world, &s_i);
-	else if (rt_strcmp(tokens[0], "cn"))
+/*
+	else if (rt_strcmp(tokens[0], "cn") == 0)
 		ret = parse_cone(tokens, world, &s_i);
 */
 	else
+	{
+		debug_print_tokens(tokens);
 		return(rt_error("parse_shape: unknown shape", -1));
+	}
 	return (ret);
 }
 

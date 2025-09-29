@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:27:53 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/24 15:16:47 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/29 13:22:23 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	parse_cyl_orientation(char *token, t_shape *s)
 	//if (!fisequal(v.x, 0))
 	s->transform = mmultfree(rotation_z(angle[0]), s->transform);
 	s->transform = mmultfree(rotation_y(angle[1]), s->transform);
-	printf("CYL angle[0] = %f, angle[1] = %f\n", angle[0], angle[1]);
 	free_matrix(s->invtrans, 4);
 	s->invtrans = minvert(s->transform, 4);
 	return (0);

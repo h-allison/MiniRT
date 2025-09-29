@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:51:51 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/24 16:47:31 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/29 14:36:06 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,9 @@ int	parse_plane_color(char *token, t_shape *s)
 	col_255 = color(0, 0, 0);
 	if (rt_atorgb(token, &col_255) != 0)
 		return (rt_error("pl: plane color: invalid input", -1));
-	printf("Plane color rgb = %f, %f, %f\n", col_255.r, col_255.g, col_255.b);
 	if (!valid_rgb_range(col_255))
 		return (rt_error("pl: rgb values must be in range [0,255]", -1));
 	s->m->color = color(col_255.r, col_255.g, col_255.b);
-	printf("Plane color t_rgb = %f, %f, %f\n", s->m->color.r, s->m->color.g, s->m->color.b);
 	return (0);
 }
 
@@ -32,7 +30,6 @@ int	parse_plane_orientation(char *token, t_shape *s)
 	t_tuple	v;
 	float	angle[2];
 
-	printf("Parsing plane orientation...\n");
 	v = vector(0, 0, 0);
 	if (rt_atof_tuple(token, &v) != 0)
 		return (rt_error("pl: plane orient: invalid input", -1));
@@ -49,13 +46,10 @@ int	parse_plane_orientation(char *token, t_shape *s)
 
 int	parse_plane_position(char *token, t_shape *s)
 {
-	printf("Parsing plane position...\n");
 	t_tuple	coords;
 	coords = point(0, 0, 0);
 	if (rt_atof_tuple(token, &coords) != 0)
 		return (rt_error("pl: plane position: invalid input", -1));
-	printf("\nPlane position = %f, %f, %f, %f\n", coords.x,
-		coords.y, coords.z, coords.w);
 	s->transform = mmultfree(translation(coords.x, coords.y, coords.z), s->transform);
 	free_matrix(s->invtrans, 4);
 	s->invtrans = minvert(s->transform, 4);

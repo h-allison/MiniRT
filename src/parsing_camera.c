@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:51:51 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/29 12:59:43 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/29 13:25:21 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,13 @@ t_camera	*place_camera(t_tuple c_coords, t_tuple c_orient, float fov)
 	if (!cam)
 		exit (1);
 	to = tadd(c_coords, c_orient);
-	
+/*	
 	if (fisequal(c_orient.x, 0) && fisequal(c_orient.y, 1) && fisequal(c_orient.z, 0))
 		up = vector(0, .9, 0);
 	else 
 		up = vector(0, 1, 0);
-//	up = vector(0, 1, 0);
+*/
+	up = vector(0, 1, 0);
 	free(cam->transform);
 	cam->transform = view_transform(c_coords, to, up);
 	return (cam);
@@ -56,7 +57,6 @@ int	parse_camera_fov(char *token, float *fov)
 		return(rt_error("C: field of view: invalid input", -1));
 	if (*fov < 0 || *fov > 180)
 		return(rt_error("C: field of view: must be in range [0, 180]", -1));
-	printf("Camera fov = %f\n", *fov);
 	return (0);
 }
 
@@ -84,7 +84,6 @@ int	parse_camera(char **tokens, t_data *data)
 		return(rt_error("C: field of view: missing value", -1));
 	if (parse_camera_fov(tokens[3], &field_of_view) != 0)
 		return (-1);
-	printf("back in parse_camera, Camera fov = %f\n", field_of_view);
 	if (tokens[4])
 		return(rt_error("C: too many arguments", -1));
 	data->cam = place_camera(c_coords, c_orient, field_of_view);

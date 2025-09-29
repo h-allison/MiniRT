@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/09/24 17:27:05 by mmillhof         ###   ########.fr        #
+#    Updated: 2025/09/29 13:42:16 by hallison         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRC         := src/main.c \
                src/parsing_plane.c \
                src/parsing_sphere.c \
                src/parsing_cyl.c \
+               src/parsing_cube.c \
                src/parsing_atof.c \
                src/parsing_atorgb.c \
                src/parsing_atof_tuple.c \
