@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   triangles.c                                        :+:      :+:    :+:   */
+/*   sh_triangle.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 17:37:09 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/27 20:55:24 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/29 20:44:05 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_shape	*triangle(t_tuple p1, t_tuple p2, t_tuple p3)
 {
 	t_tri	*tri;
 	t_shape	*t;
-	
+
 	tri = malloc(sizeof(t_tri));
 	tri->p1 = p1;
 	tri->p2 = p2;
@@ -60,7 +60,7 @@ t_intersection	*local_intersect_triangle(t_shape *t, t_ray r)
 	xs = intersections(intersection(0, NULL), intersection(0, NULL));
 	if (fabs(det) < EPSILON)
 		return (xs);
-	f = 1.0 / det;	
+	f = 1.0 / det;
 	p1_to_origin = tsub(r.origin, t->triangle->p1);
 	u = f * dot(p1_to_origin, dir_cross_e2);
 	if (u < 0 || u > 1)

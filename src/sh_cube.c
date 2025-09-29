@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:49:31 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/29 18:07:15 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/29 20:41:37 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,12 @@ t_intersection	*local_intersect_cube(t_shape *s, t_ray r)
 	float		tmin;
 	float		tmax;
 
-	check_axis(&t.xtmin, &t.xtmax,
-			r.origin.x, r.direction.x);
-	check_axis(&t.ytmin, &t.ytmax,
-			r.origin.y, r.direction.y);
-	check_axis(&t.ztmin, &t.ztmax,
-			r.origin.z, r.direction.z);
+	check_axis(&t.xtmin, &t.xtmax, r.origin.x, r.direction.x);
+	check_axis(&t.ytmin, &t.ytmax, r.origin.y, r.direction.y);
+	check_axis(&t.ztmin, &t.ztmax, r.origin.z, r.direction.z);
 	tmin = maxf(t.xtmin, t.ytmin, t.ztmin);
 	tmax = minf(t.xtmax, t.ytmax, t.ztmax);
 	if (tmin > tmax)
-		return(intersections(intersection(0, NULL), intersection(0,NULL)));
+		return (intersections(intersection(0, NULL), intersection(0, NULL)));
 	return (intersections(intersection(tmin, s), intersection(tmax, s)));
 }

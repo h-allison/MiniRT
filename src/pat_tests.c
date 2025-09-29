@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 19:12:15 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/29 19:52:33 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/29 20:33:26 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ char	*face_from_point(t_tuple point)
 	abs_y = fabs(point.y);
 	abs_z = fabs(point.z);
 	coord = maxf(abs_x, abs_y, abs_z);
-
 	if (coord == point.x)
 		return ("right");
 	if (coord == -point.x)

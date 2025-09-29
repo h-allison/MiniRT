@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 18:58:07 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/29 18:59:49 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/29 20:32:58 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,3 @@ t_rgb	checkers_at(t_pattern *checkers, t_tuple point)
 		return (checkers->a);
 	return (checkers->b);
 }
-

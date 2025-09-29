@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 14:56:16 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/23 01:30:39 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/29 20:48:41 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ void	swap_xs(t_intersection *a, t_intersection *b)
 	b->t = tmp_t;
 	b->object = tmp_o;
 	return ;
-}	
+}
 
 void	sort_intersections(t_intersection *xs)
 {
 	int		i;
 
 	i = 0;
-	while(xs[i + 1].object)
+	while (xs[i + 1].object)
 	{
 		if (xs[i].t > xs[i + 1].t)
 		{
@@ -48,7 +48,7 @@ t_intersection	*intersect_world(t_world *w, t_ray *r)
 {
 	int				i;
 	t_intersection	*xs;
-	
+
 	i = 0;
 	while (w->s[i])
 	{
@@ -61,7 +61,7 @@ t_intersection	*intersect_world(t_world *w, t_ray *r)
 void	lst_findobject(t_list *containers, t_shape *object)
 {
 	t_list	*new_next;
-	t_list  *new_node;
+	t_list	*new_node;
 
 	while (containers->next)
 	{
@@ -73,37 +73,36 @@ void	lst_findobject(t_list *containers, t_shape *object)
 				new_next = NULL;
 			free(containers->next);
 			containers->next = new_next;
-			return;
+			return ;
 		}
 		containers = containers->next;
 	}
 	new_node = ft_lstnew(object);
 	containers->next = new_node;
-	return;
+	return ;
 }
 
-void    clear_list(t_list **lst) 
+void	clear_list(t_list **lst)
 {
-    t_list  *node;
-    t_list  *temp;
+	t_list	*node;
+	t_list	*temp;
 
-    node = *lst;
-    while (node)
-    {   
-        temp = node->next;
-        free(node);
-        node = temp;
-    }
-    *lst = NULL;
+	node = *lst;
+	while (node)
+	{
+		temp = node->next;
+		free(node);
+		node = temp;
+	}
+	*lst = NULL;
 }
-
 
 void	prepare_n(t_comps *comps, t_intersection *ht, t_intersection *xs)
 {
 	t_list			*containers;
 	int				i;
 	t_shape			*object;
-	
+
 	containers = ft_lstnew(NULL);
 	i = 0;
 	while (xs && xs[i].object)
@@ -137,6 +136,7 @@ void	prepare_n(t_comps *comps, t_intersection *ht, t_intersection *xs)
 t_comps	prepare_computations(t_intersection *ht, t_ray *r, t_intersection *xs)
 {
 	t_comps	comps;
+
 	comps.t = ht->t;
 	comps.object = ht->object;
 	comps.point = position(*r, comps.t);

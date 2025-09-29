@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 18:58:07 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/29 19:05:16 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/29 20:36:31 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ t_rgb	uv_checkers_at(t_pattern *checkers, t_tuple uv)
 {
 	float	u2;
 	float	v2;
-	
+
 	u2 = floorf(uv.x * checkers->width);
 	v2 = floorf(uv.y * checkers->height);
-	if (fmod(u2 + v2,  2) == 0)
+	if (fmod(u2 + v2, 2) == 0)
 		return (checkers->a);
 	return (checkers->b);
 }
