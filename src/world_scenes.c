@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 18:12:31 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/29 22:54:26 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/29 23:37:18 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -578,7 +578,6 @@ t_world	default_world_tri_test(void)
 	tri1->m->reflective = 0.1;
 	tri1->m->refractive_index = 1.52;
 	tri1->m->transparency = .6;
-	tri1->m->ambient = 0.2;
 	tri2 = triangle(point(1, 0, -1), point(1, 0, 1), point(0, 1, 0));
 	tri2->m->color = color(100, 80, 0);
 	tri2->m->reflective = 0.1;
