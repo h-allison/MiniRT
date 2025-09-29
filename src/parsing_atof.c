@@ -1,28 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_utils.c                                    :+:      :+:    :+:   */
+/*   parsing_atof.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 11:19:08 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/18 17:54:06 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/29 19:14:14 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-/*
-// TODO integrate all whitespaces into tokenization
-int	ft_is_whitespace(const char nptr)
-{
-	if (nptr == ' ' || nptr == '\t' || nptr == '\n'
-		|| nptr == '\r' || nptr == '\v' || nptr == '\f')
-		return (1);
-	else
-		return (0);
-}
-*/
 
 static int	calculate_integral(const char *str, float *integral, int *i);
 static int	calculate_decimal(const char *str, float *decimal, int *i);
@@ -45,14 +33,14 @@ int	rt_atof(const char	*str, float *f)
 	sign = 1;
 	i = 0;
 	if (determine_sign(str, &sign, &i) != 0)
-		return(-1);
+		return (-1);
 	if (str[i] != '.')
 	{
 		if (calculate_integral(str, &integral, &i) != 0)
 			return (-1);
 	}
 	if (str[i] == '.')
-	{	
+	{
 		i++;
 		if (calculate_decimal(str, &decimal, &i) != 0)
 			return (-1);
@@ -68,11 +56,11 @@ int	rt_atof(const char	*str, float *f)
 static int	calculate_integral(const char *str, float *integral, int *i)
 {
 	if (str[*i] == '\0')
-		return(-1);
+		return (-1);
 	while (str[*i] && str[*i] != '.')
 	{
 		if (!(str[*i] >= '0' && str[*i] <= '9'))
-			return(-1);
+			return (-1);
 		*integral = (*integral * 10) + str[*i] - '0';
 		(*i)++;
 	}
@@ -90,12 +78,12 @@ static int	calculate_decimal(const char *str, float *decimal, int *i)
 
 	places = 0.1;
 	if (str[*i] == '\0')
-		return(-1);
+		return (-1);
 	while (str[*i])
 	{
 		digit = 0;
 		if (!(str[*i] >= '0' && str[*i] <= '9'))
-			return(-1);
+			return (-1);
 		digit = str[*i] - '0';
 		digit = digit * places;
 		places = places / 10;
@@ -123,4 +111,3 @@ static int	determine_sign(const char *str, int *sign, int *i)
 		return (-1);
 	return (0);
 }
-

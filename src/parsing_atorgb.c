@@ -6,12 +6,11 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 11:19:08 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/23 12:25:02 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/29 19:17:13 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
 
 static int	calculate_channel(const char *str, float *channel, char c, int *i);
 
@@ -19,7 +18,6 @@ static int	calculate_channel(const char *str, float *channel, char c, int *i);
 // RGB must be in the format [255,255,255]
 // Returns -1 if non-numeric chars / format error encountered
 // Disallows "-", "+", and "."
-// Returns 0 on success
 // Caller is responsible for checking that values are <= 255 ! 
 
 int	rt_atorgb(const char *str, t_rgb *rgb)
@@ -28,28 +26,26 @@ int	rt_atorgb(const char *str, t_rgb *rgb)
 
 	i = 0;
 	if (calculate_channel(str, &rgb->r, 'r', &i) != 0)
-			return (-1);
+		return (-1);
 	if (calculate_channel(str, &rgb->g, 'g', &i) != 0)
-			return (-1);
+		return (-1);
 	if (calculate_channel(str, &rgb->b, 'b', &i) != 0)
-			return (-1);
+		return (-1);
 	return (0);
 }
 
 // calculate_channel(): helper function for rt_atof()
 // Calculates r, g, or b value & modifies float pointer
-// Returns -1 if invald chars encountered
-// Returns -1 if missing comma after r, g,
-// Returns -1 if b contains extraneous comma
+// Returns -1 if: invald chars encountered, missing commas, extraneous comma
 
 static int	calculate_channel(const char *str, float *channel, char c, int *i)
 {
 	if (str[*i] == '\0')
-		return(-1);
+		return (-1);
 	while (str[*i] && str[*i] != ',')
 	{
 		if (!(str[*i] >= '0' && str[*i] <= '9'))
-			return(-1);
+			return (-1);
 		*channel = (*channel * 10) + str[*i] - '0';
 		(*i)++;
 	}
@@ -82,4 +78,3 @@ bool	valid_rgb_range(t_rgb col)
 		return (false);
 	return (true);
 }
-
