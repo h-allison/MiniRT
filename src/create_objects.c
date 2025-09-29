@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 19:13:39 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/27 20:01:19 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/29 17:53:04 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,110 +134,6 @@ t_material	*material(void)
 	m->refractive_index = 1.0;
 	m->pattern = pattern();
 	return (m);
-}
-
-t_shape	*group(void)
-{
-	t_shape	*g;
-
-	g = malloc(sizeof(t_shape));
-	g->parent = NULL;
-	g->group = NULL;
-	g->triangle = NULL;
-	g->transform = create_id_matrix();
-	g->invtrans = minvert(g->transform, 4);
-	g->local_normal_at = local_normal_at_group;
-	g->local_intersect = local_intersect_group;
-	g->m = material();
-	return (g);
-}
-
-/* CREATE VARIOUS SHAPES */
-
-t_shape	*sphere(void)
-{
-	t_shape	*s;
-
-	s = malloc(sizeof(t_shape));
-	s->parent = NULL;
-	s->group = NULL;
-	s->triangle = NULL;
-	s->transform = create_id_matrix();
-	s->invtrans = minvert(s->transform, 4);
-	s->local_normal_at = local_normal_at_sphere;
-	s->local_intersect = local_intersect_sphere;
-	s->m = material();
-	return (s);
-}
-
-t_shape	*plane(void)
-{
-	t_shape	*s;
-
-	s = malloc(sizeof(t_shape));
-	s->parent = NULL;
-	s->group = NULL;
-	s->triangle = NULL;
-	s->transform = create_id_matrix();
-	s->invtrans = minvert(s->transform, 4);
-	s->local_normal_at = local_normal_at_plane;
-	s->local_intersect = local_intersect_plane;
-	s->m = material();
-	return (s);
-}
-
-t_shape	*cube(void)
-{
-	t_shape	*s;
-
-	s = malloc(sizeof(t_shape));
-	s->parent = NULL;
-	s->group = NULL;
-	s->triangle = NULL;
-	s->transform = create_id_matrix();
-	s->invtrans = minvert(s->transform, 4);
-	s->local_normal_at = local_normal_at_cube;
-	s->local_intersect = local_intersect_cube;
-	s->m = material();
-	return (s);
-}
-
-t_shape	*cylinder(void)
-{
-	t_shape	*s;
-
-	s = malloc(sizeof(t_shape));
-	s->parent = NULL;
-	s->group = NULL;
-	s->triangle = NULL;
-	s->transform = create_id_matrix();
-	s->invtrans = minvert(s->transform, 4);
-	s->local_normal_at = local_normal_at_cyl;
-	s->local_intersect = local_intersect_cyl;
-	s->m = material();
-	s->minimum = -FLT_MAX;
-	s->maximum = FLT_MAX;
-	s->closed = false;
-	return (s);
-}
-
-t_shape	*cone(void)
-{
-	t_shape	*s;
-
-	s = malloc(sizeof(t_shape));
-	s->parent = NULL;
-	s->group = NULL;
-	s->triangle = NULL;
-	s->transform = create_id_matrix();
-	s->invtrans = minvert(s->transform, 4);
-	s->local_normal_at = local_normal_at_cone;
-	s->local_intersect = local_intersect_cone;
-	s->m = material();
-	s->minimum = -FLT_MAX;
-	s->maximum = FLT_MAX;
-	s->closed = false;
-	return (s);
 }
 
 /* GROUPED OBJECTS */

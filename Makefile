@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/09/28 14:19:45 by mmillhof         ###   ########.fr        #
+#    Updated: 2025/09/29 19:29:04 by mmillhof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,11 +56,27 @@ SRC         := src/main.c \
 			   src/create_matrices.c \
 			   src/export_ppm.c \
 			   src/patterns.c \
+			   src/pat_checkers.c \
+			   src/pat_gradient.c \
+			   src/pat_ring.c \
+			   src/pat_stripe.c \
+			   src/pat_texture_map.c \
+			   src/pat_uv_checkers.c \
+			   src/pat_uv_image.c \
+			   src/pat_uv_maps.c \
+			   src/pat_uv_align_check.c \
+			   src/pat_tests.c \
 			   src/reflection.c \
 			   src/groups.c \
 			   src/uv_mapping.c \
 			   src/textures.c \
-			   src/triangles.c \
+			   src/sh_cone.c \
+			   src/sh_cube.c \
+			   src/sh_cylinder.c \
+			   src/sh_group.c \
+			   src/sh_plane.c \
+			   src/sh_sphere.c \
+			   src/sh_triangle.c \
 			   src/obj_parser.c \
 			   src/free.c \
 			   src/world_scenes.c \

@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:25:23 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/27 20:20:30 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/29 18:16:40 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,72 +24,6 @@ t_tuple	local_normal_at(t_shape *s, t_tuple local_point)
 }
 
 /* ABSTRACT FUNCTIONS */
-
-t_tuple	local_normal_at_sphere(t_shape *s, t_tuple local_point)
-{
-	t_tuple	local_normal;
-
-	(void)s;
-	local_normal = tsub(local_point, point(0, 0, 0));
-	return (local_normal);
-}
-
-t_tuple	local_normal_at_plane(t_shape *s, t_tuple local_point)
-{
-	(void)s;
-	(void)local_point;
-	return (vector(0, 1, 0));
-}
-
-t_tuple	local_normal_at_cube(t_shape *s, t_tuple local_point)
-{
-	float	maxc;
-
-	(void)s;
-	maxc = maxf(fabs(local_point.x), fabs(local_point.y), fabs(local_point.z));
-	if (maxc == fabs(local_point.x))
-		return (vector(local_point.x, 0, 0));
-	if (maxc == fabs(local_point.y))
-		return (vector(0, local_point.y, 0));
-	return (vector(0, 0, local_point.z));
-}
-
-t_tuple	local_normal_at_cyl(t_shape *s, t_tuple local_point)
-{
-	float	dist;
-
-	(void)s;
-	dist = local_point.x * local_point.x + local_point.z * local_point.z;
-	if (dist < 1 && local_point.y >= s->maximum - EPSILON)
-		return (vector(0, 1, 0));
-	else if (dist < 1 && local_point.y <= s->minimum + EPSILON)
-		return (vector(0, -1, 0));
-	return (vector(local_point.x, 0, local_point.z));
-}
-
-t_tuple	local_normal_at_cone(t_shape *s, t_tuple local_point)
-{
-	float	dist;
-	float	y;
-
-	(void)s;
-	dist = local_point.x * local_point.x + local_point.z * local_point.z;
-	if (dist <= 1 && local_point.y >= s->maximum - EPSILON)
-		return (vector(0, 1, 0));
-	else if (dist <= 1 && local_point.y <= s->minimum + EPSILON)
-		return (vector(0, -1, 0));
-	y = sqrtf(dist);
-	y *= -(local_point.y > 0);
-	return (vector(local_point.x, y, local_point.z));
-}
-
-t_tuple	local_normal_at_group(t_shape *s, t_tuple local_point)
-{
-	(void)s;
-	(void)local_point;
-	ft_putstr_fd("local normal at group. this shouldn't happen!!", 2);
-	exit(0);
-}
 
 t_tuple	normal_at(t_shape *s, t_tuple world_point)
 {
