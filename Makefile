@@ -89,20 +89,20 @@ SRC         := src/main.c \
 			   src/debug_prints.c
 
 # ---- Paths ----
-LIBFT_PATH  := lib/libft
-LIBFT       := $(LIBFT_PATH)/libft.a
-
 MLX42_PATH  := lib/MLX42
 MLX42_A     := $(MLX42_PATH)/build/libmlx42.a
+
+LIBFT_PATH  := lib/libft
+LIBFT       := $(LIBFT_PATH)/libft.a
 
 # ---- Toolchain ----
 CC          ?= cc
 CFLAGS      ?= -Wall -Wextra -Werror
 CPPFLAGS := -Iinclude \
-             -I$(LIBFT_PATH)/include \
              -I$(MLX42_PATH)/include \
+             -I$(LIBFT_PATH)/include \
              -MMD -MP
-LDFLAGS     := -L$(LIBFT_PATH) -L$(MLX42_PATH)/build
+LDFLAGS     := -L$(MLX42_PATH)/build -L$(LIBFT_PATH)
 LDLIBS      := -lft -lmlx42 -lglfw -lm
 
 # ---- OS-specific extras (GLFW deps) ----
@@ -139,15 +139,17 @@ mlx42: $(MLX42_A)
 
 $(MLX42_A):
 	@if [ ! -d "$(MLX42_PATH)" ]; then \
-		if [ ! -d "$(MLX42_PATH)"]; then \
-			git clone https://github.com/codam-coding-college/MLX42.git $(MLX42_PATH); \
-	fi; \
-	cmake -S $(MLX42_PATH) -B $(MLX42_PATH)/build -DMLX42_BUILD_EXAMPLES=OFF
-	$(MAKE) -C $(MLX42_PATH)/build
+		echo "Cloning MLX42"; \
+		git clone https://github.com/codam-coding-college/MLX42.git $(MLX42_PATH); \
+	fi
+	@if [ ! -f "$(MLX42_A)" ]; then \
+		echo "Building MLX42"; \
+		cmake -S $(MLX42_PATH) -B $(MLX42_PATH)/build -DMLX42_BUILD_EXAMPLES=OFF; \
+		$(MAKE) -C $(MLX42_PATH)/build; \
 	fi
 
 # Build target
-$(NAME): $(OBJ) $(LIBFT) $(MLX42_A)
+$(NAME): $(MLX42_A) $(OBJ) $(LIBFT)
 	$(CC) $(OBJ) $(LDFLAGS) $(LDLIBS) -o $@
 
 clean:
@@ -158,14 +160,13 @@ clean:
 fclean: clean
 	$(MAKE) -C $(LIBFT_PATH) fclean
 	rm -f $(NAME)
-#	rm -rf $(MLX42_PATH)/build
 
 re: fclean all
 
 # ---- Debug/analysis profiles ----
 asan: CFLAGS  += -fsanitize=address -fsanitize=undefined -g
 asan: LDFLAGS += -fsanitize=address -fsanitize=undefined -g
-asan: $(NAME)
+asan: clean
 
 gdb:  CFLAGS  += -g -O0
 gdb:  fclean all
