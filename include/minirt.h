@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/28 14:22:22 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/29 16:45:07 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include <stdlib.h>
 # include <errno.h>
 
-# define WIN_WIDTH 1024
-# define WIN_HEIGHT 768
+# define WIN_WIDTH 1024 / 6
+# define WIN_HEIGHT 768 / 6
 
 # define MAX_RECURSION 4
 # define OFFSET	 0.001
@@ -481,6 +481,7 @@ t_parser		*parse_obj_file(char *filename);
 //free.c
 int				free_matrices_and_ret(t_shape *p, int ret);
 void			free_world(t_world *w);
+void			free_cam(t_camera *cam);
 void			free_shape(t_shape *s);
 void			free_material(t_material *m);
 void			free_pattern(t_pattern *p);	

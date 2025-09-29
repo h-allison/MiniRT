@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 12:38:13 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/26 17:44:36 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/29 16:42:13 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,4 +114,12 @@ void	free_world(t_world *w)
 	while (w->light[i])
 		free(w->light[i++]);
 	free(w->light);
+	free(w->checklist);
+	free(w);
+}
+
+void	free_cam(t_camera *cam)
+{
+	free_matrix(cam->transform, 4);
+	free(cam);
 }

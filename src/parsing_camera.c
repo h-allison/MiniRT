@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:51:51 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/29 13:25:21 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/29 16:30:09 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_camera	*place_camera(t_tuple c_coords, t_tuple c_orient, float fov)
 		up = vector(0, 1, 0);
 */
 	up = vector(0, 1, 0);
-	free(cam->transform);
+	free_matrix(cam->transform, 4);
 	cam->transform = view_transform(c_coords, to, up);
 	return (cam);
 }	

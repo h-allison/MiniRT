@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 23:32:31 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/26 18:00:32 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/29 16:34:09 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	mlx_handling(t_data *data)
 	if (!data->img || (mlx_image_to_window(data->mlx, data->img, 0, 0) < 0))
 		ft_error(); // TODO
 	img_wipe(data, color(0x00, 0x00, 0x00));
-	mlx_loop_hook(data->mlx, render, data);
+	mlx_loop_hook(data->mlx, render_with_parsing, data);
 	mlx_loop_hook(data->mlx, ft_hook, data);
 	mlx_loop(data->mlx);
 	mlx_terminate(data->mlx);
@@ -47,7 +47,11 @@ void	ft_hook(void *param)
 	if (init)
 	{
 		if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
+		{
 			mlx_close_window(data->mlx);
+			free_world(data->world);
+			free_cam(data->cam);
+		}
 		if (mlx_is_key_down(data->mlx, MLX_KEY_UP))
 		{
 			data->cam->transform = mmultfree(translation(0, 0, 0.05), data->cam->transform);

@@ -6,26 +6,12 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 11:18:54 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/24 15:06:42 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/29 16:19:38 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "minirt.h"
-
-// check identifier:
-// check for A, C, L, pl, sp, cy
-// if nonsense, exit
-// if asterisk (after usable data) okay
-// open new function, fill cooresponding struct'
-	// on parsing error, print ERROR and exit
-// if ACL found twice, abort / exit
-
-
-/*
-*/
-
-// TODO fancier exit
 
 bool	is_space(char c)
 {

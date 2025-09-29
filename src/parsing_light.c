@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:51:51 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/23 18:32:39 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/29 16:04:57 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	alloc_init_lights(t_world *world)
 {
 	int	i;
 
-	world->light = (t_light **)malloc((world->checklist->count_light + 1) * sizeof(t_light *));
+	world->light = (t_light **)ft_calloc((world->checklist->count_light + 2), sizeof(t_light *));
 	if (!world->light)
 		exit(1);
 	i = 0;
