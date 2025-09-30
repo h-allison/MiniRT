@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 14:56:16 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/30 15:25:56 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/30 18:52:08 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,18 @@ t_intersection	*intersect_world(t_world *w, t_ray *r)
 		i++;
 	}
 	return (xs);
+}
+
+/* ABSTRACT FUNCTIONV */
+
+t_tuple	normal_at(t_shape *s, t_tuple world_point)
+{
+	t_tuple	local_point;
+	t_tuple	local_normal;
+
+	local_point = world_to_object(s, world_point);
+	local_normal = s->local_normal_at(s, local_point);
+	return (normal_to_world(s, local_normal));
 }
 
 t_comps	prepare_computations(t_intersection *ht, t_ray *r, t_intersection *xs)

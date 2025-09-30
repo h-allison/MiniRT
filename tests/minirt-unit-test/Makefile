@@ -176,7 +176,7 @@ SRCS := \
     $(PRG_DIR)/src/math_intersections_2.c \
     $(PRG_DIR)/src/math_intersections_3.c \
     $(PRG_DIR)/src/math_colors.c \
-    $(PRG_DIR)/src/math_shading.c \
+    $(PRG_DIR)/src/math_shading_1.c \
     $(PRG_DIR)/src/math_shading_2.c \
     $(PRG_DIR)/src/math_view.c \
     $(PRG_DIR)/src/create_objects.c \
@@ -196,7 +196,8 @@ SRCS := \
     $(PRG_DIR)/src/pat_tests.c \
     $(PRG_DIR)/src/reflection.c \
     $(PRG_DIR)/src/groups.c \
-    $(PRG_DIR)/src/uv_mapping.c \
+    $(PRG_DIR)/src/uv_mapping_1.c \
+    $(PRG_DIR)/src/uv_mapping_2.c \
     $(PRG_DIR)/src/textures.c \
     $(PRG_DIR)/src/sh_cone.c \
     $(PRG_DIR)/src/sh_cube.c \

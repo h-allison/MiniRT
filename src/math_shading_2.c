@@ -6,37 +6,45 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 13:30:13 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/29 22:35:28 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/30 17:41:24 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_rgb	shade_hit(t_world *w, t_comps *comps, int remaining)
+static t_rgb	iterate_lights(t_world *w, t_comps *comps)
 {
-	t_largs	largs;
 	int		i;
+	t_largs	largs;
 	t_rgb	surface;
-	t_rgb	reflected;
-	t_rgb	refracted;
-	float	reflectance;
 
+	largs.shape = comps->object;
+	largs.material = comps->object->m;
+	largs.point = comps->over_point;
+	largs.eyev = comps->eyev;
+	largs.normalv = comps->normalv;
 	surface = color(0, 0, 0);
 	i = 0;
 	while (1)
 	{
-		largs.shape = comps->object;
-		largs.material = comps->object->m;
-		largs.light = w->light[i];
-		largs.point = comps->over_point;
-		largs.eyev = comps->eyev;
-		largs.normalv = comps->normalv;
 		largs.in_shadow = is_shadowed(w, i, comps->over_point);
+		largs.light = w->light[i];
 		surface = cadd(surface, lighting(&largs));
 		if (w->light[i]->last)
 			break ;
 		i++;
 	}
+	return (surface);
+}
+
+t_rgb	shade_hit(t_world *w, t_comps *comps, int remaining)
+{
+	t_rgb	surface;
+	t_rgb	reflected;
+	t_rgb	refracted;
+	float	reflectance;
+
+	surface = iterate_lights(w, comps);
 	reflected = reflected_color(w, comps, remaining);
 	refracted = refracted_color(w, comps, remaining);
 	if (comps->object->m->reflective > 0 && comps->object->m->transparency > 0)

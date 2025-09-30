@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/30 15:57:30 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/30 18:51:51 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -372,8 +372,6 @@ float			**rotation_z(float r);
 float			**shearing(float *shear);
 
 //math_shading.c
-t_tuple			local_normal_at(t_shape *s, t_tuple local_point);
-t_tuple			normal_at(t_shape *s, t_tuple p);
 t_tuple			reflect(t_tuple in, t_tuple normal);
 t_rgb			lighting(t_largs *largs);
 
@@ -422,6 +420,7 @@ t_intersection	*local_intersect_triangle(t_shape *s, t_ray r);
 t_shape			*hexagon(void);
 
 //sh_test_shapes.c
+t_tuple			local_normal_at(t_shape *s, t_tuple local_point);
 t_shape			*create_test_shape(void);
 t_shape			*glass_sphere(void);
 //************************************************************************
@@ -444,6 +443,7 @@ t_intersection	*hit(t_intersection *xs);
 void			swap_xs(t_intersection *a, t_intersection *b);
 void			sort_intersections(t_intersection *xs);
 t_intersection	*intersect_world(t_world *w, t_ray *r);
+t_tuple			normal_at(t_shape *s, t_tuple p);
 t_comps			prepare_computations(t_intersection *i, t_ray *r, t_intersection *xs);
 
 //math_intersections_23.c

@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/09/30 15:23:47 by mmillhof         ###   ########.fr        #
+#    Updated: 2025/09/30 18:50:19 by mmillhof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ SRC         := src/main.c \
 			   src/math_intersections_2.c \
 			   src/math_intersections_3.c \
 			   src/math_colors.c \
-			   src/math_shading.c \
+			   src/math_shading_1.c \
 			   src/math_shading_2.c \
 			   src/math_view.c \
 			   src/create_objects.c \
@@ -74,7 +74,8 @@ SRC         := src/main.c \
 			   src/pat_tests.c \
 			   src/reflection.c \
 			   src/groups.c \
-			   src/uv_mapping.c \
+			   src/uv_mapping_1.c \
+			   src/uv_mapping_2.c \
 			   src/textures.c \
 			   src/sh_cone.c \
 			   src/sh_cube.c \
