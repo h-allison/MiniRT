@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:27:53 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/30 16:50:01 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/30 20:29:47 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	mandatory_tokens_found(char **tokens)
 		return (rt_error("cb: cube height: missing values", -1));
 	if (!tokens[5])
 		return (rt_error("cb: cube color: missing values", -1));
-	if (tokens[6])
+	if (BONUS == false && tokens[6])
 	{
 		printf("token = %s\n", tokens[4]);
 		return (rt_error("cube: Extraneous args", -1));
@@ -64,11 +64,8 @@ static int	mandatory_tokens_found(char **tokens)
 	return (0);
 }
 
-// TODO remove cube_i check later
 int	parse_cube(char **tokens, t_world *world, int *s_i)
 {
-	static int	cube_i;
-
 	if (mandatory_tokens_found(tokens) != 0)
 		return (-1);
 	world->s[*s_i] = cube();
@@ -82,9 +79,11 @@ int	parse_cube(char **tokens, t_world *world, int *s_i)
 		return (-1);
 	if (parse_cube_position(tokens[1], world->s[*s_i]) != 0)
 		return (-1);
+	if (BONUS == true && tokens[6])
+	{
+		if (parse_shape_bonus("cb", tokens + 6, world->s[*s_i]) != 0)
+			return (-1);
+	}
 	(*s_i)++;
-	cube_i++;
-	if (cube_i > (world->checklist->count_cube))
-		return (rt_error("parse_cube: more cubes than counted", -1));
 	return (0);
 }

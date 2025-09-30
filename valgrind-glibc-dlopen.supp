@@ -7,4 +7,6 @@
   fun:_dl_find_object_update
   ...
   obj:*/ld-*.so*
+  ...
+  fun:*radeonsi_dri.so
 }

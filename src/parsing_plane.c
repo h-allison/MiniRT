@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:51:51 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/30 16:16:07 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/30 20:30:56 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	parse_plane(char **tokens, t_world *world, int *s_i)
 		return (-1);
 	if (BONUS == true && tokens[4])
 	{
-		if (parse_plane_bonus(tokens + 4, world->s[*s_i]) != 0)
+		if (parse_shape_bonus("pl", tokens + 4, world->s[*s_i]) != 0)
 			return (-1);
 	}
 	(*s_i)++;
