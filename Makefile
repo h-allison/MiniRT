@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/09/30 18:50:19 by mmillhof         ###   ########.fr        #
+#    Updated: 2025/09/30 19:57:31 by hallison         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -127,8 +127,8 @@ all: $(NAME)
 
 # Compile C -> .o into build/
 $(OBJDIR)/%.o: src/%.c | $(OBJDIR)
-	$(CC) $(CFLAGS) $(CPPFLAGS) -O3 -c $< -o $@
-	# $(CC) $(CFLAGS) $(CPPFLAGS) -O0 -g -c $< -o $@
+	$(CC) $(CFLAGS) -O3 -c $< -o $@
+	# $(CC) $(CFLAGS) -O0 -g -c $< -o $@
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
@@ -176,12 +176,5 @@ gdb:  CFLAGS  += -g -O0
 gdb:  fclean all
 
 valgrind: $(NAME)
-	valgrind --leak-check=full --show-leak-kinds=definite --track-origins=yes \
-	         --track-fds=yes --quiet ./$(NAME)
+	valgrind --leak-check=full --suppressions=valgrind-glibc-dlopen.supp --track-fds=yes ./$(NAME) samples/sample_0.rt
 
-valchild: $(NAME)
-	valgrind --leak-check=full --show-leak-kinds=definite --track-origins=yes \
-	         --track-fds=yes --trace-children=yes --quiet ./$(NAME)
-
-# Auto-include dependency files
-# -include $(DEP)
