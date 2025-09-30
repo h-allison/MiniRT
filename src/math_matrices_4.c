@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 15:59:09 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/27 00:24:35 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/30 12:55:20 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,10 @@ float	**minvert_free(float **m, int size)
 
 	det = mdet(m, size);
 	if (!det)
-		return (m);
+	{
+		mcopy(&m2, &m, size);
+		return (m2);
+	}
 	m2 = alloc_matrix(size);
 	x = 0;
 	while (x < size)
@@ -110,7 +113,7 @@ float	**minvert(float **m, int size)
 	det = mdet(m, size);
 	if (!det)
 	{
-		mcopy(&m, &m2, size);
+		mcopy(&m2, &m, size);
 		return (m2);
 	}
 	x = 0;
@@ -128,7 +131,7 @@ float	**minvert(float **m, int size)
 	return (m2);
 }
 
-void	mcopy(float ***m, float ***m2, int size)
+void	mcopy(float ***dst, float ***src, int size)
 {
 	int	y;
 	int	x;
@@ -139,7 +142,7 @@ void	mcopy(float ***m, float ***m2, int size)
 		x = 0;
 		while (x < size)
 		{
-			*m[y][x] = *m2[y][x];
+			(*dst)[y][x] = (*src)[y][x];
 			x++;
 		}
 		y++;

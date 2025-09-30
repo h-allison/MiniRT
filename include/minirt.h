@@ -359,7 +359,7 @@ float			mdet(float **m, int size);
 float			**minvert(float **m, int size);
 float			**minvert_free(float **m, int size);
 bool			minvertable(float **m, int size);
-void			mcopy(float ***m, float ***m2, int size);
+void			mcopy(float ***dst, float ***src, int size);
 
 //math_transform.c
 float			**translation(float x, float y, float z);
