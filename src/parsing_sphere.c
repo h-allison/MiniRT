@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:51:51 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/29 20:34:57 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/30 20:51:13 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	mandatory_tokens_found(char **tokens)
 		return (rt_error("sp: sphere diameter: missing values", -1));
 	if (!tokens[3])
 		return (rt_error("sp: sphere color: missing values", -1));
-	if (tokens[4])
+	if (BONUS == false && tokens[4])
 	{
 		printf("token = %s\n", tokens[4]);
 		return (rt_error("sp: Extraneous args", -1));
@@ -69,11 +69,8 @@ static int	mandatory_tokens_found(char **tokens)
 	return (0);
 }
 
-// TODO remove pl_i and pl_i check later
 int	parse_sphere(char **tokens, t_world *world, int *s_i)
 {
-	static int	sp_i;
-
 	if (mandatory_tokens_found(tokens) != 0)
 		return (-1);
 	world->s[*s_i] = sphere();
@@ -85,9 +82,12 @@ int	parse_sphere(char **tokens, t_world *world, int *s_i)
 		return (-1);
 	if (parse_sphere_position(tokens[1], world->s[*s_i]) != 0)
 		return (-1);
+	if (BONUS == true && tokens[4])
+	{
+		if (parse_shape_bonus("sp", tokens + 4, world->s[*s_i]) != 0)
+			return (-1);
+	}
+	printf("sphere[%i]->specular = %f\n", *s_i, world->s[*s_i]->m->specular);
 	(*s_i)++;
-	sp_i++;
-	if (sp_i > (world->checklist->count_sphere))
-		return (rt_error("parse_sphere: more spheres than counted", -1));
 	return (0);
 }

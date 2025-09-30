@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/30 18:51:51 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/30 20:27:47 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,7 +264,6 @@ int				parse_camera(char **tokens, t_data *data);
 int				parse_light(char **tokens, t_world *world);
 int				parse_light_bonus(char **tokens, t_light *light);
 int				parse_plane(char **tokens, t_world *worldi, int *s_i);
-int				parse_plane_bonus(char **tokens, t_shape *s);
 int				parse_sphere(char **tokens, t_world *world, int *s_i);
 int				parse_cyl(char **tokens, t_world *world, int *s_i);
 int				parse_cyl_position(char *token, t_shape *s);
@@ -284,7 +283,10 @@ int				check_v_normalized(t_tuple v, char *element);
 void			debug_print_tokens(char **tokens);
 void    		debug_print_matrix(float **m);
 void			vector_to_rotation(t_tuple v, float *angle);
+int				parse_shape_bonus(char *shape, char **tokens, t_shape *s);
 int				bonus_ambient(char *element, char **tokens, t_shape *s, int *i);
+int				bonus_specular(char *element, char **tokens, t_shape *s, int *t_i);
+int				bonus_diffuse(char *element, char **tokens, t_shape *s, int *t_i);
 
 //rendering.c
 void			render(void *param);

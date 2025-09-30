@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:27:53 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/29 20:09:10 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/30 20:29:35 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ static int	mandatory_tokens_found(char **tokens)
 		return (rt_error("cn: cone height: missing values", -1));
 	if (!tokens[5])
 		return (rt_error("cn: cone color: missing values", -1));
+	if (tokens[6] && BONUS == false)
+		return (rt_error("cn: Extraneous args", -1));
 	return (0);
 }
 
@@ -81,11 +83,8 @@ int	set_cone_min_max(char **tokens, t_shape *s)
 	return (0);
 }
 
-// TODO remove cone_i and cone_i check later
 int	parse_cone(char **tokens, t_world *world, int *s_i)
 {
-	static int	cone_i;
-
 	if (mandatory_tokens_found(tokens) != 0)
 		return (-1);
 	world->s[*s_i] = cone();
@@ -102,9 +101,11 @@ int	parse_cone(char **tokens, t_world *world, int *s_i)
 		return (-1);
 	if (parse_cone_position(tokens[1], world->s[*s_i]) != 0)
 		return (-1);
+	if (BONUS == true && tokens[6])
+	{
+		if (parse_shape_bonus("cn", tokens + 6, world->s[*s_i]) != 0)
+			return (-1);
+	}
 	(*s_i)++;
-	cone_i++;
-	if (cone_i > (world->checklist->count_cone))
-		return (rt_error("parse_cone: more cones parsed than counted", -1));
 	return (0);
 }

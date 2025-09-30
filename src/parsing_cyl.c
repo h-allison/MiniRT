@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:27:53 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/29 20:25:39 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/30 20:52:15 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static int	mandatory_tokens_found(char **tokens)
 		return (rt_error("cy: cylinder height: missing values", -1));
 	if (!tokens[5])
 		return (rt_error("cy: cylinder color: missing values", -1));
-	if (tokens[6])
+	if (BONUS == false && tokens[6])
 	{
 		printf("token = %s\n", tokens[4]);
 		return (rt_error("cy: Extraneous args", -1));
@@ -83,11 +83,8 @@ static int	mandatory_tokens_found(char **tokens)
 	return (0);
 }
 
-// TODO remove cyl_i and cyl_i check later
 int	parse_cyl(char **tokens, t_world *world, int *s_i)
 {
-	static int	cyl_i;
-
 	if (mandatory_tokens_found(tokens) != 0)
 		return (-1);
 	world->s[*s_i] = cylinder();
@@ -104,9 +101,12 @@ int	parse_cyl(char **tokens, t_world *world, int *s_i)
 		return (-1);
 	if (parse_cyl_position(tokens[1], world->s[*s_i]) != 0)
 		return (-1);
+	if (BONUS == true && tokens[6])
+	{
+		if (parse_shape_bonus("cy", tokens + 6, world->s[*s_i]) != 0)
+			return (-1);
+	}
+	printf("cyl[%i]->specular = %f\n", *s_i, world->s[*s_i]->m->specular);
 	(*s_i)++;
-	cyl_i++;
-	if (cyl_i > (world->checklist->count_cyl))
-		return (rt_error("parse_cyl: more cyls encountered than counted", -1));
 	return (0);
 }
