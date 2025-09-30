@@ -6,7 +6,11 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2025/09/30 20:04:36 by hallison         ###   ########.fr        #
+=======
+#    Updated: 2025/09/30 20:49:43 by mmillhof         ###   ########.fr        #
+>>>>>>> mat_refactoring
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +43,9 @@ SRC         := src/main.c \
                src/parsing_bonus_fields.c \
                src/error_handling.c \
                src/mlx_handling.c \
+               src/mlx_keypress_1.c \
+               src/mlx_keypress_2.c \
+               src/mlx_keypress_3.c \
                src/rendering.c \
                src/math_float.c \
 			   src/math_matrices_1.c \
