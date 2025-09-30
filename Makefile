@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/09/29 20:27:03 by hallison         ###   ########.fr        #
+#    Updated: 2025/09/30 13:39:01 by hallison         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,11 +97,9 @@ LIBFT       := $(LIBFT_PATH)/libft.a
 
 # ---- Toolchain ----
 CC          ?= cc
-CFLAGS      ?= -Wall -Wextra -Werror
-CPPFLAGS := -Iinclude \
-             -I$(MLX42_PATH)/include \
-             -I$(LIBFT_PATH)/include \
-             -MMD -MP
+CFLAGS      ?= -Wall -Wextra -Werror \
+				-Iinclude -I$(MLX42_PATH)/include \
+             	-I$(LIBFT_PATH)/include \
 LDFLAGS     := -L$(MLX42_PATH)/build -L$(LIBFT_PATH)
 LDLIBS      := -lft -lmlx42 -lglfw -lm
 
@@ -116,7 +114,6 @@ endif
 # ---- Objects / Deps ----
 OBJDIR      := build
 OBJ         := $(patsubst src/%.c,$(OBJDIR)/%.o,$(SRC))
-DEP         := $(OBJ:.o=.d)
 
 # ---- Rules ----
 .PHONY: all clean fclean re asan gdb valgrind valchild mlx42
@@ -160,6 +157,7 @@ clean:
 fclean: clean
 	$(MAKE) -C $(LIBFT_PATH) fclean
 	rm -f $(NAME)
+	rm -rf $(MLX42_PATH)
 
 re: fclean all
 
@@ -180,4 +178,4 @@ valchild: $(NAME)
 	         --track-fds=yes --trace-children=yes --quiet ./$(NAME)
 
 # Auto-include dependency files
--include $(DEP)
+# -include $(DEP)
