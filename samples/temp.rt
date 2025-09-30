@@ -1,0 +1,32 @@
+*CAMERA		position	orientation			field of view								
+C		-2,2,-6	0.312348,-0.156174,0.937043			60								
+*AMBIENT		intensity	color											
+A		1	255,255,255											
+*LIGHT		position	intensity			color								
+L		-7,7,-6	1			160,40,40								
+L		7,7,-6	1			40,40,160								
+L		-2,3,-6	1			40,160,40								
+*PLANE		position	orientation			color								
+pl		0,0,0	0,1,0			200,200,200		ambient	1					
+pl		0,0,40	0,0,-1			80,0,0		diffuse	1					
+*SPHERE		position	diameter			color								
+sp		-1.5,0.33,-0.75	0.33			255,128,128								
+sp		-0.5,1,1.5	1			10,10,10								
+sp		1.5,0.5,-0.5	1.5			140,100,255								
+*CYLINDER		position	orientation	diameter	height	color								
+cy		-1.5,0.33,-0.75	1,0,1	0.5	1	255,0,0								
+cy		-0.5,1,1.5	0,-1,0	1	1	0,255,0								
+cy		1.5,0.5,-0.5	.33,0,.66	1	2	0,0,255								
+*CUBE		position	orientation	diameter	height	color								
+cb		-1.5,0.33,-0.75	1,0,1	0.5	1	255,128,128								
+cb		-0.5,1,1.5	0,-1,0	1	1	10,10,10								
+cb		1.5,0.5,-0.5	.33,0,.66	1	2	140,100,255								
+*CONE		position	orientation	diameter	height	color	minimum	maximum						
+cn		-1.5,0.33,-0.75	1,0,1	0.5	1	255,128,128	0.5	1						
+cn		-0.5,1,1.5	0,-1,0	1	1	10,10,10								
+cn		1.5,0.5,-0.5	.33,0,.66	1	2	140,100,255								
+*CONE		position	orientation	diameter	height	color	minimum	maximum						
+cn		-1.5,0.33,-0.75	1,0,1	0.5	1	255,128,128								
+cn		-0.5,1,1.5	0,-1,0	1	1	10,10,10								
+cn		1.5,0.5,-0.5	.33,0,.66	1	2	140,100,255								
+														
