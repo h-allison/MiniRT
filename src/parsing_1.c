@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 11:18:54 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/30 17:30:23 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/30 19:48:06 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	start_parsing_routine(t_data *data)
 			if (parse_into_world(tokens, data) == -1)
 			{
 				free_tokens(tokens);
-				return(-1);
+				return (-1);
 			}
 			free_tokens(tokens);
 		}
