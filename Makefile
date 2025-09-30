@@ -6,11 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2025/09/30 20:04:36 by hallison         ###   ########.fr        #
-=======
-#    Updated: 2025/09/30 20:49:43 by mmillhof         ###   ########.fr        #
->>>>>>> mat_refactoring
+#    Updated: 2025/09/30 21:05:25 by mmillhof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
