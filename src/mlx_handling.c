@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 23:32:31 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/29 23:42:24 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/30 14:09:11 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	ft_hook(void *param)
 	{
 		if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 		{
+			mlx_delete_image(data->mlx, data->img);
 			mlx_close_window(data->mlx);
 			free_world(data->world);
 			free_cam(data->cam);
