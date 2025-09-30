@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 23:02:20 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/25 18:44:39 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/30 16:00:12 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int test_reflect_col_nonreflect(void)
 {
-	t_world			w;
+	t_world			*w;
 	t_ray			r;
 	t_intersection	i;
 	t_comps			c;
@@ -22,11 +22,11 @@ int test_reflect_col_nonreflect(void)
 
 	w = default_world();
 	r = ray(point(0, 1, -1), vector(0, -sqrtf(2)/2, sqrtf(2)/2));
-	w.s[1]->m->ambient = 1;
-	i = intersection(1, w.s[1]);
+	w->s[1]->m->ambient = 1;
+	i = intersection(1, w->s[1]);
 	c = prepare_computations(&i, &r, NULL);
-	col = reflected_color(&w, &c, 10);
-	free_world(&w);
+	col = reflected_color(w, &c, 10);
+	free_world(w);
 	if (!fisequal(col.r, 0) || !fisequal(col.g, 0)
 			|| !fisequal(col.b, 0))
 		return (-1);

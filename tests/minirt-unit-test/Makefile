@@ -165,14 +165,16 @@ SRCS := \
     $(PRG_DIR)/src/math_matrices_2.c \
     $(PRG_DIR)/src/math_matrices_3.c \
     $(PRG_DIR)/src/math_matrices_4.c \
+    $(PRG_DIR)/src/math_matrices_5.c \
     $(PRG_DIR)/src/math_tuples_1.c \
     $(PRG_DIR)/src/math_tuples_2.c \
     $(PRG_DIR)/src/math_tuples_3.c \
     $(PRG_DIR)/src/math_transform.c \
     $(PRG_DIR)/src/math_transform_2.c \
     $(PRG_DIR)/src/math_rays.c \
-    $(PRG_DIR)/src/math_intersections.c \
+    $(PRG_DIR)/src/math_intersections_1.c \
     $(PRG_DIR)/src/math_intersections_2.c \
+    $(PRG_DIR)/src/math_intersections_3.c \
     $(PRG_DIR)/src/math_colors.c \
     $(PRG_DIR)/src/math_shading.c \
     $(PRG_DIR)/src/math_shading_2.c \
@@ -206,7 +208,8 @@ SRCS := \
     $(PRG_DIR)/src/sh_hexagon.c \
     $(PRG_DIR)/src/sh_test_shapes.c \
     $(PRG_DIR)/src/obj_parser.c \
-    $(PRG_DIR)/src/free.c \
+    $(PRG_DIR)/src/free_1.c \
+    $(PRG_DIR)/src/free_2.c \
     $(PRG_DIR)/src/world_scenes.c \
 	$(PRG_DIR)/src/debug_prints.c \
 	$(LIBFT_DIR)/ft_lstadd_back.c\

@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:54:44 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/29 22:55:21 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/30 16:07:42 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,7 @@ void	render_with_parsing(void *param)
 void	render(void *param)
 {
 	static int		render_status;
-	static t_world	world;
+	static t_world	*world;
 	static t_camera	*cam;
 	static t_data	*data;
 
@@ -198,5 +198,5 @@ void	render(void *param)
 		printf("cam->fov: %f\n", data->cam->field_of_view); // TODO delete
 	}
 	if (render_status == 1)
-		render_status = render_chunk(&world, data);
+		render_status = render_chunk(world, data);
 }

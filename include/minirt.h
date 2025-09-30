@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/29 23:01:02 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/30 15:57:30 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -433,7 +433,7 @@ t_ray			transform(t_ray r, float **m);
 void			set_transform(t_shape *s, float **t);
 t_ray			ray_for_pixel(t_camera *c, float px, float py);
 
-//math_intersections.c
+//math_intersections_1.c
 t_intersection	*local_intersect(t_shape *s, t_ray r);
 t_intersection	*intersect(t_shape *s, t_ray r);
 t_intersection	intersection(float t, t_shape *s);
@@ -445,6 +445,9 @@ void			swap_xs(t_intersection *a, t_intersection *b);
 void			sort_intersections(t_intersection *xs);
 t_intersection	*intersect_world(t_world *w, t_ray *r);
 t_comps			prepare_computations(t_intersection *i, t_ray *r, t_intersection *xs);
+
+//math_intersections_23.c
+void			prepare_n(t_comps *comps, t_intersection *ht, t_intersection *xs);
 
 //math_view.c
 float			**view_transform(t_tuple from, t_tuple to, t_tuple up);
@@ -539,14 +542,14 @@ void			free_canvas(t_canvas *c);
 void			free_largs(t_largs *l);	
 
 //world_scenes.c
-t_world			default_world(void);
-t_world			default_world_2(void);
-t_world			default_world_3(void);
-t_world			default_world_4(void);
-t_world			default_world_5(void);
-t_world			default_world_6(void);
-t_world			default_world_cyl(void);
-t_world			default_world_group_test(void);
-t_world			default_world_rotation(void);
-t_world			default_world_tri_test(void);
+t_world			*default_world(void);
+t_world			*default_world_2(void);
+t_world			*default_world_3(void);
+t_world			*default_world_4(void);
+t_world			*default_world_5(void);
+t_world			*default_world_6(void);
+t_world			*default_world_cyl(void);
+t_world			*default_world_group_test(void);
+t_world			*default_world_rotation(void);
+t_world			*default_world_tri_test(void);
 #endif

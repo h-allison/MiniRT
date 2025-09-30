@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 23:01:53 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/25 19:02:17 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/30 16:02:30 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,29 @@
 
 int test_reflect_mutually_reflective(void)
 {
-	t_world			w;
+	t_world			*w;
 	t_shape			*lower;
 	t_shape			*upper;
 	t_ray			r;
 	t_rgb			col;
 
 	w = default_world();
-	free(w.light[0]);
-	w.light[0] = point_light(point(0, 0, 0), color(255, 255, 255));
+	free(w->light[0]);
+	w->light[0] = point_light(point(0, 0, 0), color(255, 255, 255));
 	lower = plane();
 	lower->m->reflective = 1;
 	set_transform(lower, translation(0, -1, 0));
-	free_shape(w.s[0]);
-	w.s[0] = lower;
+	free_shape(w->s[0]);
+	w->s[0] = lower;
 	upper = plane();
 	upper->m->reflective = 1;
 	set_transform(upper, translation(0, 1, 0));
-	free_shape(w.s[1]);
-	w.s[1] = upper;
-	w.s[2] = NULL;
+	free_shape(w->s[1]);
+	w->s[1] = upper;
+	w->s[2] = NULL;
 	r = ray(point(0, 0, 0), vector(0, 1, 0));
-	col = color_at(&w, &r, 10);
-	free_world(&w);
+	col = color_at(w, &r, 10);
+	free_world(w);
 	(void)col;
 	return (0);
 }

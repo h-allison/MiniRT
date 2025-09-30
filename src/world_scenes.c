@@ -6,20 +6,21 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 18:12:31 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/29 23:37:18 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/30 16:09:20 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "minirt.h"
 
-t_world	default_world(void)
+t_world	*default_world(void)
 {
-	t_world	w;
+	t_world	*w;
 	t_shape	*s1;
 	t_shape	*s2;
 	t_light	*light;
 
+	w = malloc(sizeof(t_world));
 	light = point_light(point(-10, 10, -10), color(255, 255, 255));
 	s1 = sphere();
 	s1->m->color = color(204, 255, 153);
@@ -27,23 +28,24 @@ t_world	default_world(void)
 	s1->m->specular = 0.2;
 	s2 = sphere();
 	set_transform(s2, scaling(0.5, 0.5, 0.5));
-	w.s = ft_calloc(5, sizeof(t_shape *));
-	w.s[0] = s1;
-	w.s[1] = s2;
-	w.light = ft_calloc(2, sizeof(t_light *));
-	if (!w.light)
+	w->s = ft_calloc(5, sizeof(t_shape *));
+	w->s[0] = s1;
+	w->s[1] = s2;
+	w->light = ft_calloc(2, sizeof(t_light *));
+	if (!w->light)
 		exit (1);
-	w.light[0] = light;
+	w->light[0] = light;
 	return (w);
 }
 
-t_world	default_world_rotation(void)
+t_world	*default_world_rotation(void)
 {
-	t_world	w;
+	t_world	*w;
 	t_shape	*s1;
 	t_shape	*s2;
 	t_light	*light;
 
+	w = malloc(sizeof(t_world));
 	light = point_light(point(-10, 10, -10), color(255, 255, 255));
 	s1 = sphere();
 	s1->m->color = color(255, 0, 0);
@@ -51,13 +53,13 @@ t_world	default_world_rotation(void)
 //*	s1->m->specular = 0.2;
 	s2 = sphere();
 	s2->m->color = color(0, 255, 0);
-	w.s = ft_calloc(5, sizeof(t_shape *));
-	w.s[0] = s1;
-	w.s[1] = s2;
-	w.light = ft_calloc(2, sizeof(t_light *));
-	if (!w.light)
+	w->s = ft_calloc(5, sizeof(t_shape *));
+	w->s[0] = s1;
+	w->s[1] = s2;
+	w->light = ft_calloc(2, sizeof(t_light *));
+	if (!w->light)
 		exit (1);
-	w.light[0] = light;
+	w->light[0] = light;
 	s1->transform = mmultfree(rotation_x(90 * DEG2RAD), s1->transform);
 	free_matrix(s1->invtrans, 4);
 	s2->invtrans = minvert(s1->transform, 4);
@@ -67,9 +69,9 @@ t_world	default_world_rotation(void)
 	return (w);
 }
 
-t_world	default_world_2(void)
+t_world	*default_world_2(void)
 {
-	t_world	w;
+	t_world	*w;
 	t_shape	*floor;
 	t_shape	*left_wall;
 	t_shape	*right_wall;
@@ -77,6 +79,7 @@ t_world	default_world_2(void)
 	t_shape	*right;
 	t_shape	*left;
 
+	w = malloc(sizeof(t_world));
 	floor = sphere();
 	floor->transform = mmultfree(scaling(10, 0.01, 10), floor->transform);
 	floor->invtrans = minvert(floor->transform, 4);
@@ -122,29 +125,30 @@ t_world	default_world_2(void)
 	left->m->diffuse = 0.7;
 	left->m->specular = 0.3;
 
-	w.light = ft_calloc(2, sizeof(t_light *));
-	if (!w.light)
+	w->light = ft_calloc(2, sizeof(t_light *));
+	if (!w->light)
 		exit (1);
-	w.light[0] = point_light(point(-10, 10, -10), color(255, 255, 255));
+	w->light[0] = point_light(point(-10, 10, -10), color(255, 255, 255));
 
-	w.s = ft_calloc(7, sizeof(t_shape *));
-	w.s[0] = floor;
-	w.s[1] = left_wall;
-	w.s[2] = right_wall;
-	w.s[3] = middle;
-	w.s[4] = right;
-	w.s[5] = left;
+	w->s = ft_calloc(7, sizeof(t_shape *));
+	w->s[0] = floor;
+	w->s[1] = left_wall;
+	w->s[2] = right_wall;
+	w->s[3] = middle;
+	w->s[4] = right;
+	w->s[5] = left;
 	return (w);
 }
 
-t_world	default_world_3(void)
+t_world	*default_world_3(void)
 {
-	t_world	w;
+	t_world	*w;
 	t_shape	*floor;
 	t_shape	*middle;
 	t_shape	*right;
 	t_shape	*left;
 
+	w = malloc(sizeof(t_world));
 	floor = plane();
 	floor->invtrans = minvert(floor->transform, 4);
 	floor->m->color = color(255, 230, 230);
@@ -176,28 +180,29 @@ t_world	default_world_3(void)
 	left->m->diffuse = 0.7;
 	left->m->specular = 0.3;
 
-	w.light = ft_calloc(2, sizeof(t_light *));
-	if (!w.light)
+	w->light = ft_calloc(2, sizeof(t_light *));
+	if (!w->light)
 		exit (1);
-	w.light[0] = point_light(point(-10, 10, -10), color(255, 255, 255));
+	w->light[0] = point_light(point(-10, 10, -10), color(255, 255, 255));
 
-	w.s = ft_calloc(5, sizeof(t_shape *));
-	w.s[0] = floor;
-	w.s[1] = middle;
-	w.s[2] = right;
-	w.s[3] = left;
+	w->s = ft_calloc(5, sizeof(t_shape *));
+	w->s[0] = floor;
+	w->s[1] = middle;
+	w->s[2] = right;
+	w->s[3] = left;
 	return (w);
 }
 
-t_world	default_world_4(void)
+t_world	*default_world_4(void)
 {
-	t_world	w;
+	t_world	*w;
 	t_shape	*floor;
 	t_shape	*wall_back;
 	t_shape	*middle;
 	t_shape	*right;
 	t_shape	*left;
 	
+	w = malloc(sizeof(t_world));
 	floor = plane();
 	floor->invtrans = minvert(floor->transform, 4);
 	floor->m->color = color(200, 200, 200);
@@ -247,33 +252,34 @@ t_world	default_world_4(void)
 	right->m->pattern->transform = mmultfree(scaling(0.1, 0.2, 0.2), right->m->pattern->transform);
 	right->m->pattern->invtrans = minvert(right->m->pattern->transform, 4);
 	
-	w.light = ft_calloc(4, sizeof(t_light *));
-	if (!w.light)
+	w->light = ft_calloc(4, sizeof(t_light *));
+	if (!w->light)
 		exit (1);
-	w.light[0] = point_light(point(-7, 7, -6), color(160, 40, 40));
-	w.light[0]->last = false;
-	w.light[1] = point_light(point(7, 7, -6), color(40, 40, 160));
-	w.light[1]->last = false;
-	w.light[2] = point_light(point(-2, 3, -6), color(40, 160, 40));
+	w->light[0] = point_light(point(-7, 7, -6), color(160, 40, 40));
+	w->light[0]->last = false;
+	w->light[1] = point_light(point(7, 7, -6), color(40, 40, 160));
+	w->light[1]->last = false;
+	w->light[2] = point_light(point(-2, 3, -6), color(40, 160, 40));
 
-	w.s = ft_calloc(6, sizeof(t_shape *));
-	w.s[0] = floor;
-	w.s[1] = wall_back;
-	w.s[2] = middle;
-	w.s[3] = right;
-	w.s[4] = left;
+	w->s = ft_calloc(6, sizeof(t_shape *));
+	w->s[0] = floor;
+	w->s[1] = wall_back;
+	w->s[2] = middle;
+	w->s[3] = right;
+	w->s[4] = left;
 	return (w);
 }
 
-t_world	default_world_5(void)
+t_world	*default_world_5(void)
 {
-	t_world	w;
+	t_world	*w;
 	t_shape	*floor;
 	t_shape	*big;
 	t_shape	*middle;
 	t_shape	*right;
 	t_shape	*left;
 	
+	w = malloc(sizeof(t_world));
 	floor = plane();
 	floor->invtrans = minvert(floor->transform, 4);
 	floor->m->color = color(200, 200, 200);
@@ -321,23 +327,23 @@ t_world	default_world_5(void)
 	right->m->pattern->transform = mmultfree(scaling(0.1, 0.2, 0.2), right->m->pattern->transform);
 	right->m->pattern->invtrans = minvert(right->m->pattern->transform, 4);
 	
-	w.light = ft_calloc(2, sizeof(t_light *));
-	if (!w.light)
+	w->light = ft_calloc(2, sizeof(t_light *));
+	if (!w->light)
 		exit (1);
-	w.light[0] = point_light(point(-7, 7, -6), color(255, 255, 240));
+	w->light[0] = point_light(point(-7, 7, -6), color(255, 255, 240));
 
-	w.s = ft_calloc(8, sizeof(t_shape *));
-	w.s[0] = floor;
-	w.s[1] = big;
-	w.s[2] = middle;
-	w.s[3] = right;
-	w.s[4] = left;
+	w->s = ft_calloc(8, sizeof(t_shape *));
+	w->s[0] = floor;
+	w->s[1] = big;
+	w->s[2] = middle;
+	w->s[3] = right;
+	w->s[4] = left;
 	return (w);
 }
 
-t_world	default_world_6(void)
+t_world	*default_world_6(void)
 {
-	t_world	w;
+	t_world	*w;
 	t_shape	*floor;
 	t_shape	*big;
 	t_shape	*middle;
@@ -345,6 +351,7 @@ t_world	default_world_6(void)
 	t_shape	*left;
 	t_shape *cub;
 	
+	w = malloc(sizeof(t_world));
 	floor = plane();
 	floor->invtrans = minvert(floor->transform, 4);
 	floor->m->color = color(200, 200, 200);
@@ -410,24 +417,24 @@ t_world	default_world_6(void)
 	cub->m->specular = 0.6;
 	cub->m->reflective = 0.4;
 
-	w.light = ft_calloc(2, sizeof(t_light *));
-	if (!w.light)
+	w->light = ft_calloc(2, sizeof(t_light *));
+	if (!w->light)
 		exit (1);
-	w.light[0] = point_light(point(-7, 7, -6), color(255, 255, 240));
+	w->light[0] = point_light(point(-7, 7, -6), color(255, 255, 240));
 
-	w.s = ft_calloc(8, sizeof(t_shape *));
-	w.s[0] = floor;
-	w.s[1] = big;
-	w.s[2] = middle;
-	w.s[3] = right;
-	w.s[4] = left;
-	w.s[5] = cub;
+	w->s = ft_calloc(8, sizeof(t_shape *));
+	w->s[0] = floor;
+	w->s[1] = big;
+	w->s[2] = middle;
+	w->s[3] = right;
+	w->s[4] = left;
+	w->s[5] = cub;
 	return (w);
 }
 
-t_world	default_world_cyl(void)
+t_world	*default_world_cyl(void)
 {
-	t_world	w;
+	t_world	*w;
 	t_shape	*floor;
 	t_shape	*sky;
 	t_shape	*big;
@@ -437,6 +444,7 @@ t_world	default_world_cyl(void)
 	t_shape *cub;
 	t_shape	*hex;
 	
+	w = malloc(sizeof(t_world));
 	floor = plane();
 	floor->invtrans = minvert(floor->transform, 4);
 	floor->m->color = color(200, 200, 200);
@@ -528,26 +536,26 @@ t_world	default_world_cyl(void)
 	hex->transform = mmultfree(translation(2.5, 0, -1), hex->transform);
 	hex->invtrans = minvert(hex->transform, 4);
 
-	w.light = ft_calloc(3, sizeof(t_light *));
-	if (!w.light)
+	w->light = ft_calloc(3, sizeof(t_light *));
+	if (!w->light)
 		exit (1);
-	w.light[0] = point_light(point(-40, 40, 60), color(255, 220, 200));
+	w->light[0] = point_light(point(-40, 40, 60), color(255, 220, 200));
 
-	w.s = ft_calloc(9, sizeof(t_shape *));
-	w.s[0] = floor;
-	w.s[1] = sky;
-	w.s[2] = big;
-	w.s[3] = middle;
-	w.s[4] = right;
-	w.s[5] = left;
-	w.s[6] = cub;
-	w.s[7] = hex;
+	w->s = ft_calloc(9, sizeof(t_shape *));
+	w->s[0] = floor;
+	w->s[1] = sky;
+	w->s[2] = big;
+	w->s[3] = middle;
+	w->s[4] = right;
+	w->s[5] = left;
+	w->s[6] = cub;
+	w->s[7] = hex;
 	return (w);
 }
 
-t_world	default_world_tri_test(void)
+t_world	*default_world_tri_test(void)
 {
-	t_world	w;
+	t_world	*w;
 	t_shape	*floor;
 	t_shape	*sky;
 	t_shape	*tri1;
@@ -556,6 +564,7 @@ t_world	default_world_tri_test(void)
 	t_shape	*tri4;
 	t_light	*light;
 	
+	w = malloc(sizeof(t_world));
 	floor = plane();
 	floor->m->color = color(200, 200, 200);
 	floor->m->diffuse = 0.4;
@@ -598,19 +607,19 @@ t_world	default_world_tri_test(void)
 	tri4->m->ambient = 0.2;
 
 	light = point_light(point(-7, 20, -6), color(180, 170, 160));
-	w.s = calloc(7, sizeof(*w.s));
-	if (!w.s)
+	w->s = calloc(7, sizeof(*w->s));
+	if (!w->s)
 		exit (1);
-	w.s[0] = floor;
-	w.s[1] = sky;
-	w.s[2] = tri1;
-	w.s[3] = tri2;
-	w.s[4] = tri3;
-	w.s[5] = tri4;
-	w.s[6] = NULL;
-	w.light = ft_calloc(2, sizeof(t_light *));
-	if (!w.light)
+	w->s[0] = floor;
+	w->s[1] = sky;
+	w->s[2] = tri1;
+	w->s[3] = tri2;
+	w->s[4] = tri3;
+	w->s[5] = tri4;
+	w->s[6] = NULL;
+	w->light = ft_calloc(2, sizeof(t_light *));
+	if (!w->light)
 		exit (1);
-	w.light[0] = light;
+	w->light[0] = light;
 	return (w);
 }
