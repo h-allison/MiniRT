@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 15:59:09 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/30 12:55:20 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/30 13:25:46 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,13 @@ float	**minvert_free(float **m, int size)
 	int		y;
 	int		x;
 
+	m2 = alloc_matrix(size);
 	det = mdet(m, size);
 	if (!det)
 	{
 		mcopy(&m2, &m, size);
 		return (m2);
 	}
-	m2 = alloc_matrix(size);
 	x = 0;
 	while (x < size)
 	{
