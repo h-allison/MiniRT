@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 12:09:09 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/28 20:24:25 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/30 00:30:56 by matthias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,11 +163,9 @@ static int	obj_add_face(int fd, t_parser *parser)
 
 static int	obj_read_file(int fd, t_parser *parser)
 {
-	int		i;
 	int		status;
 	char	buf;
 
-	i = 0;
 	while (1)
 	{
 		buf = obj_read_next_char(fd, "vf");
@@ -187,6 +185,7 @@ static int	obj_read_file(int fd, t_parser *parser)
 		if (status < 0 || (status == 0 && parser->vertices[0].y == 0 )) 
 			return (-1);
 	}
+	(void)i;
 	return (0);
 }
 

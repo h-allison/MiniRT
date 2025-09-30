@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/30 12:56:44 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/29 23:01:02 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include <stdlib.h>
 # include <errno.h>
 
-# define WIN_WIDTH 1024 / 2
-# define WIN_HEIGHT 768 / 2
+# define WIN_WIDTH 800
+# define WIN_HEIGHT 600
 
 # define MAX_RECURSION 4
 # define OFFSET	 0.001
@@ -200,7 +200,7 @@ typedef struct s_largs
 	t_light			*light;
 	t_tuple			eyev;
 	t_tuple			normalv;
-	bool			in_shadow;
+	float			in_shadow;
 }	t_largs;
 
 typedef struct s_intersection
@@ -380,7 +380,7 @@ t_rgb			lighting(t_largs *largs);
 //math_shading_2.c
 t_rgb			shade_hit(t_world *w, t_comps *comps, int remaining);
 t_rgb			color_at(t_world *w, t_ray *r, int remaining);
-bool			is_shadowed(t_world *world, int i, t_tuple point);
+float			is_shadowed(t_world *world, int i, t_tuple point);
 
 //SHAPES *****************************************************************
 //sh_cone.c

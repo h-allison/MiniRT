@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 17:55:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/29 16:40:53 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/29 20:49:30 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	set_transform(t_shape *s, float **t)
 	s->invtrans = minvert(s->transform, 4);
 }
 
-
 // TODO isinvertable check for minvert -- had sometimes segfault at these lines
 t_ray	ray_for_pixel(t_camera *c, float px, float py)
 {
@@ -73,8 +72,6 @@ t_ray	ray_for_pixel(t_camera *c, float px, float py)
 	world_y = c->half_height - (py + 0.5) * c->pixel_size;
 	pixel = tmmultfree(minvert(c->transform, 4), point(world_x, world_y, -1));
 	origin = tmmultfree(minvert(c->transform, 4), point(0, 0, 0));
-//	pixel = tmatrixmult(minvert(c->transform, 4), point(world_x, world_y, -1));
-//	origin = tmatrixmult(minvert(c->transform, 4), point(0, 0, 0));
 	direction = tnorm(tsub(pixel, origin));
 	return (ray(origin, direction));
 }

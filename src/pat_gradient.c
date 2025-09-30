@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 18:57:21 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/29 18:57:55 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/29 20:33:11 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,3 @@ t_rgb	gradient_at(t_pattern *gradient, t_tuple point)
 	fraction = point.x - floorf(point.x);
 	return (cadd(gradient->a, cscale(distance, fraction)));
 }
-

@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:25:23 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/29 18:16:40 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/29 22:52:34 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,8 @@ t_rgb	lighting(t_largs *largs)
 	effective_color = cmult(col, largs->light->intensity);
 	lightv = tnorm(tsub(largs->light->position, largs->point));
 	ambient = cscale(effective_color, largs->material->ambient);
-	if (largs->in_shadow)
-		return (ambient);
 	light_dot_normal = dot(lightv, largs->normalv);
-	if (light_dot_normal < 0 || largs->in_shadow)
+	if (light_dot_normal < 0)
 	{
 		diffuse = color(0, 0, 0);
 		specular = color(0, 0, 0);
@@ -85,6 +83,8 @@ t_rgb	lighting(t_largs *largs)
 						largs->material->specular), factor);
 		}
 	}
+	diffuse = cscale(diffuse, largs->in_shadow);
+	specular = cscale(specular, largs->in_shadow);
 	ret = cadd(cadd(ambient, diffuse), specular);
 	return (ret);
 }

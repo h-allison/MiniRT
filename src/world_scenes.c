@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 18:12:31 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/27 22:14:48 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/29 23:37:18 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -450,7 +450,7 @@ t_world	default_world_cyl(void)
 	sky->transform = mmultfree(scaling(100, 100, 100), sky->transform);
 	sky->invtrans = minvert(sky->transform, 4);
 	sky->m->color = color(0, 0, 0);
-	sky->m->ambient = 1;
+	sky->m->ambient = 1.2;
 	sky->m->diffuse = 0;
 	sky->m->specular = 0;
 	sky->m->pattern = texture_map(uv_image(canvas_from_ppm("samples/textures/sky.ppm")), spherical_map);
@@ -469,14 +469,15 @@ t_world	default_world_cyl(void)
 	left->maximum = 2;
 	left->closed = true;
 	left->transform = mmultfree(scaling(0.5, 0.5, 0.5), left->transform);
-	left->transform = mmultfree(translation(-2.5, 0, 2), left->transform);
+	left->transform = mmultfree(rotation_z(15 * DEG2RAD), left->transform);
+	left->transform = mmultfree(translation(-2.5, 0.3, 2), left->transform);
 	left->invtrans = minvert(left->transform, 4);
 	left->m->color = color(20, 0, 10);
 	left->m->diffuse = 1;
 	left->m->specular = 1;
 	left->m->ambient = 0.1;
 	left->m->reflective = 2;
-	left->m->transparency = 1;
+	left->m->transparency = 0.8;
 	left->m->refractive_index = 1.5;
 
 	middle = sphere();
@@ -524,13 +525,13 @@ t_world	default_world_cyl(void)
 
 	hex = hexagon();
 	hex->transform = mmultfree(scaling(1, 1, 1), hex->transform);
-	hex->transform = mmultfree(translation(3.5, .2, 0), hex->transform);
+	hex->transform = mmultfree(translation(2.5, 0, -1), hex->transform);
 	hex->invtrans = minvert(hex->transform, 4);
 
 	w.light = ft_calloc(3, sizeof(t_light *));
 	if (!w.light)
 		exit (1);
-	w.light[0] = point_light(point(-10,40, 70), color(255, 220, 200));
+	w.light[0] = point_light(point(-40, 40, 60), color(255, 220, 200));
 
 	w.s = ft_calloc(9, sizeof(t_shape *));
 	w.s[0] = floor;
@@ -577,7 +578,6 @@ t_world	default_world_tri_test(void)
 	tri1->m->reflective = 0.1;
 	tri1->m->refractive_index = 1.52;
 	tri1->m->transparency = .6;
-	tri1->m->ambient = 0.2;
 	tri2 = triangle(point(1, 0, -1), point(1, 0, 1), point(0, 1, 0));
 	tri2->m->color = color(100, 80, 0);
 	tri2->m->reflective = 0.1;

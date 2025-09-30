@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:49:31 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/29 18:11:21 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/29 20:42:39 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,15 @@ t_intersection	*local_intersect_cyl(t_shape *s, t_ray r)
 	float			y0;
 	float			y1;
 
-	a = r.direction.x * r.direction.x +
-		r.direction.z * r.direction.z;
+	a = r.direction.x * r.direction.x
+		+ r.direction.z * r.direction.z;
 	xs = intersections(intersection(0, NULL), intersection(0, NULL));
 	if (!fisequal(a, 0))
 	{
-		b = 2 * r.origin.x * r.direction.x +
-			2 * r.origin.z * r.direction.z;
-		c = r.origin.x * r.origin.x +
-			r.origin.z * r.origin.z - 1;
+		b = 2 * r.origin.x * r.direction.x
+			+ 2 * r.origin.z * r.direction.z;
+		c = r.origin.x * r.origin.x
+			+ r.origin.z * r.origin.z - 1;
 		disc = b * b - 4 * a * c;
 		if (disc < 0)
 			return (xs);

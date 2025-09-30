@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:49:31 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/29 18:13:37 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/29 20:43:09 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,3 @@ t_intersection	*local_intersect_plane(t_shape *s, t_ray r)
 	}
 	return (xs);
 }
-
