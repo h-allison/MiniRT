@@ -157,8 +157,13 @@ SRCS := \
     $(PRG_DIR)/src/parsing_atorgb.c \
     $(PRG_DIR)/src/parsing_atof_tuple.c \
     $(PRG_DIR)/src/parsing_utils.c \
+    $(PRG_DIR)/src/parsing_bonus_fields.c \
+    $(PRG_DIR)/src/parsing_bonus_shapes.c \
     $(PRG_DIR)/src/error_handling.c \
     $(PRG_DIR)/src/mlx_handling.c \
+    $(PRG_DIR)/src/mlx_keypress_1.c \
+    $(PRG_DIR)/src/mlx_keypress_2.c \
+    $(PRG_DIR)/src/mlx_keypress_3.c \
     $(PRG_DIR)/src/rendering.c \
     $(PRG_DIR)/src/math_float.c \
     $(PRG_DIR)/src/math_matrices_1.c \
@@ -208,7 +213,8 @@ SRCS := \
     $(PRG_DIR)/src/sh_triangle.c \
     $(PRG_DIR)/src/sh_hexagon.c \
     $(PRG_DIR)/src/sh_test_shapes.c \
-    $(PRG_DIR)/src/obj_parser.c \
+    $(PRG_DIR)/src/obj_parser_1.c \
+    $(PRG_DIR)/src/obj_parser_2.c \
     $(PRG_DIR)/src/free_1.c \
     $(PRG_DIR)/src/free_2.c \
     $(PRG_DIR)/src/world_scenes.c \

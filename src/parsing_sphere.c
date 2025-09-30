@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:51:51 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/30 20:51:13 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/30 21:08:07 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ int	parse_sphere(char **tokens, t_world *world, int *s_i)
 		if (parse_shape_bonus("sp", tokens + 4, world->s[*s_i]) != 0)
 			return (-1);
 	}
-	printf("sphere[%i]->specular = %f\n", *s_i, world->s[*s_i]->m->specular);
 	(*s_i)++;
 	return (0);
 }

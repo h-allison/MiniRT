@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/30 21:04:20 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/30 21:34:54 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,9 +235,6 @@ typedef	struct	s_parser
 	t_tuple		*vertices;
 }	t_parser;
 
-//main.c
-void			img_wipe(t_data *data, t_rgb color);
-
 //check_file.c
 int				scenefile_check_chars(char *filename);
 
@@ -309,6 +306,7 @@ int				bonus_diffuse(char *element, char **tokens, t_shape *s, int *t_i);
 
 //rendering.c
 void			render(void *param);
+void			img_wipe(t_data *data, t_rgb color);
 int				rt_error_e(char *element, char *msg, int ret);
 void			render_with_parsing(void *param);
 
@@ -552,8 +550,13 @@ t_tuple			cube_uv_down(t_tuple point);
 t_canvas		*canvas_from_ppm(char *filename);
 t_rgb			pixel_at(t_canvas *canvas, int x, int y);
 
-//obj_files/c
+//obj_parser_1.c
 t_parser		*parse_obj_file(char *filename);
+
+//obj_parser_2.c
+int				obj_read_next_buffer(char *buf, int fd, int init);
+int				obj_read_next_float(int fd, float *n);
+char			obj_read_next_char(int fd, char *s);
 
 //free.c
 int				free_matrices_and_ret(t_shape *p, int ret);

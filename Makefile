@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/09/30 21:05:25 by mmillhof         ###   ########.fr        #
+#    Updated: 2025/09/30 21:22:38 by mmillhof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,7 +91,8 @@ SRC         := src/main.c \
 			   src/sh_triangle.c \
 			   src/sh_hexagon.c \
 			   src/sh_test_shapes.c \
-			   src/obj_parser.c \
+			   src/obj_parser_1.c \
+			   src/obj_parser_2.c \
 			   src/free_1.c \
 			   src/free_2.c \
 			   src/world_scenes.c \

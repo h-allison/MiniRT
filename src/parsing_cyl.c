@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:27:53 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/30 20:52:15 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/30 21:08:18 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ int	parse_cyl(char **tokens, t_world *world, int *s_i)
 		if (parse_shape_bonus("cy", tokens + 6, world->s[*s_i]) != 0)
 			return (-1);
 	}
-	printf("cyl[%i]->specular = %f\n", *s_i, world->s[*s_i]->m->specular);
 	(*s_i)++;
 	return (0);
 }

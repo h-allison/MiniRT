@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:54:44 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/30 16:31:44 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/30 21:34:13 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,26 @@ static int	render_chunk(t_world *world, t_data *data)
 		}
 	}
 	return (1);
+}
+
+void	img_wipe(t_data *data, t_rgb color)
+{
+	int		y;
+	int		x;
+
+	y = 0;
+	x = 0;
+	while (y < data->mlx->height)
+	{
+		x = 0;
+		while (x < data->mlx->width)
+		{
+			mlx_put_pixel(data->img, x, y, color_to_hex(color));
+			x++;
+		}
+		y++;
+	}
+	return ;
 }
 
 void	render_with_parsing(void *param)
