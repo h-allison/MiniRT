@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/30 18:51:51 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/30 21:01:02 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,6 +235,9 @@ typedef	struct	s_parser
 	t_tuple		*vertices;
 }	t_parser;
 
+//main.c
+void			img_wipe(t_data *data, t_rgb color);
+
 //check_file.c
 int				scenefile_check_chars(char *filename);
 
@@ -248,8 +251,24 @@ int				rt_error(char *msg, int ret);
 
 //mlx_handling.c
 int				mlx_handling(t_data *data);
-void			ft_hook(void *param);
-void			img_wipe(t_data *data, t_rgb color);
+void			mlx_hook(void *param);
+void			mlx_check_keys(t_data *data);
+
+//mlx_keypress_X.c
+void			keypress_escape(t_data *data);
+void			keypress_up(t_data *data);
+void			keypress_down(t_data *data);
+void			keypress_left(t_data *data);
+void			keypress_right(t_data *data);
+void			keypress_r(t_data *data);
+void			keypress_f(t_data *data);
+void			keypress_q(t_data *data);
+void			keypress_e(t_data *data);
+void			keypress_p(t_data *data);
+void			keypress_s(t_data *data);
+void			keypress_w(t_data *data);
+void			keypress_a(t_data *data);
+void			keypress_d(t_data *data);
 
 //parsing.c
 int				parse_file(char *filename, t_data *data);

@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 23:32:31 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/30 14:09:11 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/30 21:01:41 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,55 @@ int	mlx_handling(t_data *data)
 {
 	data->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, data->filename, true);
 	if (!data->mlx)
-		ft_error(); // TODO
+		ft_error();
 	data->img = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
 	if (!data->img || (mlx_image_to_window(data->mlx, data->img, 0, 0) < 0))
-		ft_error(); // TODO
+		ft_error();
 	img_wipe(data, color(0x00, 0x00, 0x00));
 	mlx_loop_hook(data->mlx, render_with_parsing, data);
-	mlx_loop_hook(data->mlx, ft_hook, data);
+	mlx_loop_hook(data->mlx, mlx_hook, data);
 	mlx_loop(data->mlx);
 	mlx_terminate(data->mlx);
 	return (EXIT_SUCCESS);
 }
 
-void	ft_hook(void *param)
+static void	mlx_check_keys_alpha(t_data *data)
+{
+	if (mlx_is_key_down(data->mlx, MLX_KEY_S))
+		keypress_s(data);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
+		keypress_w(data);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
+		keypress_a(data);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_D))
+		keypress_d(data);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_R))
+		keypress_r(data);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_F))
+		keypress_f(data);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_Q))
+		keypress_q(data);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_E))
+		keypress_e(data);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_P))
+		keypress_p(data);
+}
+
+static void	mlx_check_keys_esc_cursor(t_data *data)
+{
+	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
+		keypress_escape(data);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_UP))
+		keypress_up(data);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_DOWN))
+		keypress_down(data);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
+		keypress_left(data);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
+		keypress_right(data);
+}
+
+void	mlx_hook(void *param)
 {
 	static bool			init;
 	static t_data		*data;
@@ -46,98 +82,7 @@ void	ft_hook(void *param)
 	}
 	if (init)
 	{
-		if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
-		{
-			mlx_delete_image(data->mlx, data->img);
-			mlx_close_window(data->mlx);
-			free_world(data->world);
-			free_cam(data->cam);
-		}
-		if (mlx_is_key_down(data->mlx, MLX_KEY_UP))
-		{
-			data->cam->transform = mmultfree(translation(0, 0, 0.05), data->cam->transform);
-			data->reset = true;
-		}
-		if (mlx_is_key_down(data->mlx, MLX_KEY_DOWN))
-		{
-			data->cam->transform = mmultfree(translation(0, 0, -0.05), data->cam->transform);
-			data->reset = true;
-		}
-		if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
-		{
-			data->cam->transform = mmultfree(translation(-0.1, 0, 0), data->cam->transform);
-			data->reset = true;
-		}
-		if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
-		{
-			data->cam->transform = mmultfree(translation(0.1, 0, 0), data->cam->transform);
-			data->reset = true;
-		}
-		if (mlx_is_key_down(data->mlx, MLX_KEY_R))
-		{
-			data->cam->transform = mmultfree(translation(0, -0.05, 0), data->cam->transform);
-			data->reset = true;
-		}
-		if (mlx_is_key_down(data->mlx, MLX_KEY_F))
-		{
-			data->cam->transform = mmultfree(translation(0, 0.05, 0), data->cam->transform);
-			data->reset = true;
-		}
-		if (mlx_is_key_down(data->mlx, MLX_KEY_S))
-		{
-			data->cam->transform = mmultfree(rotation_x(-0.5 * DEG2RAD), data->cam->transform);
-			data->reset = true;
-		}
-		if (mlx_is_key_down(data->mlx, MLX_KEY_W))
-		{
-			data->cam->transform = mmultfree(rotation_x(0.5 * DEG2RAD), data->cam->transform);
-			data->reset = true;
-		}
-		if (mlx_is_key_down(data->mlx, MLX_KEY_A))
-		{
-			data->cam->transform = mmultfree(rotation_y(1 * DEG2RAD), data->cam->transform);
-			data->reset = true;
-		}
-		if (mlx_is_key_down(data->mlx, MLX_KEY_D))
-		{
-			data->cam->transform = mmultfree(rotation_y(-1 * DEG2RAD), data->cam->transform);
-			data->reset = true;
-		}
-		if (mlx_is_key_down(data->mlx, MLX_KEY_Q))
-		{
-			data->cam->transform = mmultfree(rotation_z(-0.5 * DEG2RAD), data->cam->transform);
-			data->reset = true;
-		}
-		if (mlx_is_key_down(data->mlx, MLX_KEY_E))
-		{
-			data->cam->transform = mmultfree(rotation_z(0.5 * DEG2RAD), data->cam->transform);
-			data->reset = true;
-		}
-		if (mlx_is_key_down(data->mlx, MLX_KEY_P))
-		{
-			printf("EXPORTING...\n");
-			canvas_export_ppm(data);
-			printf("done!\n");
-		}
+		mlx_check_keys_esc_cursor(data);
+		mlx_check_keys_alpha(data);
 	}
-}
-
-void	img_wipe(t_data *data, t_rgb color)
-{
-	int		y;
-	int		x;
-
-	y = 0;
-	x = 0;
-	while (y < data->mlx->height)
-	{
-		x = 0;
-		while (x < data->mlx->width)
-		{
-			mlx_put_pixel(data->img, x, y, color_to_hex(color));
-			x++;
-		}
-		y++;
-	}
-	return ;
 }
