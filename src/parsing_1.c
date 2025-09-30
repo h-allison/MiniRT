@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 11:18:54 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/29 17:35:06 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/30 17:30:23 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int	start_parsing_routine(t_data *data)
 		{
 			if (parse_into_world(tokens, data) == -1)
 			{
-				printf("error\n");
-				exit (1);
+				free_tokens(tokens);
+				return(-1);
 			}
 			free_tokens(tokens);
 		}
@@ -64,13 +64,11 @@ void	alloc_shape_array(t_world *world)
 	lst = world->checklist;
 	count_shape = lst->count_sphere + lst->count_cyl
 		+ lst->count_cube + lst->count_plane + lst->count_cone;
-	world->s = (t_shape **)calloc(sizeof(t_shape *), count_shape + 1);
+	world->s = (t_shape **)ft_calloc(sizeof(t_shape *), count_shape + 1);
 	if (!world->s)
 		exit(1);
 	world->checklist->count_shape = count_shape;
 }
-
-// TODO: keep this extra check?
 
 int	parse_file(char *filename, t_data *data)
 {
@@ -86,6 +84,7 @@ int	parse_file(char *filename, t_data *data)
 		exit (1);
 	}
 	alloc_shape_array(data->world);
-	start_parsing_routine(data);
+	if (start_parsing_routine(data) != 0)
+		return (-1);
 	return (0);
 }

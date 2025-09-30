@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/09/30 16:01:14 by hallison         ###   ########.fr        #
+#    Updated: 2025/09/30 17:40:49 by hallison         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -123,7 +123,8 @@ all: $(NAME)
 
 # Compile C -> .o into build/
 $(OBJDIR)/%.o: src/%.c | $(OBJDIR)
-	$(CC) $(CFLAGS) $(CPPFLAGS) -O3 -c $< -o $@
+	# $(CC) $(CFLAGS) $(CPPFLAGS) -O3 -c $< -o $@
+	$(CC) $(CFLAGS) $(CPPFLAGS) -O0 -g -c $< -o $@
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
