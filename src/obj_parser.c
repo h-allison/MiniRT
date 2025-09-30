@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 12:09:09 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/30 00:30:56 by matthias         ###   ########.fr       */
+/*   Updated: 2025/09/30 13:27:30 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,6 @@ static int	obj_read_file(int fd, t_parser *parser)
 		if (status < 0 || (status == 0 && parser->vertices[0].y == 0 )) 
 			return (-1);
 	}
-	(void)i;
 	return (0);
 }
 
