@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:06:34 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/26 16:40:56 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/30 16:06:47 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int test_shadehit_reflective_and_transparent(void)
 {
-	t_world			w;
+	t_world			*w;
 	t_ray			r;
 	t_shape			*floor;
 	t_shape			*ball;
@@ -37,18 +37,18 @@ int test_shadehit_reflective_and_transparent(void)
 	ball->m->ambient = 0.5;
 	set_transform(ball, translation(0, -3.5, -0.5));
 
-	w.s[2] = floor;
-	w.s[3] = ball;
-	w.s[4] = NULL;
+	w->s[2] = floor;
+	w->s[3] = ball;
+	w->s[4] = NULL;
 
 	xs = intersections(intersection(sqrtf(2), floor),
 			intersection(sqrtf(2), floor));
 	comps = prepare_computations(&xs[0], &r, xs);
 	xs[0].object = NULL;
 	
-	col = shade_hit(&w, &comps, 5);
+	col = shade_hit(w, &comps, 5);
 	xs[0].object = NULL;
-	free_world(&w);
+	free_world(w);
 	if (!fisequal(col.r, 0.933891))
 		return (-1);
 	if (!fisequal(col.g, 0.696412))

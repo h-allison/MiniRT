@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 14:56:16 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/29 20:48:41 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/30 18:52:08 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,79 +58,16 @@ t_intersection	*intersect_world(t_world *w, t_ray *r)
 	return (xs);
 }
 
-void	lst_findobject(t_list *containers, t_shape *object)
+/* ABSTRACT FUNCTIONV */
+
+t_tuple	normal_at(t_shape *s, t_tuple world_point)
 {
-	t_list	*new_next;
-	t_list	*new_node;
+	t_tuple	local_point;
+	t_tuple	local_normal;
 
-	while (containers->next)
-	{
-		if (containers->next->content == object)
-		{
-			if (containers->next)
-				new_next = containers->next->next;
-			else
-				new_next = NULL;
-			free(containers->next);
-			containers->next = new_next;
-			return ;
-		}
-		containers = containers->next;
-	}
-	new_node = ft_lstnew(object);
-	containers->next = new_node;
-	return ;
-}
-
-void	clear_list(t_list **lst)
-{
-	t_list	*node;
-	t_list	*temp;
-
-	node = *lst;
-	while (node)
-	{
-		temp = node->next;
-		free(node);
-		node = temp;
-	}
-	*lst = NULL;
-}
-
-void	prepare_n(t_comps *comps, t_intersection *ht, t_intersection *xs)
-{
-	t_list			*containers;
-	int				i;
-	t_shape			*object;
-
-	containers = ft_lstnew(NULL);
-	i = 0;
-	while (xs && xs[i].object)
-	{
-		if (xs[i].t == ht->t && xs[i].object == ht->object)
-		{
-			if (containers->next == NULL)
-				comps->n1 = 1.0;
-			else
-			{
-				object = (t_shape *)ft_lstlast(containers)->content;
-				comps->n1 = object->m->refractive_index;
-			}
-		}
-		lst_findobject(containers, xs[i].object);
-		if (xs[i].t == ht->t && xs[i].object == ht->object)
-		{
-			if (containers->next == NULL)
-				comps->n2 = 1.0;
-			else
-			{
-				object = (t_shape *)ft_lstlast(containers)->content;
-				comps->n2 = object->m->refractive_index;
-			}
-		}
-		i++;
-	}
-	clear_list(&containers);
+	local_point = world_to_object(s, world_point);
+	local_normal = s->local_normal_at(s, local_point);
+	return (normal_to_world(s, local_normal));
 }
 
 t_comps	prepare_computations(t_intersection *ht, t_ray *r, t_intersection *xs)

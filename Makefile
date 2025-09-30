@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/09/30 17:40:49 by hallison         ###   ########.fr        #
+#    Updated: 2025/09/30 18:50:19 by mmillhof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,16 +44,18 @@ SRC         := src/main.c \
 			   src/math_matrices_2.c \
 			   src/math_matrices_3.c \
 			   src/math_matrices_4.c \
+			   src/math_matrices_5.c \
                src/math_tuples_1.c \
                src/math_tuples_2.c \
                src/math_tuples_3.c \
 			   src/math_transform.c \
 			   src/math_transform_2.c \
 			   src/math_rays.c \
-			   src/math_intersections.c \
+			   src/math_intersections_1.c \
 			   src/math_intersections_2.c \
+			   src/math_intersections_3.c \
 			   src/math_colors.c \
-			   src/math_shading.c \
+			   src/math_shading_1.c \
 			   src/math_shading_2.c \
 			   src/math_view.c \
 			   src/create_objects.c \
@@ -73,7 +75,8 @@ SRC         := src/main.c \
 			   src/pat_tests.c \
 			   src/reflection.c \
 			   src/groups.c \
-			   src/uv_mapping.c \
+			   src/uv_mapping_1.c \
+			   src/uv_mapping_2.c \
 			   src/textures.c \
 			   src/sh_cone.c \
 			   src/sh_cube.c \
@@ -85,7 +88,8 @@ SRC         := src/main.c \
 			   src/sh_hexagon.c \
 			   src/sh_test_shapes.c \
 			   src/obj_parser.c \
-			   src/free.c \
+			   src/free_1.c \
+			   src/free_2.c \
 			   src/world_scenes.c \
 			   src/debug_prints.c
 
@@ -123,8 +127,8 @@ all: $(NAME)
 
 # Compile C -> .o into build/
 $(OBJDIR)/%.o: src/%.c | $(OBJDIR)
-	# $(CC) $(CFLAGS) $(CPPFLAGS) -O3 -c $< -o $@
-	$(CC) $(CFLAGS) $(CPPFLAGS) -O0 -g -c $< -o $@
+	$(CC) $(CFLAGS) $(CPPFLAGS) -O3 -c $< -o $@
+	# $(CC) $(CFLAGS) $(CPPFLAGS) -O0 -g -c $< -o $@
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
