@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 12:09:09 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/30 13:27:30 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/30 16:34:59 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	obj_skip_gibberish(int fd)
 	}
 }
 
-static bool	obj_expected(char buf, char* s)
+static bool	obj_expected(char buf, char *s)
 {
 	while (s && *s)
 		if (buf == *(s++))
@@ -132,7 +132,7 @@ static int	obj_add_vertex(int fd, t_parser *parser)
 	int		i;
 	int		status;
 	float	f[3];
-	
+
 	i = 0;
 	status = 0;
 	while (i < 3)
@@ -156,7 +156,6 @@ static int	obj_add_face(int fd, t_parser *parser)
 {
 	(void)fd;
 	(void)parser;
-
 	printf("\nADD FACE");
 	return (1);
 }
@@ -181,8 +180,8 @@ static int	obj_read_file(int fd, t_parser *parser)
 		if (buf == 'v')
 			status = obj_add_vertex(fd, parser);
 		if (buf == 'f')
-			status = obj_add_face(fd, parser);	
-		if (status < 0 || (status == 0 && parser->vertices[0].y == 0 )) 
+			status = obj_add_face(fd, parser);
+		if (status < 0 || (status == 0 && parser->vertices[0].y == 0)) 
 			return (-1);
 	}
 	return (0);

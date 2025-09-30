@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 16:02:00 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/09 00:18:37 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/30 17:02:09 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,23 @@
 
 float	**msubmatrix(float **m, int size, int row, int col)
 {
-	int		x_m;
-	int		y_m;
-	int		x_sub;
-	int		y_sub;
 	float	**sub;
+	int		y_m;
+	int		y_sub;
+	int		x_m;
 
 	sub = alloc_matrix(size - 1);
-	x_sub = 0;
-	y_sub = 0;
 	y_m = 0;
+	y_sub = 0;
 	while (y_m < size)
 	{
 		if (y_m != row)
 		{
 			x_m = 0;
-			x_sub = 0;
 			while (x_m < size)
 			{
 				if (x_m != col)
-					sub[y_sub][x_sub++] = m[y_m][x_m];
+					sub[y_sub][x_m - (x_m > col)] = m[y_m][x_m];
 				x_m++;
 			}
 			y_sub++;

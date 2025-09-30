@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 14:56:16 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/30 15:48:05 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/30 16:17:52 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	clear_list(t_list **lst)
 static void	set_n(t_list *containers, float *n)
 {
 	t_shape			*object;
-	
+
 	if (containers->next == NULL)
 		*n = 1.0;
 	else
