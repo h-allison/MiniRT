@@ -258,11 +258,13 @@ char			**get_element_tokens(char const *s);
 int				fill_checklist_count(t_data *data);
 void			init_checklist(t_world *world);
 int				parse_into_world(char **tokens, t_data *data);
+int				rt_strcmp(char *token, char *s2);
 int				parse_ambient(char **tokens, t_world *world);
 int				parse_camera(char **tokens, t_data *data);
 int				parse_light(char **tokens, t_world *world);
 int				parse_light_bonus(char **tokens, t_light *light);
 int				parse_plane(char **tokens, t_world *worldi, int *s_i);
+int				parse_plane_bonus(char **tokens, t_shape *s);
 int				parse_sphere(char **tokens, t_world *world, int *s_i);
 int				parse_cyl(char **tokens, t_world *world, int *s_i);
 int				parse_cyl_position(char *token, t_shape *s);
@@ -282,6 +284,7 @@ int				check_v_normalized(t_tuple v, char *element);
 void			debug_print_tokens(char **tokens);
 void    		debug_print_matrix(float **m);
 void			vector_to_rotation(t_tuple v, float *angle);
+int				bonus_ambient(char *element, char **tokens, t_shape *s, int *i);
 
 //rendering.c
 void			render(void *param);

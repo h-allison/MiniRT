@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:27:53 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/29 20:19:00 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/30 16:50:01 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	parse_cube_diam_and_height(char *d_token, char *h_token, t_shape *s)
 	ht = 0;
 	if (rt_atof(h_token, &ht) != 0)
 		return (rt_error("cb: cube height: invalid input", -1));
-	printf("Cyl height = %f\n", ht);
 	s->transform = mmultfree(scaling(rad, rad, rad), s->transform);
 	free_matrix(s->invtrans, 4);
 	s->invtrans = minvert(s->transform, 4);

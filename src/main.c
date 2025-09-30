@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:54:44 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/26 18:04:31 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/09/30 17:30:53 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		rt_early_exit(ERROR_WRONG_ARGS);
 	data.reset = true;
-	parse_file(argv[1], &data);
+	if (parse_file(argv[1], &data) != 0)
+	{
+		free_world(data.world);
+		return (0);
+	}
 	printf("Time to raytrace!\n");
 	mlx_handling(&data);
 	return (0);

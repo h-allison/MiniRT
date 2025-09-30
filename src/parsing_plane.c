@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:51:51 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/29 20:32:45 by hallison         ###   ########.fr       */
+/*   Updated: 2025/09/30 16:16:07 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,14 @@ static int	mandatory_tokens_found(char **tokens)
 		return (rt_error("pl: plane orientation: missing values", -1));
 	if (!tokens[3])
 		return (rt_error("pl: plane color: missing values", -1));
-	if (tokens[4])
+	if (tokens[4] && BONUS == false)
 		return (rt_error("pl: Extraneous args", -1));
 	return (0);
 }
 
-// TODO remove pl_i and pl_i check later
 // TODO remove pattern
 int	parse_plane(char **tokens, t_world *world, int *s_i)
 {
-	static int	pl_i;
-
 	if (mandatory_tokens_found(tokens) != 0)
 		return (-1);
 	world->s[*s_i] = plane();
@@ -90,9 +87,11 @@ int	parse_plane(char **tokens, t_world *world, int *s_i)
 		return (-1);
 	if (parse_plane_position(tokens[1], world->s[*s_i]) != 0)
 		return (-1);
+	if (BONUS == true && tokens[4])
+	{
+		if (parse_plane_bonus(tokens + 4, world->s[*s_i]) != 0)
+			return (-1);
+	}
 	(*s_i)++;
-	pl_i++;
-	if (pl_i > (world->checklist->count_plane))
-		return (rt_error("parse_plane: more planes than counted", -1));
 	return (0);
 }

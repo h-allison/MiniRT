@@ -23,6 +23,7 @@ SRC         := src/main.c \
                src/parsing_light.c \
                src/parsing_light_bonus.c \
                src/parsing_plane.c \
+               src/parsing_plane_bonus.c \
                src/parsing_sphere.c \
                src/parsing_cyl.c \
                src/parsing_cyl_2.c \
@@ -127,6 +128,7 @@ all: $(NAME)
 # Compile C -> .o into build/
 $(OBJDIR)/%.o: src/%.c | $(OBJDIR)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -O3 -c $< -o $@
+	# $(CC) $(CFLAGS) $(CPPFLAGS) -O0 -g -c $< -o $@
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
