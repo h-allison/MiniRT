@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/10/01 09:38:50 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/01 13:05:55 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,15 @@ typedef struct s_intersection
 	float			t;
 }	t_intersection;
 
+typedef struct s_rstate {
+	int				y_tile;
+	int				stride;
+	int				initial_stride;
+	int				aa_mode;
+	int				aa_y;
+	int				done;
+}	t_rstate;
+
 typedef struct s_data
 {
 	char		*filename;
@@ -217,6 +226,7 @@ typedef struct s_data
 	bool		reset;
 	t_world		*world;
 	t_camera	*cam;
+	t_rstate	rs;
 }	t_data;
 
 typedef struct s_tminmax
@@ -303,12 +313,19 @@ int				parse_shape_bonus(char *shape, char **tokens, t_shape *s);
 int				bonus_ambient(char *element, char **tokens, t_shape *s, int *i);
 int				bonus_specular(char *element, char **tokens, t_shape *s, int *t_i);
 int				bonus_diffuse(char *element, char **tokens, t_shape *s, int *t_i);
-
-//rendering.c
-void			render(void *param);
-void			img_wipe(t_data *data, t_rgb color);
 int				rt_error_e(char *element, char *msg, int ret);
+
+//rendering_1.c
+void			render(void *param);
 void			render_with_parsing(void *param);
+void			img_wipe(t_data *data, t_rgb color);
+
+//rendering_2.c
+int				render_chunk(t_world *world, t_data *data);
+
+//rendering_3.c
+int				compute_rows_limit(t_data *data);
+int				render_pixelated_chunk(t_world *world, t_data *data, int rows_limit);
 
 //create_objects.c
 t_pattern		*pattern(void);

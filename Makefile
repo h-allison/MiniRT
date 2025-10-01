@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/09/30 21:22:38 by mmillhof         ###   ########.fr        #
+#    Updated: 2025/10/01 13:06:07 by mmillhof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,9 @@ SRC         := src/main.c \
                src/mlx_keypress_1.c \
                src/mlx_keypress_2.c \
                src/mlx_keypress_3.c \
-               src/rendering.c \
+               src/rendering_1.c \
+               src/rendering_2.c \
+               src/rendering_3.c \
                src/math_float.c \
 			   src/math_matrices_1.c \
 			   src/math_matrices_2.c \
@@ -109,7 +111,8 @@ LIBFT       := $(LIBFT_PATH)/libft.a
 CC          ?= cc
 CFLAGS      ?= -Wall -Wextra -Werror \
 				-Iinclude -I$(MLX42_PATH)/include \
-             	-I$(LIBFT_PATH)/include 
+             	-I$(LIBFT_PATH)/include \
+				-MMD -MP
 LDFLAGS     := -L$(MLX42_PATH)/build -L$(LIBFT_PATH)
 LDLIBS      := -lft -lmlx42 -lglfw -lm
 
@@ -124,6 +127,7 @@ endif
 # ---- Objects / Deps ----
 OBJDIR      := build
 OBJ         := $(patsubst src/%.c,$(OBJDIR)/%.o,$(SRC))
+DEP         := $(OBJ:.o=.d)
 
 # ---- Rules ----
 .PHONY: all clean fclean re asan gdb valgrind valchild mlx42
@@ -183,3 +187,4 @@ gdb:  fclean all
 valgrind: $(NAME)
 	valgrind --leak-check=full --suppressions=valgrind-glibc-dlopen.supp --track-fds=yes ./$(NAME) samples/sample_0.rt
 
+-include $(DEP)
