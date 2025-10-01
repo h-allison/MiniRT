@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 12:09:09 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/30 21:25:13 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/01 09:27:31 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,7 @@ static int	obj_open_file(char *filename)
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-	{
 		perror("texture: open");
-	}
 	return (fd);
 }
 
@@ -98,6 +96,6 @@ t_parser	*parse_obj_file(char *filename)
 	if (obj_read_file(fd, parser))
 		return (NULL);
 	close(fd);
-	obj_read_next_buffer(NULL, 0, 1);
+	read_next_buffer(NULL, 0, 1);
 	return (parser);
 }

@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/30 21:34:54 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/01 09:38:50 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -548,13 +548,13 @@ t_tuple			cube_uv_down(t_tuple point);
 
 //textures.c
 t_canvas		*canvas_from_ppm(char *filename);
-t_rgb			pixel_at(t_canvas *canvas, int x, int y);
 
 //obj_parser_1.c
 t_parser		*parse_obj_file(char *filename);
 
 //obj_parser_2.c
-int				obj_read_next_buffer(char *buf, int fd, int init);
+int				read_next_buffer(char *buf, int fd, int init);
+int				skip_line(int fd);
 int				obj_read_next_float(int fd, float *n);
 char			obj_read_next_char(int fd, char *s);
 

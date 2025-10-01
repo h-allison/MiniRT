@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/23 14:50:50 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/26 23:54:31 by mmillhof         ###   ########.fr       */
+/*   Created: 2025/10/01 09:36:36 by mmillhof          #+#    #+#             */
+/*   Updated: 2025/10/01 09:37:19 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,9 @@ static int	canvas_open_file(char *filename)
 	buf = ft_calloc(3, sizeof(char));
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-	{
 		perror("texture: open");
-	}
 	else if (read(fd, buf, 3) < 0)
-	{
 		perror("texture: read");
-	}
 	else if (ft_strncmp(buf, "P3\n", 3))
 	{
 		ft_putstr_fd("texture: Wrong header!", 2);
@@ -34,45 +30,6 @@ static int	canvas_open_file(char *filename)
 	}
 	free(buf);
 	return (fd);
-}
-
-static int	read_next_buffer(char *buf, int fd, int init)
-{
-	static char	stash[100001];
-	static int	i;
-	int			status;
-
-	if (init)
-	{
-		stash[0] = '\0';
-		i = 0;
-		return (0);
-	}
-	if (!stash[i])
-	{
-		status = read(fd, stash, 100000);
-		if (status < 0)
-			return (-1);
-		if (status == 0)
-			return (0);
-		stash[status + 1] = '\0';
-		i = 0;
-	}
-	*buf = stash[i++];
-	return (1);
-}
-
-static int	canvas_skip_comment(int fd)
-{
-	char	buf;
-	int		status;
-
-	while (1)
-	{
-		status = read_next_buffer(&buf, fd, 0);
-		if (status <= 0 || buf == '\n')
-			return (status);
-	}
 }
 
 static char	canvas_read_next_digit(int fd)
@@ -83,7 +40,7 @@ static char	canvas_read_next_digit(int fd)
 	status = read_next_buffer(&buf, fd, 0);
 	if (status > 0 && buf == '#')
 	{
-		status = canvas_skip_comment(fd);
+		status = skip_line(fd);
 		buf = '\n';
 	}
 	if (status < 0)
@@ -176,9 +133,4 @@ t_canvas	*canvas_from_ppm(char *filename)
 	close(fd);
 	read_next_buffer(NULL, 0, 1);
 	return (canvas);
-}
-
-t_rgb	pixel_at(t_canvas *canvas, int x, int y)
-{
-	return (canvas->img[y][x]);
 }

@@ -6,13 +6,13 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 12:09:09 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/30 21:21:23 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/01 09:22:07 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	obj_read_next_buffer(char *buf, int fd, int init)
+int	read_next_buffer(char *buf, int fd, int init)
 {
 	static char	stash[100001];
 	static int	i;
@@ -38,14 +38,14 @@ int	obj_read_next_buffer(char *buf, int fd, int init)
 	return (1);
 }
 
-static int	obj_skip_gibberish(int fd)
+int	skip_line(int fd)
 {
 	char	buf;
 	int		status;
 
 	while (1)
 	{
-		status = obj_read_next_buffer(&buf, fd, 0);
+		status = read_next_buffer(&buf, fd, 0);
 		if (status <= 0 || buf == '\n')
 			return (status);
 	}
@@ -65,16 +65,16 @@ char	obj_read_next_char(int fd, char *expect)
 	char	buf2;
 	int		status;
 
-	status = obj_read_next_buffer(&buf, fd, 0);
+	status = read_next_buffer(&buf, fd, 0);
 	if (status > 0 && obj_expected(buf, expect))
 	{
-		status = obj_read_next_buffer(&buf2, fd, 0);
+		status = read_next_buffer(&buf2, fd, 0);
 		if (status > 0 && obj_expected(buf2, " "))
 			return (buf);
 	}
 	if (status > 0 && buf != ' ' && buf != '\n')
 	{
-		status = obj_skip_gibberish(fd);
+		status = skip_line(fd);
 		buf = '#';
 	}
 	else if (status == 0)
@@ -97,7 +97,7 @@ int	obj_read_next_float(int fd, float *n)
 	idx = 0;
 	while (1)
 	{
-		status = obj_read_next_buffer(&c, fd, 0);
+		status = read_next_buffer(&c, fd, 0);
 		if (status <= 0 || !obj_expected(c, "-.0123456789 \n"))
 		{
 			printf("obj: Invalid file");
