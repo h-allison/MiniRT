@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 18:12:31 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/30 16:09:20 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/01 13:25:16 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -359,7 +359,7 @@ t_world	*default_world_6(void)
 	floor->m->ambient = 0.01;
 	floor->m->specular = 0.2;
 	floor->m->reflective = .2;
-	floor->m->pattern = ring_pattern(color(80, 80, 80), floor->m->color);
+//	floor->m->pattern = ring_pattern(color(80, 80, 80), floor->m->color);
 
 	big = sphere();
 	big->transform = mmultfree(translation(.5, 1, 4), big->transform);
@@ -368,9 +368,9 @@ t_world	*default_world_6(void)
 	big->m->diffuse = .6;
 	big->m->ambient = .2;
 	big->m->specular = 0.5;
-	big->m->pattern = stripe_pattern(color(80, 80, 80), big->m->color);
-	big->m->pattern->transform = mmultfree(scaling(0.4, 0.4, 0.6), big->m->pattern->transform);
-	big->m->pattern->invtrans = minvert(big->m->pattern->transform, 4);
+//	big->m->pattern = stripe_pattern(color(80, 80, 80), big->m->color);
+//	big->m->pattern->transform = mmultfree(scaling(0.4, 0.4, 0.6), big->m->pattern->transform);
+//	big->m->pattern->invtrans = minvert(big->m->pattern->transform, 4);
 
 	left = sphere();
 	left->transform = mmultfree(scaling(0.33, 0.33, 0.33), left->transform);
@@ -402,9 +402,9 @@ t_world	*default_world_6(void)
 	right->m->color = color(140, 100, 255);
 	right->m->diffuse = 0.7;
 	right->m->specular = 0.4;
-	right->m->pattern = ring_pattern(color(20, 80, 60), right->m->color);
-	right->m->pattern->transform = mmultfree(scaling(0.1, 0.2, 0.2), right->m->pattern->transform);
-	right->m->pattern->invtrans = minvert(right->m->pattern->transform, 4);
+//	right->m->pattern = ring_pattern(color(20, 80, 60), right->m->color);
+//	right->m->pattern->transform = mmultfree(scaling(0.1, 0.2, 0.2), right->m->pattern->transform);
+//	right->m->pattern->invtrans = minvert(right->m->pattern->transform, 4);
 	
 	cub = cube();
 	cub->transform = mmultfree(rotation_y(30 * DEG2RAD), cub->transform);
@@ -421,7 +421,6 @@ t_world	*default_world_6(void)
 	if (!w->light)
 		exit (1);
 	w->light[0] = point_light(point(-7, 7, -6), color(255, 255, 240));
-
 	w->s = ft_calloc(8, sizeof(t_shape *));
 	w->s[0] = floor;
 	w->s[1] = big;
