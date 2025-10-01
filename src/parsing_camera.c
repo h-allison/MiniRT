@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:51:51 by hallison          #+#    #+#             */
-/*   Updated: 2025/10/01 18:30:14 by hallison         ###   ########.fr       */
+/*   Updated: 2025/10/01 19:40:37 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,12 @@ t_camera	*place_camera_2(t_tuple c_coords, t_tuple c_orient, float fov)
 		exit (1);
 	vector_to_rotation(c_orient, angle);
 	cam->transform = view_transform(point(0, 0, 0), point(0, 0, 1), vector(0, 1, 0));
-
-	printf("\nBEFORE rotating, camera transform matrix:\n");
-	debug_print_matrix(cam->transform);
-	printf("\nangle[0] = %f\n", angle[0]);
-	printf("angle[1] = %f\n", angle[1]);
-	cam->transform = mmultfree(translation(c_coords.x, c_coords.y, c_coords.z), cam->transform);
+	cam->transform = mmultfree(translation(c_coords.x, -c_coords.y, c_coords.z), cam->transform);
 	cam->transform = mmultfree(rotation_z(angle[0]), cam->transform);
+	cam->transform = mmultfree(rotation_z(90 * DEG2RAD), cam->transform);
 	cam->transform = mmultfree(rotation_y(angle[1]), cam->transform);
-//	inverted_transform = minvert(cam->transform, 4);
+	cam->transform = mmultfree(rotation_y(90 * DEG2RAD), cam->transform);
+//	cam->transform = minvert_free(cam->transform, 4);
 //	free_matrix(cam->transform, 4);
 //	cam->transform = inverted_transform;
 	(void)c_coords;
