@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:51:51 by hallison          #+#    #+#             */
-/*   Updated: 2025/10/01 19:40:37 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/01 22:02:38 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,29 +32,23 @@ t_camera	*place_camera(t_tuple c_coords, t_tuple c_orient, float fov)
 	return (cam);
 }
 
-// TODO protect NULL return
 t_camera	*place_camera_2(t_tuple c_coords, t_tuple c_orient, float fov)
 {
 	t_camera	*cam;
-	float		angle[2];
-//	float		**inverted_transform;
+	t_tuple		up;
+	t_tuple		right;
+	float		dot_product;
 
-//	c_orient = tmult(c_orient, -1);
 	cam = camera(WIN_WIDTH, WIN_HEIGHT, DEG2RAD * fov);
 	if (!cam)
 		exit (1);
-	vector_to_rotation(c_orient, angle);
-	cam->transform = view_transform(point(0, 0, 0), point(0, 0, 1), vector(0, 1, 0));
-	cam->transform = mmultfree(translation(c_coords.x, -c_coords.y, c_coords.z), cam->transform);
-	cam->transform = mmultfree(rotation_z(angle[0]), cam->transform);
-	cam->transform = mmultfree(rotation_z(90 * DEG2RAD), cam->transform);
-	cam->transform = mmultfree(rotation_y(angle[1]), cam->transform);
-	cam->transform = mmultfree(rotation_y(90 * DEG2RAD), cam->transform);
-//	cam->transform = minvert_free(cam->transform, 4);
-//	free_matrix(cam->transform, 4);
-//	cam->transform = inverted_transform;
-	(void)c_coords;
-	(void)c_orient;
+	up = vector(0, 1, 0);
+	dot_product = dot(c_orient, up);
+	if (dot_product > 0.999f || dot_product < -0.999f)
+		up = vector(1, 0, 0);
+	right = tnorm(cross(c_orient, up));
+	cam->transform = view_transform(c_coords, tadd(c_coords, c_orient),
+			cross(right, c_orient));
 	return (cam);
 }
 
