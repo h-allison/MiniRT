@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/10/01 09:38:50 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/01 13:00:12 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -303,6 +303,10 @@ int				parse_shape_bonus(char *shape, char **tokens, t_shape *s);
 int				bonus_ambient(char *element, char **tokens, t_shape *s, int *i);
 int				bonus_specular(char *element, char **tokens, t_shape *s, int *t_i);
 int				bonus_diffuse(char *element, char **tokens, t_shape *s, int *t_i);
+int				bonus_shininess(char *element, char **tokens, t_shape *s, int *t_i);
+int				bonus_reflective(char *element, char **tokens, t_shape *s, int *t_i);
+int				bonus_transparency(char *element, char **tokens, t_shape *s, int *t_i);
+int				bonus_refractive_index(char *element, char **tokens, t_shape *s, int *t_i);
 
 //rendering.c
 void			render(void *param);

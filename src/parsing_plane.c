@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:51:51 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/30 20:30:56 by hallison         ###   ########.fr       */
+/*   Updated: 2025/10/01 13:26:44 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ static int	mandatory_tokens_found(char **tokens)
 	return (0);
 }
 
-// TODO remove pattern
 int	parse_plane(char **tokens, t_world *world, int *s_i)
 {
 	if (mandatory_tokens_found(tokens) != 0)
@@ -80,9 +79,9 @@ int	parse_plane(char **tokens, t_world *world, int *s_i)
 		exit(1);
 	if (parse_plane_color(tokens[3], world->s[*s_i]) != 0)
 		return (-1);
-	free_pattern(world->s[*s_i]->m->pattern);
-	world->s[*s_i]->m->pattern = checkers_pattern(color(80, 80, 100),
-			world->s[*s_i]->m->color);
+//	free_pattern(world->s[*s_i]->m->pattern);
+//	world->s[*s_i]->m->pattern = checkers_pattern(color(80, 80, 100),
+//			world->s[*s_i]->m->color);
 	if (parse_plane_orientation(tokens[2], world->s[*s_i]) != 0)
 		return (-1);
 	if (parse_plane_position(tokens[1], world->s[*s_i]) != 0)

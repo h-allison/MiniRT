@@ -1,0 +1,23 @@
+*CAMERA		position	orientation			field of view					
+C		0,0,-8	0,0,1			60					
+*AMBIENT		intensity	color								
+A		1	255,255,255								
+*LIGHT		position	intensity			color					
+L		-7,7,-6	1			160,40,40					
+L		7,7,-6	1			40,40,160					
+L		-2,3,-6	1			40,160,40					
+*PLANE		position	orientation			color					
+*pl		0,0,0	0,1,0			200,200,200					
+*pl		0,0,40	0,0,-1			80,0,0					
+*SPHERE ROW 1 -- (Ambient 0 - 1)		position	diameter			color					
+sp		-2,2,0	1			128,128,128	ambient 0	diffuse 0.9	specular 0.9		
+sp		-0,2,0	1			128,128,128	ambient 0.5	diffuse 0.9	specular 0.9		
+sp		2,2,0	1			128,128,128	ambient 1	diffuse 0.9	specular 0.9		
+*SPHERE ROW 2 -- (Diffuse 0 - 1)		position	diameter			color					
+sp		-2,0,0	1			128,128,128	ambient 0.1	diffuse 0	specular 0.9		
+sp		-0,0,0	1			128,128,128	ambient 0.1	diffuse 0.5	specular 0.9		
+sp		2,0,0	1			128,128,128	ambient 0.1	diffuse 1			
+*SPHERE ROW 3 -- (Specular 0 - 1)		position	diameter			color					
+sp		-2,-2,0	1			128,128,128	ambient 0.1	diffuse 0.9	specular 0		
+sp		-0,-2,0	1			128,128,128	ambient 0.1	diffuse 0.9	specular 0.5		
+sp		2,-2,0	1			128,128,128	ambient 0.1	diffuse 0.9	specular 1		
