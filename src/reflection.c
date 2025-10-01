@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 19:21:19 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/22 23:03:47 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/01 14:27:45 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,26 +45,34 @@ t_rgb	reflected_color(t_world *w, t_comps *comps, int remaining)
 	return (cscale(col, comps->object->m->reflective)); 
 }
 
-t_rgb	refracted_color(t_world *w, t_comps *comps, int remaining)
+static bool	refract_direction(t_tuple *direction, t_comps *comps)
 {
 	float	n_ratio;
 	float	cos_i;
 	float	sin2_t;
 	float	cos_t;
+
+	n_ratio = comps->n1 / comps->n2;
+	cos_i = dot(comps->eyev, comps->normalv);
+	sin2_t = n_ratio * n_ratio * (1 - cos_i * cos_i);
+	if (sin2_t > 1)
+		return (1);
+	cos_t = sqrtf(1.0 - sin2_t);
+	*direction = tsub(tmult(comps->normalv, n_ratio * cos_i - cos_t),
+			tmult(comps->eyev, n_ratio));
+	return (0);
+}
+
+t_rgb	refracted_color(t_world *w, t_comps *comps, int remaining)
+{
 	t_tuple	direction;
 	t_ray	refract_ray;
 	t_rgb	col;
 
 	if (comps->object->m->transparency == 0 || remaining <= 0)
 		return (color(0, 0, 0));
-	n_ratio = comps->n1 / comps->n2;
-	cos_i = dot(comps->eyev, comps->normalv);
-	sin2_t = n_ratio * n_ratio * (1 - cos_i * cos_i);
-	if (sin2_t > 1)
+	if (refract_direction(&direction, comps))
 		return (color(0, 0, 0));
-	cos_t = sqrtf(1.0 - sin2_t);
-	direction = tsub(tmult(comps->normalv, n_ratio * cos_i - cos_t),
-			tmult(comps->eyev, n_ratio));
 	refract_ray = ray(comps->under_point, direction);
 	col = cscale(color_at(w, &refract_ray, remaining - 1),
 			comps->object->m->transparency);
