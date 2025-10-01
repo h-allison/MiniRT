@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 20:04:57 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/29 20:20:03 by hallison         ###   ########.fr       */
+/*   Updated: 2025/10/01 16:46:29 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	parse_cone_orientation(char *token, t_shape *s)
 	v = vector(0, 0, 0);
 	if (rt_atof_tuple(token, &v) != 0)
 		return (rt_error("cn: cone orient: invalid input", -1));
-	v = tnorm(v);
 	if (check_v_normalized(v, "cn: cone orientation") != 0)
 		return (-1);
+	v = tnorm(v);
 	vector_to_rotation(v, angle);
 	s->transform = mmultfree(rotation_z(angle[0]), s->transform);
 	s->transform = mmultfree(rotation_y(angle[1]), s->transform);

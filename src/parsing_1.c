@@ -6,11 +6,13 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 11:18:54 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/30 19:48:06 by hallison         ###   ########.fr       */
+/*   Updated: 2025/10/01 16:54:48 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+// TODO core dump when unknown specifier encountered in bonus?
 
 void	free_tokens(char **tokens)
 {

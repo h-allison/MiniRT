@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/10/01 14:42:53 by hallison         ###   ########.fr       */
+/*   Updated: 2025/10/01 14:46:13 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -313,6 +313,8 @@ int				parse_shape_bonus(char *shape, char **tokens, t_shape *s);
 int				bonus_ambient(char *element, char **tokens, t_shape *s, int *i);
 int				bonus_specular(char *element, char **tokens, t_shape *s, int *t_i);
 int				bonus_diffuse(char *element, char **tokens, t_shape *s, int *t_i);
+int				bonus_reflective(char *element, char **tokens, t_shape *s, int *t_i);
+int				bonus_shininess(char *element, char **tokens, t_shape *s, int *t_i);
 int				rt_error_e(char *element, char *msg, int ret);
 
 //rendering_1.c

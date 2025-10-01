@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:27:53 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/30 21:08:18 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/01 17:22:32 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int	parse_cyl_orientation(char *token, t_shape *s)
 	v = vector(0, 0, 0);
 	if (rt_atof_tuple(token, &v) != 0)
 		return (rt_error("cy: cylinder orient: invalid input", -1));
-	v = tnorm(v);
 	if (check_v_normalized(v, "cy: cylinder orientation") != 0)
 		return (-1);
+	v = tnorm(v);
 	vector_to_rotation(v, angle);
 	s->transform = mmultfree(rotation_z(angle[0]), s->transform);
 	s->transform = mmultfree(rotation_y(angle[1]), s->transform);
@@ -106,6 +106,9 @@ int	parse_cyl(char **tokens, t_world *world, int *s_i)
 		if (parse_shape_bonus("cy", tokens + 6, world->s[*s_i]) != 0)
 			return (-1);
 	}
+	printf("\ncylinder transform matrix:\n");
+	debug_print_matrix(world->s[*s_i]->transform);
+	printf("\n");
 	(*s_i)++;
 	return (0);
 }

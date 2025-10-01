@@ -1,20 +1,20 @@
-*CAMERA		position	orientation			field of view											
-C		-2,2,-6	0.312348,-0.156174,0.937043			60											
-*AMBIENT		intensity	color														
-A		1	255,255,255														
-*LIGHT		position	intensity			color											
-L		-7,7,-6	1			255,255,240											
-																	
-																	
-*PLANE		position	orientation			color											
-pl		0,0,0	0,1,0			200,200,200	diffuse 0.7	ambient 0.01	specular 0.2	reflective 0.2							
-																	
-*SPHERES		position	diameter			color											
-sp		0.5,1,4	2			140,130,100	ambient 0.2	diffuse 0.6	specular 0.5								
-sp		-2,0.33,2	0.66			128,120,70	diffuse 0.4	specular 0.1	ambient 0.1	reflective 0.7	transparency 0						
-sp		-0.2,1,-2	2			10,20,15	diffuse 1	specular 1	shininess 300	ambient 0.1	reflective 2	transparency 0.9	refractive_index 1.5	refractive_index 1.5			
-sp		4,0.5,2.5	1			140,100,255	diffuse 0.7	specular 0.4									
-*CUBE		position	orientation	diameter	height	color											
-cb		-1.8,0.2,-1	-0.5,0,1	0.4	0.4	40,70,100	diffuse 0.6	ambient 0.3	specular 0.6	reflective 0.4							
-																	
-																	
+*CAMERA		position	orientation			field of view										
+*C		-2,2,-6	0.312348,-0.156174,0.937043			60										
+C		0,0,0	0,1,0			60										
+*AMBIENT		intensity	color													
+A		1	255,255,255													
+*LIGHT		position	intensity			color										
+L		-7,7,-6	1			255,255,240										
+																
+																
+*PLANE		position	orientation			color										
+pl		0,0,0	0,1,0			200,200,200	diffuse 0.7	ambient 0.01	specular 0.2	reflective 0.2						
+																
+*SPHERES		position	diameter			color										
+sp		0.5,1,4	2			140,130,100	ambient 0.2	diffuse 0.6	specular 0.5							
+sp		-2,0.33,2	0.66			128,120,70	diffuse 0.4	specular 0.1	ambient 0.1	reflective 0.7	transparency 0					
+sp		-0.2,1,-2	2			10,20,15	diffuse 1	specular 1	shininess 300	ambient 0.1	reflective 2	transparency 0.9	refractive_index 1.5	refractive_index 1.5		
+sp		4,0.5,2.5	1			140,100,255	diffuse 0.7	specular 0.4								
+*CUBE		position	orientation	diameter	height	color										
+cb		-1.8,0.2,-1	-0.5,0,1	0.4	0.4	40,70,100	diffuse 0.6	ambient 0.3	specular 0.6	reflective 0.4						
+																

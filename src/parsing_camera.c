@@ -6,12 +6,14 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:51:51 by hallison          #+#    #+#             */
-/*   Updated: 2025/10/01 14:15:35 by hallison         ###   ########.fr       */
+/*   Updated: 2025/10/01 18:30:14 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+
+// TODO Should not seg fault if camera orientation is wrong
 // TODO malloc exit
 // TODO if c_orient == default up, change something
 t_camera	*place_camera(t_tuple c_coords, t_tuple c_orient, float fov)
@@ -27,6 +29,35 @@ t_camera	*place_camera(t_tuple c_coords, t_tuple c_orient, float fov)
 	up = vector(0, 1, 0);
 	free_matrix(cam->transform, 4);
 	cam->transform = view_transform(c_coords, to, up);
+	return (cam);
+}
+
+// TODO protect NULL return
+t_camera	*place_camera_2(t_tuple c_coords, t_tuple c_orient, float fov)
+{
+	t_camera	*cam;
+	float		angle[2];
+//	float		**inverted_transform;
+
+//	c_orient = tmult(c_orient, -1);
+	cam = camera(WIN_WIDTH, WIN_HEIGHT, DEG2RAD * fov);
+	if (!cam)
+		exit (1);
+	vector_to_rotation(c_orient, angle);
+	cam->transform = view_transform(point(0, 0, 0), point(0, 0, 1), vector(0, 1, 0));
+
+	printf("\nBEFORE rotating, camera transform matrix:\n");
+	debug_print_matrix(cam->transform);
+	printf("\nangle[0] = %f\n", angle[0]);
+	printf("angle[1] = %f\n", angle[1]);
+	cam->transform = mmultfree(translation(c_coords.x, c_coords.y, c_coords.z), cam->transform);
+	cam->transform = mmultfree(rotation_z(angle[0]), cam->transform);
+	cam->transform = mmultfree(rotation_y(angle[1]), cam->transform);
+//	inverted_transform = minvert(cam->transform, 4);
+//	free_matrix(cam->transform, 4);
+//	cam->transform = inverted_transform;
+	(void)c_coords;
+	(void)c_orient;
 	return (cam);
 }
 
@@ -72,9 +103,13 @@ int	parse_camera(char **tokens, t_data *data)
 		return (rt_error("C: camera orientation: invalid input", -1));
 	if (check_v_normalized(orient, "C: camera orientation") != 0)
 		return (-1);
+	orient = tnorm(orient);
 	if (parse_camera_fov(tokens[3], &field_of_view) != 0)
 		return (-1);
 	orient = tnorm(orient);
-	data->cam = place_camera(coords, orient, field_of_view);
+	data->cam = place_camera_2(coords, orient, field_of_view);
+	printf("\ncamera transform matrix:\n");
+	debug_print_matrix(data->cam->transform);
+	printf("\n");
 	return (0);
 }
