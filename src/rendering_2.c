@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 11:26:02 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/10/01 13:02:25 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/01 13:35:41 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	render_aa_chunk(t_world *world, t_data *data)
 		while (x < data->cam->hsize)
 		{
 			col = aa_row_color(world, data, x, data->rs.aa_y);
-			mlx_put_pixel(data->img, x, data->rs.aa_y, color_to_hex(col));
+			put_px_fast(data, x, data->rs.aa_y, color_to_hex(col));
 			x++;
 		}
 		data->rs.aa_y++;

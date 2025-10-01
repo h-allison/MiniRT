@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 11:26:02 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/10/01 13:06:48 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/01 13:27:38 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,21 @@ static uint32_t	pixel_hex(t_world *world, t_data *data, int x, int y)
 	return (h);
 }
 
-static void	draw_block(t_data *data, int x, int y, uint32_t hex)
+static void	draw_block_fast(t_data *data, int x, int y, uint32_t hex)
 {
-	int	yy;
-	int	xx;
-	int	stride;
+	int			yy;
+	int			xx;
+	uint32_t	*row;
 
-	stride = data->rs.stride;
 	yy = y;
-	while (yy < y + stride && yy < data->cam->vsize)
+	while (yy < y + data->rs.stride && yy < data->cam->vsize)
 	{
+		row = (uint32_t *)data->img->pixels;
+		row = row + (size_t)yy * (size_t)data->img->width;
 		xx = x;
-		while (xx < x + stride && xx < data->cam->hsize)
+		while (xx < x + data->rs.stride && xx < data->cam->hsize)
 		{
-			mlx_put_pixel(data->img, xx, yy, hex);
+			row[xx] = hex;
 			xx++;
 		}
 		yy++;
@@ -85,7 +86,7 @@ int	render_pixelated_chunk(t_world *world, t_data *data, int rows_limit)
 			if (!should_skip(data, x, data->rs.y_tile))
 			{
 				hex = pixel_hex(world, data, x, data->rs.y_tile);
-				draw_block(data, x, data->rs.y_tile, hex);
+				draw_block_fast(data, x, data->rs.y_tile, hex);
 			}
 			x += data->rs.stride;
 		}

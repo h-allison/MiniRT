@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/10/01 13:06:07 by mmillhof         ###   ########.fr        #
+#    Updated: 2025/10/01 13:31:11 by mmillhof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRC         := src/main.c \
                src/rendering_1.c \
                src/rendering_2.c \
                src/rendering_3.c \
+               src/rendering_4.c \
                src/math_float.c \
 			   src/math_matrices_1.c \
 			   src/math_matrices_2.c \

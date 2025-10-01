@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/10/01 13:05:55 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/01 13:57:00 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define OFFSET	 0.001
 # define EPSILON 0.0001
 
-# define CHUNK_SIZE             4
+# define CHUNK_SIZE             8
 # define PIXELATE_START_STRIDE  16
 # define AA_SPP                 4
 
@@ -326,6 +326,9 @@ int				render_chunk(t_world *world, t_data *data);
 //rendering_3.c
 int				compute_rows_limit(t_data *data);
 int				render_pixelated_chunk(t_world *world, t_data *data, int rows_limit);
+
+//rendering_4.c
+void			put_px_fast(t_data *data, int x, int y, uint32_t hex);
 
 //create_objects.c
 t_pattern		*pattern(void);
