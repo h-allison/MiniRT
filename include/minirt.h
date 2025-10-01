@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/10/01 14:46:13 by hallison         ###   ########.fr       */
+/*   Updated: 2025/10/01 23:28:47 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,6 +245,13 @@ typedef	struct	s_parser
 	t_tuple		*vertices;
 }	t_parser;
 
+typedef struct	s_abc
+{
+	float	a;
+	float	b;
+	float	c;
+}	t_abc;
+
 //check_file.c
 int				scenefile_check_chars(char *filename);
 
@@ -425,9 +432,11 @@ t_rgb			color_at(t_world *w, t_ray *r, int remaining);
 float			is_shadowed(t_world *world, int i, t_tuple point);
 
 //SHAPES *****************************************************************
-//sh_cone.c
+//sh_cone_1.c
 t_shape			*cone(void);
 t_tuple			local_normal_at_cone(t_shape *s, t_tuple local_point);
+
+//sh_conei_2.c
 t_intersection	*local_intersect_cone(t_shape *s, t_ray r);
 
 //sh_cube.c

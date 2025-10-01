@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:49:31 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/29 20:40:28 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/01 22:52:44 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,17 +84,14 @@ t_intersection	*local_intersect_cone(t_shape *s, t_ray r)
 	float			y0;
 	float			y1;
 
-	a = r.direction.x * r.direction.x
-		- r.direction.y * r.direction.y
+	a = r.direction.x * r.direction.x - r.direction.y * r.direction.y
 		+ r.direction.z * r.direction.z;
-	b = 2 * r.origin.x * r.direction.x
-		- 2 * r.origin.y * r.direction.y
+	b = 2 * r.origin.x * r.direction.x - 2 * r.origin.y * r.direction.y
 		+ 2 * r.origin.z * r.direction.z;
 	xs = intersections(intersection(0, NULL), intersection(0, NULL));
 	if (a == 0 && b == 0)
 		return (xs);
-	c = r.origin.x * r.origin.x
-		- r.origin.y * r.origin.y
+	c = r.origin.x * r.origin.x - r.origin.y * r.origin.y
 		+ r.origin.z * r.origin.z;
 	if (fisequal (a, 0) && !fisequal(b, 0))
 	{
