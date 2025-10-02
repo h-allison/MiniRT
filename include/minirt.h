@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/10/01 23:28:47 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:53:40 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define MINIRT_H
 
 # include "libft.h"
-# include "minirt_p.h"
 # include <MLX42/MLX42.h>
 # include <math.h>
 # include <float.h>
@@ -24,6 +23,8 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <errno.h>
+
+#define	BONUS true
 
 # define WIN_WIDTH 800
 # define WIN_HEIGHT 600
@@ -41,8 +42,6 @@
 /*# define DEG2RAD  M_PI / 180.0
 # define RAD2DEG 180.0 / M_PI*/
 
-# define DEFAULT_UP vector(0, 1, 0)
-
 typedef enum e_error
 {
 	ERROR_WRONG_ARGS,
@@ -50,6 +49,20 @@ typedef enum e_error
 	ERROR_OPEN,
 	ERROR_WRONG_CHARS,
 }	t_error;
+
+typedef struct	s_checklist
+{
+	bool	a_parsed;
+	bool	c_parsed;
+	bool	l_parsed;
+	int		count_light;
+	int		count_sphere;
+	int		count_cyl;
+	int		count_cube;
+	int		count_plane;
+	int		count_cone;
+	int		count_shape;
+}	t_checklist;
 
 typedef struct s_tuple
 {
@@ -258,6 +271,7 @@ int				scenefile_check_chars(char *filename);
 //file_helpers.c
 int				open_file(char *filename);
 int				check_rt_filename(char	*filename);
+int				close_and_return(int fd, int ret);
 
 //error_handling.c
 void			rt_early_exit(int error);
@@ -289,7 +303,7 @@ int				parse_file(char *filename, t_data *data);
 bool			is_space(char c);
 char			**get_element_tokens(char const *s);
 int				fill_checklist_count(t_data *data);
-void			init_checklist(t_world *world);
+int				init_checklist(t_world *world);
 int				parse_into_world(char **tokens, t_data *data);
 int				rt_strcmp(char *token, char *s2);
 int				parse_ambient(char **tokens, t_world *world);

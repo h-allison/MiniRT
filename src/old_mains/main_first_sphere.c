@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_first_sphere.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:54:44 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/03 16:43:20 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:24:53 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/*
 int	mlx_handling(t_data *data);
 
 int	main(int argc, char **argv)
@@ -127,3 +128,4 @@ int	mlx_handling(t_data *data)
 	mlx_terminate(data->mlx);
 	return (EXIT_SUCCESS);
 }
+*/

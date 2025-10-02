@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:51:51 by hallison          #+#    #+#             */
-/*   Updated: 2025/10/01 13:26:44 by hallison         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:30:29 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	parse_plane(char **tokens, t_world *world, int *s_i)
 		return (-1);
 	world->s[*s_i] = plane();
 	if (!world->s[*s_i])
-		exit(1);
+		return (-1);
 	if (parse_plane_color(tokens[3], world->s[*s_i]) != 0)
 		return (-1);
 	if (parse_plane_orientation(tokens[2], world->s[*s_i]) != 0)

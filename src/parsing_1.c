@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 11:18:54 by hallison          #+#    #+#             */
-/*   Updated: 2025/10/01 16:54:48 by hallison         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:55:27 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void	free_tokens(char **tokens)
 	free (tokens);
 }
 
-// TODO: distribute_ambient(data->world);
-
 int	start_parsing_routine(t_data *data)
 {
 	int		fd;
@@ -35,7 +33,7 @@ int	start_parsing_routine(t_data *data)
 
 	fd = open_file(data->filename);
 	if (fd < 0)
-		exit (1);
+		return (-1);
 	element = get_next_line(fd);
 	while (element != NULL)
 	{
@@ -46,7 +44,7 @@ int	start_parsing_routine(t_data *data)
 			if (parse_into_world(tokens, data) == -1)
 			{
 				free_tokens(tokens);
-				return (-1);
+				return (close_and_return(fd, -1));
 			}
 			free_tokens(tokens);
 		}
@@ -56,7 +54,7 @@ int	start_parsing_routine(t_data *data)
 	return (0);
 }
 
-void	alloc_shape_array(t_world *world)
+int	alloc_shape_array(t_world *world)
 {
 	t_checklist	*lst;
 	int			count_shape;
@@ -66,17 +64,18 @@ void	alloc_shape_array(t_world *world)
 		+ lst->count_cube + lst->count_plane + lst->count_cone;
 	world->s = (t_shape **)ft_calloc(sizeof(t_shape *), count_shape + 1);
 	if (!world->s)
-		exit(1);
+		return (-1);
 	world->checklist->count_shape = count_shape;
+	return (0);
 }
 
-t_world *init_world(void)
+t_world	*init_world(void)
 {
-	t_world *world;
+	t_world	*world;
 
-	world = (t_world *) ft_calloc(sizeof(t_world), 1);
+	world = (t_world *)ft_calloc(sizeof(t_world), 1);
 	if (!world)
-		exit (1);
+		return (NULL);
 	world->s = NULL;
 	world->light = NULL;
 	world->checklist = NULL;
@@ -89,11 +88,13 @@ int	parse_file(char *filename, t_data *data)
 	data->filename = filename;
 	data->world = init_world();
 	if (!data->world)
-		exit (1);
-	init_checklist(data->world);
+		return (-1);
+	if (init_checklist(data->world) != 0)
+		return (-1);
 	if (fill_checklist_count(data) != 0)
 		return (-1);
-	alloc_shape_array(data->world);
+	if (alloc_shape_array(data->world) != 0)
+		return (-1);
 	if (start_parsing_routine(data) != 0)
 		return (-1);
 	return (0);
