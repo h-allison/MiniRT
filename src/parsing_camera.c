@@ -12,10 +12,7 @@
 
 #include "minirt.h"
 
-
 // TODO Should not seg fault if camera orientation is wrong
-// TODO malloc exit
-// TODO if c_orient == default up, change something
 t_camera	*place_camera(t_tuple c_coords, t_tuple c_orient, float fov)
 {
 	t_camera	*cam;

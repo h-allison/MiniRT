@@ -106,9 +106,6 @@ int	parse_cyl(char **tokens, t_world *world, int *s_i)
 		if (parse_shape_bonus("cy", tokens + 6, world->s[*s_i]) != 0)
 			return (-1);
 	}
-	printf("\ncylinder transform matrix:\n");
-	debug_print_matrix(world->s[*s_i]->transform);
-	printf("\n");
 	(*s_i)++;
 	return (0);
 }

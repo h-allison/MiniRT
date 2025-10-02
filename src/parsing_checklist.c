@@ -43,8 +43,9 @@ int	count_shape(t_checklist *lst, char *ln)
 		lst->count_cone++;
 	else if (ln[0] != '*' && !is_space(ln[0]))
 	{
-		printf("c = %c\n", ln[0]);
-		return (rt_error("File incl. unknown identifier", -1));
+		rt_error("File incl. unknown identifier", -1);
+		printf("hint: first letter: %c\n", ln[0]);
+		return (-1);
 	}
 	return (0);
 }

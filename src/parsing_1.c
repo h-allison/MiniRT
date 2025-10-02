@@ -12,8 +12,6 @@
 
 #include "minirt.h"
 
-// TODO core dump when unknown specifier encountered in bonus?
-
 void	free_tokens(char **tokens)
 {
 	int	i;
@@ -72,19 +70,29 @@ void	alloc_shape_array(t_world *world)
 	world->checklist->count_shape = count_shape;
 }
 
+t_world *init_world(void)
+{
+	t_world *world;
+
+	world = (t_world *) ft_calloc(sizeof(t_world), 1);
+	if (!world)
+		exit (1);
+	world->s = NULL;
+	world->light = NULL;
+	world->checklist = NULL;
+	return (world);
+}
+
 int	parse_file(char *filename, t_data *data)
 {
 	check_rt_filename(filename);
 	data->filename = filename;
-	data->world = malloc(sizeof(t_world));
+	data->world = init_world();
 	if (!data->world)
 		exit (1);
 	init_checklist(data->world);
 	if (fill_checklist_count(data) != 0)
-	{
-		free(data->world);
-		exit (1);
-	}
+		return (-1);
 	alloc_shape_array(data->world);
 	if (start_parsing_routine(data) != 0)
 		return (-1);

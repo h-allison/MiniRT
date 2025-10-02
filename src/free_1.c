@@ -22,16 +22,26 @@ void	free_world(t_world *w)
 {
 	int	i;
 
+	if (!w)
+		return ;
 	i = 0;
-	while (w->s[i])
-		free_shape(w->s[i++]);
-	free(w->s);
+	if (w->s)
+	{
+		while (w->s[i])
+			free_shape(w->s[i++]);
+		free(w->s);
+	}
 	i = 0;
-	while (w->light[i])
-		free(w->light[i++]);
-	free(w->light);
-	free(w->checklist);
-	free(w);
+	if (w->light)
+	{
+		while (w->light[i])
+			free(w->light[i++]);
+		free(w->light);
+	}
+	if (w->checklist)
+		free(w->checklist);
+	if (w)
+		free(w);
 }
 
 void	free_shape(t_shape *s)
