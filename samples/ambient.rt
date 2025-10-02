@@ -2,9 +2,9 @@
 C		2,2,-10	0.2,0,1			60							
 *C		0,1,-10	0,0,1			60
 *AMBIENT		intensity	color													
-A		0.1	50,0,50													
+A		0.1		128,0,128													
 *LIGHT		position	intensity			color										
-L		-7,7,-6	1			0,0,0										
+L		-7,7,-6	1			128,128,128										
 																
 																
 *PLANE		position	orientation			color										
