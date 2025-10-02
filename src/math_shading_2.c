@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 13:30:13 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/30 17:41:24 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/02 18:09:39 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static t_rgb	iterate_lights(t_world *w, t_comps *comps)
 	{
 		largs.in_shadow = is_shadowed(w, i, comps->over_point);
 		largs.light = w->light[i];
-		surface = cadd(surface, lighting(&largs));
+		surface = cadd(surface, lighting(&largs, w));
 		if (w->light[i]->last)
 			break ;
 		i++;

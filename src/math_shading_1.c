@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:25:23 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/30 18:58:30 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/02 18:53:06 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +70,21 @@ static void	calc_diff_spec(t_largs *largs, t_rgb eff_color,
 	}
 }
 
-t_rgb	lighting(t_largs *largs)
+t_rgb	lighting(t_largs *largs, t_world *w)
 {
 	t_rgb	effective_color;
 	t_rgb	ambient;
 	t_rgb	diffuse;
 	t_rgb	specular;
+	t_rgb	shape_color;
 
 	effective_color = calc_eff_col(largs);
 	ambient = cscale(effective_color, largs->material->ambient);
 	calc_diff_spec(largs, effective_color, &diffuse, &specular);
 	diffuse = cscale(diffuse, largs->in_shadow);
 	specular = cscale(specular, largs->in_shadow);
-	return (cadd(cadd(ambient, diffuse), specular));
+	shape_color = cadd(cadd(ambient, diffuse), specular);
+	shape_color = cscale(cadd(shape_color, w->ambient_total),
+		0.5 + 0.5 * (1 - w->ambient_ratio));
+	return (shape_color);
 }
