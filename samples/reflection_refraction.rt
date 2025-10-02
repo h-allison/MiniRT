@@ -1,5 +1,5 @@
 *CAMERA		position	orientation			field of view										
-C		2,2,-10	0.2,0,1			60							
+C		-2,2,-6	0.3,-.2,1			60							
 *C		0,1,-10	0,0,1			60
 *AMBIENT		intensity	color													
 A		0.2	255,255,255													
