@@ -72,9 +72,9 @@ int	parse_shape(char **tokens, t_world *world)
 		ret = parse_sphere(tokens, world, &s_i);
 	else if (rt_strcmp(tokens[0], "cy") == 0)
 		ret = parse_cyl(tokens, world, &s_i);
-	else if (rt_strcmp(tokens[0], "cb") == 0)
+	else if (BONUS == true && rt_strcmp(tokens[0], "cb") == 0)
 		ret = parse_cube(tokens, world, &s_i);
-	else if (rt_strcmp(tokens[0], "cn") == 0)
+	else if (BONUS == true && rt_strcmp(tokens[0], "cn") == 0)
 		ret = parse_cone(tokens, world, &s_i);
 	else
 	{

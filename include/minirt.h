@@ -14,7 +14,6 @@
 # define MINIRT_H
 
 # include "libft.h"
-# include "minirt_p.h"
 # include <MLX42/MLX42.h>
 # include <math.h>
 # include <float.h>
@@ -24,6 +23,8 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <errno.h>
+
+#define	BONUS true
 
 # define WIN_WIDTH 800
 # define WIN_HEIGHT 600
@@ -41,8 +42,6 @@
 /*# define DEG2RAD  M_PI / 180.0
 # define RAD2DEG 180.0 / M_PI*/
 
-# define DEFAULT_UP vector(0, 1, 0)
-
 typedef enum e_error
 {
 	ERROR_WRONG_ARGS,
@@ -50,6 +49,20 @@ typedef enum e_error
 	ERROR_OPEN,
 	ERROR_WRONG_CHARS,
 }	t_error;
+
+typedef struct	s_checklist
+{
+	bool	a_parsed;
+	bool	c_parsed;
+	bool	l_parsed;
+	int		count_light;
+	int		count_sphere;
+	int		count_cyl;
+	int		count_cube;
+	int		count_plane;
+	int		count_cone;
+	int		count_shape;
+}	t_checklist;
 
 typedef struct s_tuple
 {
