@@ -19,9 +19,15 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		rt_early_exit(ERROR_WRONG_ARGS);
 	data.reset = true;
+	data.cam = NULL;
 	if (parse_file(argv[1], &data) != 0)
 	{
 		free_world(data.world);
+		if (data.cam)
+		{
+			free_matrix(data.cam->transform, 4);
+			free(data.cam);
+		}
 		return (0);
 	}
 	printf("Time to raytrace!\n");

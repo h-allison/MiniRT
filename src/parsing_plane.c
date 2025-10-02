@@ -79,9 +79,6 @@ int	parse_plane(char **tokens, t_world *world, int *s_i)
 		exit(1);
 	if (parse_plane_color(tokens[3], world->s[*s_i]) != 0)
 		return (-1);
-//	free_pattern(world->s[*s_i]->m->pattern);
-//	world->s[*s_i]->m->pattern = checkers_pattern(color(80, 80, 100),
-//			world->s[*s_i]->m->color);
 	if (parse_plane_orientation(tokens[2], world->s[*s_i]) != 0)
 		return (-1);
 	if (parse_plane_position(tokens[1], world->s[*s_i]) != 0)
