@@ -1,0 +1,76 @@
+rendering_3.c:	c = cscale(c, world->ambient_ratio);
+parsing_1.c:	lst = world->checklist;
+parsing_1.c:	world->s = (t_shape **)ft_calloc(sizeof(t_shape *), count_shape + 1);
+parsing_1.c:	if (!world->s)
+parsing_1.c:	world->checklist->count_shape = count_shape;
+parsing_1.c:	world->s = NULL;
+parsing_1.c:	world->light = NULL;
+parsing_1.c:	world->checklist = NULL;
+parsing_cyl.c:	world->s[*s_i] = cylinder();
+parsing_cyl.c:	world->s[*s_i]->closed = true;
+parsing_cyl.c:	world->s[*s_i]->minimum = -0.5;
+parsing_cyl.c:	world->s[*s_i]->maximum = 0.5;
+parsing_cyl.c:	if (!world->s[*s_i])
+parsing_cyl.c:	if (parse_cyl_color(tokens[5], world->s[*s_i]) != 0)
+parsing_cyl.c:	if (parse_cyl_diam_and_height(tokens[3], tokens[4], world->s[*s_i]) != 0)
+parsing_cyl.c:	if (parse_cyl_orientation(tokens[2], world->s[*s_i]) != 0)
+parsing_cyl.c:	if (parse_cyl_position(tokens[1], world->s[*s_i]) != 0)
+parsing_cyl.c:		if (parse_shape_bonus("cy", tokens + 6, world->s[*s_i]) != 0)
+parsing_world.c:	while (world->s[i] != NULL)
+parsing_world.c:		world->s[i]->m->ambient = world->ambient_ratio;
+parsing_cube.c:	world->s[*s_i] = cube();
+parsing_cube.c:	if (!world->s[*s_i])
+parsing_cube.c:	if (parse_cube_color(tokens[5], world->s[*s_i]) != 0)
+parsing_cube.c:	if (parse_cube_diam_and_height(tokens[3], tokens[4], world->s[*s_i]) != 0)
+parsing_cube.c:	if (parse_cube_orientation(tokens[2], world->s[*s_i]) != 0)
+parsing_cube.c:	if (parse_cube_position(tokens[1], world->s[*s_i]) != 0)
+parsing_cube.c:		if (parse_shape_bonus("cb", tokens + 6, world->s[*s_i]) != 0)
+parsing_light.c:	world->light = (t_light **)ft_calloc((world->checklist->count_light + 2),
+parsing_light.c:	if (!world->light)
+parsing_light.c:	while (i < world->checklist->count_light)
+parsing_light.c:		world->light[i] = point_light(point(0, 0, 0), color(0, 0, 0));
+parsing_light.c:		world->light[i]->last = false;
+parsing_light.c:	world->light[i] = point_light(point(0, 0, 0), color(0, 0, 0));
+parsing_light.c:	world->light[i]->last = true;
+parsing_light.c:		if (func[i](tokens[i + 1], world->light[li]) != 0)
+parsing_light.c:		if (parse_light_bonus(tokens, world->light[li]) != 0)
+math_shading_2.c:	v = tsub(world->light[i]->position, point);
+parsing_plane.c:	world->s[*s_i] = plane();
+parsing_plane.c:	if (!world->s[*s_i])
+parsing_plane.c:	if (parse_plane_color(tokens[3], world->s[*s_i]) != 0)
+parsing_plane.c:	if (parse_plane_orientation(tokens[2], world->s[*s_i]) != 0)
+parsing_plane.c:	if (parse_plane_position(tokens[1], world->s[*s_i]) != 0)
+parsing_plane.c:		if (parse_shape_bonus("pl", tokens + 4, world->s[*s_i]) != 0)
+parsing_ambient.c:	world->ambient_rgb = color(temp_255.r, temp_255.g, temp_255.b);
+parsing_ambient.c:	world->ambient_ratio = 0;
+parsing_ambient.c:	if (rt_atof(token, &world->ambient_ratio) != 0)
+parsing_ambient.c:	if (world->ambient_ratio < 0 || world->ambient_ratio > 1)
+parsing_checklist.c:	world->checklist = malloc (sizeof(t_checklist));
+parsing_checklist.c:	if (!world->checklist)
+parsing_checklist.c:	world->checklist->a_parsed = false;
+parsing_checklist.c:	world->checklist->c_parsed = false;
+parsing_checklist.c:	world->checklist->l_parsed = false;
+parsing_checklist.c:	world->checklist->count_light = 0;
+parsing_checklist.c:	world->checklist->count_sphere = 0;
+parsing_checklist.c:	world->checklist->count_cyl = 0;
+parsing_checklist.c:	world->checklist->count_cube = 0;
+parsing_checklist.c:	world->checklist->count_plane = 0;
+parsing_checklist.c:	world->checklist->count_cone = 0;
+parsing_checklist.c:	world->checklist->count_shape = 0;
+parsing_checklist.c:			if (count_singular_element(data->world->checklist, ln) != 0)
+parsing_checklist.c:			if (count_shape(data->world->checklist, ln) != 0)
+parsing_sphere.c:	world->s[*s_i] = sphere();
+parsing_sphere.c:	if (!world->s[*s_i])
+parsing_sphere.c:	if (parse_sphere_color(tokens[3], world->s[*s_i]) != 0)
+parsing_sphere.c:	if (parse_sphere_diameter(tokens[2], world->s[*s_i]) != 0)
+parsing_sphere.c:	if (parse_sphere_position(tokens[1], world->s[*s_i]) != 0)
+parsing_sphere.c:		if (parse_shape_bonus("sp", tokens + 4, world->s[*s_i]) != 0)
+parsing_cone.c:	world->s[*s_i] = cone();
+parsing_cone.c:	world->s[*s_i]->closed = true;
+parsing_cone.c:	if (!world->s[*s_i])
+parsing_cone.c:	if (set_cone_min_max(tokens, world->s[*s_i]) != 0)
+parsing_cone.c:	if (parse_cone_color(tokens[5], world->s[*s_i]) != 0)
+parsing_cone.c:	if (parse_cone_diam_and_height(tokens[3], tokens[4], world->s[*s_i]) != 0)
+parsing_cone.c:	if (parse_cone_orientation(tokens[2], world->s[*s_i]) != 0)
+parsing_cone.c:	if (parse_cone_position(tokens[1], world->s[*s_i]) != 0)
+parsing_cone.c:		if (parse_shape_bonus("cn", tokens + 6, world->s[*s_i]) != 0)
