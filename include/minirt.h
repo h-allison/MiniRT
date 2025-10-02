@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/10/02 14:53:40 by hallison         ###   ########.fr       */
+/*   Updated: 2025/10/02 16:43:19 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,8 @@ typedef struct s_world
 	t_checklist		*checklist;
 	float			ambient_ratio;
 	t_rgb			ambient_rgb;
+	t_rgb			ambient_hue;
+	t_rgb			ambient_total;
 }	t_world;
 
 typedef struct s_largs

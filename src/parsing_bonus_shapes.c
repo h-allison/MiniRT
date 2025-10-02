@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:59:16 by hallison          #+#    #+#             */
-/*   Updated: 2025/10/01 13:20:08 by hallison         ###   ########.fr       */
+/*   Updated: 2025/10/02 16:53:12 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ int	ambient_diff_spec(char *shape, char **tokens, t_shape *s, int *t_i)
 	int	ret;
 
 	ret = 0;
-	if (rt_strcmp(tokens[*t_i], "ambient") == 0)
+	if (rt_strcmp(tokens[0], "ambient") == 0)
 		ret = (bonus_ambient(shape, tokens, s, t_i));
-	else if (rt_strcmp(tokens[*t_i], "diffuse") == 0)
+	else if (rt_strcmp(tokens[0], "diffuse") == 0)
 		ret = (bonus_diffuse(shape, tokens, s, t_i));
-	else if (rt_strcmp(tokens[*t_i], "specular") == 0)
+	else if (rt_strcmp(tokens[0], "specular") == 0)
 		ret = (bonus_specular(shape, tokens, s, t_i));
 	return (ret);
 }
@@ -38,8 +38,8 @@ int	parse_shape_bonus(char *shape, char **tks, t_shape *s)
 	ret = 0;
 	while (tks[t_i])
 	{
-		if (rt_strcmp(tks[t_i], "ambient")
-			|| rt_strcmp(tks[t_i], "diffuse")
+		if (rt_strcmp(tks[t_i], "ambient") == 0
+			|| rt_strcmp(tks[t_i], "diffuse") == 0
 			|| rt_strcmp(tks[t_i], "specular") == 0)
 			ret = ambient_diff_spec(shape, tks + t_i, s, &t_i);
 		else if (rt_strcmp(tks[t_i], "shininess") == 0)
