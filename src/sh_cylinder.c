@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:49:31 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/29 20:42:39 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/02 11:27:22 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,41 +70,45 @@ static void	intersect_caps(t_shape *cyl, t_intersection *xs, t_ray r)
 	return ;
 }
 
-t_intersection	*local_intersect_cyl(t_shape *s, t_ray r)
+static bool calc_xs_cyl(t_abc abc, t_shape *s, t_ray r, t_intersection *xs)
 {
-	t_intersection	*xs;
-	float			a;
-	float			b;
-	float			c;
 	float			disc;
 	float			t0;
 	float			t1;
 	float			y0;
 	float			y1;
+	
+	abc.b = 2 * r.origin.x * r.direction.x
+		+ 2 * r.origin.z * r.direction.z;
+	abc.c = r.origin.x * r.origin.x
+		+ r.origin.z * r.origin.z - 1;
+	disc = abc.b * abc.b - 4 * abc.a * abc.c;
+	if (disc < 0)
+		return (1);
+	t0 = (-abc.b - sqrtf(disc)) / (2 * abc.a);
+	t1 = (-abc.b + sqrtf(disc)) / (2 * abc.a);
+	if (t0 > t1)
+		swapf(&t0, &t1);
+	y0 = r.origin.y + t0 * r.direction.y;
+	if ((s->minimum) < y0 && y0 < s->maximum)
+		xs = intersections(intersection(t0, s), intersection(t0, s));
+	y1 = r.origin.y + t1 * r.direction.y;
+	if (s->minimum < y1 && y1 < s->maximum)
+		xs = intersections(intersection(t1, s), intersection(t1, s));
+	return (0);
+}
 
-	a = r.direction.x * r.direction.x
+t_intersection	*local_intersect_cyl(t_shape *s, t_ray r)
+{
+	t_intersection	*xs;
+	t_abc			abc;
+
+	abc.a = r.direction.x * r.direction.x
 		+ r.direction.z * r.direction.z;
 	xs = intersections(intersection(0, NULL), intersection(0, NULL));
-	if (!fisequal(a, 0))
-	{
-		b = 2 * r.origin.x * r.direction.x
-			+ 2 * r.origin.z * r.direction.z;
-		c = r.origin.x * r.origin.x
-			+ r.origin.z * r.origin.z - 1;
-		disc = b * b - 4 * a * c;
-		if (disc < 0)
+	if (!fisequal(abc.a, 0))
+		if (calc_xs_cyl(abc, s, r, xs))
 			return (xs);
-		t0 = (-b - sqrtf(disc)) / (2 * a);
-		t1 = (-b + sqrtf(disc)) / (2 * a);
-		if (t0 > t1)
-			swapf(&t0, &t1);
-		y0 = r.origin.y + t0 * r.direction.y;
-		if ((s->minimum) < y0 && y0 < s->maximum)
-			xs = intersections(intersection(t0, s), intersection(t0, s));
-		y1 = r.origin.y + t1 * r.direction.y;
-		if (s->minimum < y1 && y1 < s->maximum)
-			xs = intersections(intersection(t1, s), intersection(t1, s));
-	}
 	intersect_caps(s, xs, r);
 	return (xs);
 }

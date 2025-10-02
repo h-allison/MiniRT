@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:49:31 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/10/01 23:28:03 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/02 11:25:21 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	intersect_caps_cone(t_shape *cyl, t_intersection *xs, t_ray r)
 		xs = intersections(intersection(t, cyl), intersection(t, cyl));
 }
 
-static bool	calc_xs(t_abc abc, t_shape *s, t_ray r, t_intersection *xs)
+static bool	calc_xs_cone(t_abc abc, t_shape *s, t_ray r, t_intersection *xs)
 {
 	float			disc;
 	float			t0;
@@ -83,7 +83,7 @@ t_intersection	*local_intersect_cone(t_shape *s, t_ray r)
 		t0 = -abc.c / (2 * abc.b);
 		xs = intersections(intersection(t0, s), intersection(t0, s));
 	}
-	else if (calc_xs(abc, s, r, xs))
+	else if (calc_xs_cone(abc, s, r, xs))
 		return (xs);
 	intersect_caps_cone(s, xs, r);
 	return (xs);
