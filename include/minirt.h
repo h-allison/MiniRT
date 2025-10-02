@@ -203,6 +203,8 @@ typedef struct s_world
 	t_checklist		*checklist;
 	float			ambient_ratio;
 	t_rgb			ambient_rgb;
+	t_rgb			ambient_hue;
+	t_rgb			ambient_total;
 }	t_world;
 
 typedef struct s_largs

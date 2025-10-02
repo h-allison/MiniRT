@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 11:26:02 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/10/02 12:53:15 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/02 16:58:22 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static uint32_t	pixel_hex(t_world *world, t_data *data, int x, int y)
 
 	r = ray_for_pixel(data->cam, (float)x, (float)y);
 	c = color_at(world, &r, MAX_RECURSION);
-	c = cscale(c, world->ambient_ratio);
 	h = color_to_hex(c);
 	return (h);
 }
