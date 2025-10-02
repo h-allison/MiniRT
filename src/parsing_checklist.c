@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:23:26 by hallison          #+#    #+#             */
-/*   Updated: 2025/10/02 14:56:32 by hallison         ###   ########.fr       */
+/*   Updated: 2025/10/02 20:37:33 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,12 @@ int	fill_checklist_count(t_data *data)
 		if (ln[0] >= 'A' && ln[0] <= 'Z')
 		{
 			if (count_singular_element(data->world->checklist, ln) != 0)
-				return (close_and_return(fd, -1));
+				return (gnl_to_end(ln, fd), close_and_return(fd, -1));
 		}
 		else
 		{
 			if (count_shape(data->world->checklist, ln) != 0)
-				return (close_and_return(fd, -1));
+				return (gnl_to_end(ln, fd), close_and_return(fd, -1));
 		}
 		free (ln);
 		ln = get_next_line(fd);

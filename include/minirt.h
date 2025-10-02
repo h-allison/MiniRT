@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/10/02 19:24:42 by hallison         ###   ########.fr       */
+/*   Updated: 2025/10/02 20:38:17 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "libft.h"
 # include <MLX42/MLX42.h>
 # include <math.h>
-# include <float.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <sys/stat.h>
@@ -24,7 +23,7 @@
 # include <stdlib.h>
 # include <errno.h>
 
-#define	BONUS true
+# define BONUS false
 
 # define WIN_WIDTH 800
 # define WIN_HEIGHT 600
@@ -36,6 +35,8 @@
 # define CHUNK_SIZE             8
 # define PIXELATE_START_STRIDE  16
 # define AA_SPP                 4
+
+# define FLT_MAX 3.402823466e+38F
 
 # define DEG2RAD 0.017453292519943
 # define RAD2DEG 57.295779513082
@@ -50,7 +51,7 @@ typedef enum e_error
 	ERROR_WRONG_CHARS,
 }	t_error;
 
-typedef struct	s_checklist
+typedef struct s_checklist
 {
 	bool	a_parsed;
 	bool	c_parsed;
@@ -89,9 +90,9 @@ typedef struct s_tri
 	t_tuple			normal;
 }	t_tri;
 
-typedef struct s_pattern t_pattern;
+typedef struct s_pattern		t_pattern;
 
-typedef struct	s_canvas
+typedef struct s_canvas
 {
 	float			width;
 	float			height;
@@ -145,8 +146,8 @@ typedef struct s_ray
 	t_tuple			direction;
 }	t_ray;
 
-typedef struct s_intersection t_intersection;
-typedef struct s_shape t_shape;
+typedef struct s_intersection	t_intersection;
+typedef struct s_shape			t_shape;
 
 typedef struct s_shape
 {
@@ -168,7 +169,7 @@ typedef struct s_containers
 {
 	t_shape				*content;
 	struct s_containers	*next;
-} t_containers;
+}	t_containers;
 
 typedef struct s_camera
 {
@@ -254,13 +255,13 @@ typedef struct s_tminmax
 	float		ztmax;
 }	t_tminmax;
 
-typedef	struct	s_parser
+typedef struct s_parser
 {
 	size_t		ignored;
 	t_tuple		*vertices;
 }	t_parser;
 
-typedef struct	s_abc
+typedef struct s_abc
 {
 	float	a;
 	float	b;
@@ -330,15 +331,22 @@ bool			valid_rgb_range(t_rgb col);
 bool			btwn_negative_and_positive_1(t_tuple t);
 int				check_v_normalized(t_tuple v, char *element);
 void			debug_print_tokens(char **tokens);
-void    		debug_print_matrix(float **m);
+void			debug_print_matrix(float **m);
 void			vector_to_rotation(t_tuple v, float *angle);
 int				parse_shape_bonus(char *shape, char **tokens, t_shape *s);
 int				bonus_ambient(char *element, char **tokens, t_shape *s, int *i);
-int				bonus_specular(char *element, char **tokens, t_shape *s, int *t_i);
-int				bonus_diffuse(char *element, char **tokens, t_shape *s, int *t_i);
-int				bonus_reflective(char *element, char **tokens, t_shape *s, int *t_i);
-int				bonus_shininess(char *element, char **tokens, t_shape *s, int *t_i);
+int				bonus_specular(char *element, char **tokens, t_shape *s,
+					int *t_i);
+int				bonus_diffuse(char *element, char **tokens, t_shape *s,
+					int *t_i);
+int				bonus_reflective(char *element, char **tokens, t_shape *s,
+					int *t_i);
+int				bonus_shininess(char *element, char **tokens, t_shape *s,
+					int *t_i);
 int				rt_error_e(char *element, char *msg, int ret);
+int				free_all_this_nonsense(char **tokens, int fd, char *element);
+void			free_tokens(char **tokens);
+void			gnl_to_end(char *line, int fd);
 
 //rendering_1.c
 void			render(void *param);
@@ -350,7 +358,8 @@ int				render_chunk(t_world *world, t_data *data);
 
 //rendering_3.c
 int				compute_rows_limit(t_data *data);
-int				render_pixelated_chunk(t_world *world, t_data *data, int rows_limit);
+int				render_pixelated_chunk(t_world *world, t_data *data,
+					int rows_limit);
 
 //rendering_4.c
 void			put_px_fast(t_data *data, int x, int y, uint32_t hex);
@@ -513,10 +522,12 @@ void			swap_xs(t_intersection *a, t_intersection *b);
 void			sort_intersections(t_intersection *xs);
 t_intersection	*intersect_world(t_world *w, t_ray *r);
 t_tuple			normal_at(t_shape *s, t_tuple p);
-t_comps			prepare_computations(t_intersection *i, t_ray *r, t_intersection *xs);
+t_comps			prepare_computations(t_intersection *i, t_ray *r,
+					t_intersection *xs);
 
 //math_intersections_23.c
-void			prepare_n(t_comps *comps, t_intersection *ht, t_intersection *xs);
+void			prepare_n(t_comps *comps, t_intersection *ht,
+					t_intersection *xs);
 
 //math_view.c
 float			**view_transform(t_tuple from, t_tuple to, t_tuple up);
@@ -525,7 +536,7 @@ float			**object_transform(t_tuple v);
 //export_ppm.c
 int				canvas_export_ppm(t_data *data);
 
-//PATTERNS *************************************************************************
+//PATTERNS ******************************************************************
 //patterns.c
 t_rgb			pattern_at_shape(t_pattern *pat, t_shape *shape, t_tuple point);
 void			set_pattern_transform(t_pattern *pat, float **t);
@@ -568,10 +579,11 @@ t_tuple			cube_map(t_tuple point);
 
 //pat_tests.c
 t_pattern		*create_test_pattern(void);
-t_rgb			stripe_at_object(t_pattern *pat, t_shape *object, t_tuple world_point);
+t_rgb			stripe_at_object(t_pattern *pat, t_shape *object,
+					t_tuple world_point);
 t_rgb			pattern_at(t_pattern *pat, t_tuple point);
 char			*face_from_point(t_tuple point);
-//******************************************************************************
+//***************************************************************************
 
 //reflection.c
 t_rgb			reflected_color(t_world *w, t_comps *comps, int remaining);

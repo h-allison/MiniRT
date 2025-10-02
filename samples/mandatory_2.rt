@@ -1,0 +1,11 @@
+*CAMERA		position	orientation			field of view										
+C		0,0,-7	0,0,1			60										
+
+*AMBIENT		intensity	color													
+A		0.2	255,255,255													
+*LIGHT		position	intensity			color										
+L		0,7,-6	1										
+
+cy	0,0,0 	1,1,1 	1 1 50,200,200
+pl	0,-1,0	0,1,0		100,80,80
+sp	0,2,0 	1 	250,200,200

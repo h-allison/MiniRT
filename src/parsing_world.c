@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:55:40 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/29 18:56:32 by hallison         ###   ########.fr       */
+/*   Updated: 2025/10/02 20:40:46 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,7 @@ int	parse_shape(char **tokens, t_world *world)
 	else if (BONUS == true && rt_strcmp(tokens[0], "cn") == 0)
 		ret = parse_cone(tokens, world, &s_i);
 	else
-	{
-		debug_print_tokens(tokens);
 		return (rt_error("parse_shape: unknown shape", -1));
-	}
 	return (ret);
 }
 

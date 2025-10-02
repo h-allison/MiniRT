@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 17:55:04 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/29 20:49:30 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/02 19:59:39 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	set_transform(t_shape *s, float **t)
 	s->invtrans = minvert(s->transform, 4);
 }
 
-// TODO isinvertable check for minvert -- had sometimes segfault at these lines
 t_ray	ray_for_pixel(t_camera *c, float px, float py)
 {
 	float	world_x;

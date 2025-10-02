@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/10/02 14:07:12 by mmillhof         ###   ########.fr        #
+#    Updated: 2025/10/02 20:30:03 by hallison         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRC         := src/main.c \
                src/parsing_utils.c \
                src/parsing_bonus_shapes.c \
                src/parsing_bonus_fields.c \
+               src/parsing_extra.c \
                src/error_handling.c \
                src/mlx_handling.c \
                src/mlx_keypress_1.c \

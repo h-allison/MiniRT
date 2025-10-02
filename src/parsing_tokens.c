@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 11:19:02 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/24 13:23:27 by hallison         ###   ########.fr       */
+/*   Updated: 2025/10/02 19:59:55 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	create_tokens(char **tokens, const char *s)
 	}
 }
 
-// TODO malloc fail return?
 char	**get_element_tokens(char const *s)
 {
 	char	**tokens;

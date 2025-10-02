@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:51:51 by hallison          #+#    #+#             */
-/*   Updated: 2025/10/02 14:33:29 by hallison         ###   ########.fr       */
+/*   Updated: 2025/10/02 20:13:08 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ t_camera	*place_camera_2(t_tuple c_coords, t_tuple c_orient, float fov)
 	if (dot_product > 0.999f || dot_product < -0.999f)
 		up = vector(1, 0, 0);
 	right = tnorm(cross(c_orient, up));
+	free_matrix(cam->transform, 4);
 	cam->transform = view_transform(c_coords, tadd(c_coords, c_orient),
 			cross(right, c_orient));
 	return (cam);
