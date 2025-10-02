@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:27:53 by hallison          #+#    #+#             */
-/*   Updated: 2025/10/02 14:55:02 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/02 16:11:02 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ int	parse_cube(char **tokens, t_world *world, int *s_i)
 		exit(1);
 	if (parse_cube_color(tokens[5], world->s[*s_i]) != 0)
 		return (-1);
-	if (parse_cube_diam_and_height(tokens[3], tokens[4], world->s[*s_i]) != 0)
-		return (-1);
 	if (parse_cube_orientation(tokens[2], world->s[*s_i]) != 0)
+		return (-1);
+	if (parse_cube_diam_and_height(tokens[3], tokens[4], world->s[*s_i]) != 0)
 		return (-1);
 	if (parse_cube_position(tokens[1], world->s[*s_i]) != 0)
 		return (-1);
