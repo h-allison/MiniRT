@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/10/02 16:43:19 by hallison         ###   ########.fr       */
+/*   Updated: 2025/10/02 15:58:54 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -520,6 +520,7 @@ void			prepare_n(t_comps *comps, t_intersection *ht, t_intersection *xs);
 
 //math_view.c
 float			**view_transform(t_tuple from, t_tuple to, t_tuple up);
+float			**object_transform(t_tuple v);
 
 //export_ppm.c
 int				canvas_export_ppm(t_data *data);

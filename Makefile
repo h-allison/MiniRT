@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/10/02 11:33:47 by mmillhof         ###   ########.fr        #
+#    Updated: 2025/10/02 14:07:12 by mmillhof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,7 +78,6 @@ SRC         := src/main.c \
 			   src/pat_uv_checkers.c \
 			   src/pat_uv_image.c \
 			   src/pat_uv_maps.c \
-			   src/pat_uv_align_check.c \
 			   src/pat_tests.c \
 			   src/reflection.c \
 			   src/groups.c \
