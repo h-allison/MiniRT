@@ -6,12 +6,13 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 18:12:31 by hallison          #+#    #+#             */
-/*   Updated: 2025/10/02 14:43:04 by hallison         ###   ########.fr       */
+/*   Updated: 2025/10/02 19:07:16 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/*
 t_world	*default_world(void)
 {
 	t_world	*w;
@@ -36,7 +37,8 @@ t_world	*default_world(void)
 	w->light[0] = light;
 	return (w);
 }
-
+*/
+/*
 t_world	*default_world_rotation(void)
 {
 	t_world	*w;
@@ -48,8 +50,8 @@ t_world	*default_world_rotation(void)
 	light = point_light(point(-10, 10, -10), color(255, 255, 255));
 	s1 = sphere();
 	s1->m->color = color(255, 0, 0);
-//	s1->m->diffuse = 0.7;
-//	s1->m->specular = 0.2;
+	s1->m->diffuse = 0.7;
+	s1->m->specular = 0.2;
 	s2 = sphere();
 	s2->m->color = color(0, 255, 0);
 	w->s = ft_calloc(5, sizeof(t_shape *));
@@ -67,7 +69,8 @@ t_world	*default_world_rotation(void)
 	s2->invtrans = minvert(s2->transform, 4);
 	return (w);
 }
-
+*/
+/*
 t_world	*default_world_2(void)
 {
 	t_world	*w;
@@ -86,23 +89,32 @@ t_world	*default_world_2(void)
 	floor->m->specular = 0;
 
 	left_wall = sphere();
-	left_wall->transform = mmultfree(scaling(10, 0.01, 10), left_wall->transform);
-	left_wall->transform = mmultfree(rotation_x(M_PI / 2), left_wall->transform);
-	left_wall->transform = mmultfree(rotation_y(-M_PI / 4), left_wall->transform);
-	left_wall->transform = mmultfree(translation(0, 0, 5), left_wall->transform);
+	left_wall->transform = mmultfree(scaling(10, 0.01, 10),
+		left_wall->transform);
+	left_wall->transform = mmultfree(rotation_x(M_PI / 2),
+		left_wall->transform);
+	left_wall->transform = mmultfree(rotation_y(-M_PI / 4),
+		left_wall->transform);
+	left_wall->transform = mmultfree(translation(0, 0, 5),
+		left_wall->transform);
 	left_wall->invtrans = minvert(left_wall->transform, 4);
 	left_wall->m = floor->m;
 
 	right_wall = sphere();
-	right_wall->transform = mmultfree(scaling(10, 0.01, 10), right_wall->transform);
-	right_wall->transform = mmultfree(rotation_x(M_PI / 2), right_wall->transform);
-	right_wall->transform = mmultfree(rotation_y(M_PI / 4), right_wall->transform);
-	right_wall->transform = mmultfree(translation(0, 0, 5), right_wall->transform);
+	right_wall->transform = mmultfree(scaling(10, 0.01, 10),
+		right_wall->transform);
+	right_wall->transform = mmultfree(rotation_x(M_PI / 2),
+		right_wall->transform);
+	right_wall->transform = mmultfree(rotation_y(M_PI / 4),
+		right_wall->transform);
+	right_wall->transform = mmultfree(translation(0, 0, 5),
+		right_wall->transform);
 	right_wall->invtrans = minvert(right_wall->transform, 4);
 	right_wall->m = floor->m;
 
 	middle = sphere();
-	middle->transform = mmultfree(translation(-0.5, 1, 0.5), middle->transform);
+	middle->transform = mmultfree(translation(-0.5, 1, 0.5),
+		middle->transform);
 	middle->invtrans = minvert(middle->transform, 4);
 	middle->m->color = color(26, 255, 128);
 	middle->m->diffuse = 0.7;
@@ -138,7 +150,8 @@ t_world	*default_world_2(void)
 	w->s[5] = left;
 	return (w);
 }
-
+*/
+/*
 t_world	*default_world_3(void)
 {
 	t_world	*w;
@@ -191,7 +204,8 @@ t_world	*default_world_3(void)
 	w->s[3] = left;
 	return (w);
 }
-
+*/
+/*
 t_world	*default_world_4(void)
 {
 	t_world	*w;
@@ -212,21 +226,28 @@ t_world	*default_world_4(void)
 	floor->m->pattern = checkers_pattern(color(100, 80, 60), floor->m->color);
 
 	wall_back = plane();
-	wall_back->transform = mmultfree(rotation_x(M_PI / 2), wall_back->transform);
-	wall_back->transform = mmultfree(translation(0, 0, 40), wall_back->transform);
+	wall_back->transform = mmultfree(rotation_x(M_PI / 2),
+		wall_back->transform);
+	wall_back->transform = mmultfree(translation(0, 0, 40),
+		wall_back->transform);
 	wall_back->invtrans = minvert(wall_back->transform, 4);
 	wall_back->m->color = color(80, 0, 0);
 	wall_back->m->diffuse = 0.5;
 	wall_back->m->ambient = 0;
 	wall_back->m->specular = 0;
-	wall_back->m->pattern = gradient_pattern(wall_back->m->color, color(0, 0, 180)) ; 
-	wall_back->m->pattern->transform = mmultfree(scaling(18, 1, 1), wall_back->m->pattern->transform);
-	wall_back->m->pattern->transform = mmultfree(rotation_y(90 * DEG2RAD), wall_back->m->pattern->transform);
-	wall_back->m->pattern->invtrans = minvert(wall_back->m->pattern->transform, 4);
+	wall_back->m->pattern = gradient_pattern(wall_back->m->color,
+		color(0, 0, 180)) ; 
+	wall_back->m->pattern->transform = mmultfree(scaling(18, 1, 1),
+		wall_back->m->pattern->transform);
+	wall_back->m->pattern->transform = mmultfree(rotation_y(90 * DEG2RAD),
+		wall_back->m->pattern->transform);
+	wall_back->m->pattern->invtrans = minvert(wall_back->m->pattern->transform,
+		4);
 
 	left = sphere();
 	left->transform = mmultfree(scaling(0.33, 0.33, 0.33), left->transform);
-	left->transform = mmultfree(translation(-1.5, 0.33, -0.75), left->transform);
+	left->transform = mmultfree(translation(-1.5, 0.33, -0.75),
+		left->transform);
 	left->invtrans = minvert(left->transform, 4);
 	left->m->color = color(255, 128, 128);
 	left->m->diffuse = 0.7;
@@ -248,7 +269,8 @@ t_world	*default_world_4(void)
 	right->m->diffuse = 0.7;
 	right->m->specular = 0.4;
 	right->m->pattern = ring_pattern(color(20, 80, 60), right->m->color);
-	right->m->pattern->transform = mmultfree(scaling(0.1, 0.2, 0.2), right->m->pattern->transform);
+	right->m->pattern->transform = mmultfree(scaling(0.1, 0.2, 0.2),
+		right->m->pattern->transform);
 	right->m->pattern->invtrans = minvert(right->m->pattern->transform, 4);
 	
 	w->light = ft_calloc(4, sizeof(t_light *));
@@ -268,7 +290,8 @@ t_world	*default_world_4(void)
 	w->s[4] = left;
 	return (w);
 }
-
+*/
+/*
 t_world	*default_world_5(void)
 {
 	t_world	*w;
@@ -323,7 +346,8 @@ t_world	*default_world_5(void)
 	right->m->diffuse = 0.7;
 	right->m->specular = 0.4;
 	right->m->pattern = ring_pattern(color(20, 80, 60), right->m->color);
-	right->m->pattern->transform = mmultfree(scaling(0.1, 0.2, 0.2), right->m->pattern->transform);
+	right->m->pattern->transform = mmultfree(scaling(0.1, 0.2, 0.2),
+		right->m->pattern->transform);
 	right->m->pattern->invtrans = minvert(right->m->pattern->transform, 4);
 	
 	w->light = ft_calloc(2, sizeof(t_light *));
@@ -339,7 +363,8 @@ t_world	*default_world_5(void)
 	w->s[4] = left;
 	return (w);
 }
-
+*/
+/*
 t_world	*default_world_6(void)
 {
 	t_world	*w;
@@ -358,7 +383,7 @@ t_world	*default_world_6(void)
 	floor->m->ambient = 0.01;
 	floor->m->specular = 0.2;
 	floor->m->reflective = .2;
-//	floor->m->pattern = ring_pattern(color(80, 80, 80), floor->m->color);
+	floor->m->pattern = ring_pattern(color(80, 80, 80), floor->m->color);
 
 	big = sphere();
 	big->transform = mmultfree(translation(.5, 1, 4), big->transform);
@@ -367,9 +392,10 @@ t_world	*default_world_6(void)
 	big->m->diffuse = .6;
 	big->m->ambient = .2;
 	big->m->specular = 0.5;
-//	big->m->pattern = stripe_pattern(color(80, 80, 80), big->m->color);
-//	big->m->pattern->transform = mmultfree(scaling(0.4, 0.4, 0.6), big->m->pattern->transform);
-//	big->m->pattern->invtrans = minvert(big->m->pattern->transform, 4);
+	big->m->pattern = stripe_pattern(color(80, 80, 80), big->m->color);
+	big->m->pattern->transform = mmultfree(scaling(0.4, 0.4, 0.6),
+		big->m->pattern->transform);
+	big->m->pattern->invtrans = minvert(big->m->pattern->transform, 4);
 
 	left = sphere();
 	left->transform = mmultfree(scaling(0.33, 0.33, 0.33), left->transform);
@@ -401,9 +427,10 @@ t_world	*default_world_6(void)
 	right->m->color = color(140, 100, 255);
 	right->m->diffuse = 0.7;
 	right->m->specular = 0.4;
-//	right->m->pattern = ring_pattern(color(20, 80, 60), right->m->color);
-//	right->m->pattern->transform = mmultfree(scaling(0.1, 0.2, 0.2), right->m->pattern->transform);
-//	right->m->pattern->invtrans = minvert(right->m->pattern->transform, 4);
+	right->m->pattern = ring_pattern(color(20, 80, 60), right->m->color);
+	right->m->pattern->transform = mmultfree(scaling(0.1, 0.2, 0.2),
+		right->m->pattern->transform);
+	right->m->pattern->invtrans = minvert(right->m->pattern->transform, 4);
 	
 	cub = cube();
 	cub->transform = mmultfree(rotation_y(30 * DEG2RAD), cub->transform);
@@ -429,7 +456,8 @@ t_world	*default_world_6(void)
 	w->s[5] = cub;
 	return (w);
 }
-
+*/
+/*
 t_world	*default_world_cyl(void)
 {
 	t_world	*w;
@@ -459,7 +487,8 @@ t_world	*default_world_cyl(void)
 	sky->m->ambient = 1.2;
 	sky->m->diffuse = 0;
 	sky->m->specular = 0;
-	sky->m->pattern = texture_map(uv_image(canvas_from_ppm("samples/textures/sky.ppm")), spherical_map);
+	sky->m->pattern = texture_map(uv_image(canvas_from_ppm("\
+		samples/textures/sky.ppm")), spherical_map);
 	
 	big = sphere();
 	big->transform = mmultfree(translation(.5, 1, 4), big->transform);
@@ -468,7 +497,8 @@ t_world	*default_world_cyl(void)
 	big->m->diffuse = .6;
 	big->m->ambient = .2;
 	big->m->specular = 0.5;
-	big->m->pattern = texture_map(uv_image(canvas_from_ppm("samples/textures/earthmap1k.ppm")), spherical_map);
+	big->m->pattern = texture_map(uv_image(canvas_from_ppm("\
+		samples/textures/earthmap1k.ppm")), spherical_map);
 
 	left = cylinder();
 	left->minimum = 0;
@@ -513,8 +543,10 @@ t_world	*default_world_cyl(void)
 	right->m->specular = 2;
 	right->m->reflective = 0;
 	right->m->pattern = stripe_pattern(color(100, 60, 100), right->m->color);
-	right->m->pattern->transform = mmultfree(rotation_z(-90 * DEG2RAD), right->m->pattern->transform);
-	right->m->pattern->transform = mmultfree(scaling(.15, .15, .15), right->m->pattern->transform);
+	right->m->pattern->transform = mmultfree(rotation_z(-90 * DEG2RAD),
+		right->m->pattern->transform);
+	right->m->pattern->transform = mmultfree(scaling(.15, .15, .15),
+		right->m->pattern->transform);
 	right->m->pattern->invtrans = minvert(right->m->pattern->transform, 4);
 	
 	cub = cube();
@@ -527,7 +559,8 @@ t_world	*default_world_cyl(void)
 	cub->m->ambient = .6;
 	cub->m->specular = 0.6;
 	cub->m->reflective = 0.1;
-	cub->m->pattern = texture_map(uv_checkers(4, 4, color(70, 100, 0), cub->m->color), cube_map);
+	cub->m->pattern = texture_map(uv_checkers(4, 4, color(70, 100, 0),
+		cub->m->color), cube_map);
 
 	hex = hexagon();
 	hex->transform = mmultfree(scaling(1, 1, 1), hex->transform);
@@ -550,7 +583,8 @@ t_world	*default_world_cyl(void)
 	w->s[7] = hex;
 	return (w);
 }
-
+*/
+/*
 t_world	*default_world_tri_test(void)
 {
 	t_world	*w;
@@ -578,7 +612,8 @@ t_world	*default_world_tri_test(void)
 	sky->m->ambient = 1;
 	sky->m->diffuse = 0;
 	sky->m->specular = 0;
-	sky->m->pattern = texture_map(uv_image(canvas_from_ppm("samples/textures/sky_night.ppm")), spherical_map);
+	sky->m->pattern = texture_map(uv_image(canvas_from_ppm("\
+		samples/textures/sky_night.ppm")), spherical_map);
 
 	tri1 = triangle(point(-1, 0, -1), point(1, 0, -1), point(0, 1, 0));
 	tri1->m->color = color(100, 80, 0);
@@ -621,3 +656,4 @@ t_world	*default_world_tri_test(void)
 	w->light[0] = light;
 	return (w);
 }
+*/

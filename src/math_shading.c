@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:25:23 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/10/02 17:54:45 by hallison         ###   ########.fr       */
+/*   Updated: 2025/10/02 19:07:59 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,6 @@ static void	diff_spec(t_largs *largs, t_rgb eff_color, t_rgb *diff, t_rgb *spec)
 		else
 			*spec = calc_specular(largs, reflect_dot_eye);
 	}
-}
-
-t_rgb	world_amb_plus_shape_c(void)
-{
-	return (NULL);
 }
 
 t_rgb	lighting(t_largs *largs)

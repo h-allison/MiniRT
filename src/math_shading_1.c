@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:25:23 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/10/02 18:53:06 by hallison         ###   ########.fr       */
+/*   Updated: 2025/10/02 18:59:18 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,6 @@ t_rgb	lighting(t_largs *largs, t_world *w)
 	specular = cscale(specular, largs->in_shadow);
 	shape_color = cadd(cadd(ambient, diffuse), specular);
 	shape_color = cscale(cadd(shape_color, w->ambient_total),
-		0.5 + 0.5 * (1 - w->ambient_ratio));
+			0.5 + 0.5 * (1 - w->ambient_ratio));
 	return (shape_color);
 }

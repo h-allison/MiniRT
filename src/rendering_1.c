@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 11:26:02 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/10/02 12:53:22 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/02 19:08:44 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	render_with_parsing(void *param)
 {
 	render_chunk(((t_data *)param)->world, param);
 }
-
+/*
 void	render(void *param)
 {
 	static int		render_status;
@@ -58,3 +58,4 @@ void	render(void *param)
 	if (render_status == 1)
 		render_status = render_chunk(world, data);
 }
+*/

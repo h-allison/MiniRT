@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 19:38:47 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/10/02 16:37:45 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/02 18:56:38 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ float	**object_transform(t_tuple v)
 		up = vector (1, 0, 0);
 	right = tnorm(cross(forward, up));
 	true_up = tnorm(cross(right, forward));
-
 	orientation = create_id_matrix();
 	orientation[0][0] = right.x;
 	orientation[0][1] = right.y;
