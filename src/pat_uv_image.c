@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 18:58:07 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/10/01 09:38:20 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/02 17:00:26 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_pattern	*uv_image(t_canvas *canvas)
 	return (uv_image);
 }
 
-static t_rgb	pixel_at(t_canvas *canvas, int x, int y)
+t_rgb	pixel_at(t_canvas *canvas, int x, int y)
 {
 	return (canvas->img[y][x]);
 }

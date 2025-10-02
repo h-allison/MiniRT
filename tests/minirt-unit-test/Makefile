@@ -54,6 +54,7 @@ SRCS := \
 	$(SRC_DIR_SHADOW)/04_test_is_shad_3.c \
 	$(SRC_DIR_SHADOW)/05_test_is_shad_4.c \
 	$(SRC_DIR_SHADOW)/06_test_over_point.c \
+	$(SRC_DIR_PATTERNS)/pat_uv_align_check.c \
 	$(SRC_DIR_PATTERNS)/00_test_patterns_launcher.c \
 	$(SRC_DIR_PATTERNS)/01_test_pattern.c \
 	$(SRC_DIR_PATTERNS)/02_test_pattern_stripe_y.c \
@@ -164,7 +165,8 @@ SRCS := \
     $(PRG_DIR)/src/mlx_keypress_1.c \
     $(PRG_DIR)/src/mlx_keypress_2.c \
     $(PRG_DIR)/src/mlx_keypress_3.c \
-    $(PRG_DIR)/src/rendering.c \
+    $(PRG_DIR)/src/rendering_1.c \
+    $(PRG_DIR)/src/rendering_2.c \
     $(PRG_DIR)/src/math_float.c \
     $(PRG_DIR)/src/math_matrices_1.c \
     $(PRG_DIR)/src/math_matrices_2.c \

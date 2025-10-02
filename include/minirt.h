@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/10/02 15:58:54 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/02 17:07:53 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -550,6 +550,7 @@ t_rgb			uv_checkers_at(t_pattern *checkers, t_tuple point);
 
 //pat_uv_image.c
 t_pattern		*uv_image(t_canvas *canvas);
+t_rgb			pixel_at(t_canvas *canvas, int x, int y);
 t_rgb			uv_image_at(t_pattern *uv_image, t_tuple uv);
 
 //pat_texture_map.c
@@ -562,10 +563,6 @@ t_tuple			spherical_map(t_tuple p);
 t_tuple			planar_map(t_tuple p);
 t_tuple			cylindrical_map(t_tuple p);
 t_tuple			cube_map(t_tuple point);
-
-//pat_uv_align_check.c
-t_pattern 		*uv_align_check(t_rgb main, t_rgb ul, t_rgb ur, t_rgb bl, t_rgb br);
-t_rgb			uv_align_check_at(t_pattern *align_check, t_tuple point);
 
 //pat_tests.c
 t_pattern		*create_test_pattern(void);
