@@ -167,6 +167,8 @@ SRCS := \
     $(PRG_DIR)/src/mlx_keypress_3.c \
     $(PRG_DIR)/src/rendering_1.c \
     $(PRG_DIR)/src/rendering_2.c \
+    $(PRG_DIR)/src/rendering_3.c \
+    $(PRG_DIR)/src/rendering_4.c \
     $(PRG_DIR)/src/math_float.c \
     $(PRG_DIR)/src/math_matrices_1.c \
     $(PRG_DIR)/src/math_matrices_2.c \
@@ -199,16 +201,17 @@ SRCS := \
     $(PRG_DIR)/src/pat_uv_checkers.c \
     $(PRG_DIR)/src/pat_uv_image.c \
     $(PRG_DIR)/src/pat_uv_maps.c \
-    $(PRG_DIR)/src/pat_uv_align_check.c \
     $(PRG_DIR)/src/pat_tests.c \
     $(PRG_DIR)/src/reflection.c \
     $(PRG_DIR)/src/groups.c \
     $(PRG_DIR)/src/uv_mapping_1.c \
     $(PRG_DIR)/src/uv_mapping_2.c \
     $(PRG_DIR)/src/textures.c \
-    $(PRG_DIR)/src/sh_cone.c \
+    $(PRG_DIR)/src/sh_cone_1.c \
+    $(PRG_DIR)/src/sh_cone_2.c \
     $(PRG_DIR)/src/sh_cube.c \
-    $(PRG_DIR)/src/sh_cylinder.c \
+    $(PRG_DIR)/src/sh_cylinder_1.c \
+    $(PRG_DIR)/src/sh_cylinder_2.c \
     $(PRG_DIR)/src/sh_group.c \
     $(PRG_DIR)/src/sh_plane.c \
     $(PRG_DIR)/src/sh_sphere.c \

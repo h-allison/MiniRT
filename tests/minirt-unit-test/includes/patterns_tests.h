@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 17:16:24 by hallison          #+#    #+#             */
-/*   Updated: 2025/10/02 17:15:04 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/02 17:34:21 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include "minirt.h"
 
 //pat_uv_align_check.c
-//t_pattern 		*uv_align_check(t_rgb main, t_rgb ul, t_rgb ur, t_rgb bl, t_rgb br);
-//t_rgb			uv_align_check_at(t_pattern *align_check, t_tuple point);
+t_pattern 		*uv_align_check(t_rgb main, t_rgb ul, t_rgb ur, t_rgb bl, t_rgb br);
+t_rgb			uv_align_check_at(t_pattern *align_check, t_tuple point);
 
 int	patterns_tests_launcher(void);
 int	test_pattern_basic(void);
@@ -33,7 +33,7 @@ int	test_pattern_gen_basic(void);
 int test_pattern_set_transform(void);
 int test_pattern_uv_checkers(void);
 int test_pattern_spherical_map(void);
-//int test_pattern_align_check(void);
+int test_pattern_align_check(void);
 int test_pattern_identify_cube_face(void);
 int	test_pattern_colors_mapped_cube(void);
 
