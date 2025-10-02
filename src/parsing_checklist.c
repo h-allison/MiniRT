@@ -6,17 +6,17 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:23:26 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/29 17:24:07 by hallison         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:56:32 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	init_checklist(t_world *world)
+int	init_checklist(t_world *world)
 {
 	world->checklist = malloc (sizeof(t_checklist));
 	if (!world->checklist)
-		exit(1);
+		return (-1);
 	world->checklist->a_parsed = false;
 	world->checklist->c_parsed = false;
 	world->checklist->l_parsed = false;
@@ -27,6 +27,7 @@ void	init_checklist(t_world *world)
 	world->checklist->count_plane = 0;
 	world->checklist->count_cone = 0;
 	world->checklist->count_shape = 0;
+	return (0);
 }
 
 int	count_shape(t_checklist *lst, char *ln)
@@ -82,22 +83,23 @@ int	fill_checklist_count(t_data *data)
 	char	*ln;
 
 	fd = open_file(data->filename);
+	if (fd < 0)
+		return (-1);
 	ln = get_next_line(fd);
 	while (ln != NULL)
 	{
 		if (ln[0] >= 'A' && ln[0] <= 'Z')
 		{
 			if (count_singular_element(data->world->checklist, ln) != 0)
-				return (-1);
+				return (close_and_return(fd, -1));
 		}
 		else
 		{
 			if (count_shape(data->world->checklist, ln) != 0)
-				return (-1);
+				return (close_and_return(fd, -1));
 		}
 		free (ln);
 		ln = get_next_line(fd);
 	}
-	close(fd);
-	return (0);
+	return (close_and_return(fd, 0));
 }

@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:51:51 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/30 21:08:07 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:33:47 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	parse_sphere(char **tokens, t_world *world, int *s_i)
 		return (-1);
 	world->s[*s_i] = sphere();
 	if (!world->s[*s_i])
-		exit(1);
+		return (-1);
 	if (parse_sphere_color(tokens[3], world->s[*s_i]) != 0)
 		return (-1);
 	if (parse_sphere_diameter(tokens[2], world->s[*s_i]) != 0)

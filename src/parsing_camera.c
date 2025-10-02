@@ -6,13 +6,12 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:51:51 by hallison          #+#    #+#             */
-/*   Updated: 2025/10/01 22:02:38 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:33:29 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-// TODO Should not seg fault if camera orientation is wrong
 t_camera	*place_camera(t_tuple c_coords, t_tuple c_orient, float fov)
 {
 	t_camera	*cam;
@@ -21,7 +20,7 @@ t_camera	*place_camera(t_tuple c_coords, t_tuple c_orient, float fov)
 
 	cam = camera(WIN_WIDTH, WIN_HEIGHT, DEG2RAD * fov);
 	if (!cam)
-		exit (1);
+		return (NULL);
 	to = tadd(c_coords, c_orient);
 	up = vector(0, 1, 0);
 	free_matrix(cam->transform, 4);
@@ -38,7 +37,7 @@ t_camera	*place_camera_2(t_tuple c_coords, t_tuple c_orient, float fov)
 
 	cam = camera(WIN_WIDTH, WIN_HEIGHT, DEG2RAD * fov);
 	if (!cam)
-		exit (1);
+		return (NULL);
 	up = vector(0, 1, 0);
 	dot_product = dot(c_orient, up);
 	if (dot_product > 0.999f || dot_product < -0.999f)
@@ -96,8 +95,7 @@ int	parse_camera(char **tokens, t_data *data)
 		return (-1);
 	orient = tnorm(orient);
 	data->cam = place_camera_2(coords, orient, field_of_view);
-	printf("\ncamera transform matrix:\n");
-	debug_print_matrix(data->cam->transform);
-	printf("\n");
+	if (!data->cam)
+		return (-1);
 	return (0);
 }

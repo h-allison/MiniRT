@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:27:53 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/30 20:29:35 by hallison         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:31:55 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	parse_cone(char **tokens, t_world *world, int *s_i)
 	world->s[*s_i] = cone();
 	world->s[*s_i]->closed = true;
 	if (!world->s[*s_i])
-		exit(1);
+		return (-1);
 	if (set_cone_min_max(tokens, world->s[*s_i]) != 0)
 		return (-1);
 	if (parse_cone_color(tokens[5], world->s[*s_i]) != 0)

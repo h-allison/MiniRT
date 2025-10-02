@@ -6,10 +6,9 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 18:12:31 by hallison          #+#    #+#             */
-/*   Updated: 2025/10/01 13:25:16 by hallison         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:43:04 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minirt.h"
 
@@ -50,7 +49,7 @@ t_world	*default_world_rotation(void)
 	s1 = sphere();
 	s1->m->color = color(255, 0, 0);
 //	s1->m->diffuse = 0.7;
-//*	s1->m->specular = 0.2;
+//	s1->m->specular = 0.2;
 	s2 = sphere();
 	s2->m->color = color(0, 255, 0);
 	w->s = ft_calloc(5, sizeof(t_shape *));

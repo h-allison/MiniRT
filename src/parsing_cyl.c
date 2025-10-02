@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:27:53 by hallison          #+#    #+#             */
-/*   Updated: 2025/10/01 17:22:32 by hallison         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:31:25 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	parse_cyl(char **tokens, t_world *world, int *s_i)
 	world->s[*s_i]->minimum = -0.5;
 	world->s[*s_i]->maximum = 0.5;
 	if (!world->s[*s_i])
-		exit(1);
+		return (-1);
 	if (parse_cyl_color(tokens[5], world->s[*s_i]) != 0)
 		return (-1);
 	if (parse_cyl_diam_and_height(tokens[3], tokens[4], world->s[*s_i]) != 0)

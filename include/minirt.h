@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/10/01 23:28:47 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:53:40 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,6 +271,7 @@ int				scenefile_check_chars(char *filename);
 //file_helpers.c
 int				open_file(char *filename);
 int				check_rt_filename(char	*filename);
+int				close_and_return(int fd, int ret);
 
 //error_handling.c
 void			rt_early_exit(int error);
@@ -302,7 +303,7 @@ int				parse_file(char *filename, t_data *data);
 bool			is_space(char c);
 char			**get_element_tokens(char const *s);
 int				fill_checklist_count(t_data *data);
-void			init_checklist(t_world *world);
+int				init_checklist(t_world *world);
 int				parse_into_world(char **tokens, t_data *data);
 int				rt_strcmp(char *token, char *s2);
 int				parse_ambient(char **tokens, t_world *world);

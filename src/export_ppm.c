@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 18:40:41 by hallison          #+#    #+#             */
-/*   Updated: 2025/09/09 00:46:46 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:58:24 by hallison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ int	write_pixel_data(int fd, t_data *data)
 	return (0);
 }
 
-// TODO name increases if already exists
-
 int	canvas_export_ppm(t_data *data)
 {
 	int		fd;
@@ -74,7 +72,7 @@ int	canvas_export_ppm(t_data *data)
 	filename = "./export.ppm";
 	fd = open(filename, O_CREAT | O_RDWR, 0644);
 	if (fd < 0)
-		exit (1);
+		return (-1);
 	write_ppm_header(fd, data);
 	write_pixel_data(fd, data);
 	close(fd);
