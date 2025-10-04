@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 17:37:09 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/10/02 12:54:06 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/03 16:14:10 by matthias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static void	calc_xs_tri(t_tuple dir_cross_e2, t_shape *t, t_ray r,
 	float			det;
 	float			xt;
 
+	(void)xs;
 	det = dot(t->triangle->e1, dir_cross_e2);
 	if (fabs(det) < EPSILON)
 		return ;

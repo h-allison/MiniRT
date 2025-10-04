@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:49:31 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/10/02 11:33:13 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/03 16:13:26 by matthias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static bool	calc_xs_cyl(t_abc abc, t_shape *s, t_ray r, t_intersection *xs)
 	float			y0;
 	float			y1;
 
+	(void)xs;
 	abc.b = 2 * r.origin.x * r.direction.x
 		+ 2 * r.origin.z * r.direction.z;
 	abc.c = r.origin.x * r.origin.x

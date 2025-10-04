@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 18:12:31 by hallison          #+#    #+#             */
-/*   Updated: 2025/10/02 19:07:16 by hallison         ###   ########.fr       */
+/*   Updated: 2025/10/03 16:16:50 by matthias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -457,7 +457,7 @@ t_world	*default_world_6(void)
 	return (w);
 }
 */
-/*
+
 t_world	*default_world_cyl(void)
 {
 	t_world	*w;
@@ -487,8 +487,7 @@ t_world	*default_world_cyl(void)
 	sky->m->ambient = 1.2;
 	sky->m->diffuse = 0;
 	sky->m->specular = 0;
-	sky->m->pattern = texture_map(uv_image(canvas_from_ppm("\
-		samples/textures/sky.ppm")), spherical_map);
+	sky->m->pattern = texture_map(uv_image(canvas_from_ppm("samples/textures/sky.ppm")), spherical_map);
 	
 	big = sphere();
 	big->transform = mmultfree(translation(.5, 1, 4), big->transform);
@@ -497,8 +496,7 @@ t_world	*default_world_cyl(void)
 	big->m->diffuse = .6;
 	big->m->ambient = .2;
 	big->m->specular = 0.5;
-	big->m->pattern = texture_map(uv_image(canvas_from_ppm("\
-		samples/textures/earthmap1k.ppm")), spherical_map);
+	big->m->pattern = texture_map(uv_image(canvas_from_ppm("samples/textures/earthmap1k.ppm")), spherical_map);
 
 	left = cylinder();
 	left->minimum = 0;
@@ -583,8 +581,7 @@ t_world	*default_world_cyl(void)
 	w->s[7] = hex;
 	return (w);
 }
-*/
-/*
+
 t_world	*default_world_tri_test(void)
 {
 	t_world	*w;
@@ -612,8 +609,7 @@ t_world	*default_world_tri_test(void)
 	sky->m->ambient = 1;
 	sky->m->diffuse = 0;
 	sky->m->specular = 0;
-	sky->m->pattern = texture_map(uv_image(canvas_from_ppm("\
-		samples/textures/sky_night.ppm")), spherical_map);
+	sky->m->pattern = texture_map(uv_image(canvas_from_ppm("samples/textures/sky_night.ppm")), spherical_map);
 
 	tri1 = triangle(point(-1, 0, -1), point(1, 0, -1), point(0, 1, 0));
 	tri1->m->color = color(100, 80, 0);
@@ -656,4 +652,4 @@ t_world	*default_world_tri_test(void)
 	w->light[0] = light;
 	return (w);
 }
-*/
+
