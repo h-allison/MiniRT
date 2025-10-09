@@ -6,13 +6,13 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 18:12:31 by hallison          #+#    #+#             */
-/*   Updated: 2025/10/03 16:16:50 by matthias         ###   ########.fr       */
+/*   Updated: 2025/10/09 16:19:17 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-/*
+
 t_world	*default_world(void)
 {
 	t_world	*w;
@@ -37,7 +37,7 @@ t_world	*default_world(void)
 	w->light[0] = light;
 	return (w);
 }
-*/
+
 /*
 t_world	*default_world_rotation(void)
 {

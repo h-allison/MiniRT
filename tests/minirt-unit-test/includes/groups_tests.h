@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:44:02 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/20 16:32:28 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/09 16:16:58 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libunit.h"
 # include "minirt.h"
 # include "libft.h"
+# include "float.h"
 
 int groups_tests_launcher(void);
 int test_groups_basic(void);

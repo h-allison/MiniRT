@@ -224,6 +224,7 @@ SRCS := \
     $(PRG_DIR)/src/free_2.c \
     $(PRG_DIR)/src/world_scenes.c \
 	$(PRG_DIR)/src/debug_prints.c \
+	$(PRG_DIR)/src/parsing_extra.c \
 	$(LIBFT_DIR)/ft_lstadd_back.c\
 	$(LIBFT_DIR)/ft_lstadd_front.c\
 	$(LIBFT_DIR)/ft_lstclear.c\
