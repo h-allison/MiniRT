@@ -25,6 +25,7 @@ t_camera	*camera(float hsize, float vsize, float field_of_view)
 	c->vsize = vsize;
 	c->field_of_view = field_of_view;
 	c->transform = create_id_matrix();
+	c->half_width = 0;
 	half_view = tanf(field_of_view / 2);
 	aspect = hsize / vsize;
 	if (aspect >= 1)

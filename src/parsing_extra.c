@@ -30,8 +30,8 @@ int	free_all_this_nonsense(char **tokens, int fd, char *element)
 	element = get_next_line(fd);
 	while (element != NULL)
 	{
-		free(element);
 		element = get_next_line(fd);
+//		free(element);
 	}
 	return (close_and_return(fd, -1));
 }

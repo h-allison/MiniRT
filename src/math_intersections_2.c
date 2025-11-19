@@ -49,6 +49,7 @@ t_intersection	*intersect_world(t_world *w, t_ray *r)
 	int				i;
 	t_intersection	*xs;
 
+	xs = NULL;
 	i = 0;
 	while (w->s[i])
 	{
