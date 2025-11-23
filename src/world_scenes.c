@@ -12,7 +12,6 @@
 
 #include "minirt.h"
 
-
 t_world	*default_world(void)
 {
 	t_world	*w;
@@ -20,7 +19,7 @@ t_world	*default_world(void)
 	t_shape	*s2;
 	t_light	*light;
 
-	w = malloc(sizeof(t_world));
+	w = init_world();
 	light = point_light(point(-10, 10, -10), color(255, 255, 255));
 	s1 = sphere();
 	s1->m->color = color(204, 255, 153);
@@ -470,7 +469,7 @@ t_world	*default_world_cyl(void)
 	t_shape *cub;
 	t_shape	*hex;
 	
-	w = malloc(sizeof(t_world));
+	w = init_world();
 	floor = plane();
 	floor->invtrans = minvert(floor->transform, 4);
 	floor->m->color = color(200, 200, 200);
@@ -593,7 +592,7 @@ t_world	*default_world_tri_test(void)
 	t_shape	*tri4;
 	t_light	*light;
 	
-	w = malloc(sizeof(t_world));
+	w = init_world();
 	floor = plane();
 	floor->m->color = color(200, 200, 200);
 	floor->m->diffuse = 0.4;
@@ -636,7 +635,7 @@ t_world	*default_world_tri_test(void)
 	tri4->m->ambient = 0.2;
 
 	light = point_light(point(-7, 20, -6), color(180, 170, 160));
-	w->s = calloc(7, sizeof(*w->s));
+	w->s = ft_calloc(5, sizeof(t_shape *));
 	if (!w->s)
 		exit (1);
 	w->s[0] = floor;

@@ -25,8 +25,8 @@
 
 # define BONUS true
 
-# define WIN_WIDTH 800
-# define WIN_HEIGHT 600
+# define WIN_WIDTH 1024
+# define WIN_HEIGHT 768
 
 # define MAX_RECURSION 4
 # define OFFSET	 0.001
@@ -308,6 +308,7 @@ char			**get_element_tokens(char const *s);
 int				fill_checklist_count(t_data *data);
 int				init_checklist(t_world *world);
 int				parse_into_world(char **tokens, t_data *data);
+t_world			*init_world(void);
 int				rt_strcmp(char *token, char *s2);
 int				parse_ambient(char **tokens, t_world *world);
 int				parse_camera(char **tokens, t_data *data);
