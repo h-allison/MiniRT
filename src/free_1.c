@@ -15,6 +15,8 @@
 void	free_cam(t_camera *cam)
 {
 	free_matrix(cam->transform, 4);
+	if (cam->inv_transform)
+		free_matrix(cam->inv_transform, 4);
 	free(cam);
 }
 

@@ -51,6 +51,7 @@ void	render(void *param)
 		cam = camera(WIN_WIDTH, WIN_HEIGHT, M_PI / 3);
 		cam->transform = view_transform(point(-3, 2, -6),
 				point(0, 1, 0), vector(0, 1, 0));
+		camera_update_cache(cam);
 		data->reset = true;
 		data->cam = cam;
 		render_status = 1;
@@ -58,4 +59,3 @@ void	render(void *param)
 	if (render_status == 1)
 		render_status = render_chunk(world, data);
 }
-

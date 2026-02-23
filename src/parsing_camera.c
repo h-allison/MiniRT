@@ -25,6 +25,7 @@ t_camera	*place_camera(t_tuple c_coords, t_tuple c_orient, float fov)
 	up = vector(0, 1, 0);
 	free_matrix(cam->transform, 4);
 	cam->transform = view_transform(c_coords, to, up);
+	camera_update_cache(cam);
 	return (cam);
 }
 
@@ -46,6 +47,7 @@ t_camera	*place_camera_2(t_tuple c_coords, t_tuple c_orient, float fov)
 	free_matrix(cam->transform, 4);
 	cam->transform = view_transform(c_coords, tadd(c_coords, c_orient),
 			cross(right, c_orient));
+	camera_update_cache(cam);
 	return (cam);
 }
 

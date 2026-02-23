@@ -22,7 +22,7 @@ t_intersection	*local_intersect(t_shape *s, t_ray r)
 	float			discriminant;
 	t_intersection	*xs;
 
-	s->saved_ray = r;
+	(void)r;
 	sphere_to_ray = tsub(r.origin, point(0, 0, 0));
 	a = dot(r.direction, r.direction);
 	b = 2 * dot(r.direction, sphere_to_ray);
@@ -61,7 +61,7 @@ t_intersection	intersection(float t, t_shape *s)
 
 t_intersection	*intersections(t_intersection i1, t_intersection i2)
 {
-	static t_intersection	xs[100];
+	static __thread t_intersection	xs[100];
 	int						i;
 
 	i = 0;
@@ -83,27 +83,20 @@ t_intersection	*intersections(t_intersection i1, t_intersection i2)
 
 t_intersection	*hit(t_intersection *xs)
 {
-	int				n;
-	t_intersection	*hit;
+	int			n;
+	int			best;
 
 	if (!xs || !xs[0].object)
 		return (NULL);
-	hit = malloc(sizeof(t_intersection));
-	if (!hit)
-		exit (1);
-	hit->object = xs[0].object;
-	hit->t = xs[0].t;
+	best = 0;
 	n = 0;
 	while (xs[n].object)
 	{
-		if ((xs[n].t >= 0 && xs[n].t < hit->t) || hit->t < 0)
-		{
-			hit->object = xs[n].object;
-			hit->t = xs[n].t;
-		}
+		if ((xs[n].t >= 0 && xs[n].t < xs[best].t) || xs[best].t < 0)
+			best = n;
 		n++;
 	}
-	if (hit->t < 0)
-		return (free(hit), NULL);
-	return (hit);
+	if (xs[best].t < 0)
+		return (NULL);
+	return (&xs[best]);
 }

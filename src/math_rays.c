@@ -38,6 +38,16 @@ t_ray	transform(t_ray r, float **m)
 	return (r2);
 }
 
+void	camera_update_cache(t_camera *c)
+{
+	if (!c)
+		return ;
+	if (c->inv_transform)
+		free_matrix(c->inv_transform, 4);
+	c->inv_transform = minvert(c->transform, 4);
+	c->origin = tmatrixmult(c->inv_transform, point(0, 0, 0));
+}
+
 void	set_transform(t_shape *s, float **t)
 {
 	int	i;
@@ -69,8 +79,8 @@ t_ray	ray_for_pixel(t_camera *c, float px, float py)
 
 	world_x = c->half_width - (px + 0.5) * c->pixel_size;
 	world_y = c->half_height - (py + 0.5) * c->pixel_size;
-	pixel = tmmultfree(minvert(c->transform, 4), point(world_x, world_y, -1));
-	origin = tmmultfree(minvert(c->transform, 4), point(0, 0, 0));
+	pixel = tmatrixmult(c->inv_transform, point(world_x, world_y, -1));
+	origin = c->origin;
 	direction = tnorm(tsub(pixel, origin));
 	return (ray(origin, direction));
 }

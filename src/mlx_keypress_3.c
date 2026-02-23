@@ -16,26 +16,30 @@ void	keypress_s(t_data *data)
 {
 	data->cam->transform = mmultfree(rotation_x(-0.5 * DEG2RAD),
 			data->cam->transform);
-	data->reset = true;
+	camera_update_cache(data->cam);
+	mark_moving(data);
 }
 
 void	keypress_w(t_data *data)
 {
 	data->cam->transform = mmultfree(rotation_x(0.5 * DEG2RAD),
 			data->cam->transform);
-	data->reset = true;
+	camera_update_cache(data->cam);
+	mark_moving(data);
 }
 
 void	keypress_a(t_data *data)
 {
 	data->cam->transform = mmultfree(rotation_y(1 * DEG2RAD),
 			data->cam->transform);
-	data->reset = true;
+	camera_update_cache(data->cam);
+	mark_moving(data);
 }
 
 void	keypress_d(t_data *data)
 {
 	data->cam->transform = mmultfree(rotation_y(-1 * DEG2RAD),
 			data->cam->transform);
-	data->reset = true;
+	camera_update_cache(data->cam);
+	mark_moving(data);
 }
