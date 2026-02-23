@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2026/02/23 00:23:58 by matthias         ###   ########.fr        #
+#    Updated: 2026/02/23 18:24:47 by matthias         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -116,7 +116,7 @@ CFLAGS      ?= -Wall -Wextra -Werror \
 				-Iinclude -I$(MLX42_PATH)/include \
              	-I$(LIBFT_PATH)/include \
 				-MMD -MP \
-				-Ofast \
+				-O3 \
 				-march=native
 LDFLAGS     := -L$(MLX42_PATH)/build -L$(LIBFT_PATH)
 LDLIBS      := -lft -lmlx42 -lglfw -lm

@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2026/02/23 03:07:52 by matthias         ###   ########.fr       */
+/*   Updated: 2026/02/23 17:49:08 by matthias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@
 # define OFFSET	 0.001
 # define EPSILON 0.0001
 
-# define PIXELATE_START_STRIDE  8
+# define PIXELATE_START_STRIDE  16
 # define AA_SPP                 4
 # define MOVING_CHUNK_SIZE      8
 # define STEADY_CHUNK_SIZE      32
-# define MOVING_MAX_RECURSION   3
+# define MOVING_MAX_RECURSION   2
 # define STEADY_MAX_RECURSION   5
 # define MOVING_FRAMES          2
 
