@@ -6,7 +6,7 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 18:12:31 by hallison          #+#    #+#             */
-/*   Updated: 2025/10/09 16:19:17 by mmillhof         ###   ########.fr       */
+/*   Updated: 2026/03/17 20:40:19 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -529,7 +529,7 @@ t_world	*default_world_cyl(void)
 	right->minimum = -1;
 	right->maximum = 1;
 	right->closed = true;
-	right->transform = mmultfree(scaling(1, 0.5, 1), right->transform);
+	right->transform = mmultfree(scaling(1, 1, 1), right->transform);
 	right->transform = mmultfree(rotation_z(70 * DEG2RAD), right->transform);
 	right->transform = mmultfree(rotation_y(75 * DEG2RAD), right->transform);
 	right->transform = mmultfree(translation(5, 2, 2), right->transform);
@@ -561,7 +561,7 @@ t_world	*default_world_cyl(void)
 
 	hex = hexagon();
 	hex->transform = mmultfree(scaling(1, 1, 1), hex->transform);
-	hex->transform = mmultfree(translation(2.5, 0, -1), hex->transform);
+	hex->transform = mmultfree(translation(2.5, 1.5, -1), hex->transform);
 	hex->invtrans = minvert(hex->transform, 4);
 
 	w->light = ft_calloc(3, sizeof(t_light *));

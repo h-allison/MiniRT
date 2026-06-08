@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2026/02/23 17:49:08 by matthias         ###   ########.fr       */
+/*   Updated: 2026/03/17 20:33:49 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 
 # define BONUS true
 
-# define WIN_WIDTH 1024
-# define WIN_HEIGHT 768
+# define WIN_WIDTH 1920
+# define WIN_HEIGHT 1080
 
 # define OFFSET	 0.001
 # define EPSILON 0.0001
