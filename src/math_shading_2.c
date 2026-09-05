@@ -70,7 +70,6 @@ t_rgb	color_at(t_world *w, t_ray *r, int remaining)
 		return (color(0, 0, 0));
 	}
 	comps = prepare_computations(ht, r, xs);
-	free(ht);
 	xs[0].object = NULL;
 	return (shade_hit(w, &comps, remaining));
 }
@@ -87,13 +86,12 @@ float	is_shadowed(t_world *world, int i, t_tuple point)
 	r = ray(point, tnorm(v));
 	xs = intersect_world(world, &r);
 	ht = hit(xs);
-	xs[0].object = NULL;
 	if (ht && ht->t < tmag(v))
 	{
 		ret = ht->object->m->transparency;
-		free(ht);
+		xs[0].object = NULL;
 		return (ret);
 	}
-	free(ht);
+	xs[0].object = NULL;
 	return (1);
 }

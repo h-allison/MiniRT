@@ -6,7 +6,7 @@
 #    By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 14:10:49 by hallison          #+#    #+#              #
-#    Updated: 2025/10/02 20:30:03 by hallison         ###   ########.fr        #
+#    Updated: 2026/02/23 18:24:47 by matthias         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -115,7 +115,9 @@ CC          ?= cc
 CFLAGS      ?= -Wall -Wextra -Werror \
 				-Iinclude -I$(MLX42_PATH)/include \
              	-I$(LIBFT_PATH)/include \
-				-MMD -MP
+				-MMD -MP \
+				-O3 \
+				-march=native
 LDFLAGS     := -L$(MLX42_PATH)/build -L$(LIBFT_PATH)
 LDLIBS      := -lft -lmlx42 -lglfw -lm
 
@@ -139,7 +141,7 @@ all: $(NAME)
 
 # Compile C -> .o into build/
 $(OBJDIR)/%.o: src/%.c | $(OBJDIR)
-	$(CC) $(CFLAGS) -O3 -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 	# $(CC) $(CFLAGS) -O0 -g -c $< -o $@
 
 $(OBJDIR):

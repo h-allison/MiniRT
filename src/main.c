@@ -20,14 +20,15 @@ int	main(int argc, char **argv)
 		rt_early_exit(ERROR_WRONG_ARGS);
 	data.reset = true;
 	data.cam = NULL;
+	data.rs.moving_frames = 0;
+	data.rs.moving_active = 0;
+	data.rs.chunk_size = STEADY_CHUNK_SIZE;
+	data.rs.max_recursion = STEADY_MAX_RECURSION;
 	if (parse_file(argv[1], &data) != 0)
 	{
 		free_world(data.world);
 		if (data.cam)
-		{
-			free_matrix(data.cam->transform, 4);
-			free(data.cam);
-		}
+			free_cam(data.cam);
 		return (0);
 	}
 	printf("Time to raytrace!\n");

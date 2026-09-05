@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 01:45:38 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/09/25 16:33:45 by mmillhof         ###   ########.fr       */
+/*   Updated: 2025/10/09 16:15:26 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int test_pattern_lighting(void)
 	largs->eyev = vector(0, 0, -1);
 	largs->normalv = vector(0, 0, -1);
 	largs->point = point(0.9, 0, 0);
-	c1 = lighting(largs);
+	c1 = lighting(largs,0);
 	largs->point = point(1.1, 0, 0);
-	c2 = lighting(largs);
+	c2 = lighting(largs, 0);
 	free_largs(largs);
 	if (c1.r != 1 || c1.g != 1 || c1.b != 1)
 		return (-1);

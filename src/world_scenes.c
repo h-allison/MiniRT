@@ -6,13 +6,12 @@
 /*   By: hallison <hallison@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 18:12:31 by hallison          #+#    #+#             */
-/*   Updated: 2025/10/03 16:16:50 by matthias         ###   ########.fr       */
+/*   Updated: 2026/03/17 20:40:19 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-/*
 t_world	*default_world(void)
 {
 	t_world	*w;
@@ -20,7 +19,7 @@ t_world	*default_world(void)
 	t_shape	*s2;
 	t_light	*light;
 
-	w = malloc(sizeof(t_world));
+	w = init_world();
 	light = point_light(point(-10, 10, -10), color(255, 255, 255));
 	s1 = sphere();
 	s1->m->color = color(204, 255, 153);
@@ -37,7 +36,7 @@ t_world	*default_world(void)
 	w->light[0] = light;
 	return (w);
 }
-*/
+
 /*
 t_world	*default_world_rotation(void)
 {
@@ -470,7 +469,7 @@ t_world	*default_world_cyl(void)
 	t_shape *cub;
 	t_shape	*hex;
 	
-	w = malloc(sizeof(t_world));
+	w = init_world();
 	floor = plane();
 	floor->invtrans = minvert(floor->transform, 4);
 	floor->m->color = color(200, 200, 200);
@@ -530,7 +529,7 @@ t_world	*default_world_cyl(void)
 	right->minimum = -1;
 	right->maximum = 1;
 	right->closed = true;
-	right->transform = mmultfree(scaling(1, 0.5, 1), right->transform);
+	right->transform = mmultfree(scaling(1, 1, 1), right->transform);
 	right->transform = mmultfree(rotation_z(70 * DEG2RAD), right->transform);
 	right->transform = mmultfree(rotation_y(75 * DEG2RAD), right->transform);
 	right->transform = mmultfree(translation(5, 2, 2), right->transform);
@@ -562,7 +561,7 @@ t_world	*default_world_cyl(void)
 
 	hex = hexagon();
 	hex->transform = mmultfree(scaling(1, 1, 1), hex->transform);
-	hex->transform = mmultfree(translation(2.5, 0, -1), hex->transform);
+	hex->transform = mmultfree(translation(2.5, 1.5, -1), hex->transform);
 	hex->invtrans = minvert(hex->transform, 4);
 
 	w->light = ft_calloc(3, sizeof(t_light *));
@@ -593,7 +592,7 @@ t_world	*default_world_tri_test(void)
 	t_shape	*tri4;
 	t_light	*light;
 	
-	w = malloc(sizeof(t_world));
+	w = init_world();
 	floor = plane();
 	floor->m->color = color(200, 200, 200);
 	floor->m->diffuse = 0.4;
@@ -636,7 +635,7 @@ t_world	*default_world_tri_test(void)
 	tri4->m->ambient = 0.2;
 
 	light = point_light(point(-7, 20, -6), color(180, 170, 160));
-	w->s = calloc(7, sizeof(*w->s));
+	w->s = ft_calloc(5, sizeof(t_shape *));
 	if (!w->s)
 		exit (1);
 	w->s[0] = floor;

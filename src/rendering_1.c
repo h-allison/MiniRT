@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 11:26:02 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/10/03 18:10:10 by matthias         ###   ########.fr       */
+/*   Updated: 2026/03/17 20:37:47 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	render(void *param)
 		cam = camera(WIN_WIDTH, WIN_HEIGHT, M_PI / 3);
 		cam->transform = view_transform(point(-3, 2, -6),
 				point(0, 1, 0), vector(0, 1, 0));
+		camera_update_cache(cam);
 		data->reset = true;
 		data->cam = cam;
 		render_status = 1;
@@ -58,4 +59,3 @@ void	render(void *param)
 	if (render_status == 1)
 		render_status = render_chunk(world, data);
 }
-

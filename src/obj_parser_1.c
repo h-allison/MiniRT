@@ -50,6 +50,7 @@ static int	obj_read_file(int fd, t_parser *parser)
 	int		status;
 	char	buf;
 
+	status = 0;
 	while (1)
 	{
 		buf = obj_read_next_char(fd, "vf");

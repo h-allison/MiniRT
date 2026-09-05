@@ -12,6 +12,12 @@
 
 #include "minirt.h"
 
+void	mark_moving(t_data *data)
+{
+	data->reset = true;
+	data->rs.moving_frames = MOVING_FRAMES;
+}
+
 void	keypress_escape(t_data *data)
 {
 	mlx_delete_image(data->mlx, data->img);
@@ -24,26 +30,30 @@ void	keypress_up(t_data *data)
 {
 	data->cam->transform = mmultfree(translation(0, 0, 0.05),
 			data->cam->transform);
-	data->reset = true;
+	camera_update_cache(data->cam);
+	mark_moving(data);
 }
 
 void	keypress_down(t_data *data)
 {
 	data->cam->transform = mmultfree(translation(0, 0, -0.05),
 			data->cam->transform);
-	data->reset = true;
+	camera_update_cache(data->cam);
+	mark_moving(data);
 }
 
 void	keypress_left(t_data *data)
 {
 	data->cam->transform = mmultfree(translation(-0.1, 0, 0),
 			data->cam->transform);
-	data->reset = true;
+	camera_update_cache(data->cam);
+	mark_moving(data);
 }
 
 void	keypress_right(t_data *data)
 {
 	data->cam->transform = mmultfree(translation(0.1, 0, 0),
 			data->cam->transform);
-	data->reset = true;
+	camera_update_cache(data->cam);
+	mark_moving(data);
 }

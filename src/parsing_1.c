@@ -38,7 +38,7 @@ int	start_parsing_routine(t_data *data)
 	while (element != NULL)
 	{
 		tokens = get_element_tokens(element);
-		free(element);
+//		free(element);
 		if (tokens != NULL)
 		{
 			if (parse_into_world(tokens, data) == -1)

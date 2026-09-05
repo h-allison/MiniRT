@@ -76,7 +76,6 @@ void	render(void *param)
 				if (t)
 				{
 					mlx_put_pixel(data->img, x, y, color_to_hex(t->object->color));
-					free(t);
 				}
 				xs[0].object = NULL;
 				x++;

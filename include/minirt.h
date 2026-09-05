@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:53:42 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/10/03 18:10:47 by matthias         ###   ########.fr       */
+/*   Updated: 2026/03/17 20:33:49 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,19 @@
 
 # define BONUS true
 
-# define WIN_WIDTH 800
-# define WIN_HEIGHT 600
+# define WIN_WIDTH 1920
+# define WIN_HEIGHT 1080
 
-# define MAX_RECURSION 4
 # define OFFSET	 0.001
 # define EPSILON 0.0001
 
-# define CHUNK_SIZE             8
 # define PIXELATE_START_STRIDE  16
 # define AA_SPP                 4
+# define MOVING_CHUNK_SIZE      8
+# define STEADY_CHUNK_SIZE      32
+# define MOVING_MAX_RECURSION   2
+# define STEADY_MAX_RECURSION   5
+# define MOVING_FRAMES          2
 
 # define FLT_MAX 3.402823466e+38F
 
@@ -180,6 +183,8 @@ typedef struct s_camera
 	float			half_height;
 	float			pixel_size;
 	float			**transform;
+	float			**inv_transform;
+	t_tuple			origin;
 }	t_camera;
 
 typedef struct s_comps
@@ -232,6 +237,10 @@ typedef struct s_rstate {
 	int				aa_mode;
 	int				aa_y;
 	int				done;
+	int				chunk_size;
+	int				max_recursion;
+	int				moving_frames;
+	int				moving_active;
 }	t_rstate;
 
 typedef struct s_data
@@ -291,6 +300,7 @@ void			keypress_up(t_data *data);
 void			keypress_down(t_data *data);
 void			keypress_left(t_data *data);
 void			keypress_right(t_data *data);
+void			mark_moving(t_data *data);
 void			keypress_r(t_data *data);
 void			keypress_f(t_data *data);
 void			keypress_q(t_data *data);
@@ -308,6 +318,7 @@ char			**get_element_tokens(char const *s);
 int				fill_checklist_count(t_data *data);
 int				init_checklist(t_world *world);
 int				parse_into_world(char **tokens, t_data *data);
+t_world			*init_world(void);
 int				rt_strcmp(char *token, char *s2);
 int				parse_ambient(char **tokens, t_world *world);
 int				parse_camera(char **tokens, t_data *data);
@@ -509,6 +520,7 @@ t_tuple			position(t_ray ray, float t);
 t_ray			transform(t_ray r, float **m);
 void			set_transform(t_shape *s, float **t);
 t_ray			ray_for_pixel(t_camera *c, float px, float py);
+void			camera_update_cache(t_camera *c);
 
 //math_intersections_1.c
 t_intersection	*local_intersect(t_shape *s, t_ray r);

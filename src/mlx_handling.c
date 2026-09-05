@@ -6,7 +6,7 @@
 /*   By: mmillhof <mmillhof@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 23:32:31 by mmillhof          #+#    #+#             */
-/*   Updated: 2025/10/04 02:07:43 by matthias         ###   ########.fr       */
+/*   Updated: 2026/06/04 12:45:38 by mmillhof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ int	mlx_handling(t_data *data)
 	if (!data->mlx)
 		ft_error();
 	data->img = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
-	if (!data->img || (mlx_image_to_window(data->mlx, data->img, 0, 0) < 0))
+		if (!data->img || (mlx_image_to_window(data->mlx, data->img, 0, 0) < 0))
 		ft_error();
 	img_wipe(data, color(0x00, 0x00, 0x00));
-	mlx_loop_hook(data->mlx, render_with_parsing, data);
+	mlx_loop_hook(data->mlx, render, data);
 	mlx_loop_hook(data->mlx, mlx_hook, data);
 	mlx_loop(data->mlx);
 	mlx_terminate(data->mlx);
